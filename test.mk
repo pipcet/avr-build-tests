@@ -34,3 +34,34 @@ $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)
 .PRECIOUS:
 .SECONDARY:
 
+EXEC_MCUS = atmega32
+EXEC_OPTS = 0 1 2 3 s
+
+$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmode}.exe: %.c ; $${CCMODE_GCC} $(DUMP_RTL) -dumpbase $$@ -O$(o) -mmcu=$(m) -o $$@ $$< 2> $$@.msg)))
+
+$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla}.exe: %.c ; $${VANILLA_GCC} $(DUMP_RTL) -dumpbase $$@ -O$(o) -mmcu=$(m) -o $$@ $$< 2> $$@.msg)))
+
+# %.c.{ccmode}.exe.done: %.c $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.exe))
+#	touch $@
+
+# %.c.{vanilla}.exe.done: %.c $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{vanilla}.exe))
+#	touch $@
+
+%.exe.status: %.exe
+	(timeout 3 simulavr -B __stop_program -B abort -d atmega32 --file $< -v && echo success || echo aborted) > $@ 2>&1
+
+%.c.exe.done: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.exe.status))
+	touch $@
+
+%.c.status: %.c.exe.done
+	touch $@
+
+$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; diff -u $$^ > $$@ || true)))
+
+%.c.diff: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.diff))
+	cat $^ > $@
+	cp $@ ../../diff/$(notdir $(shell pwd)).diff
+
+%.c.done: %.c %.c.{ccmode}.done %.c.{vanilla}.done %.c.{ccmode-dP}.done %.c.{vanilla-dP}.done %.c.diff
+	touch $@
+
