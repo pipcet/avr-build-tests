@@ -1,3 +1,6 @@
 *~
 *.*.*
 /src/*/Makefile
+/src-exec/*/Makefile
+/compile/*/Makefile
+/execute/*/Makefile
