@@ -9,6 +9,7 @@ makefiles: $(foreach src,$(SOURCES),$(dir $(src))/Makefile)
 env:
 	@echo "export CCMODE_GCC=$$HOME/avr-ccmode/bin/avr-gcc"
 	@echo "export VANILLA_GCC=$$HOME/avr-vanilla/bin/avr-gcc"
+	@echo "export LRA_GCC=$$HOME/avr-lra/bin/avr-gcc"
 
 compile/%/done: compile/%/Makefile
 	$(MAKE) -C compile/$* all
@@ -18,6 +19,7 @@ compile/%/Makefile: | compile/%
 	@echo "all: $(patsubst compile/$*/%,%,$(wildcard compile/$*/*.c)).compile" >> $@
 	@echo "rtl: $(patsubst compile/$*/%,%,$(wildcard compile/$*/*.c)).rtl" >> $@
 	@echo "tree: $(patsubst compile/$*/%,%,$(wildcard compile/$*/*.c)).tree" >> $@
+	@echo "lra: $(patsubst compile/$*/%,%,$(wildcard compile/$*/*.c)).lra-compile" >> $@
 
 execute/%/done: execute/%/Makefile
 	$(MAKE) -C execute/$* all
@@ -26,6 +28,7 @@ execute/%/Makefile: | execute/%
 	@echo "-include ../../test.mk" > $@
 	@echo "all: $(patsubst execute/$*/%,%,$(wildcard execute/$*/*.c)).execute $(patsubst execute/$*/%,%,$(wildcard execute/$*/*.c)).compile" >> $@
 	@echo "rtl: $(patsubst execute/$*/%,%,$(wildcard execute/$*/*.c)).execute $(patsubst execute/$*/%,%,$(wildcard execute/$*/*.c)).rtl" >> $@
+	@echo "lra: $(patsubst execute/$*/%,%,$(wildcard execute/$*/*.c)).lra-compile" >> $@
 
 clean:
 	rm -f compile/*/Makefile

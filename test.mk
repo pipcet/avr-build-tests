@@ -11,6 +11,14 @@ $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmode-tree}.s
 
 $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmode-dP}.s: %.c ; $${CCMODE_GCC} -dP -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
 
+$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{lra}.s: %.c ; $${LRA_GCC} $(DUMP_RTL) -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
+
+$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{lra-rtl}.s: %.c ; $${LRA_GCC} -fdump-rtl-all -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
+
+$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{lra-tree}.s: %.c ; $${LRA_GCC} -fdump-tree-all -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
+
+$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{lra-dP}.s: %.c ; $${LRA_GCC} -dP -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
+
 $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla-rtl}.s: %.c ; $${VANILLA_GCC} -fdump-rtl-all -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
 
 $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla-tree}.s: %.c ; $${VANILLA_GCC} -fdump-tree-all -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
@@ -22,13 +30,22 @@ $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla-dP}.s:
 %.c.{ccmode}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.s))
 	touch $@
 
+%.c.{lra}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{lra}.s))
+	touch $@
+
 %.c.{vanilla}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{vanilla}.s))
 	touch $@
 
 %.c.{ccmode}.rtl: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{ccmode-rtl}.s))
 	touch $@
 
+%.c.{lra}.rtl: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{lra-rtl}.s))
+	touch $@
+
 %.c.{ccmode}.tree: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{ccmode-tree}.s))
+	touch $@
+
+%.c.{lra}.tree: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{lra-tree}.s))
 	touch $@
 
 %.c.{vanilla}.rtl: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{vanilla-rtl}.s))
@@ -40,14 +57,13 @@ $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla-dP}.s:
 %.c.{ccmode-dP}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{ccmode-dP}.s))
 	touch $@
 
+%.c.{lra-dP}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{lra-dP}.s))
+	touch $@
+
 %.c.{vanilla-dP}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{vanilla-dP}.s))
 	touch $@
 
-$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; diff -I '\.ident' -u $$^ > $$@ || true)))
-
-%.c.diff: $(foreach m,$(MCUS),$(foreach o,$(COMPARE_OPTS),%.c.{$(m)}.{$(o)}.diff))
-	cat $^ > $@
-	cp $@ ../../diff/$(notdir $(shell pwd)).diff
+$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; (echo DIR $(notdir $(shell pwd)); diff -I '\.ident' -u $$^) > $$@ || true)))
 
 %.c.compile: %.c %.c.{ccmode}.done %.c.{vanilla}.done %.c.{ccmode-dP}.done %.c.{vanilla-dP}.done %.c.diff
 	touch $@
@@ -86,8 +102,22 @@ $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{vani
 %.c.execute: %.c.exe.done
 	touch $@
 
-$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; diff -I '\.ident' -u $$^ > $$@ || true)))
+$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; (echo DIR $(notdir $(shell pwd)); diff -I '\.ident' -u $$^) > $$@ || true)))
+
+%.c.diff: $(foreach m,$(MCUS),$(foreach o,$(COMPARE_OPTS),%.c.{$(m)}.{$(o)}.diff))
+	cat $^ > $@
+	for D in $^; do \
+	    HASH=`perl ../../diffhash.pl $$D`; \
+	    if ! [ -f ../../classified-diff/*/$$HASH.diff ]; then \
+	        cp $$D ../../diff/$$HASH.diff; \
+	    fi; \
+	done
 
 %.c.diff: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.diff))
 	cat $^ > $@
-	cp $@ ../../diff/$(notdir $(shell pwd)).diff
+	for D in $^; do \
+	    HASH=`perl ../../diffhash.pl $$D`; \
+	    if ! [ -f ../../classified-diff/*/$$HASH.diff ]; then \
+	        cp $$D ../../diff/$$HASH.diff; \
+	    fi; \
+	done
