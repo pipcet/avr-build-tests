@@ -63,15 +63,15 @@ $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla-dP}.s:
 %.c.{vanilla-dP}.done: %.c $(foreach m,$(MCUS),$(foreach o,$(OPTS),%.c.{$(m)}.{$(o)}.{vanilla-dP}.s))
 	touch $@
 
-$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; (echo DIR $(notdir $(shell pwd)); diff -I '\.ident' -u $$^) > $$@ || true)))
+$(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmode}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; (echo DIR $(notdir $(shell pwd)); diff -I '\.ident' -u $$^) > $$@ || true)))
 
-%.c.compile: %.c %.c.{ccmode}.done %.c.{vanilla}.done %.c.{ccmode-dP}.done %.c.{vanilla-dP}.done %.c.diff
+%.c.compile: %.c %.c.{ccmode}.done %.c.{vanilla}.done %.c.{ccmode-dP}.done %.c.{vanilla-dP}.done %.c.{ccmode}.diff
 	touch $@
 
-%.c.rtl: %.c %.c.{ccmode}.rtl %.c.{vanilla}.rtl
+%.c.rtl: %.c %.c.{ccmode}.rtl %.c.{vanilla}.rtl %.c.{lra}.rtl
 	touch $@
 
-%.c.tree: %.c %.c.{ccmode}.tree %.c.{vanilla}.tree
+%.c.tree: %.c %.c.{ccmode}.tree %.c.{vanilla}.tree %.c.{lra}.tree
 	touch $@
 
 .PRECIOUS:
@@ -102,9 +102,9 @@ $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{vani
 %.c.execute: %.c.exe.done
 	touch $@
 
-$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; (echo DIR $(notdir $(shell pwd)); diff -I '\.ident' -u $$^) > $$@ || true)))
+$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmode}.diff: %.c.{$(m)}.{$(o)}.{vanilla}.s %.c.{$(m)}.{$(o)}.{ccmode}.s ; (echo DIR $(notdir $(shell pwd)); diff -I '\.ident' -u $$^) > $$@ || true)))
 
-%.c.diff: $(foreach m,$(MCUS),$(foreach o,$(COMPARE_OPTS),%.c.{$(m)}.{$(o)}.diff))
+%.c.{ccmode}.diff: $(foreach m,$(MCUS),$(foreach o,$(COMPARE_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.diff))
 	cat $^ > $@
 	for D in $^; do \
 	    HASH=`perl ../../diffhash.pl $$D`; \
@@ -113,7 +113,7 @@ $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.diff:
 	    fi; \
 	done
 
-%.c.diff: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.diff))
+%.c.{ccmode}.diff: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.diff))
 	cat $^ > $@
 	for D in $^; do \
 	    HASH=`perl ../../diffhash.pl $$D`; \
