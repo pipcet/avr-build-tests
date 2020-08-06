@@ -1,0 +1,50 @@
+--- stdarg-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:53:09.241054924 +0000
++++ stdarg-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:53:09.009052605 +0000
+@@ -1030,15 +1030,19 @@
+ /* frame size = 2 */
+ /* stack size = 16 */
+ .L__stack_usage = 16
+-	movw r24,r28
+-	adiw r24,19
+-	movw r30,r24
++	ldi r25,lo8(19)
++	mov r8,r25
++	mov r9,__zero_reg__
++	add r8,r28
++	adc r9,r29
++	movw r30,r8
+ 	ld r6,Z+
+ 	ld r7,Z+
+ 	movw r8,r30
+ 	std Y+2,r31
+ 	std Y+1,r30
+-	sbiw r24,18
++	movw r24,r28
++	adiw r24,1
+ 	sts pap+1,r25
+ 	sts pap,r24
+ 	ldi r31,6
+@@ -1186,15 +1190,19 @@
+ /* frame size = 2 */
+ /* stack size = 16 */
+ .L__stack_usage = 16
+-	movw r24,r28
+-	adiw r24,19
+-	movw r30,r24
++	ldi r25,lo8(19)
++	mov r8,r25
++	mov r9,__zero_reg__
++	add r8,r28
++	adc r9,r29
++	movw r30,r8
+ 	ld r6,Z+
+ 	ld r7,Z+
+ 	movw r8,r30
+ 	std Y+2,r31
+ 	std Y+1,r30
+-	sbiw r24,18
++	movw r24,r28
++	adiw r24,1
+ 	sts pap+1,r25
+ 	sts pap,r24
+ 	ldi r31,6

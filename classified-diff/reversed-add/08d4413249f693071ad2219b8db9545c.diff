@@ -1,0 +1,15 @@
+--- pr84524.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:07:02.220517076 +0000
++++ pr84524.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:07:01.848513427 +0000
+@@ -125,8 +125,10 @@
+ /* frame size = 512 */
+ /* stack size = 512 */
+ .L__stack_usage = 512
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ 	movw r30,r28
+ 	adiw r30,1

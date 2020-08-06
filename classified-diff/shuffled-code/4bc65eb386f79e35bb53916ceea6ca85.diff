@@ -1,0 +1,14 @@
+DIR 0e213865d81beca231eafbf65e31119c
+--- 920826-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:08.758451390 +0000
++++ 920826-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:08:50.174869250 +0000
+@@ -14,8 +14,8 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	movw r26,r24
+-	ld r30,X
++	movw r30,r24
++	ld r30,Z
+ 	mov __tmp_reg__,r30
+ 	lsl r0
+ 	sbc r31,r31

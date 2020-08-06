@@ -1,0 +1,20 @@
+--- pr36343.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:46:09.284853673 +0000
++++ pr36343.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:46:09.052851349 +0000
+@@ -50,8 +50,8 @@
+ 	std Y+3,r22
+ 	std Y+4,r23
+ 	or r24,r25
+-	breq .L7
+ 	movw r24,r28
++	breq .L7
+ 	adiw r24,5
+ 	call bar
+ 	ldd r30,Y+5
+@@ -89,7 +89,6 @@
+ 	pop r28
+ 	ret
+ .L7:
+-	movw r24,r28
+ 	adiw r24,1
+ 	call bar
+ 	ldd r22,Y+1

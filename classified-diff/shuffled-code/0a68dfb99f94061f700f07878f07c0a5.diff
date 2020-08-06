@@ -1,0 +1,22 @@
+DIR a1cca7c92fe577f0464d9f284484827f
+--- pr86637-2.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 19:04:44.310350293 +0000
++++ pr86637-2.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 19:04:41.818327234 +0000
+@@ -94,15 +94,15 @@
+ 	ldd r24,Y+3
+ 	cp __zero_reg__,r24
+ 	brlt .L5
++	ldd r17,Y+31
++	lsl r17
++	sbc r17,r17
+ 	movw r18,r2
+ 	movw r20,r4
+ 	movw r22,r6
+ 	movw r24,r8
+ 	ldd r10,Y+30
+ 	ldd r11,Y+31
+-	mov r17,r11
+-	lsl r17
+-	sbc r17,r17
+ 	mov r12,r17
+ 	mov r13,r17
+ 	mov r14,r17

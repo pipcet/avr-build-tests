@@ -1,0 +1,150 @@
+DIR 1b6d7058973fface7ca0392d0c511c59
+--- 950729-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:34.634725066 +0000
++++ 950729-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:58:34.386722458 +0000
+@@ -47,24 +47,22 @@
+ /* frame size = 16 */
+ /* stack size = 34 */
+ .L__stack_usage = 34
+-	std Y+3,r24
+-	std Y+4,r25
+-	std Y+5,r16
++	std Y+1,r24
++	std Y+2,r25
++	std Y+3,r16
+ 	mov r9,r17
+ 	mov r8,r18
+ 	mov r7,r19
+ 	mov r6,r20
+ 	mov r5,r21
+ 	mov r4,r22
+-	std Y+6,r23
++	std Y+4,r23
+ 	std Y+15,r14
+-	ldd r30,Y+3
+-	ldd r31,Y+4
++	ldd r30,Y+1
++	ldd r31,Y+2
+ 	subi r30,-127
+ 	sbci r31,-1
+ 	st Z,__zero_reg__
+-	mov r25,r30
+-	mov r24,r31
+ 	mov r18,r14
+ 	cpi r18,lo8(117)
+ 	breq .L9
+@@ -82,8 +80,8 @@
+ .L4:
+ 	movw r24,r2
+ 	adiw r24,1
+-	ldd r18,Y+3
+-	ldd r19,Y+4
++	ldd r18,Y+1
++	ldd r19,Y+2
+ 	add r24,r18
+ 	adc r25,r19
+ /* epilogue start */
+@@ -116,8 +114,8 @@
+ 	ldd r19,Y+15
+ 	cpi r19,lo8(120)
+ 	brne .L16
+-	ldi r30,lo8(16)
+-	std Y+16,r30
++	ldi r24,lo8(16)
++	std Y+16,r24
+ 	rjmp .L2
+ .L5:
+ 	subi r24,lo8(-(.LC1))
+@@ -127,13 +125,17 @@
+ 	ldi r31,lo8(10)
+ 	std Y+16,r31
+ .L2:
+-	std Y+1,r25
+-	std Y+2,r24
++	ldd r30,Y+1
++	ldd r31,Y+2
++	subi r30,-127
++	sbci r31,-1
++	std Y+6,r31
++	std Y+5,r30
+ 	ldi r24,lo8(126)
+ 	mov r2,r24
+ 	mov r3,__zero_reg__
+ .L8:
+-	ldd r24,Y+5
++	ldd r24,Y+3
+ 	std Y+7,r24
+ 	std Y+8,r9
+ 	std Y+9,r8
+@@ -141,8 +143,8 @@
+ 	std Y+11,r6
+ 	std Y+12,r5
+ 	std Y+13,r4
+-	ldd r30,Y+6
+-	std Y+14,r30
++	ldd r25,Y+4
++	std Y+14,r25
+ 	ldd r10,Y+16
+ 	mov r11,__zero_reg__
+ 	mov r12,__zero_reg__
+@@ -158,25 +160,24 @@
+ 	mov r22,r6
+ 	mov r23,r5
+ 	mov r24,r4
+-	mov r25,r30
+ 	call __umoddi3
+ 	movw r24,r18
+-	ldi r31,1
+-	sub r2,r31
++	ldi r30,1
++	sub r2,r30
+ 	sbc r3,__zero_reg__
+-	ldd r18,Y+15
+-	cpi r18,lo8(88)
++	ldd r31,Y+15
++	cpi r31,lo8(88)
+ 	brne .L5
+ 	subi r24,lo8(-(.LC0))
+ 	sbci r25,hi8(-(.LC0))
+ .L15:
+ 	movw r30,r24
+ 	ld r24,Z
+-	ldd r30,Y+1
+-	ldd r31,Y+2
++	ldd r30,Y+5
++	ldd r31,Y+6
+ 	st -Z,r24
+-	std Y+2,r31
+-	std Y+1,r30
++	std Y+6,r31
++	std Y+5,r30
+ 	ldd r10,Y+16
+ 	mov r11,__zero_reg__
+ 	mov r12,__zero_reg__
+@@ -185,23 +186,23 @@
+ 	mov r15,__zero_reg__
+ 	ldi r16,0
+ 	ldi r17,0
+-	ldd r18,Y+5
++	ldd r18,Y+3
+ 	mov r19,r9
+ 	mov r20,r8
+ 	mov r21,r7
+ 	mov r22,r6
+ 	mov r23,r5
+ 	mov r24,r4
+-	ldd r25,Y+6
++	ldd r25,Y+4
+ 	call __udivdi3
+-	std Y+5,r18
++	std Y+3,r18
+ 	mov r9,r19
+ 	mov r8,r20
+ 	mov r7,r21
+ 	mov r6,r22
+ 	mov r5,r23
+ 	mov r4,r24
+-	std Y+6,r25
++	std Y+4,r25
+ 	ldd r18,Y+7
+ 	ldd r19,Y+8
+ 	ldd r20,Y+9

@@ -1,0 +1,24 @@
+DIR 05fac6dfd6161744c35060a726f6a6b6
+--- pr70263-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:57:37.118112143 +0000
++++ pr70263-1.c.{atmega128}.{2}.{lra}.s	2020-08-06 13:08:28.690664679 +0000
+@@ -39,16 +39,16 @@
+ 	sts c,r18
+ 	lsl r18
+ 	rol r19
++	subi r18,lo8(-(a))
++	sbci r19,hi8(-(a))
+ 	movw r30,r18
+-	subi r30,lo8(-(a))
+-	sbci r31,hi8(-(a))
+ 	st Z,r23
+ 	std Z+1,r22
+ 	lsl r24
+ 	rol r25
++	subi r24,lo8(-(a))
++	sbci r25,hi8(-(a))
+ 	movw r30,r24
+-	subi r30,lo8(-(a))
+-	sbci r31,hi8(-(a))
+ 	std Z+1,r21
+ 	st Z,r20
+ /* epilogue start */

@@ -1,0 +1,14 @@
+DIR 24c4048442d74055d9aef3e2a2f0dac1
+--- 20030120-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:50.634892671 +0000
++++ 20030120-2.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:09:22.175172397 +0000
+@@ -13,6 +13,10 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
++	mov r19,r24
++	mov r18,r25
++	mov r24,r19
++	mov r25,r18
+ 	cpi r24,1
+ 	cpc r25,__zero_reg__
+ 	breq .L2

@@ -1,0 +1,390 @@
+DIR d8f931d52f671f025b80daa1e435fa5d
+--- 20020508-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:55:27.832666294 +0000
++++ 20020508-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:55:27.224659244 +0000
+@@ -27,8 +27,8 @@
+ 	mov __tmp_reg__,r18
+ 	lsl r0
+ 	sbc r21,r21
+-	std Y+4,r21
+-	std Y+3,r20
++	std Y+8,r21
++	std Y+7,r20
+ 	lds r14,shift1
+ 	mov r24,r14
+ 	lds r25,shift1+1
+@@ -39,8 +39,8 @@
+ 	sbc r23,r25
+ 	std Y+14,r23
+ 	std Y+13,r22
+-	ldd r20,Y+3
+-	ldd r21,Y+4
++	ldd r20,Y+7
++	ldd r21,Y+8
+ 	mov r0,r14
+ 	rjmp 2f
+ 	1:
+@@ -49,8 +49,8 @@
+ 	2:
+ 	dec r0
+ 	brpl 1b
+-	ldd r22,Y+3
+-	ldd r23,Y+4
++	ldd r22,Y+7
++	ldd r23,Y+8
+ 	ldd r0,Y+13
+ 	rjmp 2f
+ 	1:
+@@ -72,8 +72,8 @@
+ 	mov __tmp_reg__,r18
+ 	lsl r0
+ 	sbc r19,r19
+-	ldd r20,Y+3
+-	ldd r21,Y+4
++	ldd r20,Y+7
++	ldd r21,Y+8
+ 	swap r20
+ 	swap r21
+ 	andi r21,0xf0
+@@ -119,11 +119,6 @@
+ 	sbci r19,65
+ 	breq .+2
+ 	rjmp .L3
+-	movw r20,r6
+-	mov r21,r20
+-	clr r20
+-	swap r21
+-	andi r21,0xf0
+ 	movw r18,r6
+ 	asr r19
+ 	ror r18
+@@ -133,6 +128,11 @@
+ 	ror r18
+ 	asr r19
+ 	ror r18
++	movw r20,r6
++	mov r21,r20
++	clr r20
++	swap r21
++	andi r21,0xf0
+ 	or r18,r20
+ 	or r19,r21
+ 	cpi r18,35
+@@ -165,11 +165,6 @@
+ 	sbci r19,65
+ 	breq .+2
+ 	rjmp .L3
+-	movw r20,r12
+-	mov r21,r20
+-	clr r20
+-	swap r21
+-	andi r21,0xf0
+ 	movw r18,r12
+ 	asr r19
+ 	ror r18
+@@ -179,6 +174,11 @@
+ 	ror r18
+ 	asr r19
+ 	ror r18
++	movw r20,r12
++	mov r21,r20
++	clr r20
++	swap r21
++	andi r21,0xf0
+ 	or r18,r20
+ 	or r19,r21
+ 	cpi r18,35
+@@ -230,24 +230,24 @@
+ 	sbci r23,-127
+ 	breq .+2
+ 	rjmp .L3
+-	movw r10,r4
+-	movw r8,r2
+-	ldi r30,28
+-	1:
+-	lsl r8
+-	rol r9
+-	rol r10
+-	rol r11
+-	dec r30
+-	brne 1b
+ 	movw r22,r4
+ 	movw r20,r2
+-	ldi r31,4
++	ldi r30,4
+ 	1:
+ 	asr r23
+ 	ror r22
+ 	ror r21
+ 	ror r20
++	dec r30
++	brne 1b
++	movw r10,r4
++	movw r8,r2
++	ldi r31,28
++	1:
++	lsl r8
++	rol r9
++	rol r10
++	rol r11
+ 	dec r31
+ 	brne 1b
+ 	or r20,r8
+@@ -288,12 +288,12 @@
+ 	mov r16,r14
+ 	call __ashrdi3
+ 	std Y+1,r18
+-	std Y+7,r19
++	std Y+5,r19
+ 	movw r8,r20
+ 	mov r10,r22
+-	std Y+5,r23
++	std Y+3,r23
+ 	mov r11,r24
+-	std Y+6,r25
++	std Y+4,r25
+ 	mov r18,r15
+ 	mov r19,r17
+ 	ldd r20,Y+20
+@@ -306,15 +306,15 @@
+ 	call __ashldi3
+ 	ldd r16,Y+1
+ 	or r18,r16
+-	ldd r16,Y+7
++	ldd r16,Y+5
+ 	or r19,r16
+ 	or r20,r8
+ 	or r21,r9
+ 	or r22,r10
+-	ldd r16,Y+5
++	ldd r16,Y+3
+ 	or r23,r16
+ 	or r24,r11
+-	ldd r16,Y+6
++	ldd r16,Y+4
+ 	or r25,r16
+ 	cpi r18,-17
+ 	sbci r19,-51
+@@ -337,12 +337,12 @@
+ 	ldi r16,lo8(4)
+ 	call __ashrdi3
+ 	std Y+1,r18
+-	std Y+7,r19
++	std Y+5,r19
+ 	movw r8,r20
+ 	mov r10,r22
+-	std Y+5,r23
++	std Y+3,r23
+ 	mov r11,r24
+-	std Y+6,r25
++	std Y+4,r25
+ 	mov r18,r15
+ 	mov r19,r17
+ 	ldd r20,Y+20
+@@ -355,15 +355,15 @@
+ 	call __ashldi3
+ 	ldd r16,Y+1
+ 	or r18,r16
+-	ldd r16,Y+7
++	ldd r16,Y+5
+ 	or r19,r16
+ 	or r20,r8
+ 	or r21,r9
+ 	or r22,r10
+-	ldd r16,Y+5
++	ldd r16,Y+3
+ 	or r23,r16
+ 	or r24,r11
+-	ldd r16,Y+6
++	ldd r16,Y+4
+ 	or r25,r16
+ 	cpi r18,-17
+ 	sbci r19,-51
+@@ -384,8 +384,8 @@
+ 	movw r20,r24
+ 	sub r20,r18
+ 	sbc r21,r19
+-	std Y+8,r21
+-	std Y+7,r20
++	std Y+6,r21
++	std Y+5,r20
+ 	mov r18,r15
+ 	mov r19,r17
+ 	ldd r20,Y+20
+@@ -396,8 +396,8 @@
+ 	mov r25,r30
+ 	ldd r16,Y+1
+ 	call __ashrdi3
+-	std Y+5,r18
+-	std Y+6,r19
++	std Y+3,r18
++	std Y+4,r19
+ 	movw r8,r20
+ 	mov r10,r22
+ 	std Y+11,r23
+@@ -411,11 +411,11 @@
+ 	mov r23,r26
+ 	mov r24,r31
+ 	mov r25,r30
+-	ldd r16,Y+7
+-	call __ashldi3
+ 	ldd r16,Y+5
++	call __ashldi3
++	ldd r16,Y+3
+ 	or r18,r16
+-	ldd r16,Y+6
++	ldd r16,Y+4
+ 	or r19,r16
+ 	or r20,r8
+ 	or r21,r9
+@@ -445,8 +445,8 @@
+ 	mov r25,r30
+ 	ldi r16,lo8(60)
+ 	call __ashrdi3
+-	std Y+5,r18
+-	std Y+6,r19
++	std Y+3,r18
++	std Y+4,r19
+ 	movw r8,r20
+ 	mov r10,r22
+ 	std Y+11,r23
+@@ -462,9 +462,9 @@
+ 	mov r25,r30
+ 	ldi r16,lo8(4)
+ 	call __ashldi3
+-	ldd r16,Y+5
++	ldd r16,Y+3
+ 	or r18,r16
+-	ldd r16,Y+6
++	ldd r16,Y+4
+ 	or r19,r16
+ 	or r20,r8
+ 	or r21,r9
+@@ -484,8 +484,8 @@
+ 	sbci r25,18
+ 	breq .+2
+ 	rjmp .L3
+-	ldd r18,Y+3
+-	ldd r19,Y+4
++	ldd r18,Y+7
++	ldd r19,Y+8
+ 	mov r0,r14
+ 	rjmp 2f
+ 	1:
+@@ -494,8 +494,8 @@
+ 	2:
+ 	dec r0
+ 	brpl 1b
+-	ldd r24,Y+3
+-	ldd r25,Y+4
++	ldd r24,Y+7
++	ldd r25,Y+8
+ 	ldd r0,Y+13
+ 	rjmp 2f
+ 	1:
+@@ -510,21 +510,21 @@
+ 	sbci r25,3
+ 	breq .+2
+ 	rjmp .L3
+-	movw r18,r6
+-	ldd r0,Y+9
++	movw r24,r6
++	mov r0,r14
+ 	rjmp 2f
+ 	1:
+-	asr r19
+-	ror r18
++	lsl r24
++	rol r25
+ 	2:
+ 	dec r0
+ 	brpl 1b
+-	movw r24,r6
+-	mov r0,r14
++	movw r18,r6
++	ldd r0,Y+9
+ 	rjmp 2f
+ 	1:
+-	lsl r24
+-	rol r25
++	asr r19
++	ror r18
+ 	2:
+ 	dec r0
+ 	brpl 1b
+@@ -553,21 +553,21 @@
+ 	sbci r25,35
+ 	breq .+2
+ 	rjmp .L3
+-	movw r18,r12
+-	ldd r0,Y+9
++	movw r24,r12
++	mov r0,r14
+ 	rjmp 2f
+ 	1:
+-	asr r19
+-	ror r18
++	lsl r24
++	rol r25
+ 	2:
+ 	dec r0
+ 	brpl 1b
+-	movw r24,r12
+-	mov r0,r14
++	movw r18,r12
++	ldd r0,Y+9
+ 	rjmp 2f
+ 	1:
+-	lsl r24
+-	rol r25
++	asr r19
++	ror r18
+ 	2:
+ 	dec r0
+ 	brpl 1b
+@@ -596,18 +596,6 @@
+ 	sbci r25,35
+ 	breq .+2
+ 	rjmp .L3
+-	movw r10,r4
+-	movw r8,r2
+-	ldd r0,Y+15
+-	rjmp 2f
+-	1:
+-	asr r11
+-	ror r10
+-	ror r9
+-	ror r8
+-	2:
+-	dec r0
+-	brpl 1b
+ 	movw r22,r4
+ 	movw r20,r2
+ 	mov r0,r14
+@@ -620,6 +608,18 @@
+ 	2:
+ 	dec r0
+ 	brpl 1b
++	movw r10,r4
++	movw r8,r2
++	ldd r0,Y+15
++	rjmp 2f
++	1:
++	asr r11
++	ror r10
++	ror r9
++	ror r8
++	2:
++	dec r0
++	brpl 1b
+ 	or r20,r8
+ 	or r21,r9
+ 	or r22,r10
+@@ -736,7 +736,7 @@
+ 	mov r23,r26
+ 	mov r24,r31
+ 	mov r25,r30
+-	ldd r16,Y+7
++	ldd r16,Y+5
+ 	call __ashrdi3
+ 	or r18,r7
+ 	or r19,r10

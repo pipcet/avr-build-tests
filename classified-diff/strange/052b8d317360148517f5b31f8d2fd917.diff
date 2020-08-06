@@ -1,0 +1,30 @@
+DIR 2cb3d364231df976b84238f716e74d4c
+--- 20031020-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:59:07.003062900 +0000
++++ 20031020-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:09:42.451363558 +0000
+@@ -13,16 +13,20 @@
+ 	push r29
+ 	rcall .
+ 	rcall .
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 4 */
+ /* stack size = 6 */
+ .L__stack_usage = 6
+-	cp r22,__zero_reg__
+-	sbci r23,4
+-	cpc r24,__zero_reg__
+-	cpc r25,__zero_reg__
++	std Y+1,r22
++	std Y+2,r23
++	std Y+3,r24
++	std Y+4,r25
++	movw r18,r22
++	movw r20,r24
++	cp r18,__zero_reg__
++	sbci r19,4
++	cpc r20,__zero_reg__
++	cpc r21,__zero_reg__
+ 	brlt .L1
+ 	call abort
+ .L1:

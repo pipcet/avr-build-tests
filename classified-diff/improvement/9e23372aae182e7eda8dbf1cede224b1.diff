@@ -1,0 +1,56 @@
+DIR 19c46247c318af7b3602d4cc50f334d0
+--- pr84524.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:45:05.468753677 +0000
++++ pr84524.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:45:05.216751963 +0000
+@@ -64,9 +64,9 @@
+ 	call foo
+ 	movw r30,r28
+ 	adiw r30,1
+-	movw r26,r28
+-	subi r26,-1
+-	sbci r27,-3
++	movw r22,r28
++	subi r22,-1
++	sbci r23,-3
+ 	ldi r19,0
+ 	ldi r18,0
+ .L12:
+@@ -74,16 +74,14 @@
+ 	ldi r20,lo8(8)
+ 	ldi r21,0
+ .L10:
+-	movw r22,r24
+-	lsl r22
+-	rol r23
+ 	sbrs r25,7
+ 	rjmp .L8
+-	movw r24,r22
+-	ldi r17,33
+-	eor r24,r17
+-	ldi r17,16
+-	eor r25,r17
++	lsl r24
++	rol r25
++	ldi r26,33
++	eor r24,r26
++	ldi r26,16
++	eor r25,r26
+ .L9:
+ 	subi r20,1
+ 	sbc r21,__zero_reg__
+@@ -95,12 +93,13 @@
+ 	breq .L11
+ 	call abort
+ .L8:
+-	movw r24,r22
++	lsl r24
++	rol r25
+ 	rjmp .L9
+ .L11:
+ 	inc r19
+-	cp r30,r26
+-	cpc r31,r27
++	cp r30,r22
++	cpc r31,r23
+ 	brne .L12
+ 	ldi r25,0
+ 	ldi r24,0

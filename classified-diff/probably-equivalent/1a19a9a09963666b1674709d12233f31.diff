@@ -1,0 +1,14 @@
+DIR fc18e6c5029978e8abb900e5722b9441
+--- 20000412-3.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:57:14.853870222 +0000
++++ 20000412-3.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:57:14.557866988 +0000
+@@ -44,8 +44,8 @@
+ .L__stack_usage = 2
+ 	ldd r25,Y+5
+ 	ldd r24,Y+38
+-	cpse r25,r24
+-	rjmp .L6
++	cp r25,r24
++	brne .L6
+ 	ldd r18,Y+6
+ 	ldd r24,Y+39
+ 	mov __tmp_reg__,r24

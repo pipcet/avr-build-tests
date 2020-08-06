@@ -1,0 +1,38 @@
+DIR 4b255b9a31cc299c7881012cf2f9f3e3
+--- pr44202-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:00:14.487752409 +0000
++++ pr44202-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:00:14.311750636 +0000
+@@ -16,7 +16,9 @@
+ 	movw r18,r24
+ 	movw r30,r22
+ 	subi r25,-2
+-	sbiw r24,0
++	cp r18,__zero_reg__
++	ldi r20,-2
++	cpc r19,r20
+ 	breq .L1
+ 	std Z+1,r19
+ 	st Z,r18
+@@ -32,14 +34,18 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	movw r30,r22
+-	subi r24,-1
++	movw r18,r24
++	subi r18,-1
++	sbci r19,-3
++	cpi r24,-1
+ 	sbci r25,-3
+ 	brne .L6
+-	ldi r18,lo8(-1)
+-	ldi r19,lo8(-3)
+-	std Z+1,r19
+-	st Z,r18
++	ldi r24,lo8(-1)
++	ldi r25,lo8(-3)
++	std Z+1,r25
++	st Z,r24
+ .L6:
++	movw r24,r18
+ /* epilogue start */
+ 	ret
+ 	.size	add513, .-add513

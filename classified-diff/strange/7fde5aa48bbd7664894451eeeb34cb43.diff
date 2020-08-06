@@ -1,0 +1,32 @@
+--- 20000605-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:54:42.005981726 +0000
++++ 20000605-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:54:41.933981007 +0000
+@@ -34,7 +34,8 @@
+ 	cp r18,r20
+ 	cpc r19,r21
+ 	brge .L1
+-	subi r18,-1
++	movw r18,r24
++	subi r18,-2
+ 	sbci r19,-1
+ 	adiw r26,1
+ 	st X,r19
+@@ -44,7 +45,8 @@
+ 	cp r18,r20
+ 	cpc r19,r21
+ 	brge .L1
+-	subi r18,-1
++	movw r18,r24
++	subi r18,-3
+ 	sbci r19,-1
+ 	adiw r26,1
+ 	st X,r19
+@@ -54,7 +56,8 @@
+ 	cp r18,r20
+ 	cpc r19,r21
+ 	brge .L1
+-	subi r18,-1
++	movw r18,r24
++	subi r18,-4
+ 	sbci r19,-1
+ 	adiw r26,1
+ 	st X,r19

@@ -1,0 +1,40 @@
+--- 20040218-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:17:15.690950364 +0000
++++ 20040218-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:17:15.374946691 +0000
+@@ -132,8 +132,10 @@
+ 	ldi r24,lo8(8)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -147,16 +149,20 @@
+ 	ldi r25,lo8(62)
+ 	std Y+12,r25
+ 	std Y+11,r24
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call xb
+ 	cpi r22,127
+ 	sbci r23,63
+ 	cpc r24,__zero_reg__
+ 	cpc r25,__zero_reg__
+ 	brne .L6
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call xw
+ 	cpi r22,127
+ 	sbci r23,62

@@ -1,0 +1,42 @@
+DIR 42e3a92de1541859855cb0f2047fbfbe
+--- pr41646.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:59:52.951534439 +0000
++++ pr41646.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:10:26.779779157 +0000
+@@ -28,12 +28,11 @@
+ /* stack size = 16 */
+ .L__stack_usage = 16
+ 	movw r16,r24
+-	movw r26,r22
+-	ld r24,X+
+-	ld r25,X+
+-	ld __tmp_reg__,X+
+-	ld r27,X
+-	mov r26,__tmp_reg__
++	movw r30,r22
++	ld r24,Z
++	ldd r25,Z+1
++	ldd r26,Z+2
++	ldd r27,Z+3
+ 	movw r22,r24
+ 	movw r24,r26
+ 	call bar
+@@ -46,14 +45,13 @@
+ 	ldi r26,lo8(-51)
+ 	ldi r27,lo8(-52)
+ 	call __umulhisi3
++	lsr r25
++	ror r24
++	lsr r25
++	ror r24
++	lsr r25
++	ror r24
+ 	movw r18,r24
+-	lsr r19
+-	ror r18
+-	lsr r19
+-	ror r18
+-	lsr r19
+-	ror r18
+-	movw r24,r18
+ 	lsl r24
+ 	rol r25
+ 	lsl r24

@@ -1,0 +1,18 @@
+DIR a6760f4ecf2e489e926eed8ec1e68382
+--- pta-field-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 16:20:46.210792168 +0000
++++ pta-field-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 16:20:46.810797507 +0000
+@@ -52,10 +52,12 @@
+ 	adiw r24,7
+ 	std Y+2,r25
+ 	std Y+1,r24
+-	sbiw r24,2
++	movw r24,r28
++	adiw r24,5
+ 	std Y+4,r25
+ 	std Y+3,r24
+-	sbiw r24,2
++	movw r24,r28
++	adiw r24,3
+ 	call bar
+ 	ldd r24,Y+7
+ 	ldd r25,Y+8

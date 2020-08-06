@@ -1,0 +1,122 @@
+DIR 4fbba421cac0bd1c1bea6aee61bdcfcb
+--- usad-run.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:48:14.074756361 +0000
++++ usad-run.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:48:13.078740103 +0000
+@@ -9,6 +9,8 @@
+ .global	bar
+ 	.type	bar, @function
+ bar:
++	push r10
++	push r11
+ 	push r12
+ 	push r13
+ 	push r14
+@@ -19,26 +21,29 @@
+ 	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 8 */
+-.L__stack_usage = 8
++/* stack size = 10 */
++.L__stack_usage = 10
+ 	movw r30,r24
+ 	movw r26,r22
+ 	movw r22,r20
+ 	movw r14,r18
+ 	movw r18,r24
+ 	inc r19
+-	ldi r17,0
+-	ldi r16,0
++	mov r13,__zero_reg__
++	mov r12,__zero_reg__
+ .L2:
+-	movw r20,r26
+-	movw r24,r30
+-	adiw r24,16
+-	movw r12,r24
++	movw r10,r26
++	movw r20,r30
++	movw r16,r30
++	subi r16,-16
++	sbci r17,-1
+ .L4:
+-	ld r24,Z+
+ 	movw r28,r20
+-	ld r25,Y+
++	ld r24,Y+
+ 	movw r20,r28
++	movw r28,r10
++	ld r25,Y+
++	movw r10,r28
+ 	sub r24,r25
+ 	sbc r25,r25
+ 	sbrs r25,7
+@@ -47,20 +52,20 @@
+ 	neg r24
+ 	sbc r25,__zero_reg__
+ .L3:
+-	add r16,r24
+-	adc r17,r25
+-	cp r12,r30
+-	cpc r13,r31
++	add r12,r24
++	adc r13,r25
++	cp r16,r20
++	cpc r17,r21
+ 	brne .L4
+-	movw r30,r12
++	adiw r30,16
+ 	add r26,r22
+ 	adc r27,r23
+-	cp r12,r18
+-	cpc r13,r19
++	cp r30,r18
++	cpc r31,r19
+ 	brne .L2
+-	movw r28,r14
+-	std Y+1,r17
+-	st Y,r16
++	movw r30,r14
++	std Z+1,r13
++	st Z,r12
+ /* epilogue start */
+ 	pop r29
+ 	pop r28
+@@ -70,6 +75,8 @@
+ 	pop r14
+ 	pop r13
+ 	pop r12
++	pop r11
++	pop r10
+ 	ret
+ 	.size	bar, .-bar
+ 	.section	.text.startup,"ax",@progbits
+@@ -129,10 +136,9 @@
+ 	cpc r19,r24
+ 	brne .L11
+ .L19:
+-	ldi r20,lo8(1)
+-	ldi r21,lo8(1)
+-	add r20,r28
+-	adc r21,r29
++	movw r20,r28
++	subi r20,-1
++	sbci r21,-2
+ 	subi r20,-16
+ 	sbci r21,-1
+ 	ldi r19,0
+@@ -143,10 +149,11 @@
+ 	movw r22,r28
+ 	subi r22,-1
+ 	sbci r23,-2
+-	movw r24,r28
+-	subi r24,-1
+-	sbci r25,-3
+-	movw r14,r24
++	movw r14,r28
++	ldi r24,-1
++	sub r14,r24
++	ldi r24,-3
++	sbc r15,r24
+ .L12:
+ 	movw r30,r22
+ 	movw r26,r16

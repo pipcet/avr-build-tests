@@ -1,0 +1,21 @@
+DIR 5d7300bbdf18de40693d7262efb7f8f8
+--- pr78883.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:01:22.972433748 +0000
++++ pr78883.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:01:22.684430918 +0000
+@@ -17,13 +17,12 @@
+ 	ld r24,Z
+ 	sbrc r24,0
+ 	rjmp .L4
+-	ldd r18,Z+2
+-	ldd r19,Z+3
+-	movw r24,r18
++	ldd r24,Z+2
++	ldd r25,Z+3
+ 	andi r24,1
+ 	clr r25
+-	sbrc r18,0
+-	rjmp .L1
++	sbiw r24,0
++	brne .L1
+ 	ldd r24,Z+4
+ 	sbrc r24,0
+ 	rjmp .L5

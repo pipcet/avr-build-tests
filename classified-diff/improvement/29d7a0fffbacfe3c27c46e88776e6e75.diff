@@ -1,0 +1,51 @@
+--- pr68185.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:46:04.036801092 +0000
++++ pr68185.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:46:03.728798006 +0000
+@@ -27,7 +27,7 @@
+ 	lds r30,o
+ 	lds r31,o+1
+ 	or r30,r31
+-	breq .L31
++	breq .L32
+ 	lds r24,e
+ 	lds r25,e+1
+ 	or r24,r25
+@@ -46,16 +46,17 @@
+ 	sts o,r24
+ 	lds r24,a
+ 	lds r25,a+1
+-.L11:
+-	sbiw r24,0
+-	breq .L11
++	or r24,r25
++	breq .L27
+ .L12:
+ 	rjmp .L12
++.L27:
++	rjmp .L27
+ .L14:
+ 	rjmp .L14
+ .L16:
+ 	rjmp .L16
+-.L31:
++.L32:
+ 	cp __zero_reg__,r22
+ 	cpc __zero_reg__,r23
+ 	brge .L4
+@@ -74,7 +75,7 @@
+ .L2:
+ 	cpi r18,1
+ 	cpc r19,__zero_reg__
+-	brne .L32
++	brne .L33
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+@@ -91,7 +92,7 @@
+ 	lsl r0
+ 	sbc r21,r21
+ 	rjmp .L8
+-.L32:
++.L33:
+ 	call abort
+ 	.size	main, .-main
+ .global	t

@@ -1,0 +1,28 @@
+DIR 00b1f60d196f542c64a7e2f8b1fcac8f
+--- 960311-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-06 12:04:58.186317977 +0000
++++ 960311-2.c.{atmega128}.{3}.{lra}.s	2020-08-06 12:04:59.178324919 +0000
+@@ -82,18 +82,18 @@
+ 	sts count+1,__zero_reg__
+ 	sts count,__zero_reg__
+ 	call b.part.0
+-	lds r28,count
+-	lds r29,count+1
+-	cpi r28,1
+-	cpc r29,__zero_reg__
++	lds r16,count
++	lds r17,count+1
++	cpi r16,1
++	cpc r17,__zero_reg__
+ 	brne .L11
+ 	call b.part.0
+ 	lds r24,count
+ 	lds r25,count+1
+ 	sbiw r24,2
+ 	brne .L11
+-	sts count+1,r29
+-	sts count,r28
++	sts count+1,r17
++	sts count,r16
+ 	call b.part.0
+ 	lds r24,count
+ 	lds r25,count+1

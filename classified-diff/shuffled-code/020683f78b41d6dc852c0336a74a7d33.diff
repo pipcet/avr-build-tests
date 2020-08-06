@@ -1,0 +1,152 @@
+DIR bffa41d93c6f5c0bf9a06e16aff17eeb
+--- pr60960.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:54:07.831715384 +0000
++++ pr60960.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:54:07.491711238 +0000
+@@ -106,20 +106,25 @@
+ 	st Z+,r21
+ 	st Z+,r22
+ 	st Z+,r23
+-	movw r14,r30
+-	movw r30,r16
+-	ldd r12,Z+4
+-	ldd r13,Z+5
+-	cp r12,r20
+-	cpc r13,r21
+-	breq .L14
+-.L6:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L7:
+-	or r24,r25
+-	breq .+2
+-	rjmp .L11
++	movw r26,r16
++	adiw r26,4
++	ld r14,X+
++	ld r15,X
++	sbiw r26,4+1
++	cp r14,r20
++	cpc r15,r21
++	breq .L15
++.L11:
++	call abort
++.L15:
++	ldd r12,Z+2
++	ldd r13,Z+3
++	adiw r26,2
++	ld r24,X+
++	ld r25,X
++	cp r12,r24
++	cpc r13,r25
++	brne .L11
+ 	ldi r22,lo8(5)
+ 	ldi r23,lo8(5)
+ 	movw r24,r22
+@@ -132,16 +137,14 @@
+ 	std Z+1,r21
+ 	std Z+2,r22
+ 	std Z+3,r23
+-	cp r12,r20
+-	cpc r13,r21
+-	breq .L15
+-.L9:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L10:
+-	or r24,r25
+-	breq .+2
+-	rjmp .L11
++	cp r14,r20
++	cpc r15,r21
++	brne .L11
++	ldd r24,Z+2
++	ldd r25,Z+3
++	cp r12,r24
++	cpc r13,r25
++	brne .L11
+ 	ldi r18,lo8(2)
+ 	ldi r19,lo8(2)
+ 	movw r20,r18
+@@ -152,19 +155,20 @@
+ 	mov r20,r22
+ 	mov r21,r23
+ 	movw r22,r24
+-	movw r30,r16
+-	st Z,r20
+-	std Z+1,r21
+-	std Z+2,r22
+-	std Z+3,r23
+-	cp r12,r20
+-	cpc r13,r21
+-	breq .L16
+-.L12:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L13:
+-	or r24,r25
++	movw r26,r16
++	st X+,r20
++	st X+,r21
++	st X+,r22
++	st X,r23
++	sbiw r26,3
++	cp r14,r20
++	cpc r15,r21
++	brne .L11
++	adiw r26,2
++	ld r24,X+
++	ld r25,X
++	cp r12,r24
++	cpc r13,r25
+ 	brne .L11
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -176,48 +180,5 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ 	ret
+-.L14:
+-	movw r30,r14
+-	ldd r18,Z+2
+-	ldd r19,Z+3
+-	movw r30,r16
+-	ldd r24,Z+2
+-	ldd r25,Z+3
+-	cp r18,r24
+-	cpc r19,r25
+-	breq .+2
+-	rjmp .L6
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L7
+-.L16:
+-	movw r30,r14
+-	ldd r18,Z+2
+-	ldd r19,Z+3
+-	movw r30,r16
+-	ldd r24,Z+2
+-	ldd r25,Z+3
+-	cp r18,r24
+-	cpc r19,r25
+-	brne .L12
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L13
+-.L15:
+-	movw r30,r14
+-	ldd r18,Z+2
+-	ldd r19,Z+3
+-	movw r30,r16
+-	ldd r24,Z+2
+-	ldd r25,Z+3
+-	cp r18,r24
+-	cpc r19,r25
+-	breq .+2
+-	rjmp .L9
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L10
+-.L11:
+-	call abort
+ 	.size	main, .-main
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"

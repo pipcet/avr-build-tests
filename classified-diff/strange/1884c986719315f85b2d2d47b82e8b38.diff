@@ -1,0 +1,15 @@
+DIR 21be93378ab15d989aadaeea1f8085f8
+--- pr42716.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:46.530849795 +0000
++++ pr42716.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:58:46.286847243 +0000
+@@ -19,8 +19,9 @@
+ 	movw r18,r24
+ 	andi r18,1
+ 	clr r19
+-	sbrs r24,0
+-	rjmp .L2
++	cp r18,__zero_reg__
++	cpc r19,__zero_reg__
++	breq .L2
+ 	ldi r20,lo8(1)
+ 	lds r18,g_17
+ 	lds r19,g_17+1

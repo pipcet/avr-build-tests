@@ -1,0 +1,20 @@
+--- pr85582-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:54:25.129813141 +0000
++++ pr85582-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:54:25.097812822 +0000
+@@ -33,14 +33,14 @@
+ 	lds r15,c+5
+ 	lds r30,c+6
+ 	lds r17,c+7
++	movw r26,r8
++	andi r26,5
++	clr r27
+ 	movw r18,r10
+ 	movw r20,r12
+ 	movw r22,r14
+ 	mov r24,r30
+ 	mov r25,r17
+-	movw r26,r8
+-	andi r26,5
+-	clr r27
+ 	mov r16,r26
+ 	call __ashrdi3
+ 	movw r6,r18

@@ -1,0 +1,163 @@
+--- 20080124-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 16:10:42.180316413 +0000
++++ 20080124-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 16:10:41.720311619 +0000
+@@ -9,6 +9,8 @@
+ .global	bar
+ 	.type	bar, @function
+ bar:
++	push r8
++	push r9
+ 	push r10
+ 	push r11
+ 	push r12
+@@ -23,15 +25,17 @@
+ 	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 10 */
+-.L__stack_usage = 10
+-	ldd r10,Y+13
+-	ldd r11,Y+14
++/* stack size = 12 */
++.L__stack_usage = 12
+ 	ldd r12,Y+15
+ 	ldd r13,Y+16
+-	ldi r18,-8
+-	sub r13,r18
+-	movw r30,r12
++	ldd r10,Y+19
++	ldd r11,Y+20
++	ldd r14,Y+17
++	ldd r15,Y+18
++	ldi r24,-8
++	sub r15,r24
++	movw r30,r14
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	cp __zero_reg__,r24
+@@ -39,34 +43,32 @@
+ 	brge .L1
+ 	ldi r16,lo8(1)
+ 	ldi r17,0
+-	ldd r24,Y+17
+-	ldd r25,Y+18
+-	movw r18,r24
+-	subi r18,1
+-	sbc r19,__zero_reg__
+-	movw r14,r18
++	movw r8,r10
++	ldi r31,1
++	sub r8,r31
++	sbc r9,__zero_reg__
+ 	rjmp .L2
+ .L3:
+ 	movw r22,r28
+-	subi r22,-19
++	subi r22,-21
+ 	sbci r23,-1
+-	movw r24,r10
++	movw r24,r12
+ 	call foo
+ .L20:
+ 	subi r16,-1
+ 	sbci r17,-1
+-	movw r30,r12
++	movw r30,r14
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	cp r24,r16
+ 	cpc r25,r17
+ 	brlt .L1
+ .L2:
+-	ldi r19,10
+-	cp r14,r19
+-	cpc r15,__zero_reg__
++	ldi r24,10
++	cp r10,r24
++	cpc r11,__zero_reg__
+ 	brsh .L3
+-	movw r30,r14
++	movw r30,r8
+ 	subi r30,lo8(-(gs(.L5)))
+ 	sbci r31,hi8(-(gs(.L5)))
+ 	jmp __tablejump2__
+@@ -85,7 +87,7 @@
+ 	.word gs(.L4)
+ 	.text
+ .L4:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+@@ -103,7 +105,7 @@
+ 	breq .L3
+ 	subi r16,-1
+ 	sbci r17,-1
+-	movw r30,r12
++	movw r30,r14
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	cp r24,r16
+@@ -121,9 +123,11 @@
+ 	pop r12
+ 	pop r11
+ 	pop r10
++	pop r9
++	pop r8
+ 	ret
+ .L6:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+@@ -145,35 +149,35 @@
+ 	rjmp .L13
+ 	rjmp .L20
+ .L7:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+ 	ldd r27,Z+3
+ 	rjmp .L15
+ .L8:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+ 	ldd r27,Z+3
+ 	rjmp .L16
+ .L9:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+ 	ldd r27,Z+3
+ 	rjmp .L17
+ .L10:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+ 	ldd r27,Z+3
+ 	rjmp .L18
+ .L11:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+@@ -183,7 +187,7 @@
+ 	rjmp .L14
+ 	rjmp .L20
+ .L12:
+-	movw r30,r10
++	movw r30,r12
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2

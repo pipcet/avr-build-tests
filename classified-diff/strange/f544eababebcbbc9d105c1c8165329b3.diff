@@ -1,0 +1,14 @@
+DIR c8c41ea70cb1f23b68bcd4245e8a0ac8
+--- 981001-4.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:05:55.159000103 +0000
++++ 981001-4.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:15:47.798713727 +0000
+@@ -21,6 +21,10 @@
+ 	ret
+ .L4:
+ 	call init
++	mov r19,r24
++	mov r18,r25
++	mov r24,r19
++	mov r25,r18
+ 	sts memo.0+1,r25
+ 	sts memo.0,r24
+ /* epilogue start */

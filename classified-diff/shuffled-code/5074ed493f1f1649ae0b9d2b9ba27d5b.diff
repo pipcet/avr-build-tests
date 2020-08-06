@@ -1,0 +1,57 @@
+--- return-addr.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:53:45.641418633 +0000
++++ return-addr.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:53:45.305415275 +0000
+@@ -233,7 +233,7 @@
+ 	movw r24,r28
+ 	adiw r24,2
+ 	call get_min_3
+-	movw r12,r24
++	movw r14,r24
+ 	movw r22,r28
+ 	subi r22,-1
+ 	sbci r23,-1
+@@ -244,27 +244,27 @@
+ 	movw r16,r28
+ 	subi r16,-2
+ 	sbci r17,-1
+-	cp r12,r16
+-	cpc r13,r17
++	cp r14,r16
++	cpc r15,r17
+ 	brsh .L22
+-	movw r16,r12
++	movw r16,r14
+ .L22:
+ 	movw r24,r28
+ 	adiw r24,1
+-	movw r14,r24
++	movw r12,r24
+ 	cp r18,r24
+ 	cpc r19,r25
+ 	brsh .L23
+-	movw r14,r18
++	movw r12,r18
+ .L23:
+-	push r15
+-	push r14
++	push r13
++	push r12
+ 	push r17
+ 	push r16
+ 	push r19
+ 	push r18
+-	push r13
+-	push r12
++	push r15
++	push r14
+ 	ldi r24,lo8(.LC0)
+ 	ldi r25,hi8(.LC0)
+ 	push r25
+@@ -278,7 +278,7 @@
+ 	dec r10
+ 	or r10,r11
+ 	breq .L21
+-	movw r16,r14
++	movw r16,r12
+ .L21:
+ 	movw r24,r16
+ /* epilogue start */

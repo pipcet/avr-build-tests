@@ -1,0 +1,40 @@
+DIR 018af1d782153a8acd564388bca7d29d
+--- pr64957.c.{atmega128}.{3}.{vanilla}.s	2020-08-06 12:05:02.350347114 +0000
++++ pr64957.c.{atmega128}.{3}.{lra}.s	2020-08-06 12:05:03.010351731 +0000
+@@ -39,26 +39,27 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r29,0
+-	ldi r28,0
++	ldi r17,0
++	ldi r16,0
+ .L7:
+-	movw r24,r28
++	movw r24,r16
+ 	call foo
+-	movw r18,r28
++	movw r18,r16
+ 	ori r18,1
+ 	cp r24,r18
+ 	cpc r25,r19
+ 	brne .L5
+-	movw r24,r28
++	movw r24,r16
+ 	call bar
+-	movw r18,r28
++	movw r18,r16
+ 	andi r18,254
+ 	cp r24,r18
+ 	cpc r25,r19
+ 	brne .L5
+-	adiw r28,1
+-	cpi r28,16
+-	cpc r29,__zero_reg__
++	subi r16,-1
++	sbci r17,-1
++	cpi r16,16
++	cpc r17,__zero_reg__
+ 	brne .L7
+ 	ldi r25,0
+ 	ldi r24,0

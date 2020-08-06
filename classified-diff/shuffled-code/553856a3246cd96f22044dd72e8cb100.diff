@@ -1,0 +1,14 @@
+DIR f7e6cc074ea9843b25d0b5ef50b68614
+--- pr39423-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:29:38.851012846 +0000
++++ pr39423-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:29:38.639010648 +0000
+@@ -43,9 +43,9 @@
+ 	movw r26,r24
+ 	ld r14,X+
+ 	ld r15,X
+-	ldi r24,lo8(8)
+ 	movw r30,r28
+ 	adiw r30,1
++	ldi r24,lo8(8)
+ 	movw r26,r30
+ 	0:
+ 	st X+,__zero_reg__

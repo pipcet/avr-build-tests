@@ -1,0 +1,113 @@
+DIR 38c279ddc5095ab4c1eb520b516e225d
+--- 921013-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:46:41.121404950 +0000
++++ 921013-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:46:40.925403614 +0000
+@@ -10,8 +10,8 @@
+ .global	f
+ 	.type	f, @function
+ f:
++	push r8
+ 	push r9
+-	push r10
+ 	push r11
+ 	push r12
+ 	push r13
+@@ -28,42 +28,42 @@
+ 	movw r28,r24
+ 	movw r16,r22
+ 	movw r14,r20
+-	movw r10,r18
++	movw r8,r18
+ 	or r18,r19
+ 	breq .L2
+-	lsl r10
+-	rol r11
+-	add r10,r28
+-	adc r11,r29
++	lsl r8
++	rol r9
++	add r8,r28
++	adc r9,r29
+ .L4:
+ 	movw r30,r16
++	subi r16,-4
++	sbci r17,-1
+ 	movw r26,r14
++	ldi r24,4
++	add r14,r24
++	adc r15,__zero_reg__
+ 	movw r12,r28
+ 	adiw r28,2
+-	clr r9
+-	inc r9
++	clr r11
++	inc r11
+ 	ld r18,X+
+ 	ld r19,X+
+ 	ld r20,X+
+ 	ld r21,X
+-	ldi r24,4
+-	add r14,r24
+-	adc r15,__zero_reg__
+ 	ld r22,Z
+ 	ldd r23,Z+1
+ 	ldd r24,Z+2
+ 	ldd r25,Z+3
+-	subi r16,-4
+-	sbci r17,-1
+ 	call __eqsf2
+ 	cpse r24,__zero_reg__
+-	mov r9,__zero_reg__
++	mov r11,__zero_reg__
+ .L3:
+ 	movw r30,r12
+-	st Z,r9
++	st Z,r11
+ 	std Z+1,__zero_reg__
+-	cp r10,r28
+-	cpc r11,r29
++	cp r8,r28
++	cpc r9,r29
+ 	brne .L4
+ .L2:
+ /* epilogue start */
+@@ -76,8 +76,8 @@
+ 	pop r13
+ 	pop r12
+ 	pop r11
+-	pop r10
+ 	pop r9
++	pop r8
+ 	ret
+ 	.size	f, .-f
+ 	.section	.rodata
+@@ -165,12 +165,14 @@
+ 	sbci r23,-1
+ 	movw r24,r8
+ 	call f
++	ldi r24,lo8(17)
++	mov r14,r24
++	mov r15,__zero_reg__
++	add r14,r28
++	adc r15,r29
+ 	movw r26,r28
+-	adiw r26,17
+-	movw r14,r26
+-	movw r30,r28
+-	adiw r30,1
+-	movw r12,r30
++	adiw r26,1
++	movw r12,r26
+ 	movw r6,r8
+ .L16:
+ 	movw r30,r14
+@@ -206,8 +208,8 @@
+ 	cp r16,r10
+ 	cpc r17,r11
+ 	brne .L21
+-	cp r14,r8
+-	cpc r15,r9
++	cp r8,r14
++	cpc r9,r15
+ 	brne .L16
+ 	ldi r25,0
+ 	ldi r24,0

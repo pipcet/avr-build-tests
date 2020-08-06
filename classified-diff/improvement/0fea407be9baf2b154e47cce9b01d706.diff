@@ -1,0 +1,47 @@
+DIR d5983c66d8595585a58f68fca6b4aef3
+--- pr40676.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:06:31.831332364 +0000
++++ pr40676.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:06:31.483329222 +0000
+@@ -33,22 +33,20 @@
+ 	or r24,r25
+ 	breq .L7
+ .L14:
+-	movw r18,r16
+-	subi r18,-2
+-	sbci r19,-1
++	movw r24,r16
++	adiw r24,2
+ .L6:
+-	movw r30,r18
+-	subi r18,-2
+-	sbci r19,-1
+-	ld r24,Z
+-	ldd r25,Z+1
+-	or r24,r25
++	movw r30,r24
++	adiw r24,2
++	ld r18,Z
++	ldd r19,Z+1
++	or r18,r19
+ 	brne .L6
++	sub r30,r16
++	sbc r31,r17
++	asr r31
++	ror r30
+ 	movw r24,r30
+-	sub r24,r16
+-	sbc r25,r17
+-	asr r25
+-	ror r24
+ /* epilogue start */
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+@@ -72,8 +70,8 @@
+ 	or r24,r25
+ 	brne .L14
+ .L7:
+-	ldi r25,0
+ 	ldi r24,0
++	ldi r25,0
+ /* epilogue start */
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__

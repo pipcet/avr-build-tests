@@ -1,0 +1,15 @@
+DIR 6926886c0db91decdf410143e9830ee7
+--- memset-4.c.{atmega128}.{2}.{vanilla}.s	2020-08-06 15:57:49.090002361 +0000
++++ memset-4.c.{atmega128}.{2}.{ccmode}.s	2020-08-06 15:57:49.618006371 +0000
+@@ -51,10 +51,7 @@
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call f
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
++	movw r18,r16
+ 	subi r18,-15
+ 	sbci r19,-1
+ .L6:

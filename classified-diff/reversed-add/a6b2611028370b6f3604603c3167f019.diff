@@ -1,0 +1,16 @@
+--- 20101013-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:14:46.633178726 +0000
++++ 20101013-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:14:46.309174781 +0000
+@@ -78,9 +78,10 @@
+ /* frame size = 8 */
+ /* stack size = 12 */
+ .L__stack_usage = 12
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	call get_addr_base_and_unit_offset
+ 	movw r30,r24
+ 	ldd r18,Y+1

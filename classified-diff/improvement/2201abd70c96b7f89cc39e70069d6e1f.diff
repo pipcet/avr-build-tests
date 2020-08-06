@@ -1,0 +1,137 @@
+--- pr49419.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:45:55.996720532 +0000
++++ pr49419.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:45:55.852719089 +0000
+@@ -8,10 +8,6 @@
+ 	.text
+ 	.type	foo.part.0, @function
+ foo.part.0:
+-	push r10
+-	push r11
+-	push r13
+-	push r14
+ 	push r15
+ 	push r16
+ 	push r17
+@@ -19,79 +15,75 @@
+ 	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 9 */
+-.L__stack_usage = 9
++/* stack size = 5 */
++.L__stack_usage = 5
+ 	movw r26,r24
+ 	movw r16,r22
+-	movw r22,r20
+-	movw r20,r18
+-	lds r10,t
+-	lds r11,t+1
+-	movw r14,r24
+-	ldi r31,0
+-	ldi r30,0
+-	ldi r19,lo8(6)
+-	mov r13,r19
++	movw r28,r20
++	movw r24,r18
++	lds r20,t
++	lds r21,t+1
++	movw r22,r26
++	ldi r19,0
++	ldi r18,0
++	ldi r30,lo8(6)
++	mov r15,r30
+ .L2:
+-	mul r13,r14
+-	movw r18,r0
+-	mul r13,r15
+-	add r19,r0
++	mul r15,r22
++	movw r30,r0
++	mul r15,r23
++	add r31,r0
+ 	clr __zero_reg__
+-	add r18,r10
+-	adc r19,r11
+-	movw r28,r18
+-	ld r14,Y
+-	ldd r15,Y+1
+-	movw r24,r30
+-	adiw r24,1
+-	cp r14,r16
+-	cpc r15,r17
++	add r30,r20
++	adc r31,r21
++	ld r22,Z
++	ldd r23,Z+1
++	cp r22,r16
++	cpc r23,r17
+ 	breq .L3
+ .L7:
+-	cp r30,r20
+-	cpc r31,r21
++	cp r18,r24
++	cpc r19,r25
+ 	brne .L10
+ 	call abort
+ .L3:
+-	cp r30,r20
+-	cpc r31,r21
++	cp r18,r24
++	cpc r19,r25
+ 	brge .L7
+-	movw r28,r18
+-	ldd r14,Y+2
+-	ldd r15,Y+3
+-	movw r30,r24
++	ldd r22,Z+2
++	ldd r23,Z+3
++	subi r18,-1
++	sbci r19,-1
+ 	rjmp .L2
+ .L10:
+-	lsl r30
+-	rol r31
+-	add r30,r22
+-	adc r31,r23
+-	ldi r20,lo8(6)
++	movw r24,r18
++	adiw r24,1
++	lsl r18
++	rol r19
++	movw r30,r28
++	add r30,r18
++	adc r31,r19
++	ldi r22,lo8(6)
+ .L8:
+-	cp r30,r22
+-	cpc r31,r23
++	cp r28,r30
++	cpc r29,r31
+ 	brne .L9
+-	std Z+1,r27
+-	st Z,r26
++	std Y+1,r27
++	st Y,r26
+ /* epilogue start */
+ 	pop r29
+ 	pop r28
+ 	pop r17
+ 	pop r16
+ 	pop r15
+-	pop r14
+-	pop r13
+-	pop r11
+-	pop r10
+ 	ret
+ .L9:
+-	mul r20,r26
++	mul r22,r26
+ 	movw r18,r0
+-	mul r20,r27
++	mul r22,r27
+ 	add r19,r0
+ 	clr __zero_reg__
+-	movw r26,r10
++	movw r26,r20
+ 	add r26,r18
+ 	adc r27,r19
+ 	adiw r26,4

@@ -1,0 +1,14 @@
+DIR 50aef679ad2a2d51d3017dae7372709d
+--- pr43784.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 15:56:17.013301003 +0000
++++ pr43784.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 15:56:17.541305038 +0000
+@@ -70,8 +70,9 @@
+ 	ldi r24,0
+ .L5:
+ 	ld r18,Z+
++	ldi r19,0
+ 	cp r18,r24
+-	cpc __zero_reg__,r25
++	cpc r19,r25
+ 	breq .L4
+ 	call abort
+ .L4:

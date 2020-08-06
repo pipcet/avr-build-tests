@@ -1,0 +1,19 @@
+--- loop-13.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 14:10:14.490398801 +0000
++++ loop-13.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 14:10:13.998393995 +0000
+@@ -178,10 +178,12 @@
+ 	brne .L9
+ 	ldi r20,lo8(5)
+ 	ldi r21,0
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
+-	movw r24,r30
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
++	movw r24,r28
++	adiw r24,41
+ 	call scale.part.0
+ 	ldd r24,Y+37
+ 	ldd r25,Y+38

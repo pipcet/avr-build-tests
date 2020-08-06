@@ -1,0 +1,74 @@
+DIR f4333798dbd4dd0e0a4d51cf04f20d44
+--- pr57130.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:56:51.245610660 +0000
++++ pr57130.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:56:50.945607341 +0000
+@@ -53,24 +53,10 @@
+ 	ldd r25,Z+1
+ 	cp r18,r24
+ 	cpc r19,r25
+-	breq .L6
+-.L2:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L3:
+-	or r24,r25
+-	brne .L7
+-/* epilogue start */
+-	adiw r28,8
+-	in __tmp_reg__,__SREG__
+-	cli
+-	out __SP_H__,r29
+-	out __SREG__,__tmp_reg__
+-	out __SP_L__,r28
+-	pop r29
+-	pop r28
+-	ret
+-.L6:
++	breq .L8
++.L5:
++	call abort
++.L8:
+ 	movw r26,r30
+ 	adiw r26,2
+ 	ldd r18,Y+3
+@@ -79,7 +65,7 @@
+ 	ldd r25,Z+3
+ 	cp r18,r24
+ 	cpc r19,r25
+-	brne .L2
++	brne .L5
+ 	adiw r26,2
+ 	ldd r18,Y+5
+ 	ldd r19,Y+6
+@@ -88,7 +74,7 @@
+ 	sbiw r26,1
+ 	cp r18,r24
+ 	cpc r19,r25
+-	brne .L2
++	brne .L5
+ 	ldd r18,Y+7
+ 	ldd r19,Y+8
+ 	adiw r26,2
+@@ -96,12 +82,17 @@
+ 	ld r25,X
+ 	cp r18,r24
+ 	cpc r19,r25
+-	brne .L2
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L3
+-.L7:
+-	call abort
++	brne .L5
++/* epilogue start */
++	adiw r28,8
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r29
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r28
++	pop r29
++	pop r28
++	ret
+ 	.size	foo, .-foo
+ 	.section	.rodata
+ .LC0:

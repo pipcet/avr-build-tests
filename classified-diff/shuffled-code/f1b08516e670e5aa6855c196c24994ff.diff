@@ -1,0 +1,21 @@
+DIR b5324104beefb851ffff20d07dc08ea1
+--- ac.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:05:20.930687528 +0000
++++ ac.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:15:17.758443607 +0000
+@@ -68,13 +68,13 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r28,lo8(.LC0)
+-	ldi r29,hi8(.LC0)
++	ldi r16,lo8(.LC0)
++	ldi r17,hi8(.LC0)
+ .L7:
+ 	push __zero_reg__
+ 	push __zero_reg__
+-	push r29
+-	push r28
++	push r17
++	push r16
+ 	call printf
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__

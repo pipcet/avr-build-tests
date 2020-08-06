@@ -1,0 +1,162 @@
+DIR 472ef824bf1776da7a30550ec808f589
+--- vfprintf-chk-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:47:32.650066317 +0000
++++ vfprintf-chk-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:47:32.454062981 +0000
+@@ -109,25 +109,14 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC0)
+ 	ldi r21,hi8(.LC0)
+-.L103:
++.L97:
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+ 	lds r24,__iob+2
+ 	lds r25,__iob+2+1
+ 	call __vfprintf_chk
+ 	sbiw r24,5
+-	brne .L4
+-.L84:
+-	lds r24,should_optimize
+-	lds r25,should_optimize+1
+-	or r24,r25
+-	breq .L4
+-/* epilogue start */
+-	pop r29
+-	pop r28
+-	pop r17
+-	pop r16
+-	ret
++	rjmp .L87
+ .L15:
+ 	ldi r18,lo8(1)
+ 	ldi r19,0
+@@ -146,15 +135,25 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC1)
+ 	ldi r21,hi8(.LC1)
+-.L105:
++.L95:
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+ 	lds r24,__iob+2
+ 	lds r25,__iob+2+1
+ 	call __vfprintf_chk
+ 	sbiw r24,6
+-	breq .L84
+-	rjmp .L4
++.L87:
++	brne .L4
++	lds r24,should_optimize
++	lds r25,should_optimize+1
++	or r24,r25
++	breq .L4
++/* epilogue start */
++	pop r29
++	pop r28
++	pop r17
++	pop r16
++	ret
+ .L14:
+ 	ldi r18,lo8(1)
+ 	ldi r19,0
+@@ -174,16 +173,14 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC2)
+ 	ldi r21,hi8(.LC2)
+-.L107:
++.L98:
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+ 	lds r24,__iob+2
+ 	lds r25,__iob+2+1
+ 	call __vfprintf_chk
+ 	sbiw r24,1
+-	brne .+2
+-	rjmp .L84
+-	rjmp .L4
++	rjmp .L87
+ .L13:
+ 	ldi r18,lo8(1)
+ 	ldi r19,0
+@@ -201,12 +198,10 @@
+ 	ldi r21,hi8(.LC3)
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+-.L109:
++.L99:
+ 	call __vfprintf_chk
+-	or r24,r25
+-	brne .+2
+-	rjmp .L84
+-	rjmp .L4
++	sbiw r24,0
++	rjmp .L87
+ .L12:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -226,7 +221,7 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC4)
+ 	ldi r21,hi8(.LC4)
+-	rjmp .L103
++	rjmp .L97
+ .L11:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -246,7 +241,7 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC4)
+ 	ldi r21,hi8(.LC4)
+-	rjmp .L105
++	rjmp .L95
+ .L10:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -266,7 +261,7 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC4)
+ 	ldi r21,hi8(.LC4)
+-	rjmp .L107
++	rjmp .L98
+ .L9:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -290,7 +285,7 @@
+ 	ldi r23,0
+ 	lds r24,__iob+2
+ 	lds r25,__iob+2+1
+-	rjmp .L109
++	rjmp .L99
+ .L8:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -310,7 +305,7 @@
+ 	movw r18,r16
+ 	ldi r20,lo8(.LC5)
+ 	ldi r21,hi8(.LC5)
+-	rjmp .L107
++	rjmp .L98
+ .L7:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -336,9 +331,7 @@
+ 	lds r25,__iob+2+1
+ 	call __vfprintf_chk
+ 	sbiw r24,7
+-	brne .+2
+-	rjmp .L84
+-	rjmp .L4
++	rjmp .L87
+ .L5:
+ 	sts should_optimize+1,__zero_reg__
+ 	sts should_optimize,__zero_reg__
+@@ -364,9 +357,7 @@
+ 	lds r25,__iob+2+1
+ 	call __vfprintf_chk
+ 	sbiw r24,2
+-	brne .+2
+-	rjmp .L84
+-	rjmp .L4
++	rjmp .L87
+ 	.size	inner, .-inner
+ 	.section	.text.startup,"ax",@progbits
+ .global	main

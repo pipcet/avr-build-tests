@@ -1,0 +1,40 @@
+--- 930126-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:17:41.771252406 +0000
++++ 930126-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:17:41.539249729 +0000
+@@ -35,8 +35,10 @@
+ 	ldi r24,lo8(5)
+ 	movw r30,r28
+ 	adiw r30,6
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -100,16 +102,20 @@
+ 	ldi r24,lo8(5)
+ 	movw r30,r28
+ 	adiw r30,11
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+ 	dec r24
+ 	brne 0b
+ 	ldi r24,lo8(5)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	movw r26,r28
+ 	adiw r26,6
+ 	0:

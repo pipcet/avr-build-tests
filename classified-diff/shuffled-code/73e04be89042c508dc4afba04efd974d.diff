@@ -1,0 +1,13 @@
+DIR 6c9013f4857f2ef3f9b127c2c617a794
+--- 20071203-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:02:30.237087151 +0000
++++ 20071203-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:02:30.009084962 +0000
+@@ -26,8 +26,8 @@
+ 	adc r25,r31
+ .L3:
+ 	movw r30,r24
+-	ld r18,Z
+ 	adiw r24,1
++	ld r18,Z
+ 	cpse r18,__zero_reg__
+ 	rjmp .L3
+ /* epilogue start */

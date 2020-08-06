@@ -1,0 +1,114 @@
+--- stdarg-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:50:35.287515990 +0000
++++ stdarg-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:50:34.639509510 +0000
+@@ -82,6 +82,7 @@
+ 	cpc r25,__zero_reg__
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__
++.L12:
+ 	brne .L8
+ .L9:
+ 	sts bar_arg+1,r29
+@@ -164,9 +165,7 @@
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	sbiw r24,17
+-	brne .+2
+-	rjmp .L9
+-	rjmp .L8
++	rjmp .L12
+ 	.size	bar, .-bar
+ .global	f0
+ 	.type	f0, @function
+@@ -469,7 +468,7 @@
+ 	lds r24,bar_arg
+ 	lds r25,bar_arg+1
+ 	sbiw r24,28
+-	brne .L22
++	brne .L24
+ 	lds r24,x
+ 	lds r25,x+1
+ 	lds r26,x+2
+@@ -477,10 +476,10 @@
+ 	sbiw r24,28
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__
+-	breq .L25
+-.L22:
++	breq .L27
++.L24:
+ 	call abort
+-.L25:
++.L27:
+ 	ldi r24,lo8(67)
+ 	push r24
+ 	push r28
+@@ -506,7 +505,7 @@
+ 	lds r25,d+3
+ 	call __nesf2
+ 	cpse r24,__zero_reg__
+-	rjmp .L22
++	rjmp .L24
+ 	push __zero_reg__
+ 	ldi r24,lo8(-128)
+ 	push r24
+@@ -535,13 +534,13 @@
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	lds r24,foo_arg
+ 	lds r25,foo_arg+1
+ 	cpi r24,-128
+ 	cpc r25,__zero_reg__
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	push __zero_reg__
+ 	push __zero_reg__
+ 	push __zero_reg__
+@@ -570,7 +569,7 @@
+ 	cpi r24,6
+ 	sbci r25,64
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r24,lo8(-1)
+ 	push r24
+ 	push r24
+@@ -603,7 +602,7 @@
+ 	lds r25,bar_arg+1
+ 	adiw r24,31
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	push r17
+ 	ldi r24,lo8(-48)
+ 	push r24
+@@ -648,7 +647,7 @@
+ 	cpi r24,8
+ 	sbci r25,64
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	push r17
+ 	ldi r24,lo8(-40)
+ 	push r24
+@@ -688,7 +687,7 @@
+ 	cpi r24,8
+ 	sbci r25,64
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r18,0
+ 	ldi r19,0
+ 	ldi r20,lo8(-40)
+@@ -699,7 +698,7 @@
+ 	lds r25,d+3
+ 	call __nesf2
+ 	cpse r24,__zero_reg__
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */

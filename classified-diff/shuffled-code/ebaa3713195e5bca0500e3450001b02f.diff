@@ -1,0 +1,58 @@
+--- ashrdi-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:12:24.451667108 +0000
++++ ashrdi-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:12:23.275655642 +0000
+@@ -107,11 +107,12 @@
+ 	cpc r31,__zero_reg__
+ 	brne .+2
+ 	rjmp .L8
++.L24:
+ 	movw r24,r30
+ 	sbiw r24,2
+ 	sbiw r24,62
+ 	brlo .+2
+-	rjmp .L25
++	rjmp .L27
+ .L9:
+ 	adiw r30,1
+ 	adiw r26,8
+@@ -126,10 +127,11 @@
+ 	cpi r30,1
+ 	cpc r31,__zero_reg__
+ 	breq .L12
++.L22:
+ 	movw r24,r30
+ 	sbiw r24,2
+ 	sbiw r24,62
+-	brsh .L26
++	brsh .L28
+ .L13:
+ 	adiw r30,1
+ 	adiw r26,8
+@@ -139,7 +141,7 @@
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit
+-.L26:
++.L28:
+ 	ld r18,X
+ 	adiw r26,1
+ 	ld r19,X
+@@ -208,8 +210,8 @@
+ 	adiw r26,8
+ 	ldi r30,lo8(2)
+ 	ldi r31,0
+-	rjmp .L15
+-.L25:
++	rjmp .L22
++.L27:
+ 	ld r18,X
+ 	adiw r26,1
+ 	ld r19,X
+@@ -279,7 +281,7 @@
+ 	adiw r26,8
+ 	ldi r30,lo8(2)
+ 	ldi r31,0
+-	rjmp .L11
++	rjmp .L24
+ 	.size	main, .-main
+ 	.section	.rodata
+ 	.type	sext, @object

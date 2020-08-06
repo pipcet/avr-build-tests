@@ -1,0 +1,16 @@
+--- loop-8.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:06:42.756326140 +0000
++++ loop-8.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:06:42.532323942 +0000
+@@ -107,9 +107,10 @@
+ 	std Y+2,r25
+ 	std Y+3,r26
+ 	std Y+4,r27
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call bar

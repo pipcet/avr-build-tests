@@ -1,0 +1,42 @@
+DIR 97406623648e9d32d4dea2d216254f6c
+--- 950809-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:04:21.550139136 +0000
++++ 950809-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:14:18.345907047 +0000
+@@ -9,8 +9,8 @@
+ .global	f
+ 	.type	f, @function
+ f:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+@@ -30,12 +30,12 @@
+ 	ldd r21,Z+7
+ 	ldd r22,Z+8
+ 	ldd r23,Z+9
+-	ld r28,X+
+-	ld r29,X
++	ld r16,X+
++	ld r17,X
+ 	sbiw r26,1
+ 	adiw r26,4+1
+-	st X,r29
+-	st -X,r28
++	st X,r17
++	st -X,r16
+ 	sbiw r26,4
+ 	adiw r26,1
+ 	st X,r23
+@@ -49,8 +49,8 @@
+ 	std Z+1,r27
+ 	st Z,r26
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ 	.size	f, .-f
+ 	.section	.text.startup,"ax",@progbits

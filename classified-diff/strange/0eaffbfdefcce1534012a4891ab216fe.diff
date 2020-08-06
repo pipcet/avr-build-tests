@@ -1,0 +1,17 @@
+--- pta-field-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:46:57.809339733 +0000
++++ pta-field-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:46:57.557337210 +0000
+@@ -51,10 +51,12 @@
+ 	adiw r24,7
+ 	std Y+2,r25
+ 	std Y+1,r24
+-	sbiw r24,2
++	movw r24,r28
++	adiw r24,5
+ 	std Y+4,r25
+ 	std Y+3,r24
+-	sbiw r24,4
++	movw r24,r28
++	adiw r24,1
+ 	call bar
+ 	ldd r24,Y+5
+ 	ldd r25,Y+6

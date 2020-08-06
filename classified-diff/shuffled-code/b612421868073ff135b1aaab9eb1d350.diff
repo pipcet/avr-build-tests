@@ -1,0 +1,100 @@
+DIR 1b65fd7fb8b4af2a45d075c06c7a1117
+--- 920726-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:45:07.940770493 +0000
++++ 920726-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:45:07.472767310 +0000
+@@ -65,10 +65,10 @@
+ 	brne .L3
+ .L12:
+ 	movw r30,r12
+-	ldd r24,Z+1
+ 	ldi r26,2
+ 	add r12,r26
+ 	adc r13,__zero_reg__
++	ldd r24,Z+1
+ 	push r24
+ 	ld r24,Z
+ 	push r24
+@@ -169,10 +169,10 @@
+ 	brne .L15
+ .L23:
+ 	movw r30,r12
+-	ldd r24,Z+1
+ 	ldi r26,2
+ 	add r12,r26
+ 	adc r13,__zero_reg__
++	ldd r24,Z+1
+ 	push r24
+ 	ld r24,Z
+ 	push r24
+@@ -280,28 +280,10 @@
+ 	ld r25,X
+ 	cpi r24,53
+ 	sbci r25,32
+-	breq .L31
+-.L25:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L26:
+-	or r24,r25
+-	brne .L27
+-	ldd r24,Y+1
+-	ldd r25,Y+2
+-	cpi r24,53
+-	sbci r25,32
+ 	breq .L32
+-.L28:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L29:
+-	or r24,r25
+-	brne .L27
+-	ldi r25,0
+-	ldi r24,0
+-	call exit
+-.L31:
++.L27:
++	call abort
++.L32:
+ 	movw r30,r14
+ 	adiw r30,2
+ 	movw r26,r14
+@@ -310,29 +292,28 @@
+ 	ld r25,X
+ 	cpi r24,50
+ 	sbci r25,48
+-	brne .L25
++	brne .L27
+ 	ldd r24,Z+2
+ 	ldd r25,Z+3
+ 	sbiw r24,32
+-	brne .L25
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L26
+-.L32:
++	brne .L27
++	ldd r24,Y+1
++	ldd r25,Y+2
++	cpi r24,53
++	sbci r25,32
++	brne .L27
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ 	cpi r24,50
+ 	sbci r25,48
+-	brne .L28
++	brne .L27
+ 	ldd r24,Y+5
+ 	ldd r25,Y+6
+ 	sbiw r24,32
+-	brne .L28
++	brne .L27
+ 	ldi r25,0
+ 	ldi r24,0
+-	rjmp .L29
+-.L27:
+-	call abort
++	call exit
+ 	.size	main, .-main
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
+ .global __do_copy_data

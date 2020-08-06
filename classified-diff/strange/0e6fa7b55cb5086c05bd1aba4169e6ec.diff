@@ -1,0 +1,345 @@
+DIR d7a9c216f5f3b2d3420b647f3810cc59
+--- stkalign.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:55:25.712641698 +0000
++++ stkalign.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:55:25.304636961 +0000
+@@ -48,8 +48,9 @@
+ 	ret
+ .L9:
+ 	movw r24,r22
+-	subi r20,2
+-	sbc r21,__zero_reg__
++	movw r20,r28
++	subi r20,-3
++	sbci r21,-1
+ 	movw r22,r20
+ 	std Y+4,r23
+ 	std Y+3,r22
+@@ -57,8 +58,9 @@
+ 	cpc r19,__zero_reg__
+ 	breq .L2
+ 	movw r24,r22
+-	subi r20,2
+-	sbc r21,__zero_reg__
++	movw r20,r28
++	subi r20,-1
++	sbci r21,-1
+ 	movw r22,r20
+ 	std Y+2,r23
+ 	std Y+1,r22
+@@ -112,8 +114,9 @@
+ 	ret
+ .L17:
+ 	movw r24,r22
+-	subi r20,2
+-	sbc r21,__zero_reg__
++	movw r20,r28
++	subi r20,-3
++	sbci r21,-1
+ 	movw r22,r20
+ 	std Y+4,r23
+ 	std Y+3,r22
+@@ -121,8 +124,9 @@
+ 	cpc r19,__zero_reg__
+ 	breq .L11
+ 	movw r24,r22
+-	subi r20,2
+-	sbc r21,__zero_reg__
++	movw r20,r28
++	subi r20,-1
++	sbci r21,-1
+ 	movw r22,r20
+ 	std Y+2,r23
+ 	std Y+1,r22
+@@ -146,88 +150,101 @@
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r12,r24
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
+-	movw r24,r16
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	movw r14,r18
++	movw r24,r18
+ 	std Y+2,r25
+ 	std Y+1,r24
+-	movw r10,r12
++	movw r8,r12
+ 	ldi r25,-1
+-	sub r10,r25
+-	sbc r11,r25
+-	movw r4,r12
+-	ldi r24,2
+-	add r4,r24
+-	adc r5,__zero_reg__
++	sub r8,r25
++	sbc r9,r25
++	movw r10,r12
++	ldi r18,2
++	add r10,r18
++	adc r11,__zero_reg__
+ 	cp r12,__zero_reg__
+ 	cpc r13,__zero_reg__
+ 	breq .+2
+-	rjmp .L38
+-	ldd r6,Y+1
+-	ldd r7,Y+2
+-	movw r24,r16
+-	std Y+2,r25
+-	std Y+1,r24
+-	movw r22,r24
++	rjmp .L37
++	ldd r16,Y+1
++	ldd r17,Y+2
++	movw r18,r14
++	std Y+2,r19
++	std Y+1,r18
++	movw r22,r18
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call test
+-	or r6,r24
+-	or r7,r25
+-	movw r24,r16
+-	std Y+2,r25
+-	std Y+1,r24
+-	movw r22,r24
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	call test
+-	or r6,r24
+-	or r7,r25
+-	movw r24,r16
+-	movw r8,r24
+-.L32:
+-	movw r24,r16
++	or r16,r24
++	or r17,r25
++	movw r24,r14
+ 	std Y+2,r25
+ 	std Y+1,r24
+ 	cp r10,__zero_reg__
+ 	cpc r11,__zero_reg__
+-	breq .+2
+-	rjmp .L39
+-	movw r12,r24
++	brne .L38
++.L23:
++	ldd r24,Y+1
++	ldd r25,Y+2
++	or r16,r24
++	or r17,r25
++	movw r24,r28
++	adiw r24,1
++	movw r18,r24
++	std Y+2,r19
++	std Y+1,r18
++.L24:
++	ldd r22,Y+1
++	ldd r23,Y+2
++	movw r24,r12
++	sbiw r24,1
++	call test2
++	movw r14,r24
++	movw r24,r28
++	adiw r24,1
++	movw r18,r24
++	std Y+2,r19
++	std Y+1,r18
++	or r8,r9
++	brne .L39
++.L25:
++	movw r8,r18
+ .L26:
+-	movw r24,r16
+-	std Y+2,r25
+-	std Y+1,r24
++	movw r24,r28
++	adiw r24,1
+ 	movw r18,r24
+-	cp r4,__zero_reg__
+-	cpc r5,__zero_reg__
++	std Y+2,r19
++	std Y+1,r18
++	cp r10,__zero_reg__
++	cpc r11,__zero_reg__
+ 	breq .+2
+ 	rjmp .L40
+ .L28:
+-	ldi r25,63
+-	and r6,r25
+-	clr r7
+-	cp r6,__zero_reg__
+-	cpc r7,__zero_reg__
+-	brne .L37
+-	or r12,r8
+-	or r13,r9
+-	or r12,r18
+-	or r13,r19
+-	ldi r24,63
+-	and r12,r24
+-	clr r13
++	andi r16,63
++	clr r17
++	cp r16,__zero_reg__
++	cpc r17,__zero_reg__
++	brne .L36
++	or r8,r14
++	or r9,r15
++	or r8,r18
++	or r9,r19
++	ldi r19,63
++	and r8,r19
++	clr r9
+ 	ldi r24,lo8(1)
+-	cp r12,__zero_reg__
+-	cpc r13,__zero_reg__
+-	breq .L37
++	cp r8,__zero_reg__
++	cpc r9,__zero_reg__
++	breq .L36
+ 	ldi r25,0
+ /* epilogue start */
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+ 	ret
+-.L37:
++.L36:
+ 	ldi r24,0
+ 	ldi r25,0
+ /* epilogue start */
+@@ -235,52 +252,61 @@
+ 	pop __tmp_reg__
+ 	ret
+ .L38:
++	movw r22,r24
++	ldi r24,lo8(1)
++	ldi r25,0
++	call test
++	or r16,r24
++	or r17,r25
++	movw r24,r14
++	movw r14,r24
++	movw r24,r28
++	adiw r24,1
++	movw r18,r24
++	std Y+2,r19
++	std Y+1,r18
++	or r8,r9
++	breq .L25
++.L39:
++	movw r22,r18
++	movw r24,r12
++	call test2
++	movw r8,r24
++	rjmp .L26
++.L37:
+ 	ldd r22,Y+1
+ 	ldd r23,Y+2
+-	movw r8,r12
+-	ldi r25,1
+-	sub r8,r25
+-	sbc r9,__zero_reg__
+-	movw r24,r8
++	movw r24,r12
++	sbiw r24,1
+ 	call test
+-	movw r6,r24
+-	movw r24,r16
++	movw r16,r24
++	movw r24,r14
+ 	std Y+2,r25
+ 	std Y+1,r24
+-	cp r10,__zero_reg__
+-	cpc r11,__zero_reg__
++	cp r8,__zero_reg__
++	cpc r9,__zero_reg__
+ 	brne .L41
+-	or r6,r24
+-	or r7,r25
+-	movw r24,r16
+-	std Y+2,r25
+-	std Y+1,r24
+-	movw r22,r24
++	movw r6,r24
++	or r16,r24
++	or r17,r7
++	movw r18,r14
++	std Y+2,r19
++	std Y+1,r18
++	movw r22,r18
+ 	ldi r25,0
+ 	ldi r24,0
+-.L36:
++.L35:
+ 	call test
+-	or r6,r24
+-	or r7,r25
+-	movw r24,r16
++	or r16,r24
++	or r17,r25
++	movw r24,r14
+ 	std Y+2,r25
+ 	std Y+1,r24
+-.L24:
+-	ldd r22,Y+1
+-	ldd r23,Y+2
+-	movw r24,r8
+-	call test2
+-	movw r8,r24
+-	rjmp .L32
+-.L39:
+-	movw r22,r24
+-	movw r24,r12
+-	call test2
+-	movw r12,r24
+-	rjmp .L26
++	rjmp .L24
+ .L40:
+-	movw r22,r24
+-	movw r24,r10
++	movw r22,r18
++	movw r24,r12
++	adiw r24,1
+ 	call test2
+ 	movw r18,r24
+ 	rjmp .L28
+@@ -289,26 +315,19 @@
+ 	ldd r23,Y+2
+ 	movw r24,r12
+ 	call test
+-	or r6,r24
+-	or r7,r25
+-	movw r24,r16
+-	std Y+2,r25
+-	std Y+1,r24
+-	cp r4,__zero_reg__
+-	cpc r5,__zero_reg__
+-	brne .L42
+-	movw r14,r24
+-	or r6,r24
+-	or r7,r15
+-	movw r24,r16
+-	std Y+2,r25
+-	std Y+1,r24
+-	rjmp .L24
+-.L42:
++	or r16,r24
++	or r17,r25
++	movw r18,r14
++	std Y+2,r19
++	std Y+1,r18
++	cp r10,__zero_reg__
++	cpc r11,__zero_reg__
++	brne .+2
++	rjmp .L23
+ 	ldd r22,Y+1
+ 	ldd r23,Y+2
+-	movw r24,r10
+-	rjmp .L36
++	movw r24,r8
++	rjmp .L35
+ 	.size	main, .-main
+ 	.local	s.0
+ 	.comm	s.0,1,1

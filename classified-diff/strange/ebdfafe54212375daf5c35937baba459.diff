@@ -1,0 +1,48 @@
+--- pr34176.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:52:54.768910304 +0000
++++ pr34176.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:52:54.684909465 +0000
+@@ -77,28 +77,28 @@
+ 	rcall .
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-.L14:
+ /* prologue: function */
+ /* frame size = 2 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r24,r28
+ 	adiw r24,1
++	movw r14,r24
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
++	movw r12,r14
+ .L13:
+ 	call foo.constprop.0
+ 	cp r16,__zero_reg__
+ 	cpc r17,__zero_reg__
+-	breq .L14
++	breq .L10
+ 	movw r14,r16
+ 	lsl r14
+ 	rol r15
+ 	lsl r14
+ 	rol r15
+-	movw r24,r28
+-	adiw r24,1
++	movw r24,r12
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
+@@ -111,6 +111,12 @@
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+ 	ret
++.L10:
++	movw r24,r12
++	call hash_find_entry
++	ldd r16,Y+1
++	ldd r17,Y+2
++	rjmp .L13
+ 	.size	main, .-main
+ 	.local	count.0
+ 	.comm	count.0,2,1

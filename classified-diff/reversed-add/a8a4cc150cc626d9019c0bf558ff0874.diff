@@ -1,0 +1,163 @@
+--- 20071219-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:12:13.019555635 +0000
++++ 20071219-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:12:12.703552555 +0000
+@@ -72,8 +72,10 @@
+ 	call foo
+ 	ldi r24,lo8(25)
+ 	movw r30,r16
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -81,13 +83,17 @@
+ 	brne 0b
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ 	ldi r24,lo8(25)
+ 	movw r30,r16
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -95,8 +101,10 @@
+ 	brne 0b
+ 	ldi r23,0
+ 	ldi r22,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ /* epilogue start */
+ 	adiw r28,50
+@@ -145,8 +153,10 @@
+ 	call foo
+ 	ldi r24,lo8(25)
+ 	movw r30,r16
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -154,13 +164,17 @@
+ 	brne 0b
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ 	ldi r24,lo8(25)
+ 	movw r30,r16
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -169,8 +183,10 @@
+ 	lds r30,p
+ 	lds r31,p+1
+ 	ldi r24,lo8(25)
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -178,8 +194,10 @@
+ 	brne 0b
+ 	ldi r23,0
+ 	ldi r22,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ /* epilogue start */
+ 	adiw r28,50
+@@ -228,8 +246,10 @@
+ 	call foo
+ 	ldi r24,lo8(25)
+ 	movw r30,r16
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -237,8 +257,10 @@
+ 	brne 0b
+ 	ldi r22,lo8(1)
+ 	ldi r23,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ 	lds r18,p
+ 	lds r19,p+1
+@@ -251,8 +273,10 @@
+ 	dec r24
+ 	brne 0b
+ 	ldi r24,lo8(25)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	movw r26,r18
+ 	0:
+ 	ld r0,Z+
+@@ -261,8 +285,10 @@
+ 	brne 0b
+ 	ldi r23,0
+ 	ldi r22,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ /* epilogue start */
+ 	adiw r28,50

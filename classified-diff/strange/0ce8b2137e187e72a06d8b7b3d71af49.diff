@@ -1,0 +1,29 @@
+DIR e017f2bc603016824427a96075c19c82
+--- loop-ivopts-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:55:42.024830160 +0000
++++ loop-ivopts-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:55:41.752827032 +0000
+@@ -44,6 +44,11 @@
+ 	mov r14,r19
+ 	mov r15,__zero_reg__
+ .L4:
++	mov r25,r14
++	mov r24,r15
++	ldi r18,1
++	sub r14,r18
++	sbc r15,__zero_reg__
+ 	movw r26,r10
+ 	adiw r26,60
+ 	ld r4,X+
+@@ -51,11 +56,8 @@
+ 	ld r6,X+
+ 	ld r7,X
+ 	sbiw r26,60+3
+-	mov r16,r14
+-	mov r17,r15
+-	ldi r27,1
+-	sub r14,r27
+-	sbc r15,__zero_reg__
++	mov r16,r25
++	mov r17,r24
+ 	movw r30,r12
+ 	subi r30,lo8(-(tmp.0))
+ 	sbci r31,hi8(-(tmp.0))

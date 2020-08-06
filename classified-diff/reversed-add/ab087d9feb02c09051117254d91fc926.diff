@@ -1,0 +1,16 @@
+--- pr42614.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:15:52.625973305 +0000
++++ pr42614.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:15:52.357970113 +0000
+@@ -45,9 +45,10 @@
+ /* stack size = 1 */
+ .L__stack_usage = 1
+ 	std Y+1,__zero_reg__
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
+ 	call expect_func

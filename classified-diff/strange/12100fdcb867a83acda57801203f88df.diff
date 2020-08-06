@@ -1,0 +1,28 @@
+--- arith-rand.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:55:07.678238161 +0000
++++ arith-rand.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:55:07.706238440 +0000
+@@ -293,9 +293,9 @@
+ 	rol r19
+ 	or r18,r19
+ 	brne .L20
+-	ldi r18,-1
+-	cp r12,r18
+-	cpc r13,r18
++	ldi r21,-1
++	cp r12,r21
++	cpc r13,r21
+ 	breq .L14
+ .L20:
+ 	call __divmodhi4
+@@ -328,8 +328,10 @@
+ 	add r18,r0
+ 	adc r19,r1
+ 	clr __zero_reg__
+-	cp r30,r18
+-	cpc __zero_reg__,r19
++	mov r24,r30
++	ldi r25,0
++	cp r18,r24
++	cpc r19,r25
+ 	brne .L16
+ 	mov r24,r30
+ 	mov __tmp_reg__,r30

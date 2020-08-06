@@ -1,0 +1,24 @@
+DIR 6dd04f9f4f80636e90fb2d09671e82be
+--- 990525-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 15:58:02.798106412 +0000
++++ 990525-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 15:58:03.346110570 +0000
+@@ -33,16 +33,13 @@
+ /* frame size = 8 */
+ /* stack size = 10 */
+ .L__stack_usage = 10
+-	ldi r24,lo8(10)
+-	mov r18,r24
+-	ldi r24,lo8(20)
+-	mov r20,r24
+-	ldi r24,lo8(30)
+-	mov r22,r24
+-	ldi r24,lo8(40)
++	ldi r18,lo8(10)
+ 	ldi r19,0
++	ldi r20,lo8(20)
+ 	ldi r21,0
++	ldi r22,lo8(30)
+ 	ldi r23,0
++	ldi r24,lo8(40)
+ 	ldi r25,0
+ /* epilogue start */
+ 	adiw r28,8

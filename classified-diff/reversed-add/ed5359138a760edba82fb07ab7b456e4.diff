@@ -1,0 +1,40 @@
+--- pr79737-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 14:07:19.884690275 +0000
++++ pr79737-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 14:07:19.532686825 +0000
+@@ -47,16 +47,20 @@
+ 	ldi r18,lo8(9)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+ 	dec r18
+ 	brne 0b
+ 	ldi r18,lo8(9)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(h)
+ 	ldi r27,hi8(h)
+ 	0:
+@@ -68,8 +72,10 @@
+ 	cpc r21,__zero_reg__
+ 	breq .L2
+ 	ldi r18,lo8(9)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(i)
+ 	ldi r27,hi8(i)
+ 	0:

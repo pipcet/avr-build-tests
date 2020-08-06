@@ -1,0 +1,15 @@
+DIR 107e65474a5ee44fa017daaf22f5c78f
+--- pr23929.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:58:14.062507757 +0000
++++ pr23929.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:58:13.750504445 +0000
+@@ -62,7 +62,10 @@
+ 	cp r30,r18
+ 	cpc r31,r19
+ 	brne .L3
+-	movw r14,r30
++	ldi r24,-64
++	sub r14,r24
++	ldi r24,-2
++	sbc r15,r24
+ 	subi r20,1
+ 	sbc r21,__zero_reg__
+ 	brne .L4

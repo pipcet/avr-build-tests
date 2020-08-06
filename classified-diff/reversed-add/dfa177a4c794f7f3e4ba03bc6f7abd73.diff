@@ -1,0 +1,16 @@
+--- 991016-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 14:06:20.484107542 +0000
++++ 991016-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 14:06:20.028103065 +0000
+@@ -160,9 +160,10 @@
+ 	std Y+6,__zero_reg__
+ 	std Y+7,__zero_reg__
+ 	std Y+8,__zero_reg__
+-	movw r20,r28
+-	subi r20,-1
+-	sbci r21,-1
++	ldi r20,lo8(1)
++	ldi r21,0
++	add r20,r28
++	adc r21,r29
+ 	ldi r22,lo8(5)
+ 	ldi r23,0
+ 	ldi r24,lo8(2)

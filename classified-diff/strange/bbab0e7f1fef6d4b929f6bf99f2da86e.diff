@@ -1,0 +1,13 @@
+DIR 4a7f2dbd74ae71f229351bf7b624d162
+--- 20110913-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:00:13.563743095 +0000
++++ 20110913-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:00:13.375741200 +0000
+@@ -106,7 +106,8 @@
+ 	movw r24,r20
+ 	movw r22,r18
+ 	call __gesf2
+-	sbrc r24,7
++	tst r24
++	brge .+2
+ 	rjmp .L7
+ 	movw r30,r12
+ 	lsl r30

@@ -1,0 +1,321 @@
+DIR 3927f807e20ac446f697d28db8904cc3
+--- pr28982a.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:46:45.381433983 +0000
++++ pr28982a.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:46:45.025431556 +0000
+@@ -42,20 +42,20 @@
+ /* stack size = 184 */
+ .L__stack_usage = 184
+ 	movw r18,r24
+-	lds r30,incs
+-	lds r31,incs+1
+-	lds r26,incs+2
+-	lds r27,incs+2+1
+-	lds r22,incs+4
+-	lds r23,incs+4+1
+-	lds r20,incs+6
+-	lds r21,incs+6+1
+-	lds r24,incs+8
+-	lds r25,incs+8+1
+-	lds r16,incs+10
+-	lds r17,incs+10+1
++	lds r26,incs
++	lds r27,incs+1
++	lds r16,incs+2
++	lds r17,incs+2+1
+ 	std Y+2,r17
+ 	std Y+1,r16
++	lds r30,incs+4
++	lds r31,incs+4+1
++	lds r22,incs+6
++	lds r23,incs+6+1
++	lds r20,incs+8
++	lds r21,incs+8+1
++	lds r24,incs+10
++	lds r25,incs+10+1
+ 	lds r16,incs+12
+ 	lds r17,incs+12+1
+ 	std Y+30,r17
+@@ -194,7 +194,7 @@
+ 	or r18,r19
+ 	brne .+4
+ 	jmp .L27
+-	movw r16,r30
++	movw r16,r26
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -203,7 +203,8 @@
+ 	std Y+63,r17
+ 	std Y+62,r16
+ 	sbiw r28,123-62
+-	movw r16,r26
++	ldd r16,Y+1
++	ldd r17,Y+2
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -212,7 +213,7 @@
+ 	std Y+63,r17
+ 	std Y+62,r16
+ 	sbiw r28,125-62
+-	movw r16,r22
++	movw r16,r30
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -223,7 +224,7 @@
+ 	st Y,r16
+ 	subi r28,lo8(127)
+ 	sbci r29,hi8(127)
+-	movw r16,r20
++	movw r16,r22
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -234,7 +235,7 @@
+ 	st Y,r16
+ 	subi r28,lo8(129)
+ 	sbci r29,hi8(129)
+-	movw r16,r24
++	movw r16,r20
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -245,8 +246,7 @@
+ 	st Y,r16
+ 	subi r28,lo8(131)
+ 	sbci r29,hi8(131)
+-	ldd r16,Y+1
+-	ldd r17,Y+2
++	movw r16,r24
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -426,162 +426,163 @@
+ 	subi r28,lo8(161)
+ 	sbci r29,hi8(161)
+ 	ldi r18,lo8(1)
+-	sbiw r26,1
++	ldd r16,Y+1
++	ldd r17,Y+2
++	cpi r16,1
++	cpc r17,__zero_reg__
+ 	brne .L5
+ 	ldi r18,0
+ .L5:
+ 	ldi r19,lo8(1)
+-	sbiw r30,1
++	sbiw r26,1
+ 	brne .L6
+ 	ldi r19,0
+ .L6:
+ 	or r18,r19
+ 	ldi r19,lo8(1)
+-	cpi r22,1
+-	cpc r23,__zero_reg__
++	sbiw r30,1
+ 	brne .L7
+ 	ldi r19,0
+ .L7:
+ 	or r18,r19
+ 	ldi r19,lo8(1)
+-	cpi r20,1
+-	cpc r21,__zero_reg__
++	cpi r22,1
++	cpc r23,__zero_reg__
+ 	brne .L8
+ 	ldi r19,0
+ .L8:
+ 	or r18,r19
+ 	ldi r19,lo8(1)
+-	sbiw r24,1
++	cpi r20,1
++	cpc r21,__zero_reg__
+ 	brne .L9
+ 	ldi r19,0
+ .L9:
+ 	or r18,r19
+-	ldi r24,lo8(1)
+-	ldd r20,Y+1
+-	ldd r21,Y+2
+-	cpi r20,1
+-	cpc r21,__zero_reg__
++	ldi r19,lo8(1)
++	sbiw r24,1
+ 	brne .L10
+-	ldi r24,0
++	ldi r19,0
+ .L10:
+-	or r18,r24
++	or r18,r19
+ 	ldi r24,lo8(1)
+-	ldd r30,Y+29
+-	ldd r31,Y+30
+-	sbiw r30,1
++	ldd r20,Y+29
++	ldd r21,Y+30
++	cpi r20,1
++	cpc r21,__zero_reg__
+ 	brne .L11
+ 	ldi r24,0
+ .L11:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r16,Y+31
+-	ldd r17,Y+32
+-	cpi r16,1
+-	cpc r17,__zero_reg__
++	ldd r30,Y+31
++	ldd r31,Y+32
++	sbiw r30,1
+ 	brne .L12
+ 	ldi r24,0
+ .L12:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r20,Y+33
+-	ldd r21,Y+34
+-	cpi r20,1
+-	cpc r21,__zero_reg__
++	ldd r16,Y+33
++	ldd r17,Y+34
++	cpi r16,1
++	cpc r17,__zero_reg__
+ 	brne .L13
+ 	ldi r24,0
+ .L13:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r30,Y+35
+-	ldd r31,Y+36
+-	sbiw r30,1
++	ldd r20,Y+35
++	ldd r21,Y+36
++	cpi r20,1
++	cpc r21,__zero_reg__
+ 	brne .L14
+ 	ldi r24,0
+ .L14:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r16,Y+37
+-	ldd r17,Y+38
+-	cpi r16,1
+-	cpc r17,__zero_reg__
++	ldd r30,Y+37
++	ldd r31,Y+38
++	sbiw r30,1
+ 	brne .L15
+ 	ldi r24,0
+ .L15:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r20,Y+39
+-	ldd r21,Y+40
+-	cpi r20,1
+-	cpc r21,__zero_reg__
++	ldd r16,Y+39
++	ldd r17,Y+40
++	cpi r16,1
++	cpc r17,__zero_reg__
+ 	brne .L16
+ 	ldi r24,0
+ .L16:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r30,Y+41
+-	ldd r31,Y+42
+-	sbiw r30,1
++	ldd r20,Y+41
++	ldd r21,Y+42
++	cpi r20,1
++	cpc r21,__zero_reg__
+ 	brne .L17
+ 	ldi r24,0
+ .L17:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r16,Y+43
+-	ldd r17,Y+44
+-	cpi r16,1
+-	cpc r17,__zero_reg__
++	ldd r30,Y+43
++	ldd r31,Y+44
++	sbiw r30,1
+ 	brne .L18
+ 	ldi r24,0
+ .L18:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r20,Y+45
+-	ldd r21,Y+46
+-	cpi r20,1
+-	cpc r21,__zero_reg__
++	ldd r16,Y+45
++	ldd r17,Y+46
++	cpi r16,1
++	cpc r17,__zero_reg__
+ 	brne .L19
+ 	ldi r24,0
+ .L19:
+ 	or r18,r24
+ 	ldi r24,lo8(1)
+-	ldd r30,Y+47
+-	ldd r31,Y+48
+-	sbiw r30,1
++	ldd r20,Y+47
++	ldd r21,Y+48
++	cpi r20,1
++	cpc r21,__zero_reg__
+ 	brne .L20
+ 	ldi r24,0
+ .L20:
+ 	or r24,r18
+ 	ldi r25,lo8(1)
+-	ldd r16,Y+49
+-	ldd r17,Y+50
+-	cpi r16,1
+-	cpc r17,__zero_reg__
++	ldd r30,Y+49
++	ldd r31,Y+50
++	sbiw r30,1
+ 	brne .L21
+ 	ldi r25,0
+ .L21:
+ 	or r24,r25
+ 	ldi r25,lo8(1)
+-	ldd r18,Y+51
+-	ldd r19,Y+52
+-	cpi r18,1
+-	cpc r19,__zero_reg__
++	ldd r16,Y+51
++	ldd r17,Y+52
++	cpi r16,1
++	cpc r17,__zero_reg__
+ 	brne .L22
+ 	ldi r25,0
+ .L22:
+ 	or r24,r25
+ 	ldi r25,lo8(1)
+-	ldd r20,Y+53
+-	ldd r21,Y+54
+-	cpi r20,1
+-	cpc r21,__zero_reg__
++	ldd r18,Y+53
++	ldd r19,Y+54
++	cpi r18,1
++	cpc r19,__zero_reg__
+ 	brne .L23
+ 	ldi r25,0
+ .L23:
+ 	or r24,r25
+ 	brne .L29
+-	ldd r24,Y+55
+-	ldd r25,Y+56
+-	sbiw r24,1
++	ldd r20,Y+55
++	ldd r21,Y+56
++	cpi r20,1
++	cpc r21,__zero_reg__
+ 	brne .+2
+ 	rjmp .L32
+ .L29:

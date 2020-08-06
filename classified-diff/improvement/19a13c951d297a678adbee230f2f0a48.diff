@@ -1,0 +1,233 @@
+DIR cb69a35baf972dbea2a30eaca754dea6
+--- pr94734.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:55:02.752373285 +0000
++++ pr94734.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:55:02.168366409 +0000
+@@ -24,28 +24,28 @@
+ /* stack size = 34 */
+ .L__stack_usage = 34
+ 	movw r18,r24
++	cp __zero_reg__,r24
++	cpc __zero_reg__,r25
++	brge .L2
+ 	movw r30,r28
+ 	adiw r30,1
+-	movw r26,r30
+ 	ldi r25,0
+ 	ldi r24,0
+-	cp __zero_reg__,r18
+-	cpc __zero_reg__,r19
+-	brge .L2
+ .L4:
+ 	cpi r24,16
+ 	cpc r25,__zero_reg__
+ 	brge .L3
+-	adiw r26,1
+-	st X,r25
+-	st -X,r24
++	std Z+1,r25
++	st Z,r24
+ .L3:
+ 	adiw r24,1
+-	adiw r26,2
++	adiw r30,2
+ 	cp r18,r24
+ 	cpc r19,r25
+ 	brne .L4
+ .L2:
++	movw r30,r28
++	adiw r30,1
+ 	movw r20,r28
+ 	subi r20,-33
+ 	sbci r21,-1
+@@ -73,8 +73,6 @@
+ .global	bar
+ 	.type	bar, @function
+ bar:
+-	push r6
+-	push r7
+ 	push r8
+ 	push r9
+ 	push r10
+@@ -97,55 +95,51 @@
+ 	out __SP_L__,r28
+ /* prologue: function */
+ /* frame size = 32 */
+-/* stack size = 46 */
+-.L__stack_usage = 46
++/* stack size = 44 */
++.L__stack_usage = 44
+ 	movw r30,r24
+-	movw r6,r22
++	movw r12,r22
+ 	movw r8,r18
+-	mov r12,r14
+-	mov r13,r15
++	movw r20,r14
+ 	ldi r24,lo8(42)
+ 	ldi r25,0
+ 	std Y+10,r25
+ 	std Y+9,r24
+-	movw r20,r28
+-	subi r20,-1
+-	sbci r21,-1
+ 	cp __zero_reg__,r30
+ 	cpc __zero_reg__,r31
+-	brge .L12
++	brge .L10
+ 	ldi r25,0
+ 	ldi r24,0
+-	movw r20,r28
+-	subi r20,-1
+-	sbci r21,-1
+ 	lsl r8
+ 	rol r9
+-	add r8,r20
+-	adc r9,r21
+-.L14:
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	add r8,r18
++	adc r9,r19
++.L12:
+ 	movw r18,r24
+ 	andi r18,37
+ 	clr r19
+-	cp r18,r6
+-	cpc r19,r7
+-	brne .L13
++	cp r18,r12
++	cpc r19,r13
++	brne .L11
+ 	movw r26,r8
+ 	st X+,r24
+ 	st X,r25
+-.L13:
++.L11:
+ 	adiw r24,1
+ 	cp r30,r24
+ 	cpc r31,r25
+-	brne .L14
+-.L12:
+-	lsl r12
+-	rol r13
+-	add r20,r12
+-	adc r21,r13
++	brne .L12
++.L10:
++	lsl r20
++	rol r21
++	add r20,r28
++	adc r21,r29
+ 	movw r30,r20
+-	ld r24,Z
+-	ldd r25,Z+1
++	ldd r24,Z+1
++	ldd r25,Z+2
+ /* epilogue start */
+ 	adiw r28,32
+ 	in __tmp_reg__,__SREG__
+@@ -165,8 +159,6 @@
+ 	pop r10
+ 	pop r9
+ 	pop r8
+-	pop r7
+-	pop r6
+ 	ret
+ 	.size	bar, .-bar
+ .global	baz
+@@ -199,28 +191,28 @@
+ 	std Y+25,r24
+ 	cp __zero_reg__,r30
+ 	cpc __zero_reg__,r31
+-	brge .L19
++	brge .L15
+ 	ldd r21,Y+15
+ 	ldd r20,Y+16
+ 	ldi r25,0
+ 	ldi r24,0
+-.L21:
++.L17:
+ 	movw r18,r24
+ 	andi r18,37
+ 	clr r19
+ 	cp r18,r26
+ 	cpc r19,r27
+-	brne .L20
++	brne .L16
+ 	mov r21,r24
+ 	mov r20,r25
+-.L20:
++.L16:
+ 	adiw r24,1
+ 	cp r30,r24
+ 	cpc r31,r25
+-	brne .L21
++	brne .L17
+ 	std Y+15,r21
+ 	std Y+16,r20
+-.L19:
++.L15:
+ 	lsl r12
+ 	rol r13
+ 	add r12,r28
+@@ -257,7 +249,7 @@
+ 	cpi r24,120
+ 	cpc r25,__zero_reg__
+ 	breq .+2
+-	rjmp .L25
++	rjmp .L21
+ 	ldi r17,lo8(4)
+ 	mov r14,r17
+ 	mov r15,__zero_reg__
+@@ -273,7 +265,7 @@
+ 	ldi r25,0
+ 	call bar
+ 	sbiw r24,42
+-	brne .L25
++	brne .L21
+ 	ldi r17,lo8(15)
+ 	mov r14,r17
+ 	mov r15,__zero_reg__
+@@ -289,7 +281,7 @@
+ 	ldi r25,0
+ 	call bar
+ 	sbiw r24,22
+-	brne .L25
++	brne .L21
+ 	ldi r18,lo8(12)
+ 	ldi r19,0
+ 	ldi r20,0
+@@ -300,7 +292,7 @@
+ 	ldi r25,0
+ 	call baz
+ 	sbiw r24,42
+-	brne .L25
++	brne .L21
+ 	ldi r18,lo8(7)
+ 	ldi r19,0
+ 	ldi r20,0
+@@ -311,7 +303,7 @@
+ 	ldi r25,0
+ 	call baz
+ 	sbiw r24,22
+-	brne .L25
++	brne .L21
+ 	ldi r18,lo8(12)
+ 	ldi r19,0
+ 	ldi r20,0
+@@ -322,12 +314,12 @@
+ 	ldi r25,0
+ 	call baz
+ 	sbiw r24,42
+-	brne .L25
++	brne .L21
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L25:
++.L21:
+ 	call abort
+ 	.size	main, .-main
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"

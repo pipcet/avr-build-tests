@@ -1,0 +1,23 @@
+--- 930208-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:55:57.602736786 +0000
++++ 930208-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:55:57.286733630 +0000
+@@ -14,16 +14,15 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	cpi r24,lo8(2)
+-	breq .L7
+ 	ldi r24,lo8(1)
+-.L5:
++	breq .L6
++.L4:
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret
+-.L7:
+-	ldi r24,lo8(1)
++.L6:
+ 	cpi r23,lo8(2)
+-	brne .L5
++	brne .L4
+ 	ldi r24,0
+ 	ldi r25,0
+ /* epilogue start */

@@ -1,0 +1,13 @@
+DIR 4e89c8a255d6231f82259d236ea496be
+--- loop-13.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:48:06.522632689 +0000
++++ loop-13.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:48:05.902622496 +0000
+@@ -181,7 +181,8 @@
+ 	movw r22,r28
+ 	subi r22,-1
+ 	sbci r23,-1
+-	movw r24,r30
++	movw r24,r28
++	adiw r24,41
+ 	call scale.part.0
+ 	ldd r24,Y+37
+ 	ldd r25,Y+38

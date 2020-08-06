@@ -1,0 +1,17 @@
+DIR fa4efab3f136b4aeb2d03b4ef6b517c9
+--- 20060109-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:29:41.219037397 +0000
++++ 20060109-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:29:41.067035822 +0000
+@@ -27,9 +27,10 @@
+ 	std Y+4,__zero_reg__
+ 	ldi r17,0
+ 	ldi r16,0
+-	movw r18,r28
+-	subi r18,-1
+-	sbci r19,-1
++	ldi r18,lo8(1)
++	ldi r19,0
++	add r18,r28
++	adc r19,r29
+ 	ldi r20,lo8(1)
+ 	ldi r21,0
+ 	call cpp_interpret_string

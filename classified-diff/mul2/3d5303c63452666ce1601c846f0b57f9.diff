@@ -1,0 +1,17 @@
+--- pr43783.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:12:12.371549317 +0000
++++ pr43783.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:12:12.095546625 +0000
+@@ -58,10 +58,10 @@
+ 	rol r25
+ 	rol r26
+ 	rol r27
+-	lsl r24
+-	rol r25
+-	rol r26
+-	rol r27
++	add r24,r24
++	adc r25,r25
++	adc r26,r26
++	adc r27,r27
+ 	sbiw r24,32
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__

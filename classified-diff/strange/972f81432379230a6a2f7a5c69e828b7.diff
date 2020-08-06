@@ -1,0 +1,17 @@
+DIR 1a19ac8385dbe89195dff487620d48b3
+--- 920501-7.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:45:05.668755038 +0000
++++ 920501-7.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:45:05.532754112 +0000
+@@ -77,8 +77,11 @@
+ 	adiw r24,30
+ 	std Y+8,r25
+ 	std Y+7,r24
+-	sbiw r24,29
+-	movw r2,r24
++	clr r2
++	inc r2
++	mov r3,__zero_reg__
++	add r2,r28
++	adc r3,r29
+ 	ldd r24,Y+9
+ 	ldd r25,Y+10
+ 	call y.0

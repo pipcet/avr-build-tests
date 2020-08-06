@@ -1,0 +1,13 @@
+DIR 4f8e372ba8093e7a057f3eb5c96abcce
+--- 20050124-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 15:56:11.861261624 +0000
++++ 20050124-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 15:56:12.369265508 +0000
+@@ -20,7 +20,8 @@
+ 	cp __zero_reg__,r24
+ 	cpc __zero_reg__,r25
+ 	brge .L3
+-	adiw r24,1
++	movw r24,r18
++	adiw r24,2
+ 	ret
+ .L3:
+ 	sbiw r24,0

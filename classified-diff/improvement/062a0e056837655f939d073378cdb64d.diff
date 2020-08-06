@@ -1,0 +1,329 @@
+DIR c00f9350736b2359aab2b585d93c0e62
+--- 20050502-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:54:11.911765066 +0000
++++ 20050502-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:54:11.275757330 +0000
+@@ -246,21 +246,25 @@
+ 	sbiw r28,65-62
+ 	call strcmp
+ 	or r24,r25
+-	breq .+2
+-	rjmp .L34
++	brne .L34
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+ 	cpi r24,97
+ 	sbci r25,98
+-	brne .+2
+-	rjmp .L45
+-.L32:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L33:
+-	or r24,r25
+-	breq .+2
+-	rjmp .L34
++	breq .L45
++.L34:
++	call abort
++.L45:
++	ldd r24,Y+3
++	ldd r25,Y+4
++	cpi r24,99
++	sbci r25,100
++	brne .L34
++	ldd r24,Y+5
++	ldd r25,Y+6
++	cpi r24,101
++	cpc r25,__zero_reg__
++	brne .L34
+ 	ldi r24,lo8(.LC3)
+ 	ldi r25,hi8(.LC3)
+ 	adiw r28,65-62
+@@ -280,38 +284,35 @@
+ 	ldd r30,Y+62
+ 	ldd r31,Y+63
+ 	sbiw r28,65-62
+-	ld r18,Z
+-	mov r20,r18
+-	subi r20,72
+-	sbc r21,r21
+-	movw r24,r20
+-	cpi r18,lo8(72)
+-	brne .L35
+-	ldd r18,Z+1
+-	mov r20,r18
+-	subi r20,73
+-	sbc r21,r21
+-	movw r24,r20
+-	cpi r18,lo8(73)
+-	brne .+2
+-	rjmp .L46
+-.L35:
+-	or r24,r25
+-	breq .+2
++	ld r24,Z
++	cpi r24,lo8(72)
++	brne .L34
++	ldd r24,Z+1
++	cpi r24,lo8(73)
++	brne .L34
++	ldd r24,Z+2
++	cpse r24,__zero_reg__
+ 	rjmp .L34
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+ 	cpi r24,65
+ 	sbci r25,66
+-	brne .+2
+-	rjmp .L47
+-.L36:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L37:
+-	or r24,r25
+-	breq .+2
+-	rjmp .L34
++	brne .L34
++	ldd r24,Y+3
++	ldd r25,Y+4
++	cpi r24,67
++	sbci r25,68
++	brne .L34
++	ldd r24,Y+5
++	ldd r25,Y+6
++	cpi r24,69
++	sbci r25,70
++	brne .L34
++	ldd r24,Y+7
++	ldd r25,Y+8
++	cpi r24,71
++	cpc r25,__zero_reg__
++	brne .L34
+ 	ldi r24,lo8(.LC5)
+ 	ldi r25,hi8(.LC5)
+ 	adiw r28,65-62
+@@ -341,15 +342,17 @@
+ 	ldd r25,Y+2
+ 	cpi r24,97
+ 	sbci r25,98
+-	brne .+2
+-	rjmp .L48
+-.L38:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L39:
+-	or r24,r25
+ 	breq .+2
+ 	rjmp .L34
++	ldd r24,Y+3
++	ldd r25,Y+4
++	cpi r24,99
++	sbci r25,100
++	breq .+2
++	rjmp .L34
++	ldd r24,Y+5
++	cpse r24,__zero_reg__
++	rjmp .L34
+ 	ldi r24,lo8(.LC8)
+ 	ldi r25,hi8(.LC8)
+ 	adiw r28,65-62
+@@ -379,15 +382,23 @@
+ 	ldd r25,Y+2
+ 	cpi r24,65
+ 	sbci r25,66
+-	brne .+2
+-	rjmp .L49
+-.L40:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L41:
+-	or r24,r25
+ 	breq .+2
+ 	rjmp .L34
++	ldd r24,Y+3
++	ldd r25,Y+4
++	cpi r24,67
++	sbci r25,68
++	breq .+2
++	rjmp .L34
++	ldd r24,Y+5
++	ldd r25,Y+6
++	cpi r24,69
++	sbci r25,70
++	breq .+2
++	rjmp .L34
++	ldd r24,Y+7
++	cpse r24,__zero_reg__
++	rjmp .L34
+ 	ldi r24,lo8(.LC11)
+ 	ldi r25,hi8(.LC11)
+ 	adiw r28,65-62
+@@ -407,147 +418,49 @@
+ 	ldd r30,Y+62
+ 	ldd r31,Y+63
+ 	sbiw r28,65-62
+-	ld r18,Z
+-	mov r20,r18
+-	subi r20,103
+-	sbc r21,r21
+-	movw r24,r20
+-	cpi r18,lo8(103)
+-	brne .L42
+-	ldd r18,Z+1
+-	mov r20,r18
+-	subi r20,104
+-	sbc r21,r21
+-	movw r24,r20
+-	cpi r18,lo8(104)
+-	breq .L50
+-.L42:
+-	or r24,r25
++	ld r24,Z
++	cpi r24,lo8(103)
+ 	breq .+2
+ 	rjmp .L34
++	ldd r24,Z+1
++	cpi r24,lo8(104)
++	breq .+2
++	rjmp .L34
++	ldd r24,Z+2
++	cpse r24,__zero_reg__
++	rjmp .L34
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+ 	cpi r24,97
+ 	sbci r25,98
+-	brne .+2
+-	rjmp .L51
+-.L43:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L44:
+-	or r24,r25
+ 	breq .+2
+ 	rjmp .L34
+-	ldi r25,0
+-	ldi r24,0
+-/* epilogue start */
+-	subi r28,-66
+-	sbci r29,-1
+-	in __tmp_reg__,__SREG__
+-	cli
+-	out __SP_H__,r29
+-	out __SREG__,__tmp_reg__
+-	out __SP_L__,r28
+-	ret
+-.L50:
+-	ldd r24,Z+2
+-	ldi r25,0
+-	rjmp .L42
+-.L46:
+-	ldd r24,Z+2
+-	ldi r25,0
+-	rjmp .L35
+-.L48:
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ 	cpi r24,99
+ 	sbci r25,100
+ 	breq .+2
+-	rjmp .L38
+-	ldd r24,Y+5
+-	cpse r24,__zero_reg__
+-	rjmp .L38
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L39
+-.L47:
+-	ldd r24,Y+3
+-	ldd r25,Y+4
+-	cpi r24,67
+-	sbci r25,68
+-	breq .+2
+-	rjmp .L36
+-	ldd r24,Y+5
+-	ldd r25,Y+6
+-	cpi r24,69
+-	sbci r25,70
+-	breq .+2
+-	rjmp .L36
+-	ldd r24,Y+7
+-	ldd r25,Y+8
+-	cpi r24,71
+-	cpc r25,__zero_reg__
+-	breq .+2
+-	rjmp .L36
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L37
+-.L49:
+-	ldd r24,Y+3
+-	ldd r25,Y+4
+-	cpi r24,67
+-	sbci r25,68
+-	breq .+2
+-	rjmp .L40
+-	ldd r24,Y+5
+-	ldd r25,Y+6
+-	cpi r24,69
+-	sbci r25,70
+-	breq .+2
+-	rjmp .L40
+-	ldd r24,Y+7
+-	cpse r24,__zero_reg__
+-	rjmp .L40
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L41
+-.L45:
+-	ldd r24,Y+3
+-	ldd r25,Y+4
+-	cpi r24,99
+-	sbci r25,100
+-	breq .+2
+-	rjmp .L32
+-	ldd r24,Y+5
+-	ldd r25,Y+6
+-	cpi r24,101
+-	cpc r25,__zero_reg__
+-	breq .+2
+-	rjmp .L32
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L33
+-.L51:
+-	ldd r24,Y+3
+-	ldd r25,Y+4
+-	cpi r24,99
+-	sbci r25,100
+-	breq .+2
+-	rjmp .L43
++	rjmp .L34
+ 	ldd r24,Y+5
+ 	ldd r25,Y+6
+ 	cpi r24,101
+ 	sbci r25,102
+ 	breq .+2
+-	rjmp .L43
++	rjmp .L34
+ 	ldd r24,Y+7
+ 	cpse r24,__zero_reg__
+-	rjmp .L43
++	rjmp .L34
+ 	ldi r25,0
+ 	ldi r24,0
+-	rjmp .L44
+-.L34:
+-	call abort
++/* epilogue start */
++	subi r28,-66
++	sbci r29,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r29
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r28
++	ret
+ 	.size	main, .-main
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
+ .global __do_copy_data

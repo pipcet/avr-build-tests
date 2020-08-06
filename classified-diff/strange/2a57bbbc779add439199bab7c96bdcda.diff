@@ -1,0 +1,24 @@
+DIR 9994bd1b728fcbdd0ddeaa62cdff774d
+--- cmpsf-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:51:35.161749537 +0000
++++ cmpsf-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:51:34.457739937 +0000
+@@ -123,8 +123,8 @@
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ 	call __ltsf2
+-	sbrc r24,7
+-	rjmp .L10
++	tst r24
++	brlt .L10
+ 	ldi r24,lo8(-116)
+ 	ldi r25,0
+ /* epilogue start */
+@@ -352,7 +352,8 @@
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ 	call __ltsf2
+-	sbrc r24,7
++	tst r24
++	brge .+2
+ 	rjmp .L31
+ 	ldi r24,lo8(-116)
+ 	ldi r25,0

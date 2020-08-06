@@ -1,0 +1,4389 @@
+DIR 02958023c6db66f7c90f359a8157c5cd
+--- strlen-5.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:57:47.678225949 +0000
++++ strlen-5.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:57:46.598214337 +0000
+@@ -990,10 +990,6 @@
+ 	.text
+ 	.type	test_const_local_arrays, @function
+ test_const_local_arrays:
+-	push r9
+-	push r10
+-	push r11
+-	push r12
+ 	push r13
+ 	push r14
+ 	push r15
+@@ -1011,35 +1007,35 @@
+ 	out __SP_L__,r28
+ /* prologue: function */
+ /* frame size = 36 */
+-/* stack size = 47 */
+-.L__stack_usage = 47
+-	ldi r24,lo8(36)
++/* stack size = 43 */
++.L__stack_usage = 43
++	ldi r18,lo8(36)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
+-	movw r26,r16
++	movw r24,r28
++	adiw r24,1
++	movw r26,r24
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+-	dec r24
++	dec r18
+ 	brne 0b
+-	movw r26,r16
++	movw r26,r24
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+-	movw r24,r26
+-	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	movw r18,r26
++	subi r18,6
++	sbc r19,__zero_reg__
++	cp r18,r24
++	cpc r19,r25
+ 	breq .L81
+ 	push __zero_reg__
+-	ldi r24,lo8(5)
++	ldi r18,lo8(5)
++	push r18
++	push r25
+ 	push r24
+-	push r17
+-	push r16
+ 	ldi r24,lo8(.LC22)
+ 	ldi r25,hi8(.LC22)
+ 	push r25
+@@ -1063,21 +1059,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L81:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L82
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC23)
+ 	ldi r25,hi8(.LC23)
+ 	push r25
+@@ -1101,25 +1099,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L82:
+-	movw r14,r28
+-	ldi r31,2
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L83
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC24)
+ 	ldi r25,hi8(.LC24)
+ 	push r25
+@@ -1143,25 +1139,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L83:
+-	movw r12,r28
+-	ldi r31,4
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,4
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L84
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC25)
+ 	ldi r25,hi8(.LC25)
+ 	push r25
+@@ -1185,6 +1179,9 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L84:
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -1197,9 +1194,9 @@
+ 	brne .+2
+ 	rjmp .L86
+ 	push __zero_reg__
+-	ldi r27,lo8(5)
+-	mov r9,r27
+-	push r9
++	ldi r31,lo8(5)
++	mov r13,r31
++	push r13
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC26)
+@@ -1209,12 +1206,12 @@
+ 	push __zero_reg__
+ 	ldi r24,lo8(84)
+ 	push r24
+-	ldi r24,lo8(.LC4)
+-	mov r10,r24
+-	ldi r24,hi8(.LC4)
+-	mov r11,r24
+-	push r11
+-	push r10
++	ldi r26,lo8(.LC4)
++	mov r14,r26
++	ldi r26,hi8(.LC4)
++	mov r15,r26
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -1237,7 +1234,7 @@
+ 	cpc r25,r17
+ 	breq .L86
+ 	push __zero_reg__
+-	push r9
++	push r13
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC27)
+@@ -1247,8 +1244,8 @@
+ 	push __zero_reg__
+ 	ldi r24,lo8(85)
+ 	push r24
+-	push r11
+-	push r10
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -1261,21 +1258,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L86:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L88
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC28)
+ 	ldi r25,hi8(.LC28)
+ 	push r25
+@@ -1299,21 +1298,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L88:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,4
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L89
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC29)
+ 	ldi r25,hi8(.LC29)
+ 	push r25
+@@ -1337,21 +1338,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L89:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L90
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC30)
+ 	ldi r25,hi8(.LC30)
+ 	push r25
+@@ -1375,21 +1378,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L90:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L91
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC31)
+ 	ldi r25,hi8(.LC31)
+ 	push r25
+@@ -1413,25 +1418,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L91:
+-	movw r10,r28
+-	ldi r31,3
+-	add r10,r31
+-	adc r11,__zero_reg__
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L92
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC32)
+ 	ldi r25,hi8(.LC32)
+ 	push r25
+@@ -1455,14 +1458,16 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L92:
+-	lds r30,idx
+-	lds r31,idx+1
+-	lsl r30
+-	rol r31
+-	lsl r30
+-	rol r31
+-	add r30,r16
+-	adc r31,r17
++	lds r24,idx
++	lds r25,idx+1
++	lsl r24
++	rol r25
++	lsl r24
++	rol r25
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -1507,9 +1512,9 @@
+ 	rol r31
+ 	lsl r30
+ 	rol r31
+-	adiw r30,1
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,2
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -1554,9 +1559,9 @@
+ 	rol r31
+ 	lsl r30
+ 	rol r31
+-	adiw r30,2
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,3
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -1595,16 +1600,18 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L95:
+-	lds r24,idx
+-	lds r25,idx+1
++	lds r20,idx
++	lds r21,idx+1
+ 	ldi r18,lo8(5)
+-	mul r18,r24
++	mul r18,r20
+ 	movw r30,r0
+-	mul r18,r25
++	mul r18,r21
+ 	add r31,r0
+ 	clr __zero_reg__
+-	add r30,r16
+-	adc r31,r17
++	movw r24,r28
++	adiw r24,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -1644,16 +1651,18 @@
+ .L96:
+ 	lds r24,idx
+ 	lds r25,idx+1
+-	movw r30,r24
+-	lsl r30
+-	rol r31
+-	lsl r30
+-	rol r31
++	movw r18,r24
++	lsl r18
++	rol r19
++	lsl r18
++	rol r19
+ 	adiw r24,1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -1702,23 +1711,25 @@
+ 	adiw r24,2
+ 	add r24,r18
+ 	adc r25,r19
+-	add r16,r24
+-	adc r17,r25
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L98
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC38)
+ 	ldi r25,hi8(.LC38)
+ 	push r25
+@@ -1742,21 +1753,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L98:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L99
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC39)
+ 	ldi r25,hi8(.LC39)
+ 	push r25
+@@ -1780,21 +1793,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L99:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L100
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC39)
+ 	ldi r25,hi8(.LC39)
+ 	push r25
+@@ -1818,21 +1833,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L100:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,4
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L80
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC39)
+ 	ldi r25,hi8(.LC39)
+ 	push r25
+@@ -1870,10 +1887,6 @@
+ 	pop r15
+ 	pop r14
+ 	pop r13
+-	pop r12
+-	pop r11
+-	pop r10
+-	pop r9
+ 	ret
+ 	.size	test_const_local_arrays, .-test_const_local_arrays
+ 	.section	.rodata.str1.1
+@@ -3418,10 +3431,6 @@
+ 	.size	test_nonconst_global_arrays, .-test_nonconst_global_arrays
+ 	.type	test_nonconst_local_arrays, @function
+ test_nonconst_local_arrays:
+-	push r9
+-	push r10
+-	push r11
+-	push r12
+ 	push r13
+ 	push r14
+ 	push r15
+@@ -3439,35 +3448,35 @@
+ 	out __SP_L__,r28
+ /* prologue: function */
+ /* frame size = 36 */
+-/* stack size = 47 */
+-.L__stack_usage = 47
+-	ldi r24,lo8(36)
++/* stack size = 43 */
++.L__stack_usage = 43
++	ldi r18,lo8(36)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
+-	movw r26,r16
++	movw r24,r28
++	adiw r24,1
++	movw r26,r24
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+-	dec r24
++	dec r18
+ 	brne 0b
+-	movw r26,r16
++	movw r26,r24
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+-	movw r24,r26
+-	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	movw r18,r26
++	subi r18,6
++	sbc r19,__zero_reg__
++	cp r18,r24
++	cpc r19,r25
+ 	breq .L293
+ 	push __zero_reg__
+-	ldi r24,lo8(5)
++	ldi r18,lo8(5)
++	push r18
++	push r25
+ 	push r24
+-	push r17
+-	push r16
+ 	ldi r24,lo8(.LC22)
+ 	ldi r25,hi8(.LC22)
+ 	push r25
+@@ -3491,21 +3500,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L293:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L294
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC23)
+ 	ldi r25,hi8(.LC23)
+ 	push r25
+@@ -3529,25 +3540,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L294:
+-	movw r14,r28
+-	ldi r31,2
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L295
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC24)
+ 	ldi r25,hi8(.LC24)
+ 	push r25
+@@ -3571,25 +3580,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L295:
+-	movw r12,r28
+-	ldi r31,4
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,4
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L296
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC25)
+ 	ldi r25,hi8(.LC25)
+ 	push r25
+@@ -3613,6 +3620,9 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L296:
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -3625,9 +3635,9 @@
+ 	brne .+2
+ 	rjmp .L298
+ 	push __zero_reg__
+-	ldi r27,lo8(5)
+-	mov r9,r27
+-	push r9
++	ldi r31,lo8(5)
++	mov r13,r31
++	push r13
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC26)
+@@ -3637,12 +3647,12 @@
+ 	push __zero_reg__
+ 	ldi r24,lo8(-60)
+ 	push r24
+-	ldi r24,lo8(.LC4)
+-	mov r10,r24
+-	ldi r24,hi8(.LC4)
+-	mov r11,r24
+-	push r11
+-	push r10
++	ldi r26,lo8(.LC4)
++	mov r14,r26
++	ldi r26,hi8(.LC4)
++	mov r15,r26
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -3665,7 +3675,7 @@
+ 	cpc r25,r17
+ 	breq .L298
+ 	push __zero_reg__
+-	push r9
++	push r13
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC27)
+@@ -3675,8 +3685,8 @@
+ 	push __zero_reg__
+ 	ldi r24,lo8(-59)
+ 	push r24
+-	push r11
+-	push r10
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -3689,21 +3699,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L298:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L300
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC28)
+ 	ldi r25,hi8(.LC28)
+ 	push r25
+@@ -3727,21 +3739,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L300:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,4
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L301
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC29)
+ 	ldi r25,hi8(.LC29)
+ 	push r25
+@@ -3765,21 +3779,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L301:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L302
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC30)
+ 	ldi r25,hi8(.LC30)
+ 	push r25
+@@ -3803,21 +3819,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L302:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L303
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC31)
+ 	ldi r25,hi8(.LC31)
+ 	push r25
+@@ -3841,25 +3859,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L303:
+-	movw r10,r28
+-	ldi r31,3
+-	add r10,r31
+-	adc r11,__zero_reg__
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L304
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC32)
+ 	ldi r25,hi8(.LC32)
+ 	push r25
+@@ -3883,14 +3899,16 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L304:
+-	lds r30,idx
+-	lds r31,idx+1
+-	lsl r30
+-	rol r31
+-	lsl r30
+-	rol r31
+-	add r30,r16
+-	adc r31,r17
++	lds r24,idx
++	lds r25,idx+1
++	lsl r24
++	rol r25
++	lsl r24
++	rol r25
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -3935,9 +3953,9 @@
+ 	rol r31
+ 	lsl r30
+ 	rol r31
+-	adiw r30,1
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,2
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -3982,9 +4000,9 @@
+ 	rol r31
+ 	lsl r30
+ 	rol r31
+-	adiw r30,2
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,3
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -4023,16 +4041,18 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L307:
+-	lds r24,idx
+-	lds r25,idx+1
++	lds r20,idx
++	lds r21,idx+1
+ 	ldi r18,lo8(5)
+-	mul r18,r24
++	mul r18,r20
+ 	movw r30,r0
+-	mul r18,r25
++	mul r18,r21
+ 	add r31,r0
+ 	clr __zero_reg__
+-	add r30,r16
+-	adc r31,r17
++	movw r24,r28
++	adiw r24,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -4072,16 +4092,18 @@
+ .L308:
+ 	lds r24,idx
+ 	lds r25,idx+1
+-	movw r30,r24
+-	lsl r30
+-	rol r31
+-	lsl r30
+-	rol r31
++	movw r18,r24
++	lsl r18
++	rol r19
++	lsl r18
++	rol r19
+ 	adiw r24,1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -4130,23 +4152,25 @@
+ 	adiw r24,2
+ 	add r24,r18
+ 	adc r25,r19
+-	add r16,r24
+-	adc r17,r25
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L310
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC38)
+ 	ldi r25,hi8(.LC38)
+ 	push r25
+@@ -4170,21 +4194,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L310:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L311
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC39)
+ 	ldi r25,hi8(.LC39)
+ 	push r25
+@@ -4208,21 +4234,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L311:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L312
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC39)
+ 	ldi r25,hi8(.LC39)
+ 	push r25
+@@ -4246,21 +4274,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L312:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,4
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L292
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC39)
+ 	ldi r25,hi8(.LC39)
+ 	push r25
+@@ -4298,10 +4328,6 @@
+ 	pop r15
+ 	pop r14
+ 	pop r13
+-	pop r12
+-	pop r11
+-	pop r10
+-	pop r9
+ 	ret
+ 	.size	test_nonconst_local_arrays, .-test_nonconst_local_arrays
+ 	.section	.rodata.str1.1
+@@ -6967,33 +6993,33 @@
+ 	call test_nonconst_global_arrays
+ 	call test_nonconst_local_arrays
+ 	call test_const_global_member_arrays
+-	ldi r24,lo8(48)
++	ldi r18,lo8(48)
+ 	ldi r30,lo8(.LC1)
+ 	ldi r31,hi8(.LC1)
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
+-	movw r26,r16
++	movw r24,r28
++	adiw r24,1
++	movw r26,r24
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+-	dec r24
++	dec r18
+ 	brne 0b
+-	movw r26,r16
++	movw r26,r24
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+-	movw r24,r26
+-	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	movw r18,r26
++	subi r18,6
++	sbc r19,__zero_reg__
++	cp r18,r24
++	cpc r19,r25
+ 	breq .L571
+ 	push __zero_reg__
+-	ldi r24,lo8(5)
++	ldi r18,lo8(5)
++	push r18
++	push r25
+ 	push r24
+-	push r17
+-	push r16
+ 	ldi r24,lo8(.LC106)
+ 	ldi r25,hi8(.LC106)
+ 	push r25
+@@ -7018,21 +7044,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L571:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L572
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC107)
+ 	ldi r25,hi8(.LC107)
+ 	push r25
+@@ -7057,25 +7085,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L572:
+-	movw r12,r28
+-	ldi r31,2
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L573
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC108)
+ 	ldi r25,hi8(.LC108)
+ 	push r25
+@@ -7100,25 +7126,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L573:
+-	movw r14,r28
+-	ldi r31,3
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L574
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC109)
+ 	ldi r25,hi8(.LC109)
+ 	push r25
+@@ -7143,6 +7167,9 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L574:
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7156,25 +7183,25 @@
+ 	rjmp .L576
+ 	push __zero_reg__
+ 	ldi r19,lo8(5)
+-	mov r8,r19
+-	push r8
++	mov r12,r19
++	push r12
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC110)
+ 	ldi r25,hi8(.LC110)
+ 	push r25
+ 	push r24
+-	clr r9
+-	inc r9
+-	push r9
++	clr r13
++	inc r13
++	push r13
+ 	ldi r24,lo8(78)
+ 	push r24
+ 	ldi r20,lo8(.LC4)
+-	mov r10,r20
++	mov r14,r20
+ 	ldi r20,hi8(.LC4)
+-	mov r11,r20
+-	push r11
+-	push r10
++	mov r15,r20
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -7197,18 +7224,18 @@
+ 	cpc r25,r17
+ 	breq .L576
+ 	push __zero_reg__
+-	push r8
++	push r12
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC111)
+ 	ldi r25,hi8(.LC111)
+ 	push r25
+ 	push r24
+-	push r9
++	push r13
+ 	ldi r24,lo8(79)
+ 	push r24
+-	push r11
+-	push r10
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -7221,21 +7248,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L576:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L578
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC112)
+ 	ldi r25,hi8(.LC112)
+ 	push r25
+@@ -7260,21 +7289,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L578:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L579
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC113)
+ 	ldi r25,hi8(.LC113)
+ 	push r25
+@@ -7299,21 +7330,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L579:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L580
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC114)
+ 	ldi r25,hi8(.LC114)
+ 	push r25
+@@ -7338,21 +7371,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L580:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L581
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC115)
+ 	ldi r25,hi8(.LC115)
+ 	push r25
+@@ -7377,21 +7412,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L581:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L582
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC116)
+ 	ldi r25,hi8(.LC116)
+ 	push r25
+@@ -7416,16 +7453,18 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L582:
+-	lds r30,idx
+-	lds r31,idx+1
++	lds r24,idx
++	lds r25,idx+1
+ 	ldi r18,3
+ 	1:
+-	lsl r30
+-	rol r31
++	lsl r24
++	rol r25
+ 	dec r18
+ 	brne 1b
+-	add r30,r16
+-	adc r31,r17
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7467,15 +7506,15 @@
+ .L583:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r25,3
++	ldi r24,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r25
++	dec r24
+ 	brne 1b
+-	adiw r30,1
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,2
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7517,15 +7556,15 @@
+ .L584:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r24,3
++	ldi r16,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r24
++	dec r16
+ 	brne 1b
+-	adiw r30,2
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,3
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7565,16 +7604,19 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L585:
+-	lds r24,idx
+-	lds r25,idx+1
+-	ldi r18,lo8(9)
+-	mul r18,r24
++	lds r18,idx
++	lds r19,idx+1
++	ldi r20,lo8(9)
++	mul r20,r18
+ 	movw r30,r0
+-	mul r18,r25
++	mul r20,r19
+ 	add r31,r0
+ 	clr __zero_reg__
+-	add r30,r16
+-	adc r31,r17
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	add r30,r18
++	adc r31,r19
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7616,18 +7658,21 @@
+ .L586:
+ 	lds r24,idx
+ 	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,1
+-	ldi r27,3
++	movw r18,r24
++	subi r18,-1
++	sbci r19,-1
++	ldi r17,3
+ 	1:
+ 	lsl r24
+ 	rol r25
+-	dec r27
++	dec r17
+ 	brne 1b
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7669,18 +7714,21 @@
+ .L587:
+ 	lds r24,idx
+ 	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,2
+-	ldi r26,3
++	movw r18,r24
++	subi r18,-2
++	sbci r19,-1
++	ldi r27,3
+ 	1:
+ 	lsl r24
+ 	rol r25
+-	dec r26
++	dec r27
+ 	brne 1b
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -7720,25 +7768,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L588:
+-	movw r14,r28
+-	ldi r31,9
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,9
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L589
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC123)
+ 	ldi r25,hi8(.LC123)
+ 	push r25
+@@ -7763,21 +7809,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L589:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,9
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L590
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC124)
+ 	ldi r25,hi8(.LC124)
+ 	push r25
+@@ -7802,25 +7850,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L590:
+-	movw r10,r28
+-	ldi r31,10
+-	add r10,r31
+-	adc r11,__zero_reg__
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,10
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L591
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC125)
+ 	ldi r25,hi8(.LC125)
+ 	push r25
+@@ -7845,25 +7891,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L591:
+-	movw r12,r28
+-	ldi r31,11
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,11
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L592
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC126)
+ 	ldi r25,hi8(.LC126)
+ 	push r25
+@@ -7888,45 +7932,48 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L592:
+-	movw r26,r14
++	movw r16,r28
++	subi r16,-9
++	sbci r17,-1
++	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r16
++	cpc r25,r17
+ 	brne .+2
+ 	rjmp .L594
+ 	push __zero_reg__
+-	ldi r23,lo8(6)
+-	mov r6,r23
+-	push r6
+-	push r15
+-	push r14
++	ldi r31,lo8(6)
++	mov r12,r31
++	push r12
++	push r17
++	push r16
+ 	ldi r24,lo8(.LC110)
+ 	ldi r25,hi8(.LC110)
+ 	push r25
+ 	push r24
+-	clr r7
+-	inc r7
+-	push r7
++	clr r13
++	inc r13
++	push r13
+ 	ldi r24,lo8(104)
+ 	push r24
+-	ldi r30,lo8(.LC4)
+-	mov r8,r30
+-	ldi r30,hi8(.LC4)
+-	mov r9,r30
+-	push r9
+-	push r8
++	ldi r26,lo8(.LC4)
++	mov r14,r26
++	ldi r26,hi8(.LC4)
++	mov r15,r26
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+ 	adiw r24,1
+ 	sts nfails+1,r25
+ 	sts nfails,r24
+-	movw r30,r14
++	movw r30,r16
+ 	0:
+ 	ld __tmp_reg__,Z+
+ 	tst __tmp_reg__
+@@ -7938,22 +7985,22 @@
+ 	out __SP_H__,r29
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r16
++	cpc r25,r17
+ 	breq .L594
+ 	push __zero_reg__
+-	push r6
+-	push r15
+-	push r14
++	push r12
++	push r17
++	push r16
+ 	ldi r24,lo8(.LC111)
+ 	ldi r25,hi8(.LC111)
+ 	push r25
+ 	push r24
+-	push r7
++	push r13
+ 	ldi r24,lo8(105)
+ 	push r24
+-	push r9
+-	push r8
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -7966,21 +8013,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L594:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,10
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L596
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC112)
+ 	ldi r25,hi8(.LC112)
+ 	push r25
+@@ -8005,21 +8054,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L596:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,11
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L597
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC113)
+ 	ldi r25,hi8(.LC113)
+ 	push r25
+@@ -8044,21 +8095,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L597:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,9
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L598
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC114)
+ 	ldi r25,hi8(.LC114)
+ 	push r25
+@@ -8083,21 +8136,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L598:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,10
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L599
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC115)
+ 	ldi r25,hi8(.LC115)
+ 	push r25
+@@ -8122,21 +8177,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L599:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,11
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L600
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC116)
+ 	ldi r25,hi8(.LC116)
+ 	push r25
+@@ -8161,17 +8218,19 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L600:
+-	lds r30,idx
+-	lds r31,idx+1
+-	adiw r30,1
+-	ldi r22,3
++	lds r24,idx
++	lds r25,idx+1
++	adiw r24,1
++	ldi r30,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r22
++	lsl r24
++	rol r25
++	dec r30
+ 	brne 1b
+-	add r30,r16
+-	adc r31,r17
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8213,15 +8272,15 @@
+ .L601:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r21,3
++	ldi r23,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r21
++	dec r23
+ 	brne 1b
+-	adiw r30,9
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,10
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8263,15 +8322,15 @@
+ .L602:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r20,3
++	ldi r22,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r20
++	dec r22
+ 	brne 1b
+-	adiw r30,10
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,11
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8311,20 +8370,22 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L603:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,1
+-	ldi r19,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,1
++	ldi r21,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r19
++	lsl r24
++	rol r25
++	dec r21
+ 	brne 1b
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8369,27 +8430,30 @@
+ 	adiw r24,1
+ 	ldi r20,lo8(9)
+ 	mul r20,r24
+-	movw r18,r0
++	movw r30,r0
+ 	mul r20,r25
+-	add r19,r0
++	add r31,r0
+ 	clr __zero_reg__
+-	add r16,r18
+-	adc r17,r19
+-	movw r26,r16
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	add r30,r18
++	adc r31,r19
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L605
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC131)
+ 	ldi r25,hi8(.LC131)
+ 	push r25
+@@ -8414,25 +8478,24 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L605:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,1
+-	ldi r18,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,1
++	ldi r20,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r18
++	lsl r24
++	rol r25
++	dec r20
+ 	brne 1b
+-	adiw r24,2
++	subi r18,-2
++	sbci r19,-1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8472,24 +8535,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L606:
+-	movw r16,r28
+-	subi r16,-33
+-	sbci r17,-1
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,33
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,10
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L607
+ 	push __zero_reg__
+ 	ldi r24,lo8(9)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC133)
+ 	ldi r25,hi8(.LC133)
+ 	push r25
+@@ -8514,21 +8576,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L607:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,33
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,10
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L608
+ 	push __zero_reg__
+ 	ldi r24,lo8(9)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC134)
+ 	ldi r25,hi8(.LC134)
+ 	push r25
+@@ -8553,25 +8617,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L608:
+-	movw r12,r28
+-	ldi r31,34
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,34
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,9
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L609
+ 	push __zero_reg__
+ 	ldi r24,lo8(8)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC135)
+ 	ldi r25,hi8(.LC135)
+ 	push r25
+@@ -8596,25 +8658,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L609:
+-	movw r14,r28
+-	ldi r31,37
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,37
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L610
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC136)
+ 	ldi r25,hi8(.LC136)
+ 	push r25
+@@ -8639,6 +8699,9 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L610:
++	movw r16,r28
++	subi r16,-33
++	sbci r17,-1
+ 	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8652,25 +8715,25 @@
+ 	rjmp .L612
+ 	push __zero_reg__
+ 	ldi r24,lo8(9)
+-	mov r8,r24
+-	push r8
++	mov r12,r24
++	push r12
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC110)
+ 	ldi r25,hi8(.LC110)
+ 	push r25
+ 	push r24
+-	clr r9
+-	inc r9
+-	push r9
++	clr r13
++	inc r13
++	push r13
+ 	ldi r24,lo8(-126)
+ 	push r24
+ 	ldi r25,lo8(.LC4)
+-	mov r10,r25
++	mov r14,r25
+ 	ldi r25,hi8(.LC4)
+-	mov r11,r25
+-	push r11
+-	push r10
++	mov r15,r25
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -8693,18 +8756,18 @@
+ 	cpc r25,r17
+ 	breq .L612
+ 	push __zero_reg__
+-	push r8
++	push r12
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC111)
+ 	ldi r25,hi8(.LC111)
+ 	push r25
+ 	push r24
+-	push r9
++	push r13
+ 	ldi r24,lo8(-125)
+ 	push r24
+-	push r11
+-	push r10
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -8717,21 +8780,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L612:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,34
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,9
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L614
+ 	push __zero_reg__
+ 	ldi r24,lo8(8)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC112)
+ 	ldi r25,hi8(.LC112)
+ 	push r25
+@@ -8756,21 +8821,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L614:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,37
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L615
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC137)
+ 	ldi r25,hi8(.LC137)
+ 	push r25
+@@ -8836,21 +8903,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L616:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,37
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L617
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC115)
+ 	ldi r25,hi8(.LC115)
+ 	push r25
+@@ -8924,13 +8993,9 @@
+ 	rol r31
+ 	dec r27
+ 	brne 1b
+-	adiw r30,35
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
++	add r30,r28
++	adc r31,r29
++	adiw r30,36
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -8978,13 +9043,9 @@
+ 	rol r31
+ 	dec r26
+ 	brne 1b
+-	adiw r30,36
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
++	add r30,r28
++	adc r31,r29
++	adiw r30,37
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -9032,13 +9093,9 @@
+ 	rol r31
+ 	dec r23
+ 	brne 1b
+-	adiw r30,37
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
++	add r30,r28
++	adc r31,r29
++	adiw r30,38
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -9078,24 +9135,22 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L621:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,4
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,4
+ 	ldi r22,3
+ 	1:
+-	lsl r30
+-	rol r31
++	lsl r24
++	rol r25
+ 	dec r22
+ 	brne 1b
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -9135,25 +9190,24 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L622:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,4
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,4
+ 	ldi r21,3
+ 	1:
+-	lsl r30
+-	rol r31
++	lsl r24
++	rol r25
+ 	dec r21
+ 	brne 1b
+-	adiw r24,1
++	subi r18,-1
++	sbci r19,-1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -9207,10 +9261,8 @@
+ 	sbci r19,-1
+ 	add r24,r18
+ 	adc r25,r19
+-	ldi r30,lo8(1)
+-	ldi r31,0
+-	add r30,r28
+-	adc r31,r29
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+ 	movw r26,r30
+@@ -11442,33 +11494,33 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L678:
+-	ldi r24,lo8(48)
++	ldi r18,lo8(48)
+ 	ldi r30,lo8(.LC2)
+ 	ldi r31,hi8(.LC2)
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
+-	movw r26,r16
++	movw r24,r28
++	adiw r24,1
++	movw r26,r24
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+-	dec r24
++	dec r18
+ 	brne 0b
+-	movw r26,r16
++	movw r26,r24
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+-	movw r24,r26
+-	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	movw r18,r26
++	subi r18,6
++	sbc r19,__zero_reg__
++	cp r18,r24
++	cpc r19,r25
+ 	breq .L679
+ 	push __zero_reg__
+-	ldi r24,lo8(5)
++	ldi r18,lo8(5)
++	push r18
++	push r25
+ 	push r24
+-	push r17
+-	push r16
+ 	ldi r24,lo8(.LC106)
+ 	ldi r25,hi8(.LC106)
+ 	push r25
+@@ -11493,21 +11545,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L679:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L680
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC107)
+ 	ldi r25,hi8(.LC107)
+ 	push r25
+@@ -11532,25 +11586,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L680:
+-	movw r12,r28
+-	ldi r31,2
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L681
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC108)
+ 	ldi r25,hi8(.LC108)
+ 	push r25
+@@ -11575,25 +11627,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L681:
+-	movw r14,r28
+-	ldi r31,3
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L682
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC109)
+ 	ldi r25,hi8(.LC109)
+ 	push r25
+@@ -11617,6 +11667,9 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L682:
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -11630,8 +11683,8 @@
+ 	rjmp .L684
+ 	push __zero_reg__
+ 	ldi r19,lo8(5)
+-	mov r8,r19
+-	push r8
++	mov r12,r19
++	push r12
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC110)
+@@ -11639,16 +11692,16 @@
+ 	push r25
+ 	push r24
+ 	ldi r20,lo8(2)
+-	mov r9,r20
+-	push r9
++	mov r13,r20
++	push r13
+ 	ldi r24,lo8(3)
+ 	push r24
+ 	ldi r21,lo8(.LC4)
+-	mov r10,r21
++	mov r14,r21
+ 	ldi r21,hi8(.LC4)
+-	mov r11,r21
+-	push r11
+-	push r10
++	mov r15,r21
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -11671,18 +11724,18 @@
+ 	cpc r25,r17
+ 	breq .L684
+ 	push __zero_reg__
+-	push r8
++	push r12
+ 	push r17
+ 	push r16
+ 	ldi r24,lo8(.LC111)
+ 	ldi r25,hi8(.LC111)
+ 	push r25
+ 	push r24
+-	push r9
++	push r13
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r11
+-	push r10
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -11695,21 +11748,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L684:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L686
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC112)
+ 	ldi r25,hi8(.LC112)
+ 	push r25
+@@ -11734,21 +11789,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L686:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L687
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC113)
+ 	ldi r25,hi8(.LC113)
+ 	push r25
+@@ -11773,21 +11830,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L687:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L688
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC114)
+ 	ldi r25,hi8(.LC114)
+ 	push r25
+@@ -11812,21 +11871,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L688:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,2
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L689
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC115)
+ 	ldi r25,hi8(.LC115)
+ 	push r25
+@@ -11851,21 +11912,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L689:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,3
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L690
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC116)
+ 	ldi r25,hi8(.LC116)
+ 	push r25
+@@ -11890,16 +11953,18 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L690:
+-	lds r30,idx
+-	lds r31,idx+1
++	lds r24,idx
++	lds r25,idx+1
+ 	ldi r18,3
+ 	1:
+-	lsl r30
+-	rol r31
++	lsl r24
++	rol r25
+ 	dec r18
+ 	brne 1b
+-	add r30,r16
+-	adc r31,r17
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -11947,9 +12012,9 @@
+ 	rol r31
+ 	dec r25
+ 	brne 1b
+-	adiw r30,1
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,2
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -11997,9 +12062,9 @@
+ 	rol r31
+ 	dec r24
+ 	brne 1b
+-	adiw r30,2
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,3
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12039,16 +12104,19 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L693:
+-	lds r24,idx
+-	lds r25,idx+1
+-	ldi r18,lo8(9)
+-	mul r18,r24
++	lds r18,idx
++	lds r19,idx+1
++	ldi r20,lo8(9)
++	mul r20,r18
+ 	movw r30,r0
+-	mul r18,r25
++	mul r20,r19
+ 	add r31,r0
+ 	clr __zero_reg__
+-	add r30,r16
+-	adc r31,r17
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	add r30,r18
++	adc r31,r19
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12090,18 +12158,20 @@
+ .L694:
+ 	lds r24,idx
+ 	lds r25,idx+1
+-	movw r30,r24
+-	ldi r27,3
++	movw r18,r24
++	ldi r16,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r27
++	lsl r18
++	rol r19
++	dec r16
+ 	brne 1b
+ 	adiw r24,1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12143,18 +12213,20 @@
+ .L695:
+ 	lds r24,idx
+ 	lds r25,idx+1
+-	movw r30,r24
+-	ldi r26,3
++	movw r18,r24
++	ldi r17,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r26
++	lsl r18
++	rol r19
++	dec r17
+ 	brne 1b
+ 	adiw r24,2
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12194,25 +12266,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L696:
+-	movw r14,r28
+-	ldi r31,9
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,9
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L697
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC123)
+ 	ldi r25,hi8(.LC123)
+ 	push r25
+@@ -12237,21 +12307,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L697:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,9
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L698
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC124)
+ 	ldi r25,hi8(.LC124)
+ 	push r25
+@@ -12276,25 +12348,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L698:
+-	movw r10,r28
+-	ldi r31,10
+-	add r10,r31
+-	adc r11,__zero_reg__
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,10
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L699
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC125)
+ 	ldi r25,hi8(.LC125)
+ 	push r25
+@@ -12319,25 +12389,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L699:
+-	movw r12,r28
+-	ldi r31,11
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,11
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L700
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC126)
+ 	ldi r25,hi8(.LC126)
+ 	push r25
+@@ -12362,45 +12430,48 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L700:
+-	movw r26,r14
++	movw r16,r28
++	subi r16,-9
++	sbci r17,-1
++	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r16
++	cpc r25,r17
+ 	brne .+2
+ 	rjmp .L702
+ 	push __zero_reg__
+-	ldi r22,lo8(6)
+-	mov r6,r22
+-	push r6
+-	push r15
+-	push r14
++	ldi r31,lo8(6)
++	mov r12,r31
++	push r12
++	push r17
++	push r16
+ 	ldi r24,lo8(.LC110)
+ 	ldi r25,hi8(.LC110)
+ 	push r25
+ 	push r24
+-	ldi r23,lo8(2)
+-	mov r7,r23
+-	push r7
++	ldi r26,lo8(2)
++	mov r13,r26
++	push r13
+ 	ldi r24,lo8(29)
+ 	push r24
+-	ldi r30,lo8(.LC4)
+-	mov r8,r30
+-	ldi r30,hi8(.LC4)
+-	mov r9,r30
+-	push r9
+-	push r8
++	ldi r27,lo8(.LC4)
++	mov r14,r27
++	ldi r27,hi8(.LC4)
++	mov r15,r27
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+ 	adiw r24,1
+ 	sts nfails+1,r25
+ 	sts nfails,r24
+-	movw r30,r14
++	movw r30,r16
+ 	0:
+ 	ld __tmp_reg__,Z+
+ 	tst __tmp_reg__
+@@ -12412,22 +12483,22 @@
+ 	out __SP_H__,r29
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r16
++	cpc r25,r17
+ 	breq .L702
+ 	push __zero_reg__
+-	push r6
+-	push r15
+-	push r14
++	push r12
++	push r17
++	push r16
+ 	ldi r24,lo8(.LC111)
+ 	ldi r25,hi8(.LC111)
+ 	push r25
+ 	push r24
+-	push r7
++	push r13
+ 	ldi r24,lo8(30)
+ 	push r24
+-	push r9
+-	push r8
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -12440,21 +12511,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L702:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,10
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L704
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC112)
+ 	ldi r25,hi8(.LC112)
+ 	push r25
+@@ -12479,21 +12552,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L704:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,11
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L705
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC113)
+ 	ldi r25,hi8(.LC113)
+ 	push r25
+@@ -12518,21 +12593,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L705:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,9
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L706
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC114)
+ 	ldi r25,hi8(.LC114)
+ 	push r25
+@@ -12557,21 +12634,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L706:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,10
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L707
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC115)
+ 	ldi r25,hi8(.LC115)
+ 	push r25
+@@ -12596,21 +12675,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L707:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,11
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,5
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L708
+ 	push __zero_reg__
+ 	ldi r24,lo8(4)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC116)
+ 	ldi r25,hi8(.LC116)
+ 	push r25
+@@ -12635,17 +12716,19 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L708:
+-	lds r30,idx
+-	lds r31,idx+1
+-	adiw r30,1
+-	ldi r21,3
++	lds r24,idx
++	lds r25,idx+1
++	adiw r24,1
++	ldi r30,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r21
++	lsl r24
++	rol r25
++	dec r30
+ 	brne 1b
+-	add r30,r16
+-	adc r31,r17
++	movw r30,r28
++	adiw r30,1
++	add r30,r24
++	adc r31,r25
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12687,15 +12770,15 @@
+ .L709:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r20,3
++	ldi r23,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r20
++	dec r23
+ 	brne 1b
+-	adiw r30,9
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,10
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12737,15 +12820,15 @@
+ .L710:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r19,3
++	ldi r22,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r19
++	dec r22
+ 	brne 1b
+-	adiw r30,10
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,11
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12785,20 +12868,22 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L711:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,1
+-	ldi r18,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,1
++	ldi r21,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r18
++	lsl r24
++	rol r25
++	dec r21
+ 	brne 1b
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12843,27 +12928,30 @@
+ 	adiw r24,1
+ 	ldi r20,lo8(9)
+ 	mul r20,r24
+-	movw r18,r0
++	movw r30,r0
+ 	mul r20,r25
+-	add r19,r0
++	add r31,r0
+ 	clr __zero_reg__
+-	add r16,r18
+-	adc r17,r19
+-	movw r26,r16
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	add r30,r18
++	adc r31,r19
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L713
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC131)
+ 	ldi r25,hi8(.LC131)
+ 	push r25
+@@ -12888,24 +12976,24 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L713:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,1
+-	ldi r27,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,1
++	ldi r20,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r27
++	lsl r24
++	rol r25
++	dec r20
+ 	brne 1b
+-	adiw r24,2
++	subi r18,-2
++	sbci r19,-1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -12945,25 +13033,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L714:
+-	movw r14,r28
+-	ldi r31,33
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,33
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,10
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L715
+ 	push __zero_reg__
+ 	ldi r24,lo8(9)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC133)
+ 	ldi r25,hi8(.LC133)
+ 	push r25
+@@ -12988,21 +13074,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L715:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,33
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,10
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L716
+ 	push __zero_reg__
+ 	ldi r24,lo8(9)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC134)
+ 	ldi r25,hi8(.LC134)
+ 	push r25
+@@ -13027,25 +13115,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L716:
+-	movw r10,r28
+-	ldi r31,34
+-	add r10,r31
+-	adc r11,__zero_reg__
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,34
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,9
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L717
+ 	push __zero_reg__
+ 	ldi r24,lo8(8)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC135)
+ 	ldi r25,hi8(.LC135)
+ 	push r25
+@@ -13070,25 +13156,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L717:
+-	movw r12,r28
+-	ldi r31,37
+-	add r12,r31
+-	adc r13,__zero_reg__
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,37
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L718
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC136)
+ 	ldi r25,hi8(.LC136)
+ 	push r25
+@@ -13113,45 +13197,48 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L718:
+-	movw r26,r14
++	movw r16,r28
++	subi r16,-33
++	sbci r17,-1
++	movw r26,r16
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,10
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r16
++	cpc r25,r17
+ 	brne .+2
+ 	rjmp .L720
+ 	push __zero_reg__
+-	ldi r30,lo8(9)
+-	mov r6,r30
+-	push r6
+-	push r15
+-	push r14
++	ldi r24,lo8(9)
++	mov r12,r24
++	push r12
++	push r17
++	push r16
+ 	ldi r24,lo8(.LC110)
+ 	ldi r25,hi8(.LC110)
+ 	push r25
+ 	push r24
+-	ldi r31,lo8(2)
+-	mov r7,r31
+-	push r7
++	ldi r25,lo8(2)
++	mov r13,r25
++	push r13
+ 	ldi r24,lo8(55)
+ 	push r24
+-	ldi r26,lo8(.LC4)
+-	mov r8,r26
+-	ldi r26,hi8(.LC4)
+-	mov r9,r26
+-	push r9
+-	push r8
++	ldi r18,lo8(.LC4)
++	mov r14,r18
++	ldi r18,hi8(.LC4)
++	mov r15,r18
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+ 	adiw r24,1
+ 	sts nfails+1,r25
+ 	sts nfails,r24
+-	movw r30,r14
++	movw r30,r16
+ 	0:
+ 	ld __tmp_reg__,Z+
+ 	tst __tmp_reg__
+@@ -13163,22 +13250,22 @@
+ 	out __SP_H__,r29
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r16
++	cpc r25,r17
+ 	breq .L720
+ 	push __zero_reg__
+-	push r6
+-	push r15
+-	push r14
++	push r12
++	push r17
++	push r16
+ 	ldi r24,lo8(.LC111)
+ 	ldi r25,hi8(.LC111)
+ 	push r25
+ 	push r24
+-	push r7
++	push r13
+ 	ldi r24,lo8(56)
+ 	push r24
+-	push r9
+-	push r8
++	push r15
++	push r14
+ 	call printf
+ 	lds r24,nfails
+ 	lds r25,nfails+1
+@@ -13191,21 +13278,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L720:
+-	movw r26,r10
++	movw r30,r28
++	adiw r30,34
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,9
+-	cp r24,r10
+-	cpc r25,r11
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L722
+ 	push __zero_reg__
+ 	ldi r24,lo8(8)
+ 	push r24
+-	push r11
+-	push r10
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC112)
+ 	ldi r25,hi8(.LC112)
+ 	push r25
+@@ -13230,21 +13319,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L722:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,37
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L723
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC137)
+ 	ldi r25,hi8(.LC137)
+ 	push r25
+@@ -13310,21 +13401,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L724:
+-	movw r26,r12
++	movw r30,r28
++	adiw r30,37
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,6
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L725
+ 	push __zero_reg__
+ 	ldi r24,lo8(5)
+ 	push r24
+-	push r13
+-	push r12
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC115)
+ 	ldi r25,hi8(.LC115)
+ 	push r25
+@@ -13392,15 +13485,15 @@
+ .L726:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r23,3
++	ldi r27,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r23
++	dec r27
+ 	brne 1b
+-	adiw r30,35
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,36
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -13442,15 +13535,15 @@
+ .L727:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r22,3
++	ldi r26,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r22
++	dec r26
+ 	brne 1b
+-	adiw r30,36
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,37
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -13492,15 +13585,15 @@
+ .L728:
+ 	lds r30,idx
+ 	lds r31,idx+1
+-	ldi r21,3
++	ldi r23,3
+ 	1:
+ 	lsl r30
+ 	rol r31
+-	dec r21
++	dec r23
+ 	brne 1b
+-	adiw r30,37
+-	add r30,r16
+-	adc r31,r17
++	add r30,r28
++	adc r31,r29
++	adiw r30,38
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -13540,20 +13633,22 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L729:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,4
+-	ldi r20,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,4
++	ldi r22,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r20
++	lsl r24
++	rol r25
++	dec r22
+ 	brne 1b
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -13593,21 +13688,24 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L730:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,4
+-	ldi r19,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,4
++	ldi r21,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r19
++	lsl r24
++	rol r25
++	dec r21
+ 	brne 1b
+-	adiw r24,1
++	subi r18,-1
++	sbci r19,-1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -13647,21 +13745,24 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L731:
+-	lds r24,idx
+-	lds r25,idx+1
+-	movw r30,r24
+-	adiw r30,4
+-	ldi r18,3
++	lds r18,idx
++	lds r19,idx+1
++	movw r24,r18
++	adiw r24,4
++	ldi r20,3
+ 	1:
+-	lsl r30
+-	rol r31
+-	dec r18
++	lsl r24
++	rol r25
++	dec r20
+ 	brne 1b
+-	adiw r24,5
++	subi r18,-5
++	sbci r19,-1
++	add r24,r18
++	adc r25,r19
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,r25
+-	add r30,r16
+-	adc r31,r17
+ 	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+@@ -13832,21 +13933,23 @@
+ 	std Y+5,r24
+ 	ldi r24,lo8(54)
+ 	std Y+6,r24
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L736
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC187)
+ 	ldi r25,hi8(.LC187)
+ 	push r25
+@@ -13871,25 +13974,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L736:
+-	movw r14,r28
+-	ldi r31,5
+-	add r14,r31
+-	adc r15,__zero_reg__
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,5
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,3
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L737
+ 	push __zero_reg__
+ 	ldi r24,lo8(2)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r18,lo8(.LC188)
+ 	ldi r19,hi8(.LC188)
+ 	push r19
+@@ -13913,21 +14014,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L737:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,7
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L738
+ 	push __zero_reg__
+ 	ldi r24,lo8(6)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC189)
+ 	ldi r25,hi8(.LC189)
+ 	push r25
+@@ -14083,21 +14186,23 @@
+ 	std Y+6,r24
+ 	ldi r24,lo8(55)
+ 	std Y+7,r24
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,8
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L742
+ 	push __zero_reg__
+ 	ldi r24,lo8(7)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC193)
+ 	ldi r25,hi8(.LC193)
+ 	push r25
+@@ -14122,21 +14227,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L742:
+-	movw r26,r14
++	movw r30,r28
++	adiw r30,5
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,4
+-	cp r24,r14
+-	cpc r25,r15
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L743
+ 	push __zero_reg__
+ 	ldi r24,lo8(3)
+ 	push r24
+-	push r15
+-	push r14
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC194)
+ 	ldi r25,hi8(.LC194)
+ 	push r25
+@@ -14161,21 +14268,23 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ .L743:
+-	movw r26,r16
++	movw r30,r28
++	adiw r30,1
++	movw r26,r30
+ 	0:
+ 	ld __tmp_reg__,X+
+ 	tst __tmp_reg__
+ 	brne 0b
+ 	movw r24,r26
+ 	sbiw r24,8
+-	cp r24,r16
+-	cpc r25,r17
++	cp r24,r30
++	cpc r25,r31
+ 	breq .L744
+ 	push __zero_reg__
+ 	ldi r24,lo8(7)
+ 	push r24
+-	push r17
+-	push r16
++	push r31
++	push r30
+ 	ldi r24,lo8(.LC195)
+ 	ldi r25,hi8(.LC195)
+ 	push r25

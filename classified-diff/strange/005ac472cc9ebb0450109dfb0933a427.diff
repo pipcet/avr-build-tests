@@ -1,0 +1,128 @@
+--- pr39339.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 16:07:31.686320203 +0000
++++ pr39339.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 16:07:31.074313750 +0000
+@@ -27,9 +27,11 @@
+ 	ldd r14,Z+6
+ 	ldd r15,Z+7
+ 	ldd r24,Z+10
+-	ldd r20,Z+11
++	ldd r21,Z+11
+ 	ldd r25,Z+12
+-	ldd r21,Z+13
++	ldd r28,Z+13
++	mov r20,r16
++	andi r20,lo8(15)
+ 	movw r26,r18
+ 	ld r30,X+
+ 	ld r31,X
+@@ -46,14 +48,12 @@
+ 	adc r31,r27
+ 	st Z,r22
+ 	std Z+1,r23
+-	mov r28,r16
+-	andi r28,lo8(15)
+ 	andi r24,lo8(-16)
+-	or r24,r28
++	or r24,r20
+ 	std Z+2,r24
+-	std Z+3,r20
++	std Z+3,r21
+ 	std Z+4,r25
+-	std Z+5,r21
++	std Z+5,r28
+ 	ldi r18,-1
+ 	sub r12,r18
+ 	sbc r13,r18
+@@ -93,14 +93,15 @@
+ 	cp r26,r18
+ 	cpc r27,r19
+ 	brne .L3
++	andi r20,lo8(15)
+ .L4:
+ 	andi r24,lo8(-16)
+-	or r24,r28
++	or r24,r20
+ 	ori r25,lo8(1<<6)
+ 	std Z+2,r24
+-	std Z+3,r20
++	std Z+3,r21
+ 	std Z+4,r25
+-	std Z+5,r21
++	std Z+5,r28
+ 	adiw r30,6
+ 	cp r30,r18
+ 	cpc r31,r19
+@@ -204,12 +205,16 @@
+ 	ldd r19,Y+4
+ 	cp r24,r18
+ 	cpc r25,r19
+-	breq .L17
+-.L11:
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-.L12:
+-	or r18,r19
++	breq .L18
++.L16:
++	call abort
++.L18:
++	ldd r20,Y+41
++	ldd r21,Y+42
++	ldd r18,Y+5
++	ldd r19,Y+6
++	cp r20,r18
++	cpc r21,r19
+ 	brne .L16
+ 	ldd r18,Y+41
+ 	ori r18,lo8(1<<6)
+@@ -218,12 +223,13 @@
+ 	ldd r19,Y+10
+ 	cp r24,r18
+ 	cpc r25,r19
+-	breq .L18
+-.L14:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L15:
+-	or r24,r25
++	brne .L16
++	ldd r18,Y+41
++	ldd r19,Y+42
++	ldd r24,Y+11
++	ldd r25,Y+12
++	cp r18,r24
++	cpc r19,r25
+ 	brne .L16
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -235,30 +241,6 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ 	ret
+-.L17:
+-	ldd r20,Y+41
+-	ldd r21,Y+42
+-	ldd r18,Y+5
+-	ldd r19,Y+6
+-	cp r20,r18
+-	cpc r21,r19
+-	brne .L11
+-	ldi r19,0
+-	ldi r18,0
+-	rjmp .L12
+-.L18:
+-	ldd r18,Y+41
+-	ldd r19,Y+42
+-	ldd r24,Y+11
+-	ldd r25,Y+12
+-	cp r18,r24
+-	cpc r19,r25
+-	brne .L14
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L15
+-.L16:
+-	call abort
+ 	.size	main, .-main
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
+ .global __do_copy_data

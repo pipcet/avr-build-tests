@@ -1,0 +1,22 @@
+DIR 0bfff5972f1442c870d73dcdb85d99d7
+--- pr65153.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:57:59.522352897 +0000
++++ pr65153.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:57:59.058347938 +0000
+@@ -133,14 +133,14 @@
+ 	eor r23,r27
+ 	movw r26,r18
+ 	movw r24,r16
+-	add r24,r20
+-	adc r25,r21
+-	adc r26,r22
+-	adc r27,r23
+ 	subi r16,-16
+ 	sbci r17,69
+ 	sbci r18,97
+ 	sbci r19,18
++	add r24,r20
++	adc r25,r21
++	adc r26,r22
++	adc r27,r23
+ 	ldd r30,Y+3
+ 	ldd r31,Y+4
+ 	subi r30,120

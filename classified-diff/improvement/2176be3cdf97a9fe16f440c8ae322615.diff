@@ -1,0 +1,59 @@
+DIR d9b0823c1e48a61f6cee12532fe60493
+--- pr61306-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:55:28.192670468 +0000
++++ pr61306-2.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:07:52.530318355 +0000
+@@ -15,8 +15,6 @@
+ 	push r29
+ 	rcall .
+ 	rcall .
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 4 */
+ /* stack size = 8 */
+@@ -57,14 +55,12 @@
+ 	clr r20
+ 	clr r20
+ 	clr r21
+-	movw r16,r24
+-	movw r18,r26
+-	or r16,r20
+-	or r17,r21
+-	or r18,r22
+-	or r19,r23
+-	movw r24,r18
+-	movw r22,r16
++	or r24,r20
++	or r25,r21
++	or r26,r22
++	or r27,r23
++	movw r22,r24
++	movw r24,r26
+ /* epilogue start */
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+@@ -82,8 +78,6 @@
+ main:
+ 	rcall .
+ 	rcall .
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 4 */
+ /* stack size = 4 */
+@@ -93,10 +87,12 @@
+ 	ldi r24,lo8(-126)
+ 	ldi r25,lo8(-127)
+ 	call fake_bswap32
+-	cpi r22,-127
+-	sbci r23,-126
+-	sbci r24,-125
+-	sbci r25,-1
++	movw r18,r22
++	movw r20,r24
++	cpi r18,-127
++	sbci r19,-126
++	sbci r20,-125
++	sbci r21,-1
+ 	brne .L5
+ 	ldi r25,0
+ 	ldi r24,0

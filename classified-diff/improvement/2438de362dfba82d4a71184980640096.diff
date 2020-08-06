@@ -1,0 +1,21 @@
+DIR 423be5ae2f6b2ea90d5abb0e39fa23d6
+--- pr32399.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:59:51.471519390 +0000
++++ pr32399.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:59:51.215516786 +0000
+@@ -69,8 +69,8 @@
+ 	ret
+ .L3:
+ 	or r10,r11
+-	brne .L5
+ 	movw r22,r18
++	brne .L5
+ 	subi r22,1
+ 	sbc r23,__zero_reg__
+ 	add r22,r16
+@@ -93,7 +93,6 @@
+ 	brne .L6
+ 	rjmp .L1
+ .L5:
+-	movw r22,r18
+ 	subi r22,1
+ 	sbc r23,__zero_reg__
+ 	add r22,r16

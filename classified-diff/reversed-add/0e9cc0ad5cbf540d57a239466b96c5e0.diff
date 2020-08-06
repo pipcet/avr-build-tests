@@ -1,0 +1,16 @@
+--- pr56205.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:11:02.658869172 +0000
++++ pr56205.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:11:02.410866750 +0000
+@@ -185,9 +185,10 @@
+ 	ld r24,Z
+ 	tst r24
+ 	breq .L7
+-	movw r22,r28
+-	subi r22,-11
+-	sbci r23,-1
++	ldi r22,lo8(11)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	movw r24,r16
+ 	call f2
+ .L7:

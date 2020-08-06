@@ -1,0 +1,21 @@
+DIR 276ac7e84e0d52c0cfd55380a3a1e595
+--- pr59229.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:58.354973112 +0000
++++ pr59229.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:58:58.166971156 +0000
+@@ -67,6 +67,7 @@
+ /* frame size = 7 */
+ /* stack size = 11 */
+ .L__stack_usage = 11
++	movw r16,r20
+ 	subi r20,1
+ 	sbc r21,__zero_reg__
+ 	sbc r22,__zero_reg__
+@@ -76,7 +77,8 @@
+ 	cpc r22,__zero_reg__
+ 	cpc r23,__zero_reg__
+ 	brsh .L4
+-	subi r20,-2
++	movw r20,r16
++	subi r20,-1
+ 	sbci r21,-1
+ 	movw r22,r24
+ 	movw r24,r28

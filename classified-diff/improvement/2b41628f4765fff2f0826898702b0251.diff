@@ -1,0 +1,16 @@
+DIR ce696e8c721545e204010e3a0266ac2c
+--- pr44788.c.{atmega128}.{3}.{vanilla}.s	2020-08-06 16:23:26.628198683 +0000
++++ pr44788.c.{atmega128}.{3}.{ccmode}.s	2020-08-06 16:23:27.156203251 +0000
+@@ -39,10 +39,8 @@
+ 	rol r15
+ 	lsl r14
+ 	rol r15
+-	ldi r30,lo8(1)
+-	ldi r31,0
+-	add r30,r28
+-	adc r31,r29
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r14
+ 	adc r31,r15
+ 	ld r24,Z

@@ -1,0 +1,28 @@
+--- pr90025.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 14:07:41.604903147 +0000
++++ pr90025.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 14:07:41.184899032 +0000
+@@ -75,8 +75,10 @@
+ 	ldi r18,lo8(8)
+ 	ldi r30,lo8(.LC1)
+ 	ldi r31,hi8(.LC1)
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -95,8 +97,10 @@
+ 	std Y+10,r23
+ 	std Y+11,r24
+ 	std Y+12,r25
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call bar
+ /* epilogue start */
+ 	adiw r28,32

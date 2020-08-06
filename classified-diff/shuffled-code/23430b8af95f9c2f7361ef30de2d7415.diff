@@ -1,0 +1,192 @@
+DIR c00f9350736b2359aab2b585d93c0e62
+--- 20050502-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:54:11.999766137 +0000
++++ 20050502-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:07:30.078101984 +0000
+@@ -49,6 +49,7 @@
+ .global	foo
+ 	.type	foo, @function
+ foo:
++	push r8
+ 	push r9
+ 	push r10
+ 	push r11
+@@ -58,33 +59,32 @@
+ 	push r15
+ 	push r16
+ 	push r17
+-	push r28
+ 	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 11 */
+ .L__stack_usage = 11
+-	mov r13,r24
+-	mov r12,r25
++	mov r10,r24
++	mov r9,r25
+ 	movw r14,r22
+-	mov r9,r20
+-	mov r29,r18
++	mov r8,r20
++	mov r11,r18
+ 	call bar
+-	mov r28,r24
+-	movw r10,r14
++	mov r29,r24
++	movw r12,r14
+ 	ldi r17,0
+ 	ldi r16,0
+ .L18:
+ 	subi r16,-1
+ 	sbci r17,-1
+-	movw r30,r10
+-	st Z+,r28
+-	movw r10,r30
+-	mov r24,r13
+-	mov r25,r12
++	movw r30,r12
++	st Z+,r29
++	movw r12,r30
++	mov r24,r10
++	mov r25,r9
+ 	call bar
+-	mov r28,r24
+-	tst r9
++	mov r29,r24
++	tst r8
+ 	breq .L5
+ 	cpi r24,lo8(39)
+ 	brne .L6
+@@ -95,7 +95,6 @@
+ 	st Z,__zero_reg__
+ /* epilogue start */
+ 	pop r29
+-	pop r28
+ 	pop r17
+ 	pop r16
+ 	pop r15
+@@ -105,23 +104,24 @@
+ 	pop r11
+ 	pop r10
+ 	pop r9
++	pop r8
+ 	ret
+ .L5:
+-	cpse r29,__zero_reg__
++	cpse r11,__zero_reg__
+ 	rjmp .L9
+-	mov r24,r28
+-	mov __tmp_reg__,r28
++	mov r24,r29
++	mov __tmp_reg__,r29
+ 	lsl r0
+ 	sbc r25,r25
+ 	call baz
+-	or r24,r25
+-	brne .L18
+-	rjmp .L7
++	sbiw r24,0
++	rjmp .L21
+ .L6:
+-	tst r29
++	tst r11
+ 	breq .L18
+ .L9:
+-	cpi r28,lo8(34)
++	cpi r29,lo8(34)
++.L21:
+ 	brne .L18
+ 	rjmp .L7
+ 	.size	foo, .-foo
+@@ -196,17 +196,17 @@
+ 	sbiw r28,65-62
+ 	call strcmp
+ 	or r24,r25
+-	breq .L21
+-.L22:
++	breq .L23
++.L24:
+ 	call abort
+-.L21:
++.L23:
+ 	ldi r22,lo8(.LC2)
+ 	ldi r23,hi8(.LC2)
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call strcmp
+ 	or r24,r25
+-	brne .L22
++	brne .L24
+ 	ldi r24,lo8(.LC3)
+ 	ldi r25,hi8(.LC3)
+ 	adiw r28,65-62
+@@ -230,14 +230,14 @@
+ 	sbiw r28,65-62
+ 	call strcmp
+ 	or r24,r25
+-	brne .L22
++	brne .L24
+ 	ldi r22,lo8(.LC5)
+ 	ldi r23,hi8(.LC5)
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call strcmp
+ 	or r24,r25
+-	brne .L22
++	brne .L24
+ 	ldi r24,lo8(.LC6)
+ 	ldi r25,hi8(.LC6)
+ 	adiw r28,65-62
+@@ -262,7 +262,7 @@
+ 	call strcmp
+ 	or r24,r25
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r22,lo8(.LC8)
+ 	ldi r23,hi8(.LC8)
+ 	movw r24,r28
+@@ -270,7 +270,7 @@
+ 	call strcmp
+ 	or r24,r25
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r24,lo8(.LC9)
+ 	ldi r25,hi8(.LC9)
+ 	adiw r28,65-62
+@@ -295,7 +295,7 @@
+ 	call strcmp
+ 	or r24,r25
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r22,lo8(.LC11)
+ 	ldi r23,hi8(.LC11)
+ 	movw r24,r28
+@@ -303,7 +303,7 @@
+ 	call strcmp
+ 	or r24,r25
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r24,lo8(.LC12)
+ 	ldi r25,hi8(.LC12)
+ 	adiw r28,65-62
+@@ -328,7 +328,7 @@
+ 	call strcmp
+ 	or r24,r25
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r22,lo8(.LC14)
+ 	ldi r23,hi8(.LC14)
+ 	movw r24,r28
+@@ -336,7 +336,7 @@
+ 	call strcmp
+ 	or r24,r25
+ 	breq .+2
+-	rjmp .L22
++	rjmp .L24
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */

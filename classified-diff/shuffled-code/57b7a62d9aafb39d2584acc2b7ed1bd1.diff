@@ -1,0 +1,14 @@
+DIR ced6bd902e8ee0ffeee4c7497254816e
+--- pr59569-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:06:11.755150794 +0000
++++ pr59569-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:06:11.535148801 +0000
+@@ -22,8 +22,8 @@
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
+ .L2:
+-	cp r30,r18
+-	cpc r31,r19
++	cp r18,r30
++	cpc r19,r31
+ 	brne .L3
+ /* epilogue start */
+ 	ret

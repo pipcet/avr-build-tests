@@ -1,0 +1,54 @@
+--- pr58365.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:15:18.561565341 +0000
++++ pr58365.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:15:18.265561776 +0000
+@@ -34,15 +34,15 @@
+ /* stack size = 10 */
+ .L__stack_usage = 10
+ 	lds r24,i
+-	cpse r24,__zero_reg__
+-	rjmp .L7
++	tst r24
+ 	ldi r24,lo8(10)
++	brne .L7
+ 	ldi r30,lo8(g)
+ 	ldi r31,hi8(g)
+-	movw r18,r28
+-	subi r18,-1
+-	sbci r19,-1
+-	movw r26,r18
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -50,7 +50,10 @@
+ 	brne 0b
+ .L5:
+ 	ldi r24,lo8(10)
+-	movw r30,r18
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(h)
+ 	ldi r27,hi8(h)
+ 	0:
+@@ -77,13 +80,12 @@
+ 	out __SP_L__,r28
+ 	ret
+ .L7:
+-	ldi r24,lo8(10)
+ 	ldi r30,lo8(f)
+ 	ldi r31,hi8(f)
+-	movw r18,r28
+-	subi r18,-1
+-	sbci r19,-1
+-	movw r26,r18
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0

@@ -1,0 +1,16 @@
+DIR 065ad40b398c148c90ae3b217c8625ab
+--- va-arg-23.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:57:38.354125494 +0000
++++ va-arg-23.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:57:38.206123896 +0000
+@@ -17,10 +17,10 @@
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	ldd r24,Y+25
+-	ldd r25,Y+26
+ 	ldd r18,Y+23
+ 	ldd r19,Y+24
++	ldd r24,Y+25
++	ldd r25,Y+26
+ 	cpi r18,1
+ 	cpc r19,__zero_reg__
+ 	brne .L2

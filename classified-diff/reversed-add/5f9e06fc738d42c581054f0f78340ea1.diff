@@ -1,0 +1,15 @@
+--- pr37573.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:09:09.881767286 +0000
++++ pr37573.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:09:09.321761809 +0000
+@@ -172,8 +172,10 @@
+ 	ldi r16,lo8(p)
+ 	ldi r17,hi8(p)
+ .L7:
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call foo
+ 	movw r30,r16
+ 	subi r16,-1

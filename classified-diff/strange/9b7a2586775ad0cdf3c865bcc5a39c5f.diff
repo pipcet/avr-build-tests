@@ -1,0 +1,13 @@
+DIR ed197a225f9a04d4c9b3da9abcb9513e
+--- 20170111-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:29:19.718814328 +0000
++++ 20170111-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:29:19.502812085 +0000
+@@ -119,7 +119,8 @@
+ 	adiw r24,18
+ 	std Y+17,r25
+ 	std Y+16,r24
+-	sbiw r24,17
++	movw r24,r28
++	adiw r24,1
+ 	call foo
+ 	mov r20,r22
+ 	mov r21,r23

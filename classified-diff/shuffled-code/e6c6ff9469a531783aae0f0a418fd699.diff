@@ -1,0 +1,23 @@
+--- 980716-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:08:54.429616137 +0000
++++ 980716-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:08:54.221614102 +0000
+@@ -21,18 +21,18 @@
+ 	adiw r24,7
+ .L2:
+ 	movw r30,r24
++	adiw r24,2
+ 	ld r18,Z
+ 	ldd r19,Z+1
+-	adiw r24,2
+ 	or r18,r19
+ 	brne .L2
+ 	movw r24,r28
+ 	adiw r24,7
+ .L3:
+ 	movw r30,r24
++	adiw r24,2
+ 	ld r18,Z
+ 	ldd r19,Z+1
+-	adiw r24,2
+ 	or r18,r19
+ 	brne .L3
+ /* epilogue start */

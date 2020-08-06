@@ -1,0 +1,38 @@
+DIR 181a9964773bc7689f9eba12b0d478a7
+--- 20031011-2.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:58:28.386659284 +0000
++++ 20031011-2.c.{atmega128}.{2}.{lra}.s	2020-08-06 13:09:03.642997058 +0000
+@@ -9,13 +9,13 @@
+ .global	h
+ 	.type	h, @function
+ h:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	movw r28,r24
++	movw r16,r24
+ 	rjmp .L2
+ .L5:
+ 	call f
+@@ -27,12 +27,13 @@
+ 	or r24,r25
+ 	brne .L1
+ .L2:
+-	sbiw r28,0
++	cp r16,__zero_reg__
++	cpc r17,__zero_reg__
+ 	brne .L5
+ .L1:
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ 	.size	h, .-h
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"

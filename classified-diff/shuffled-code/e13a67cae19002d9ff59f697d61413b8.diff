@@ -1,0 +1,14 @@
+DIR 5b1f444311d69df91b6808c46154db9d
+--- scal-to-vec1.c.{atmega128}.{2}.{vanilla}.s	2020-08-06 15:57:03.425655085 +0000
++++ scal-to-vec1.c.{atmega128}.{2}.{ccmode}.s	2020-08-06 15:57:06.117675588 +0000
+@@ -1040,9 +1040,9 @@
+ 	cp r26,r18
+ 	cpc r27,r19
+ 	brne .L78
+-	ldi r20,lo8(-1)
+ 	movw r24,r16
+ 	sbiw r24,2
++	ldi r20,lo8(-1)
+ 	movw r26,r6
+ 	adiw r26,32
+ 	st X,r24

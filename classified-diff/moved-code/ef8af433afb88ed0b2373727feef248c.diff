@@ -1,0 +1,13 @@
+--- scal-to-vec1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:11:07.486916298 +0000
++++ scal-to-vec1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:11:07.002911574 +0000
+@@ -987,9 +987,9 @@
+ 	cp r14,r30
+ 	cpc r15,r31
+ 	brne .L14
+-	ldi r21,lo8(-1)
+ 	movw r24,r8
+ 	sbiw r24,2
++	ldi r21,lo8(-1)
+ 	movw r26,r6
+ 	adiw r26,32
+ 	st X,r24

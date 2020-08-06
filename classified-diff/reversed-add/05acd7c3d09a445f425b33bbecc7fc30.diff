@@ -1,0 +1,15 @@
+--- pr34176.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:06:16.504068466 +0000
++++ pr34176.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:06:16.440067837 +0000
+@@ -61,8 +61,10 @@
+ 	mov r15,__zero_reg__
+ 	mov r14,__zero_reg__
+ .L6:
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	add r24,r28
++	adc r25,r29
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2

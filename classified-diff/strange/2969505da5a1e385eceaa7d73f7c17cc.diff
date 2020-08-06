@@ -1,0 +1,18 @@
+DIR 72451734391ce4fdae6ba7e8695449d1
+--- 920428-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:49:58.844382783 +0000
++++ 920428-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:49:58.560378582 +0000
+@@ -92,9 +92,11 @@
+ 	cp __zero_reg__,r24
+ 	cpc __zero_reg__,r25
+ 	brge .L6
+-	subi r18,27
+-	sbc r19,__zero_reg__
+-	movw r2,r18
++	clr r2
++	inc r2
++	mov r3,__zero_reg__
++	add r2,r28
++	adc r3,r29
+ 	call f.0
+ 	rjmp .L4
+ .L3:

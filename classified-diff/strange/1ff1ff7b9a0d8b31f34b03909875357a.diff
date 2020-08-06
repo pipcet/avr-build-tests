@@ -1,0 +1,13 @@
+DIR d37a3370be22ebd5d63cd8f4639c1cb2
+--- pr37713.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:06:24.123262743 +0000
++++ pr37713.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:06:23.975261406 +0000
+@@ -41,7 +41,8 @@
+ 	std Y+11,r24
+ 	std Y+14,r25
+ 	std Y+13,r24
+-	sbiw r24,14
++	movw r24,r28
++	adiw r24,1
+ 	call sdp_seq_alloc
+ /* epilogue start */
+ 	adiw r28,15

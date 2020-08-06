@@ -1,0 +1,16 @@
+--- pr51447.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:10:07.690332368 +0000
++++ pr51447.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:10:07.438329906 +0000
+@@ -60,8 +60,11 @@
+ 	adiw r24,12
+ 	std Y+8,r25
+ 	std Y+7,r24
+-	sbiw r24,11
+-	movw r2,r24
++	clr r2
++	inc r2
++	mov r3,__zero_reg__
++	add r2,r28
++	adc r3,r29
+ 	ldi r24,lo8(gs(.L4))
+ 	ldi r25,hi8(gs(.L4))
+ 	call bar.0

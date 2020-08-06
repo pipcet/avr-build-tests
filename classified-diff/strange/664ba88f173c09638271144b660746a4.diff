@@ -1,0 +1,184 @@
+DIR 28e70a1a0553d886dfb55a02cc45d18e
+--- memset-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:45:44.197017224 +0000
++++ memset-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:45:43.957015590 +0000
+@@ -20,32 +20,29 @@
+ 	mov r15,r24
+ 	ldi r17,0
+ 	ldi r16,0
+-.L19:
+ 	ldi r28,lo8(1)
+ 	ldi r29,0
+-	rjmp .L2
+-.L16:
+-	ldi r20,lo8(96)
+-	ldi r21,0
+-	ldi r22,lo8(97)
+-	ldi r23,0
+-	ldi r24,lo8(u)
+-	ldi r25,hi8(u)
+-	call memset
+-	movw r20,r28
+-	ldi r23,0
+-	ldi r22,0
+-	movw r24,r14
+-	call memset
+-	cp r14,r24
+-	cpc r15,r25
+-	brne .+2
+-	rjmp .L18
+-.L4:
+-	call abort
++.L2:
++	cpi r28,80
++	cpc r29,__zero_reg__
++	breq .+2
++	rjmp .L16
++	subi r16,-1
++	sbci r17,-1
++	ldi r24,-1
++	sub r14,r24
++	sbc r15,r24
++	cpi r16,8
++	cpc r17,__zero_reg__
++	breq .+2
++	rjmp .L19
++	ldi r25,0
++	ldi r24,0
++	call exit
+ .L5:
+ 	cpi r18,lo8(97)
+-	brne .L4
++	breq .+2
++	rjmp .L4
+ 	adiw r24,1
+ 	movw r30,r26
+ .L3:
+@@ -70,7 +67,8 @@
+ .L7:
+ 	ld r18,Z+
+ 	cpi r18,lo8(97)
+-	brne .L4
++	breq .+2
++	rjmp .L4
+ 	cp r24,r30
+ 	cpc r25,r31
+ 	brne .L7
+@@ -81,9 +79,10 @@
+ 	movw r20,r28
+ 	movw r24,r14
+ 	call memset
+-	cp r14,r24
+-	cpc r15,r25
+-	brne .L4
++	cp r24,r14
++	cpc r25,r15
++	breq .+2
++	rjmp .L4
+ 	ldi r30,lo8(u)
+ 	ldi r31,hi8(u)
+ 	ldi r25,0
+@@ -103,7 +102,8 @@
+ 	movw r24,r30
+ 	adiw r30,1
+ 	cpi r20,lo8(65)
+-	brne .L4
++	breq .+2
++	rjmp .L4
+ 	cp r30,r18
+ 	cpc r31,r19
+ 	brne .L10
+@@ -121,8 +121,8 @@
+ 	ldi r23,0
+ 	movw r24,r14
+ 	call memset
+-	cp r14,r24
+-	cpc r15,r25
++	cp r24,r14
++	cpc r25,r15
+ 	breq .+2
+ 	rjmp .L4
+ 	ldi r30,lo8(u)
+@@ -143,8 +143,7 @@
+ 	movw r24,r30
+ 	adiw r30,1
+ 	cpi r20,lo8(66)
+-	breq .+2
+-	rjmp .L4
++	brne .L4
+ 	cp r18,r30
+ 	cpc r19,r31
+ 	brne .L14
+@@ -152,29 +151,12 @@
+ .L15:
+ 	ld r18,Z+
+ 	cpi r18,lo8(97)
+-	breq .+2
+-	rjmp .L4
++	brne .L4
+ 	cp r24,r30
+ 	cpc r25,r31
+ 	brne .L15
+ 	adiw r28,1
+-.L2:
+-	cpi r28,80
+-	cpc r29,__zero_reg__
+-	breq .+2
+-	rjmp .L16
+-	subi r16,-1
+-	sbci r17,-1
+-	ldi r24,-1
+-	sub r14,r24
+-	sbc r15,r24
+-	cpi r16,8
+-	cpc r17,__zero_reg__
+-	breq .+2
+-	rjmp .L19
+-	ldi r25,0
+-	ldi r24,0
+-	call exit
++	rjmp .L2
+ .L18:
+ 	ldi r30,lo8(u)
+ 	ldi r31,hi8(u)
+@@ -183,18 +165,37 @@
+ 	rjmp .L3
+ .L9:
+ 	cpi r18,lo8(97)
+-	breq .+2
+-	rjmp .L4
++	brne .L4
+ 	adiw r24,1
+ 	movw r30,r26
+ 	rjmp .L8
+ .L13:
+ 	cpi r18,lo8(97)
+-	breq .+2
+-	rjmp .L4
++	brne .L4
+ 	adiw r24,1
+ 	movw r30,r26
+ 	rjmp .L12
++.L19:
++	ldi r28,lo8(1)
++	ldi r29,0
++.L16:
++	ldi r20,lo8(96)
++	ldi r21,0
++	ldi r22,lo8(97)
++	ldi r23,0
++	ldi r24,lo8(u)
++	ldi r25,hi8(u)
++	call memset
++	movw r20,r28
++	ldi r23,0
++	ldi r22,0
++	movw r24,r14
++	call memset
++	cp r14,r24
++	cpc r15,r25
++	breq .L18
++.L4:
++	call abort
+ 	.size	main, .-main
+ .global	A
+ 	.data

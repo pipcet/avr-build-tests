@@ -1,0 +1,38 @@
+DIR 14a4e3d9933e4fd3861c2e12684e8318
+--- pr34768-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:20.638577447 +0000
++++ pr34768-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:08:59.278955680 +0000
+@@ -36,14 +36,14 @@
+ .global	test
+ 	.type	test, @function
+ test:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	lds r28,x
+-	lds r29,x+1
++	lds r16,x
++	lds r17,x+1
+ 	ldi r30,lo8(gs(bar))
+ 	ldi r31,hi8(gs(bar))
+ 	or r24,r25
+@@ -54,11 +54,11 @@
+ 	icall
+ 	lds r24,x
+ 	lds r25,x+1
+-	add r24,r28
+-	adc r25,r29
++	add r24,r16
++	adc r25,r17
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ 	.size	test, .-test
+ 	.section	.text.startup,"ax",@progbits

@@ -1,0 +1,16 @@
+--- pr93908.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:06:41.664315425 +0000
++++ pr93908.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:06:41.444313266 +0000
+@@ -99,9 +99,10 @@
+ /* frame size = 4 */
+ /* stack size = 4 */
+ .L__stack_usage = 4
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	ldi r24,lo8(.LC0)
+ 	ldi r25,hi8(.LC0)
+ 	call foo

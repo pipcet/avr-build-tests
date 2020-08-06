@@ -1,0 +1,66 @@
+DIR 931e3d65a01a44c8b41c53453d8aada6
+--- 930523-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 19:04:03.033966425 +0000
++++ 930523-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 19:04:02.637962722 +0000
+@@ -13,9 +13,37 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	sbrs r25,7
+-	rjmp .L10
+-.L8:
++	clr r12
++	dec r12
++	mov r13,r12
++	mov r14,__zero_reg__
++	mov r15,__zero_reg__
++.L3:
++	sbrc r31,7
++	rjmp .L2
++	ldi r29,0
++	ldi r28,0
++	movw r24,r30
++	movw r22,r28
++	call __divmodhi4
++	movw r30,r24
++	cp r24,r28
++	cpc r25,r29
++	brlt .L2
++	movw r22,r28
++	call __divmodhi4
++	clr r18
++	clr r19
++	sub r18,r22
++	sbc r19,r23
++.L2:
++	ldi r24,-1
++	cp r12,r24
++	cpc r13,r24
++	ldi r24,1
++	cpc r14,r24
++	cpc r15,__zero_reg__
++	brsh .L3
+ 	ldi r25,0
+ 	ldi r24,0
+ 	lds r20,0
+@@ -34,21 +62,6 @@
+ 	sts 0+2,r22
+ 	sts 0+3,r23
+ 	rjmp .L6
+-.L10:
+-	ldi r31,0
+-	ldi r30,0
+-	movw r22,r30
+-	call __divmodhi4
+-	cp r24,r30
+-	cpc r25,r31
+-	brlt .L8
+-	movw r22,r30
+-	call __divmodhi4
+-	clr r18
+-	clr r19
+-	sub r18,r22
+-	sbc r19,r23
+-	rjmp .L8
+ 	.size	f, .-f
+ .global	v
+ 	.section .bss

@@ -1,0 +1,49 @@
+DIR c56ee4be4a43f580730119f263485ce8
+--- 20001017-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:54:38.292083121 +0000
++++ 20001017-2.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:07:34.194141729 +0000
+@@ -9,19 +9,18 @@
+ .global	fn_4parms
+ 	.type	fn_4parms, @function
+ fn_4parms:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r26,r20
+-	movw r30,r18
+-	movw r28,r22
+-	ld r20,Y
+-	ldd r21,Y+1
+-	ldd r22,Y+2
+-	ldd r23,Y+3
++	movw r30,r22
++	ld r20,Z
++	ldd r21,Z+1
++	ldd r22,Z+2
++	ldd r23,Z+3
+ 	cpi r20,1
+ 	cpc r21,__zero_reg__
+ 	cpc r22,__zero_reg__
+@@ -36,6 +35,7 @@
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__
+ 	brne .L2
++	movw r30,r18
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	sbiw r24,3
+@@ -44,8 +44,8 @@
+ 	call abort
+ .L1:
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ 	.size	fn_4parms, .-fn_4parms
+ 	.section	.text.startup,"ax",@progbits

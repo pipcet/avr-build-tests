@@ -1,0 +1,14 @@
+DIR 334826ab2a0d1f535527bf14a831eaff
+--- bitfld-8.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:59:16.987166141 +0000
++++ bitfld-8.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:59:16.775163953 +0000
+@@ -20,8 +20,8 @@
+ 	bld r25,0
+ 	sbrc r24,0
+ 	rjmp .L4
+-	cpse r18,__zero_reg__
+-	rjmp .L4
++	tst r18
++	brne .L4
+ 	mov r24,r25
+ 	ret
+ .L4:

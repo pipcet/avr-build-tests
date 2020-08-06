@@ -1,0 +1,39 @@
+DIR f30d9b69cf5b1a5e9eb2e20d9f878457
+--- 20000427-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:29:30.970931115 +0000
++++ 20000427-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:17:16.563507788 +0000
+@@ -9,13 +9,13 @@
+ .global	ConvertFor3dDriver
+ 	.type	ConvertFor3dDriver, @function
+ ConvertFor3dDriver:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	movw r28,r22
++	movw r16,r22
+ 	lds r24,lheight
+ 	lds r25,lheight+1
+ 	call FindNearestPowerOf2
+@@ -26,14 +26,14 @@
+ 	movw r24,r30
+ 	movw r22,r18
+ 	call __divmodhi4
+-	cp r28,r22
+-	cpc r29,r23
++	cp r16,r22
++	cpc r17,r23
+ 	brlt .L3
+ 	sts lheight+1,r19
+ 	sts lheight,r18
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ .L3:
+ 	lsl r18

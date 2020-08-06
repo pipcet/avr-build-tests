@@ -1,0 +1,14 @@
+DIR 8700a7df3bad1a367d0aefac578e1346
+--- 20041214-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:50:50.665131900 +0000
++++ 20041214-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:50:50.577130655 +0000
+@@ -22,8 +22,8 @@
+ 	movw r14,r24
+ 	movw r28,r22
+ 	ld r24,Y
+-	cpse r24,__zero_reg__
+-	rjmp .L3
++	tst r24
++	brne .L3
+ .L2:
+ 	ldi r25,0
+ 	ldi r24,0

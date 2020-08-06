@@ -1,0 +1,18 @@
+DIR 69739e3396a6d85963f0bc249a1959b6
+--- pr64269.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:02:19.552984329 +0000
++++ pr64269.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:12:19.724825167 +0000
+@@ -17,12 +17,9 @@
+ 	st Z+,__zero_reg__
+ 	ldi r24,lo8(-1)
+ 	ldi r25,lo8(-1)
+-	movw r26,r30
+-	movw r18,r24
+ 	0:
+-	st X+,__zero_reg__
+-	subi r18,1
+-	sbci r19,0
++	st Z+,__zero_reg__
++	sbiw r24,1
+ 	brne 0b
+ /* epilogue start */
+ 	ret

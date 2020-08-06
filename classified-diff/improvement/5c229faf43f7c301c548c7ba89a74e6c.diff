@@ -1,0 +1,28 @@
+--- pr90025.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:54:30.729869084 +0000
++++ pr90025.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:54:30.509866887 +0000
+@@ -22,20 +22,18 @@
+ 	ldi r27,hi8(.LC0)
+ 	adiw r24,6
+ 	movw r30,r18
+-	mov r21,r24
+-	mov r20,r25
+ .L3:
+-	ld r23,Z+
+-	ld r22,X+
+-	cpse r23,r22
++	ld r21,Z+
++	ld r20,X+
++	cpse r21,r20
+ .L4:
+ 	call abort
+ .L2:
+ 	cp r30,r24
+ 	cpc r31,r25
+ 	brne .L3
+-	mov r30,r21
+-	mov r31,r20
++	movw r30,r18
++	adiw r30,6
+ 	subi r18,-32
+ 	sbci r19,-1
+ .L5:

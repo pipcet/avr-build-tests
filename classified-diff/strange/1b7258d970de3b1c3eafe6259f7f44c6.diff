@@ -1,0 +1,41 @@
+DIR e60044946afa165c7d1dbc34de033e7c
+--- pr79737-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:29:06.118673038 +0000
++++ pr79737-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:29:05.922671001 +0000
+@@ -61,16 +61,20 @@
+ 	ldi r18,lo8(9)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+ 	dec r18
+ 	brne 0b
+ 	ldi r18,lo8(9)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(h)
+ 	ldi r27,hi8(h)
+ 	0:
+@@ -83,8 +87,10 @@
+ 	or r18,r19
+ 	breq .L3
+ 	ldi r18,lo8(9)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(i)
+ 	ldi r27,hi8(i)
+ 	0:

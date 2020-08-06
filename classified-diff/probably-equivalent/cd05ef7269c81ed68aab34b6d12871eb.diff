@@ -1,0 +1,14 @@
+DIR e4c0c1ad0b33285e06e62b9a5dc7f47d
+--- 960311-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-06 16:05:13.697342509 +0000
++++ 960311-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-06 16:05:14.449348114 +0000
+@@ -28,8 +28,8 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	sbrs r24,7
+-	rjmp .L4
++	tst r24
++	brge .L4
+ 	lds r18,count
+ 	lds r19,count+1
+ 	subi r18,-1

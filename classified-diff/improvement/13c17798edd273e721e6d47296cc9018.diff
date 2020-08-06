@@ -1,0 +1,23 @@
+DIR 0db9958c28013fe7cce2011af941491d
+--- pr91190.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:58:07.022432911 +0000
++++ pr91190.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:58:06.546427841 +0000
+@@ -49,8 +49,7 @@
+ 	lds r24,g
+ 	lds r25,g+1
+ 	or r24,r25
+-	breq .+2
+-	rjmp .L4
++	brne .L4
+ 	sts e+2+1,__zero_reg__
+ 	sts e+2,__zero_reg__
+ 	ldi r18,lo8(90)
+@@ -82,8 +81,7 @@
+ 	or r24,r25
+ 	breq .L2
+ 	tst r18
+-	brne .+2
+-	rjmp .L2
++	breq .L2
+ 	ldd r8,Y+1
+ 	ldd r9,Y+2
+ 	ldd r10,Y+3

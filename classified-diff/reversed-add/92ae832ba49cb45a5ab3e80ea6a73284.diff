@@ -1,0 +1,27 @@
+--- pr65956.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:19:43.604637610 +0000
++++ pr65956.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:19:43.280633977 +0000
+@@ -211,16 +211,19 @@
+ 	ldi r24,lo8(36)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r26,r28
+-	adiw r26,1
++	ldi r26,lo8(1)
++	ldi r27,0
++	add r26,r28
++	adc r27,r29
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+ 	dec r24
+ 	brne 0b
+-	movw r22,r28
+-	subi r22,-25
+-	sbci r23,-1
++	ldi r22,lo8(25)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	ldi r24,lo8(-36)
+ 	ldi r25,0
+ 	call bar

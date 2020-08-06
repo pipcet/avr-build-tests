@@ -1,0 +1,29 @@
+DIR 6fd03c37353e47e6f5fd3001edad9141
+--- pr43679.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 19:02:36.989151954 +0000
++++ pr43679.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 19:02:36.661148809 +0000
+@@ -33,20 +33,12 @@
+ 	or r24,r26
+ 	or r24,r27
+ 	breq .L1
+-	lds r18,g_5
+-	lds r19,g_5+1
+-	lds r25,g_7
+-	lds r24,g_7+1
+-	rjmp .L5
++	lds r24,g_5
++	lds r25,g_5+1
++	or r24,r25
++	brne .L1
+ .L7:
+-	ldi r25,0
+-	ldi r24,0
+-.L5:
+-	cp r18,__zero_reg__
+-	cpc r19,__zero_reg__
+-	breq .L7
+-	sts g_7,r25
+-	sts g_7+1,r24
++	rjmp .L7
+ .L4:
+ .L1:
+ /* epilogue start */

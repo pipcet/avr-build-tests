@@ -1,0 +1,14 @@
+DIR a632975977e1d01f67c44cfdb2fd078b
+--- loop-12.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:52:39.126600059 +0000
++++ loop-12.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:52:38.858596582 +0000
+@@ -62,8 +62,8 @@
+ 	ret
+ .L17:
+ 	cpi r24,lo8(33)
+-	breq .L21
+-	rjmp .L16
++	brne .L16
++	rjmp .L21
+ 	.size	main, .-main
+ .global	p
+ 	.section .bss

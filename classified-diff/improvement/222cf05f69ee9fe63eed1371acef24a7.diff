@@ -1,0 +1,23 @@
+DIR d9e44be25069c8dbfa64a5998e65e7ad
+--- pr58640.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:55:28.736676774 +0000
++++ pr58640.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:55:28.396672833 +0000
+@@ -22,9 +22,9 @@
+ 	lds r24,d
+ 	lds r25,d+1
+ 	or r24,r25
+-	breq .L5
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
++	breq .L5
+ 	sts e+1,r25
+ 	sts e,r24
+ 	ldi r24,lo8(4)
+@@ -36,8 +36,6 @@
+ 	ldi r24,0
+ 	call exit
+ .L5:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	sts b+1,r25
+ 	sts b,r24
+ 	rjmp .L2

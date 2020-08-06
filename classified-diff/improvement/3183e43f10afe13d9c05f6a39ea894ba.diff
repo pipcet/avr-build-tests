@@ -1,0 +1,57 @@
+DIR 5d1fa04bf90750f221696787c6b0e0c9
+--- pr67506.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:01:21.100415349 +0000
++++ pr67506.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:01:20.696411376 +0000
+@@ -33,11 +33,6 @@
+ .L__stack_usage = 18
+ 	lds r24,c
+ 	lds r25,c+1
+-	movw r20,r24
+-	mov __tmp_reg__,r25
+-	lsl r0
+-	sbc r22,r22
+-	sbc r23,r23
+ 	cp __zero_reg__,r24
+ 	cpc __zero_reg__,r25
+ 	brge .+2
+@@ -55,13 +50,12 @@
+ 	sts c,r24
+ 	sbrs r23,7
+ 	rjmp .L7
+-.L20:
++.L6:
+ 	movw r20,r24
+ 	mov __tmp_reg__,r25
+ 	lsl r0
+ 	sbc r22,r22
+ 	sbc r23,r23
+-.L6:
+ 	movw r16,r20
+ 	movw r18,r22
+ 	add r16,r12
+@@ -151,7 +145,7 @@
+ 	sts c+1,r25
+ 	sts c,r24
+ 	sbrc r23,7
+-	rjmp .L20
++	rjmp .L6
+ .L7:
+ 	lds r24,ai
+ 	lds r25,ai+1
+@@ -195,7 +189,7 @@
+ 	lds r21,nl+1
+ 	cp r18,r20
+ 	cpc r19,r21
+-	brsh .L21
++	brsh .L20
+ .L14:
+ 	movw r20,r24
+ 	movw r22,r26
+@@ -246,7 +240,7 @@
+ 	movw r20,r24
+ 	movw r22,r26
+ 	rjmp .L10
+-.L21:
++.L20:
+ 	lds r18,charsonline
+ 	tst r18
+ 	breq .L14

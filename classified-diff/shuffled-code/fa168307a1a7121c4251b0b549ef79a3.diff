@@ -1,0 +1,15 @@
+DIR b98b869077ece83a63568066fa181062
+--- pr58277-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:05:30.782777751 +0000
++++ pr58277-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:15:25.838516337 +0000
+@@ -289,9 +289,9 @@
+ .L14:
+ 	lsl r24
+ 	rol r25
++	subi r24,lo8(-(a))
++	sbci r25,hi8(-(a))
+ 	movw r30,r24
+-	subi r30,lo8(-(a))
+-	sbci r31,hi8(-(a))
+ 	ld __tmp_reg__,Z+
+ 	ld r31,Z
+ 	mov r30,__tmp_reg__

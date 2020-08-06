@@ -1,0 +1,36 @@
+DIR 03af702b2f528466ad549e38025427f3
+--- pr86526.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:57:28.930023487 +0000
++++ pr86526.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:57:28.758021621 +0000
+@@ -23,24 +23,15 @@
+ 	ldd r25,Z+1
+ 	cp r24,__zero_reg__
+ 	sbci r25,97
+-	breq .L6
+-.L2:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L3:
+-	or r24,r25
+-	brne .L7
+-/* epilogue start */
+-	ret
+-.L6:
++	breq .L8
++.L5:
++	call abort
++.L8:
+ 	ldd r24,Z+2
+ 	cpse r24,__zero_reg__
+-	rjmp .L2
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L3
+-.L7:
+-	call abort
++	rjmp .L5
++/* epilogue start */
++	ret
+ 	.size	foo, .-foo
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
+ .global __do_copy_data

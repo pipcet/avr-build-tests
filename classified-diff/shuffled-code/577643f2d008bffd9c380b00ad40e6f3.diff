@@ -1,0 +1,14 @@
+DIR 7e9fe44d22384b5d0045b97aa8e23635
+--- 20120105-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:03:16.573529178 +0000
++++ 20120105-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:03:16.413527662 +0000
+@@ -32,9 +32,9 @@
+ /* frame size = 7 */
+ /* stack size = 7 */
+ .L__stack_usage = 7
+-	ldi r24,lo8(7)
+ 	movw r30,r28
+ 	adiw r30,1
++	ldi r24,lo8(7)
+ 	movw r26,r30
+ 	0:
+ 	st X+,__zero_reg__

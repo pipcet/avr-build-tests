@@ -1,0 +1,15 @@
+--- pr44575.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:11:22.447062301 +0000
++++ pr44575.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:11:22.071058632 +0000
+@@ -28,8 +28,10 @@
+ /* frame size = 0 */
+ /* stack size = 12 */
+ .L__stack_usage = 12
+-	movw r30,r28
+-	adiw r30,15
++	ldi r30,lo8(15)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ld r16,Z+
+ 	ld r17,Z+
+ 	swap r16

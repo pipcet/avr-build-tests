@@ -1,0 +1,68 @@
+DIR 02d9c6a432721d5a9db1b87b75f67890
+--- pr34176.c.{atmega128}.{2}.{vanilla}.s	2020-08-06 12:05:09.994400587 +0000
++++ pr34176.c.{atmega128}.{2}.{lra}.s	2020-08-06 12:05:10.762405958 +0000
+@@ -54,39 +54,39 @@
+ 	rcall .
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-.L12:
+ /* prologue: function */
+ /* frame size = 2 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r24,r28
+ 	adiw r24,1
++	movw r14,r24
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
+ 	movw r24,r16
++	movw r12,r14
+ .L9:
+ 	call foo
+ 	cp r16,__zero_reg__
+ 	cpc r17,__zero_reg__
+-	breq .L12
++	breq .L7
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+ 	rol r17
++	asr r17
++	ror r16
++	asr r17
++	ror r16
+ 	movw r14,r16
+-	asr r15
+-	ror r14
+-	asr r15
+-	ror r14
+-	movw r24,r28
+-	adiw r24,1
++	movw r24,r12
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
+-	movw r24,r16
+-	add r24,r14
+-	adc r25,r15
++	movw r24,r14
++	add r24,r16
++	adc r25,r17
+ 	cp r16,r24
+ 	cpc r17,r25
+ 	breq .L9
+@@ -96,6 +96,13 @@
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+ 	ret
++.L7:
++	movw r24,r12
++	call hash_find_entry
++	ldd r16,Y+1
++	ldd r17,Y+2
++	movw r24,r16
++	rjmp .L9
+ 	.size	main, .-main
+ 	.local	count.0
+ 	.comm	count.0,2,1

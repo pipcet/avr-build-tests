@@ -1,0 +1,14 @@
+DIR 9ffbf43126e33be52cd2bf7e01d627f9
+--- e.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:04:36.386276917 +0000
++++ e.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:04:36.222275397 +0000
+@@ -37,8 +37,8 @@
+ 	st -Z,r25
+ 	st -Z,r24
+ 	movw r16,r30
+-	cp r14,r28
+-	cpc r15,r29
++	cp r28,r14
++	cpc r29,r15
+ 	brne .L2
+ /* epilogue start */
+ 	pop r29

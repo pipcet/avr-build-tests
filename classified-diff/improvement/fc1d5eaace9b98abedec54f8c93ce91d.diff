@@ -1,0 +1,27 @@
+--- 930719-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 14:16:29.458409514 +0000
++++ 930719-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 14:16:29.182406264 +0000
+@@ -22,19 +22,15 @@
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L8:
+-	cp r22,__zero_reg__
+-	cpc r23,__zero_reg__
+-	brne .L2
+-	sts 0,__zero_reg__
+ .L3:
+ 	cpi r18,1
+ 	cpc r19,__zero_reg__
+-	breq .L8
+-	cpi r18,1
+-	cpc r19,__zero_reg__
+ 	brne .L3
+-	rjmp .L8
++	or r22,r23
++	brne .L2
++.L6:
++	sts 0,__zero_reg__
++	rjmp .L6
+ 	.size	f, .-f
+ 	.section	.text.startup,"ax",@progbits
+ .global	main

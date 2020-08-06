@@ -1,0 +1,138 @@
+DIR 5c4906e4f6ff7b64792327fbe9212108
+--- vprintf-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:48:50.383338318 +0000
++++ vprintf-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:48:49.915330947 +0000
+@@ -73,10 +73,12 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC0)
+ 	ldi r25,hi8(.LC0)
+-.L27:
++.L28:
+ 	call vprintf
+ 	sbiw r24,5
+-	breq .L1
++.L21:
++	brne .+2
++	rjmp .L1
+ .L2:
+ 	call abort
+ .L13:
+@@ -86,17 +88,10 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC1)
+ 	ldi r25,hi8(.LC1)
+-.L21:
++.L32:
+ 	call vprintf
+ 	sbiw r24,6
+-	brne .L2
+-.L1:
+-/* epilogue start */
+-	pop r29
+-	pop r28
+-	pop r17
+-	pop r16
+-	ret
++	rjmp .L21
+ .L12:
+ 	ldi r24,lo8(97)
+ 	ldi r25,0
+@@ -104,20 +99,18 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC2)
+ 	ldi r25,hi8(.LC2)
+-.L23:
++.L33:
+ 	call vprintf
+ 	sbiw r24,1
+-	breq .L1
+-	rjmp .L2
++	rjmp .L21
+ .L11:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC3)
+ 	ldi r25,hi8(.LC3)
+-.L25:
++.L34:
+ 	call vprintf
+-	or r24,r25
+-	breq .L1
+-	rjmp .L2
++	sbiw r24,0
++	rjmp .L21
+ .L10:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC4)
+@@ -126,7 +119,7 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC4)
+ 	ldi r25,hi8(.LC4)
+-	rjmp .L27
++	rjmp .L28
+ .L9:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC4)
+@@ -135,7 +128,7 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC4)
+ 	ldi r25,hi8(.LC4)
+-	rjmp .L21
++	rjmp .L32
+ .L8:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC4)
+@@ -144,7 +137,7 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC4)
+ 	ldi r25,hi8(.LC4)
+-	rjmp .L23
++	rjmp .L33
+ .L7:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC4)
+@@ -153,7 +146,7 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC4)
+ 	ldi r25,hi8(.LC4)
+-	rjmp .L25
++	rjmp .L34
+ .L6:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC5)
+@@ -162,7 +155,7 @@
+ 	movw r22,r16
+ 	ldi r24,lo8(.LC5)
+ 	ldi r25,hi8(.LC5)
+-	rjmp .L23
++	rjmp .L33
+ .L5:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC6)
+@@ -173,9 +166,7 @@
+ 	ldi r25,hi8(.LC6)
+ 	call vprintf
+ 	sbiw r24,7
+-	brne .+2
+-	rjmp .L1
+-	rjmp .L2
++	rjmp .L21
+ .L3:
+ 	movw r22,r26
+ 	ldi r24,lo8(.LC7)
+@@ -186,9 +177,14 @@
+ 	ldi r25,hi8(.LC7)
+ 	call vprintf
+ 	sbiw r24,2
+-	brne .+2
+-	rjmp .L1
+-	rjmp .L2
++	rjmp .L21
++.L1:
++/* epilogue start */
++	pop r29
++	pop r28
++	pop r17
++	pop r16
++	ret
+ 	.size	inner, .-inner
+ 	.section	.text.startup,"ax",@progbits
+ .global	main

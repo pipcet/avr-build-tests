@@ -1,0 +1,21 @@
+DIR d624cc1de0db71c700a4d6db5b5e4c65
+--- 950704-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:06:33.035343228 +0000
++++ 950704-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:06:32.803341135 +0000
+@@ -62,8 +62,8 @@
+ 	mov r25,r26
+ 	ldi r26,0
+ 	call __cmpdi2_s8
+-	brlt .L2
+ 	mov r18,r9
++	brlt .L2
+ 	ldd r19,Y+4
+ 	ldd r20,Y+3
+ 	mov r21,r27
+@@ -122,7 +122,6 @@
+ 	pop r2
+ 	ret
+ .L2:
+-	mov r18,r9
+ 	ldd r19,Y+4
+ 	ldd r20,Y+3
+ 	mov r21,r27

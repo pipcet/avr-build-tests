@@ -1,0 +1,22 @@
+DIR 9156831a9e7d5bc3148c98a6c2542954
+--- pr12517.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:03:52.993872415 +0000
++++ pr12517.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:03:52.749870127 +0000
+@@ -36,9 +36,9 @@
+ 	movw r24,r16
+ 	andi r24,4
+ 	clr r25
++	or r24,r25
+ 	sbrc r16,3
+ 	rjmp .L5
+-	or r24,r25
+ 	brne .L6
+ .L1:
+ /* epilogue start */
+@@ -74,7 +74,6 @@
+ 	call g
+ 	rjmp .L2
+ .L5:
+-	or r24,r25
+ 	brne .L7
+ .L8:
+ 	ldi r25,0

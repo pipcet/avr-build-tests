@@ -1,0 +1,16 @@
+--- pr42691.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:07:35.656844863 +0000
++++ pr42691.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:07:35.432842668 +0000
+@@ -138,9 +138,10 @@
+ 	std Y+10,r25
+ 	std Y+11,r26
+ 	std Y+12,r27
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	movw r24,r28
+ 	adiw r24,9
+ 	call add

@@ -1,0 +1,21 @@
+DIR 0288575c4bca48c72c9bbcde63d40dee
+--- pr37258.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:57:26.341995390 +0000
++++ pr37258.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:57:26.033992044 +0000
+@@ -108,6 +108,8 @@
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
+ 	call func_82
++	ldi r19,0
++	ldi r18,0
+ 	push __zero_reg__
+ 	push r28
+ 	push __zero_reg__
+@@ -124,8 +126,6 @@
+ 	mov r15,__zero_reg__
+ 	ldi r16,0
+ 	ldi r17,0
+-	ldi r19,0
+-	ldi r18,0
+ 	ldi r20,lo8(116)
+ 	ldi r21,lo8(-54)
+ 	ldi r22,lo8(1)

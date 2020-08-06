@@ -1,0 +1,31 @@
+--- 980716-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:55:25.762418787 +0000
++++ 980716-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:55:25.566416830 +0000
+@@ -19,22 +19,20 @@
+ .L__stack_usage = 2
+ 	movw r24,r28
+ 	adiw r24,7
+-	mov r19,r24
+-	mov r18,r25
+ .L2:
+ 	movw r30,r24
+-	ld r20,Z
+-	ldd r21,Z+1
+ 	adiw r24,2
+-	or r20,r21
++	ld r18,Z
++	ldd r19,Z+1
++	or r18,r19
+ 	brne .L2
+-	mov r24,r19
+-	mov r25,r18
++	movw r24,r28
++	adiw r24,7
+ .L3:
+ 	movw r30,r24
++	adiw r24,2
+ 	ld r18,Z
+ 	ldd r19,Z+1
+-	adiw r24,2
+ 	or r18,r19
+ 	brne .L3
+ /* epilogue start */

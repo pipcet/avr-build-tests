@@ -1,0 +1,20 @@
+DIR 157db3ed0d2f8053fd34636882b3c32d
+--- pr78527.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:58:22.178593737 +0000
++++ pr78527.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:09:00.026962775 +0000
+@@ -26,6 +26,7 @@
+ 	neg r23
+ 	neg r22
+ 	sbc r23,__zero_reg__
++	mov r30,r22
+ 	mov r21,r23
+ .L3:
+ 	sbiw r24,0
+@@ -36,7 +37,7 @@
+ .L4:
+ 	rjmp .L4
+ .L6:
+-	mov r19,r22
++	mov r19,r30
+ 	mov r18,r21
+ 	sbiw r24,0
+ 	brne .L8

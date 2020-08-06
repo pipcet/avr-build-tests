@@ -1,0 +1,184 @@
+DIR 581156d98dbb3f4c07bd46a0e8f92a02
+--- ssad-run.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:48:35.787106831 +0000
++++ ssad-run.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:48:35.535102805 +0000
+@@ -9,8 +9,10 @@
+ .global	bar
+ 	.type	bar, @function
+ bar:
+-	push r10
++	push r8
++	push r9
+ 	push r11
++	push r12
+ 	push r13
+ 	push r14
+ 	push r15
+@@ -20,32 +22,36 @@
+ 	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 9 */
+-.L__stack_usage = 9
++/* stack size = 11 */
++.L__stack_usage = 11
+ 	movw r30,r24
+ 	movw r26,r22
+ 	movw r22,r20
+-	movw r10,r18
+-	movw r14,r24
+-	inc r15
++	movw r8,r18
++	movw r12,r24
++	inc r13
+ 	ldi r19,0
+ 	ldi r18,0
+ .L2:
+ 	movw r16,r26
+ 	movw r20,r30
+-	subi r20,-16
+-	sbci r21,-1
++	movw r14,r30
++	ldi r29,16
++	add r14,r29
++	adc r15,__zero_reg__
+ .L4:
+-	ld r24,Z+
++	movw r28,r20
++	ld r24,Y+
++	movw r20,r28
+ 	movw r28,r16
+-	ld r13,Y+
++	ld r11,Y+
+ 	movw r16,r28
+ 	mov __tmp_reg__,r24
+ 	lsl r0
+ 	sbc r25,r25
+-	sub r24,r13
++	sub r24,r11
+ 	sbc r25,__zero_reg__
+-	sbrc r13,7
++	sbrc r11,7
+ 	inc r25
+ 	sbrs r25,7
+ 	rjmp .L3
+@@ -55,16 +61,16 @@
+ .L3:
+ 	add r18,r24
+ 	adc r19,r25
+-	cp r20,r30
+-	cpc r21,r31
++	cp r14,r20
++	cpc r15,r21
+ 	brne .L4
+-	movw r30,r20
++	adiw r30,16
+ 	add r26,r22
+ 	adc r27,r23
+-	cp r20,r14
+-	cpc r21,r15
++	cp r30,r12
++	cpc r31,r13
+ 	brne .L2
+-	movw r30,r10
++	movw r30,r8
+ 	std Z+1,r19
+ 	st Z,r18
+ /* epilogue start */
+@@ -75,8 +81,10 @@
+ 	pop r15
+ 	pop r14
+ 	pop r13
++	pop r12
+ 	pop r11
+-	pop r10
++	pop r9
++	pop r8
+ 	ret
+ 	.size	bar, .-bar
+ 	.section	.text.startup,"ax",@progbits
+@@ -96,43 +104,43 @@
+ /* frame size = 514 */
+ /* stack size = 514 */
+ .L__stack_usage = 514
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-2
+-	movw r24,r28
+-	adiw r24,1
+-	movw r14,r24
+-	ldi r31,0
+-	ldi r30,0
+-	movw r24,r16
+-	movw r22,r14
++	movw r26,r28
++	subi r26,-1
++	sbci r27,-2
++	movw r30,r28
++	adiw r30,1
++	ldi r21,0
++	ldi r20,0
+ .L10:
+-	movw r18,r30
+-	andi r18,7
+-	clr r19
+-	mov r20,r18
+-	sbrc r30,0
++	movw r24,r20
++	andi r24,7
++	clr r25
++	mov r18,r24
++	sbrc r20,0
+ 	rjmp .L8
+-	lsl r20
+-	subi r20,lo8(-(1))
++	lsl r18
++	subi r18,lo8(-(1))
+ .L13:
+-	neg r18
+-	movw r26,r16
+-	st X+,r20
+-	movw r16,r26
+-	movw r26,r14
++	neg r24
+ 	st X+,r18
+-	movw r14,r26
+-	adiw r30,1
+-	cp r30,__zero_reg__
+-	ldi r27,1
+-	cpc r31,r27
++	st Z+,r24
++	subi r20,-1
++	sbci r21,-1
++	cp r20,__zero_reg__
++	ldi r18,1
++	cpc r21,r18
+ 	brne .L10
+ 	movw r18,r28
+ 	subi r18,-1
+ 	sbci r19,-3
+ 	ldi r20,lo8(16)
+ 	ldi r21,0
++	movw r22,r28
++	subi r22,-1
++	sbci r23,-1
++	movw r24,r28
++	subi r24,-1
++	sbci r25,-2
+ 	call bar
+ 	subi r28,lo8(-513)
+ 	sbci r29,hi8(-513)
+@@ -145,10 +153,10 @@
+ 	breq .L11
+ 	call abort
+ .L8:
+-	com r20
+-	lsl r20
+-	asr r19
+-	ror r18
++	com r18
++	lsl r18
++	asr r25
++	ror r24
+ 	rjmp .L13
+ .L11:
+ 	ldi r25,0

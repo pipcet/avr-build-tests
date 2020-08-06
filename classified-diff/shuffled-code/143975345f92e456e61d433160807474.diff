@@ -1,0 +1,15 @@
+DIR 508d599be04e954e2fd9c1e5224dfffb
+--- 20090907-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:00:35.591964233 +0000
++++ 20090907-1.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:11:04.192127585 +0000
+@@ -54,9 +54,9 @@
+ 	rol r23
+ 	add r22,r24
+ 	adc r23,__zero_reg__
++	add r20,r22
++	adc r21,r23
+ 	movw r30,r20
+-	add r30,r22
+-	adc r31,r23
+ 	ldd r24,Z+1
+ 	ld r25,Z
+ 	add r24,r25

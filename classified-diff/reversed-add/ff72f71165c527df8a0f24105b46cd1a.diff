@@ -1,0 +1,15 @@
+--- va-arg-9.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:17:26.883080242 +0000
++++ va-arg-9.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:17:26.339073938 +0000
+@@ -90,8 +90,10 @@
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	movw r30,r28
+-	adiw r30,5
++	ldi r30,lo8(5)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ld r26,Z+
+ 	ld r27,Z+
+ 	movw r24,r30

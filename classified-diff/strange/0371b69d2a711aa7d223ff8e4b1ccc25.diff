@@ -1,0 +1,24 @@
+DIR 3ba121bb3162f486759936b98ea81646
+--- fdmul.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:59:35.615357592 +0000
++++ fdmul.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:10:12.659647110 +0000
+@@ -14,12 +14,18 @@
+ 	push r29
+ 	rcall .
+ 	rcall .
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 4 */
+ /* stack size = 6 */
+ .L__stack_usage = 6
++	mov r27,r18
++	mov r26,r19
++	mov r31,r20
++	mov r30,r21
++	mov r18,r27
++	mov r19,r26
++	mov r20,r31
++	mov r21,r30
+ 	std Y+1,r22
+ 	std Y+2,r23
+ 	std Y+3,r24

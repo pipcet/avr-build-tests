@@ -1,0 +1,160 @@
+DIR ca287f6334e29024f0e422394f892345
+--- pr65956.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:54:59.120330478 +0000
++++ pr65956.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:54:58.648324909 +0000
+@@ -71,8 +71,6 @@
+ .global	bar
+ 	.type	bar, @function
+ bar:
+-	push r12
+-	push r13
+ 	push r14
+ 	push r15
+ 	push r16
+@@ -81,8 +79,8 @@
+ 	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 8 */
+-.L__stack_usage = 8
++/* stack size = 6 */
++.L__stack_usage = 6
+ 	movw r28,r22
+ 	cpi r24,-37
+ 	cpc r25,__zero_reg__
+@@ -90,20 +88,20 @@
+ 	cpi r24,-36
+ 	cpc r25,__zero_reg__
+ 	brne .L15
++.L38:
+ 	ldd r18,Y+2
+ 	ldd r19,Y+3
++	ld r16,Y
++	ldd r17,Y+1
++	sbiw r28,24
+ 	ld r14,Y
+ 	ldd r15,Y+1
+-	sbiw r28,24
+-	ld r12,Y
+-	ldd r13,Y+1
+ 	ldd r24,Y+2
+ 	ldd r25,Y+3
+-.L16:
+ 	or r24,r25
+ 	breq .L15
+ 	or r18,r19
+-	brne .L38
++	brne .L39
+ .L15:
+ /* epilogue start */
+ 	pop r29
+@@ -112,18 +110,14 @@
+ 	pop r16
+ 	pop r15
+ 	pop r14
+-	pop r13
+-	pop r12
+ 	ret
+ .L14:
+-	movw r16,r22
+-	subi r16,24
+-	sbc r17,__zero_reg__
+-	movw r30,r16
+-	ld r14,Z
+-	ldd r15,Z+1
+-	ld r12,Y
+-	ldd r13,Y+1
++	movw r30,r22
++	sbiw r30,24
++	ld r16,Z
++	ldd r17,Z+1
++	ld r14,Y
++	ldd r15,Y+1
+ 	ldd r18,Y+2
+ 	ldd r19,Y+3
+ 	ldd r24,Z+2
+@@ -132,36 +126,34 @@
+ 	breq .L15
+ 	or r18,r19
+ 	breq .L15
+-	movw r24,r14
++	movw r24,r16
+ 	call fn2
+ 	or r24,r25
+-	brne .L39
++	brne .L40
+ .L21:
+-	movw r22,r12
+-	movw r24,r14
++	movw r22,r14
++	movw r24,r16
+ 	call fn1
+-	ldd r18,Y+2
+-	ldd r19,Y+3
+-	ld r14,Y
+-	ldd r15,Y+1
+-	movw r30,r16
+-	ld r12,Z
+-	ldd r13,Z+1
+-	ldd r24,Z+2
+-	ldd r25,Z+3
+-	rjmp .L16
+-.L38:
+-	movw r24,r12
++	rjmp .L38
++.L39:
++	movw r24,r14
+ 	call fn2
+ 	or r24,r25
+-	brne .L40
++	brne .L41
+ .L24:
+-	movw r22,r14
+-	movw r24,r12
++	movw r22,r16
++	movw r24,r14
+ 	call fn1
+-	rjmp .L15
+-.L39:
+-	movw r24,r12
++/* epilogue start */
++	pop r29
++	pop r28
++	pop r17
++	pop r16
++	pop r15
++	pop r14
++	ret
++.L40:
++	movw r24,r14
+ 	call fn2
+ 	or r24,r25
+ 	breq .L21
+@@ -169,8 +161,8 @@
+ 	ldi r25,hi8(.LC1)
+ 	call fn3
+ 	rjmp .L21
+-.L40:
+-	movw r24,r14
++.L41:
++	movw r24,r16
+ 	call fn2
+ 	or r24,r25
+ 	breq .L24
+@@ -245,7 +237,7 @@
+ 	call bar
+ 	lds r24,v+1
+ 	cpi r24,lo8(1)
+-	brne .L43
++	brne .L44
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+@@ -256,7 +248,7 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ 	ret
+-.L43:
++.L44:
+ 	call abort
+ 	.size	main, .-main
+ .global	v

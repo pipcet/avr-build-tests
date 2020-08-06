@@ -1,0 +1,17 @@
+DIR caeda9a5a06612eb16635fab810f1558
+--- pr27863.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:06:01.135054429 +0000
++++ pr27863.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:06:00.899052284 +0000
+@@ -63,9 +63,11 @@
+ 	sbc r6,r6
+ 	sbc r7,r7
+ .L12:
+-	ld r28,Z
+-	ldd r29,Z+1
++	movw r28,r30
+ 	sbiw r30,4
++	ld __tmp_reg__,Y+
++	ld r29,Y
++	mov r28,__tmp_reg__
+ 	push r28
+ 	push r29
+ 	ret

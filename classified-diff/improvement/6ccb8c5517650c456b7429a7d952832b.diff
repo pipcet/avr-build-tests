@@ -1,0 +1,22 @@
+--- pr34099-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:53:14.685109323 +0000
++++ pr34099-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:53:14.481107285 +0000
+@@ -68,17 +68,12 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	or r24,r25
+-	breq .L14
+ 	ldi r24,lo8(1)
++	breq .L14
+ 	or r22,r23
+-	breq .L15
++	breq .L14
+ 	ldi r24,0
+-.L15:
+-	ldi r25,0
+-/* epilogue start */
+-	ret
+ .L14:
+-	ldi r24,lo8(1)
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret

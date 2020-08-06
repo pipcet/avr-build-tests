@@ -1,0 +1,30 @@
+--- pr65401.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:53:03.945002001 +0000
++++ pr65401.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:53:03.696999523 +0000
+@@ -73,7 +73,6 @@
+ 	movw r30,r24
+ 	ldi r24,0
+ 	ldi r25,lo8(64)
+-	movw r12,r14
+ .L8:
+ 	st Z+,r24
+ 	st Z+,r25
+@@ -82,7 +81,8 @@
+ 	cpi r24,64
+ 	cpc r25,__zero_reg__
+ 	brne .L8
+-	movw r24,r12
++	movw r24,r28
++	adiw r24,1
+ 	call foo
+ 	movw r30,r14
+ 	ldi r24,0
+@@ -112,7 +112,8 @@
+ 	cpi r16,64
+ 	cpc r17,__zero_reg__
+ 	brne .L11
+-	movw r24,r12
++	movw r24,r28
++	adiw r24,1
+ 	call bar
+ .L13:
+ 	movw r30,r14

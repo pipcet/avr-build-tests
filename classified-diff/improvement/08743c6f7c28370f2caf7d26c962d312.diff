@@ -1,0 +1,35 @@
+DIR 7defa9fad809fd03425a2378dc1b4313
+--- pr42833.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:50:33.128882135 +0000
++++ pr42833.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:50:32.668875533 +0000
+@@ -53,7 +53,6 @@
+ 	pop r14
+ 	ret
+ .L3:
+-	cpi r18,lo8(-8)
+ 	breq .+2
+ 	rjmp .L25
+ .L15:
+@@ -89,7 +88,6 @@
+ 	pop r14
+ 	ret
+ .L12:
+-	cpi r21,lo8(-8)
+ 	breq .L21
+ 	mov r18,r26
+ 	lsl r26
+@@ -109,7 +107,6 @@
+ 	mov r25,r18
+ 	rjmp .L11
+ .L9:
+-	cpi r20,lo8(-8)
+ 	breq .L19
+ 	mov __tmp_reg__,r24
+ 	lsl r0
+@@ -128,7 +125,6 @@
+ 	brpl 1b
+ 	rjmp .L8
+ .L6:
+-	cpi r19,lo8(-8)
+ 	brne .+2
+ 	rjmp .L17
+ 	mov __tmp_reg__,r30

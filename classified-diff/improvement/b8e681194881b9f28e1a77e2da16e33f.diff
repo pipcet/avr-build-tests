@@ -1,0 +1,17 @@
+DIR 3300af3d422fb63c7e72b15c6c55d3cb
+--- pr34458.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:59:15.783153714 +0000
++++ pr34458.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:59:15.531151112 +0000
+@@ -172,10 +172,9 @@
+ 	adc r5,r31
+ 	lsl r8
+ 	rol r9
+-	ldi r26,lo8(26)
+-	ldi r27,lo8(8)
+-	add r26,r28
+-	adc r27,r29
++	movw r26,r28
++	subi r26,-26
++	sbci r27,-9
+ 	add r26,r8
+ 	adc r27,r9
+ 	movw r24,r28

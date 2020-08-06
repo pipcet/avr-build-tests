@@ -1,0 +1,15 @@
+--- pr64979.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:06:53.172428329 +0000
++++ pr64979.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:06:52.860425268 +0000
+@@ -73,8 +73,10 @@
+ /* frame size = 2 */
+ /* stack size = 4 */
+ .L__stack_usage = 4
+-	movw r30,r28
+-	adiw r30,7
++	ldi r30,lo8(7)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ld r24,Z+
+ 	ld r25,Z+
+ 	adiw r30,2

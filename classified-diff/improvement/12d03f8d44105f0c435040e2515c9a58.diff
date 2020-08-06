@@ -1,0 +1,53 @@
+DIR 7ae29e4bb3fc7118edf46d2b9efbd0de
+--- pr43269.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:50:26.548787447 +0000
++++ pr43269.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:50:26.368784849 +0000
+@@ -12,26 +12,20 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	lds r18,g_211
+-	lds r19,g_211+1
+-	lds r25,g_21
+-	lds r24,g_21+1
++	lds r24,g_211
++	lds r25,g_211+1
+ .L2:
+-	cpi r18,-1
+-	cpc r19,r18
+-	breq .L3
+-	ldi r18,lo8(-1)
+-	ldi r19,lo8(-1)
+-	sts g_261+1,r19
+-	sts g_261,r18
+-	sts g_21,r25
+-	sts g_21+1,r24
++	adiw r24,1
++	brne .L4
++.L3:
++	rjmp .L3
++.L4:
++	ldi r24,lo8(-1)
++	ldi r25,lo8(-1)
++	sts g_261+1,r25
++	sts g_261,r24
+ /* epilogue start */
+ 	ret
+-.L3:
+-	ldi r25,lo8(1)
+-	ldi r24,0
+-	rjmp .L2
+ 	.size	func_32, .-func_32
+ 	.section	.text.startup,"ax",@progbits
+ .global	main
+@@ -47,9 +41,9 @@
+ 	lds r24,g_261
+ 	lds r25,g_261+1
+ 	adiw r24,1
+-	breq .L5
++	breq .L6
+ 	call abort
+-.L5:
++.L6:
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */

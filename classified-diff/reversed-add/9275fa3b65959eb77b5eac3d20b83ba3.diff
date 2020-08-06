@@ -1,0 +1,27 @@
+--- 20041214-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:13:02.624039202 +0000
++++ 20041214-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:13:02.508038072 +0000
+@@ -22,8 +22,8 @@
+ 	movw r14,r24
+ 	movw r28,r22
+ 	ld r24,Y
+-	cpse r24,__zero_reg__
+-	rjmp .L3
++	tst r24
++	brne .L3
+ .L2:
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -63,9 +63,10 @@
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	movw r20,r28
+-	subi r20,-9
+-	sbci r21,-1
++	ldi r20,lo8(9)
++	ldi r21,0
++	add r20,r28
++	adc r21,r29
+ 	ldd r22,Y+7
+ 	ldd r23,Y+8
+ 	ldd r24,Y+5

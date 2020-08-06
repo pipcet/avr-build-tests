@@ -1,0 +1,22 @@
+DIR 72a937042ba394216c32da27d635e6f0
+--- va-arg-15.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:49:59.816397148 +0000
++++ va-arg-15.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:49:59.732395907 +0000
+@@ -64,8 +64,8 @@
+ 	ldd r25,Y+4
+ 	call __nesf2
+ 	tst r24
++.L10:
+ 	breq .L3
+-.L8:
+ 	call abort
+ .L2:
+ 	movw r30,r16
+@@ -74,7 +74,7 @@
+ 	movw r16,r30
+ 	cp r24,r14
+ 	cpc r25,r15
+-	brne .L8
++	rjmp .L10
+ .L3:
+ 	ldi r31,-1
+ 	sub r14,r31

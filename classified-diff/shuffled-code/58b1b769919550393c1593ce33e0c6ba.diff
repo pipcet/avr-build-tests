@@ -1,0 +1,13 @@
+--- pr47337.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:55:25.594417109 +0000
++++ pr47337.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:55:25.466415831 +0000
+@@ -93,9 +93,9 @@
+ 	cpi r26,lo8(a+512)
+ 	cpc r27,r18
+ 	brne .L3
+-	ldi r18,lo8(16)
+ 	movw r30,r28
+ 	adiw r30,1
++	ldi r18,lo8(16)
+ 	movw r26,r30
+ 	0:
+ 	st X+,__zero_reg__

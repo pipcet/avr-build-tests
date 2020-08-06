@@ -1,0 +1,14 @@
+DIR d051a31261e1c459fa3d1b0c4669fd06
+--- pr41634.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:06:15.887188229 +0000
++++ pr41634.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:06:15.611185729 +0000
+@@ -26,9 +26,9 @@
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call foo
+-	ldi r24,lo8(6)
+ 	ldi r30,lo8(outbuffer.0-3)
+ 	ldi r31,hi8(outbuffer.0-3)
++	ldi r24,lo8(6)
+ 	movw r26,r28
+ 	adiw r26,1
+ 	0:

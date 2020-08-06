@@ -1,0 +1,50 @@
+DIR 7053cb4fddf70731d6419fac945ff460
+--- pr33870.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:49:55.876338841 +0000
++++ pr33870.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:49:55.544333917 +0000
+@@ -117,15 +117,16 @@
+ /* stack size = 60 */
+ .L__stack_usage = 60
+ 	movw r30,r24
+-	movw r24,r28
+-	adiw r24,1
+-	movw r14,r24
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
+ 	ldi r24,lo8(50)
+-	movw r26,r14
++	movw r26,r18
+ 	0:
+ 	st X+,__zero_reg__
+ 	dec r24
+ 	brne 0b
++	movw r14,r18
+ .L11:
+ 	sbiw r30,0
+ 	brne .L16
+@@ -170,7 +171,9 @@
+ 	ldd r10,Z+16
+ 	std Z+16,__zero_reg__
+ 	std Z+15,__zero_reg__
+-	movw r12,r14
++	movw r24,r28
++	adiw r24,1
++	movw r12,r24
+ 	ldi r17,0
+ 	ldi r16,0
+ .L14:
+@@ -266,10 +269,10 @@
+ 	adiw r24,1
+ 	call sort_pagelist
+ 	movw r30,r24
+-	ldd r18,Z+15
+-	ldd r19,Z+16
+-	cp r18,r24
+-	cpc r19,r25
++	ldd r24,Z+15
++	ldd r25,Z+16
++	cp r24,r30
++	cpc r25,r31
+ 	brne .L23
+ 	call abort
+ .L23:

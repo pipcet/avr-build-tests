@@ -1,0 +1,15 @@
+--- 990127-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:08:59.997670608 +0000
++++ 990127-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:08:59.753668221 +0000
+@@ -58,8 +58,10 @@
+ 	adiw r24,1
+ 	subi r18,1
+ 	sbc r19,__zero_reg__
+-	movw r30,r28
+-	adiw r30,3
++	ldi r30,lo8(3)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	cp r18,__zero_reg__
+ 	cpc r19,__zero_reg__
+ 	brne .L4

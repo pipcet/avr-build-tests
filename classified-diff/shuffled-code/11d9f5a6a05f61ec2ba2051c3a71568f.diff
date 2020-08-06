@@ -1,0 +1,24 @@
+DIR b0e17f5aed2f5af703a7dbdde5dadc1d
+--- pr68249.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:53:27.167212686 +0000
++++ pr68249.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:53:26.475204009 +0000
+@@ -129,14 +129,14 @@
+ 	cpse r18,__zero_reg__
+ 	mov r28,r18
+ .L20:
+-	lds r20,c
+-	lds r21,c+1
+-	mov r24,r28
++	mov r20,r28
+ 	mov __tmp_reg__,r28
+ 	lsl r0
+-	sbc r25,r25
+-	cp r20,r24
+-	cpc r21,r25
++	sbc r21,r21
++	lds r24,c
++	lds r25,c+1
++	cp r24,r20
++	cpc r25,r21
+ 	brge .L21
+ 	sts g+1,__zero_reg__
+ 	sts g,__zero_reg__

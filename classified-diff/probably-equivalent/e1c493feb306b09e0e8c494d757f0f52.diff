@@ -1,0 +1,29 @@
+DIR 544213f40eda2a9e2f865cf2627d0f0c
+--- pr65875.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:00:48.460092557 +0000
++++ pr65875.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:00:48.104089015 +0000
+@@ -16,20 +16,22 @@
+ 	lds r24,b
+ 	lds r25,b+1
+ 	or r24,r25
+-	breq .L15
++	breq .L16
+ 	lds r24,c
+ 	lds r25,c+1
+ 	lds r18,e
+ 	lds r19,e+1
+ .L6:
+ 	sbiw r24,0
+-	breq .L6
++	breq .L13
+ 	cp r18,__zero_reg__
+ 	cpc r19,__zero_reg__
+ 	brne .L6
+ .L7:
+ 	rjmp .L7
+-.L15:
++.L13:
++	rjmp .L13
++.L16:
+ 	lds r24,a
+ 	lds r25,a+1
+ 	lds r18,f

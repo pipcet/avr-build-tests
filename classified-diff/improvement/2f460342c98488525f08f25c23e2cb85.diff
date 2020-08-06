@@ -1,0 +1,14 @@
+DIR 2ed518cfb2e27e1a40566725ef320b55
+--- pr91597.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:59:10.535099474 +0000
++++ pr91597.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:09:51.871452139 +0000
+@@ -33,9 +33,8 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	call foo
++	sbiw r24,1
+ 	movw r18,r24
+-	subi r18,1
+-	sbc r19,__zero_reg__
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
+ 	cpi r18,2

@@ -1,0 +1,13 @@
+DIR 3e09813f0ed2ccf6830ed8743444d030
+--- 920501-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:59:44.999453477 +0000
++++ 920501-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:59:43.867441929 +0000
+@@ -434,7 +434,8 @@
+ 	cp r18,__zero_reg__
+ 	cpc r19,__zero_reg__
+ 	brne .L26
+-	sbiw r24,2
++	movw r24,r20
++	sbiw r24,1
+ 	movw r6,r24
+ 	ldd r8,Y+23
+ 	ldd r9,Y+22

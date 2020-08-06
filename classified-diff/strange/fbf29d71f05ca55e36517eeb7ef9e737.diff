@@ -1,0 +1,14 @@
+DIR c92a2f556db68202d7a542ad8778122a
+--- pr28778.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:05:56.263010144 +0000
++++ pr28778.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:15:48.758722347 +0000
+@@ -41,6 +41,10 @@
+ /* frame size = 64 */
+ /* stack size = 66 */
+ .L__stack_usage = 66
++	mov r19,r24
++	mov r18,r25
++	mov r24,r19
++	mov r25,r18
+ 	sbiw r24,0
+ 	brne .L4
+ 	ldi r24,lo8(42)

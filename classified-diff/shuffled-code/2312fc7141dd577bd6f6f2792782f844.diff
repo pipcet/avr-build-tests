@@ -1,0 +1,65 @@
+DIR 972798fbfea2671350e2f4f67897c3ff
+--- postmod-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:51:27.997651603 +0000
++++ postmod-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:51:27.613646336 +0000
+@@ -105,11 +105,11 @@
+ 	lds r8,counter3+1
+ 	lds r7,counter3+2
+ 	lds r6,counter3+3
+-	lds r14,counter4
+-	lds r11,counter4+1
+-	lds r10,counter4+2
+-	lds r19,counter4+3
++	lds r10,counter4
++	lds r19,counter4+1
+ 	std Y+11,r19
++	lds r14,counter4+2
++	lds r11,counter4+3
+ 	lds r15,counter5
+ 	lds r16,counter5+1
+ 	lds r17,counter5+2
+@@ -230,11 +230,11 @@
+ 	ldd r19,Z+1
+ 	ldd r20,Z+2
+ 	ldd r21,Z+3
+-	std Y+1,r14
+-	std Y+2,r11
+-	std Y+3,r10
++	std Y+1,r10
+ 	ldd r31,Y+11
+-	std Y+4,r31
++	std Y+2,r31
++	std Y+3,r14
++	std Y+4,r11
+ 	ldd r22,Y+1
+ 	ldd r23,Y+2
+ 	ldd r24,Y+3
+@@ -394,10 +394,10 @@
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ 	call __addsf3
+-	mov r14,r22
+-	mov r11,r23
+-	mov r10,r24
+-	std Y+11,r25
++	mov r10,r22
++	std Y+11,r23
++	mov r14,r24
++	mov r11,r25
+ 	ldd r30,Y+23
+ 	ldd r31,Y+24
+ 	ldd r18,Y+27
+@@ -480,10 +480,10 @@
+ 	sts counter5+1,r25
+ 	sts counter5+2,r26
+ 	sts counter5+3,r27
+-	mov r24,r14
+-	mov r25,r11
+-	mov r26,r10
+-	ldd r27,Y+11
++	mov r24,r10
++	ldd r25,Y+11
++	mov r26,r14
++	mov r27,r11
+ 	sts counter4,r24
+ 	sts counter4+1,r25
+ 	sts counter4+2,r26

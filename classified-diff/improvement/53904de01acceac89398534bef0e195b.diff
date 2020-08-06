@@ -1,0 +1,14 @@
+DIR 2cd0ab22e05f4ca53fad2bf19ad8f58f
+--- 20180226-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:59:07.351066507 +0000
++++ 20180226-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:09:42.803366872 +0000
+@@ -84,9 +84,8 @@
+ 	movw r30,r28
+ 	adiw r30,3
+ 	ldi r24,lo8(6)
+-	movw r26,r30
+ 	0:
+-	st X+,__zero_reg__
++	st Z+,__zero_reg__
+ 	dec r24
+ 	brne 0b
+ 	ldi r24,lo8(2)

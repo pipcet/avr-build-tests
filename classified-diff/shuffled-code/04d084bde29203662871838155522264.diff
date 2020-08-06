@@ -1,0 +1,17 @@
+DIR 50fe6c5e1a02325ff344a2d0e20ffd76
+--- 940122-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:00:38.703995324 +0000
++++ 940122-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:11:06.996153618 +0000
+@@ -40,10 +40,10 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	movw r18,r24
+-	mul r18,r18
++	movw r20,r24
++	mul r20,r20
+ 	movw r24,r0
+-	mul r18,r19
++	mul r20,r21
+ 	add r25,r0
+ 	add r25,r0
+ 	clr r1

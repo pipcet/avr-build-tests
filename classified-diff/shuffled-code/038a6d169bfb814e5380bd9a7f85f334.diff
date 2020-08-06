@@ -1,0 +1,56 @@
+--- regstack-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:47:53.473897072 +0000
++++ regstack-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:47:53.301895351 +0000
+@@ -446,22 +446,22 @@
+ 	ldd r17,Y+20
+ 	call __subdf3
+ 	std Y+47,r18
++	std Y+48,r19
++	std Y+49,r20
+ 	adiw r28,64-63
+-	std Y+63,r19
++	std Y+63,r21
+ 	sbiw r28,64-63
+-	std Y+48,r20
+-	std Y+49,r21
+-	std Y+50,r22
+-	std Y+51,r23
+-	std Y+52,r24
+-	std Y+63,r25
++	std Y+63,r22
++	std Y+50,r23
++	std Y+51,r24
++	std Y+52,r25
+ 	sts R,r18
+ 	sts R+1,r19
+ 	sts R+2,r20
+ 	sts R+3,r21
+ 	sts R+4,r22
+ 	sts R+5,r23
+-	ldd r24,Y+52
++	ldd r24,Y+51
+ 	sts R+6,r24
+ 	sts R+7,r25
+ 	ldd r10,Y+1
+@@ -556,15 +556,15 @@
+ 	mov r15,r25
+ 	ldi r16,lo8(104)
+ 	ldd r18,Y+47
++	ldd r19,Y+48
++	ldd r20,Y+49
+ 	adiw r28,64-63
+-	ldd r19,Y+63
++	ldd r21,Y+63
+ 	sbiw r28,64-63
+-	ldd r20,Y+48
+-	ldd r21,Y+49
+-	ldd r22,Y+50
+-	ldd r23,Y+51
+-	ldd r24,Y+52
+-	ldd r25,Y+63
++	ldd r22,Y+63
++	ldd r23,Y+50
++	ldd r24,Y+51
++	ldd r25,Y+52
+ 	call __nedf2
+ 	cpse r24,__zero_reg__
+ 	rjmp .L2

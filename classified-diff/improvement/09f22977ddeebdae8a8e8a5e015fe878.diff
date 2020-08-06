@@ -1,0 +1,48 @@
+--- 931004-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:46:06.256823335 +0000
++++ 931004-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:46:06.016820931 +0000
+@@ -17,10 +17,10 @@
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	movw r26,r28
+-	adiw r26,5
+-	ld r20,X+
+-	ld r21,X+
++	movw r30,r28
++	adiw r30,5
++	ld r20,Z+
++	ld r21,Z+
+ 	cp __zero_reg__,r20
+ 	cpc __zero_reg__,r21
+ 	brge .L3
+@@ -29,10 +29,10 @@
+ 	ldi r24,lo8(10)
+ 	ldi r25,0
+ .L5:
+-	movw r30,r26
+-	ld r18,Z
+-	ldd r19,Z+1
+-	adiw r26,2
++	movw r26,r30
++	adiw r30,2
++	ld r18,X+
++	ld r19,X
+ 	cp r18,r24
+ 	cpc r19,r25
+ 	brne .L8
+@@ -41,11 +41,10 @@
+ 	cpc r21,r25
+ 	brne .L5
+ .L3:
+-	ld r24,X+
+-	ld r25,X+
+-	ld __tmp_reg__,X+
+-	ld r27,X
+-	mov r26,__tmp_reg__
++	ld r24,Z
++	ldd r25,Z+1
++	ldd r26,Z+2
++	ldd r27,Z+3
+ 	cpi r24,123
+ 	cpc r25,__zero_reg__
+ 	cpc r26,__zero_reg__

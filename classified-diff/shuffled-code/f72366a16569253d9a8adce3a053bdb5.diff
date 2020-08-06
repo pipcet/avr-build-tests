@@ -1,0 +1,82 @@
+--- pr68185.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 15:53:11.373076228 +0000
++++ pr68185.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 15:53:11.237074869 +0000
+@@ -22,32 +22,29 @@
+ 	cpc r19,__zero_reg__
+ 	brne .+2
+ 	rjmp .L2
+-	lds r26,o
+-	lds r27,o+1
++	lds r22,o
++	lds r23,o+1
+ 	lds r30,t
+ 	lds r31,t+1
+ 	lds r21,w
+-.L3:
+-	sbiw r26,0
++	or r22,r23
+ 	breq .L11
+ 	lds r24,e
+ 	lds r25,e+1
+-.L7:
+-	sbiw r24,0
+-	breq .L7
+-	lds r20,b
+-	lds r21,b+1
+-	lds r18,z
+-	lds r19,z+1
+-	lds r24,u
+-	lds r25,u+1
+-.L4:
+-	sbiw r24,0
+-	breq .L4
+-	sts c+1,r21
+-	sts c,r20
+-	sts o+1,r19
+-	sts o,r18
++	or r24,r25
++	breq .L26
++	lds r18,b
++	lds r19,b+1
++	lds r24,z
++	lds r25,z+1
++	lds r20,u
++	lds r21,u+1
++	or r20,r21
++	breq .L27
++	sts c+1,r19
++	sts c,r18
++	sts o+1,r25
++	sts o,r24
+ .L5:
+ 	rjmp .L5
+ .L11:
+@@ -67,7 +64,7 @@
+ .L9:
+ 	subi r18,1
+ 	sbc r19,__zero_reg__
+-	brne .L3
++	brne .L11
+ 	sts d+1,__zero_reg__
+ 	sts d,__zero_reg__
+ 	sts q+1,r25
+@@ -76,12 +73,18 @@
+ 	sts f,r22
+ .L2:
+ 	sbiw r24,1
+-	brne .L23
++	brne .L28
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L23:
++.L27:
++.L20:
++	rjmp .L20
++.L26:
++.L21:
++	rjmp .L21
++.L28:
+ 	call abort
+ 	.size	main, .-main
+ .global	t

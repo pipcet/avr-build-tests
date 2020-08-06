@@ -1,0 +1,31 @@
+--- 20051110-2.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 14:19:37.116564818 +0000
++++ 20051110-2.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 14:19:36.732560506 +0000
+@@ -52,9 +52,10 @@
+ 	lds r23,flag+1
+ 	ldi r21,0
+ 	ldi r20,0
+-	ldi r30,lo8(bytes)
+-	ldi r31,hi8(bytes)
+ .L3:
++	movw r30,r20
++	subi r30,lo8(-(bytes))
++	sbci r31,hi8(-(bytes))
+ 	ori r18,lo8(-128)
+ 	st Z,r18
+ 	cp r22,__zero_reg__
+@@ -62,12 +63,12 @@
+ 	brne .L4
+ 	subi r20,-1
+ 	sbci r21,-1
+-	movw r30,r20
+-	subi r30,lo8(-(bytes))
+-	sbci r31,hi8(-(bytes))
+ .L4:
+ 	mov r18,r24
+ 	andi r18,lo8(127)
++	movw r30,r20
++	subi r30,lo8(-(bytes))
++	sbci r31,hi8(-(bytes))
+ 	st Z,r18
+ 	ldi r19,7
+ 	1:

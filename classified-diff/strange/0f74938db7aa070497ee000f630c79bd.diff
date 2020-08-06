@@ -1,0 +1,17 @@
+DIR 52dba19699db06aab5ee37381a8d2e1c
+--- pr90139.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:00:44.176049904 +0000
++++ pr90139.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:00:44.016048310 +0000
+@@ -34,9 +34,10 @@
+ .L7:
+ 	rjmp .L7
+ .L9:
+-	movw r24,r16
+-	adiw r24,4
+-	movw r14,r24
++	movw r14,r16
++	ldi r24,4
++	add r14,r24
++	adc r15,__zero_reg__
+ .L2:
+ 	movw r30,r16
+ 	ld r24,Z

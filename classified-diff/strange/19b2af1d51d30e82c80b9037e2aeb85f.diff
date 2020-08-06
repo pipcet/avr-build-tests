@@ -1,0 +1,27 @@
+--- pr20466-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:55:23.426395455 +0000
++++ pr20466-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:55:23.266393857 +0000
+@@ -89,10 +89,12 @@
+ 	adiw r24,15
+ 	std Y+6,r25
+ 	std Y+5,r24
+-	sbiw r24,6
++	movw r24,r28
++	adiw r24,9
+ 	std Y+4,r25
+ 	std Y+3,r24
+-	sbiw r24,2
++	movw r24,r28
++	adiw r24,7
+ 	std Y+2,r25
+ 	std Y+1,r24
+ 	movw r14,r28
+@@ -109,7 +111,8 @@
+ 	movw r22,r28
+ 	subi r22,-13
+ 	sbci r23,-1
+-	sbiw r24,2
++	movw r24,r28
++	adiw r24,5
+ 	call f
+ 	ldd r24,Y+15
+ 	ldd r25,Y+16

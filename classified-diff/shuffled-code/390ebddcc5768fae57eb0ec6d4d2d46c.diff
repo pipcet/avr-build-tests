@@ -1,0 +1,24 @@
+--- memset-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:54:36.633928063 +0000
++++ memset-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:54:35.941921150 +0000
+@@ -166,8 +166,8 @@
+ 	movw r20,r16
+ 	movw r24,r14
+ 	call memset
+-	cp r14,r24
+-	cpc r15,r25
++	cp r24,r14
++	cpc r25,r15
+ 	breq .+2
+ 	rjmp .L5
+ 	ldi r30,lo8(u)
+@@ -277,8 +277,8 @@
+ 	ldi r23,0
+ 	movw r24,r14
+ 	call memset
+-	cp r14,r24
+-	cpc r15,r25
++	cp r24,r14
++	cpc r25,r15
+ 	breq .+2
+ 	rjmp .L5
+ 	sbiw r28,0

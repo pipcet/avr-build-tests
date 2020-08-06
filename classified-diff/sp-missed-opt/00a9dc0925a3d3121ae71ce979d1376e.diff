@@ -1,0 +1,35 @@
+--- 20010122-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:12:01.283441181 +0000
++++ 20010122-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:12:01.063439036 +0000
+@@ -364,7 +364,9 @@
+ 	std Y+1,r24
+ 	rcall .
+ 	rcall .
+-	sbiw r24,3
++	in r24,__SP_L__
++	in r25,__SP_H__
++	adiw r24,1
+ 	call test10a
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+@@ -416,7 +418,9 @@
+ 	std Y+1,r24
+ 	rcall .
+ 	rcall .
+-	sbiw r24,3
++	in r24,__SP_L__
++	in r25,__SP_H__
++	adiw r24,1
+ 	call test11a
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+@@ -468,7 +472,9 @@
+ 	std Y+1,r24
+ 	rcall .
+ 	rcall .
+-	sbiw r24,3
++	in r24,__SP_L__
++	in r25,__SP_H__
++	adiw r24,1
+ 	call test12a
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2

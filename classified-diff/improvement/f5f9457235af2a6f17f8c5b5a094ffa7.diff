@@ -1,0 +1,21 @@
+DIR 651bb4c7adfa0d5284de0eebc0f6d565
+--- pr37341.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:02:02.044815069 +0000
++++ pr37341.c.{atmega128}.{3}.{lra}.s	2020-08-06 13:12:05.896698007 +0000
+@@ -62,8 +62,8 @@
+ .L5:
+ 	cpi r20,16
+ 	cpc r21,__zero_reg__
+-	brsh .L13
+ 	ldi r20,lo8(-74)
++	brsh .L13
+ 	mulsu r20,r22
+ 	movw r24,r0
+ 	mul r20,r23
+@@ -101,7 +101,6 @@
+ 	ldi r25,lo8(-1)
+ 	rjmp .L18
+ .L13:
+-	ldi r20,lo8(-74)
+ 	mulsu r20,r22
+ 	movw r24,r0
+ 	mul r20,r23

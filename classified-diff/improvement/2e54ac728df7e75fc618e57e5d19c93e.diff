@@ -1,0 +1,28 @@
+DIR 2a3ccb338d24d62809e7fb606afe52fd
+--- pr87623.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:59:03.903030755 +0000
++++ pr87623.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:59:03.807029759 +0000
+@@ -20,19 +20,18 @@
+ 	sbiw r26,2
+ 	ldd r24,Z+6
+ 	cp r25,r24
+-	breq .L7
+ 	ldi r24,lo8(1)
+-.L5:
++	breq .L6
++.L4:
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret
+-.L7:
+-	ldi r24,lo8(1)
++.L6:
+ 	adiw r26,3
+ 	ld r18,X
+ 	ldd r25,Z+7
+-	cpse r18,r25
+-	rjmp .L5
++	cp r18,r25
++	brne .L4
+ 	ldi r24,0
+ 	ldi r25,0
+ /* epilogue start */

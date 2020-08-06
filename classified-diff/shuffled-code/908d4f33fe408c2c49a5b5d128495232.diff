@@ -1,0 +1,72 @@
+--- 991016-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:50:21.519378305 +0000
++++ 991016-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:50:21.251375625 +0000
+@@ -36,10 +36,14 @@
+ 	st Z,r18
+ 	ldi r24,lo8(1)
+ 	or r18,r19
++.L23:
+ 	breq .L21
+-.L22:
+ 	ldi r24,0
+-	rjmp .L21
++.L21:
++	ldi r25,0
++/* epilogue start */
++	pop r16
++	ret
+ .L2:
+ 	ld r20,Z
+ 	ldd r21,Z+1
+@@ -57,15 +61,11 @@
+ 	std Z+2,r22
+ 	std Z+3,r23
+ 	ldi r24,lo8(1)
+-	or r20,r21
+-	or r20,r22
+-	or r20,r23
+-	brne .L22
+-.L21:
+-	ldi r25,0
+-/* epilogue start */
+-	pop r16
+-	ret
++	cp r20,__zero_reg__
++	cpc r21,__zero_reg__
++	cpc r22,__zero_reg__
++	cpc r23,__zero_reg__
++	rjmp .L23
+ .L3:
+ 	ld r18,Z
+ 	ldd r19,Z+1
+@@ -161,10 +161,10 @@
+ 	ldd r24,Y+13
+ 	ldd r25,Y+14
+ 	sbiw r24,32
+-	breq .L24
+-.L25:
++	breq .L25
++.L26:
+ 	call abort
+-.L24:
++.L25:
+ 	ldd r24,Y+9
+ 	ldd r25,Y+10
+ 	ldd r26,Y+11
+@@ -172,7 +172,7 @@
+ 	sbiw r24,32
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__
+-	brne .L25
++	brne .L26
+ 	ldd r18,Y+1
+ 	ldd r19,Y+2
+ 	ldd r20,Y+3
+@@ -183,7 +183,7 @@
+ 	ldd r25,Y+8
+ 	ldi r26,lo8(32)
+ 	call __cmpdi2_s8
+-	brne .L25
++	brne .L26
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit

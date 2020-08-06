@@ -1,0 +1,26 @@
+DIR 7d03994c7107eed56baa32e63898d606
+--- pr14730.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 16:17:22.072931853 +0000
++++ pr14730.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 16:17:22.508935932 +0000
+@@ -22,16 +22,16 @@
+ 	breq .L9
+ 	ldi r24,lo8(1)
+ 	cpi r25,lo8(7)
++.L10:
+ 	brne .L5
+ .L9:
+ 	ldi r24,0
+-	rjmp .L5
+-.L2:
+-	ldi r24,lo8(1)
+-	cpi r25,lo8(14)
+-	breq .L9
+ .L5:
+ 	ldi r25,0
+ 	ret
++.L2:
++	ldi r24,lo8(1)
++	cpi r25,lo8(14)
++	rjmp .L10
+ 	.size	t, .-t
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"

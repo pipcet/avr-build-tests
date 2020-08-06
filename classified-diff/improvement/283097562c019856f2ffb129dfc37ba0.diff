@@ -1,0 +1,19 @@
+DIR d369818ea944a3de3846d8ec53b25fbe
+--- 20000910-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 18:55:18.016552144 +0000
++++ 20000910-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 18:55:17.796549578 +0000
+@@ -27,14 +27,12 @@
+ 	lds r25,list+2+1
+ 	call strchr
+ 	or r24,r25
+-	breq .L6
+ 	ldi r25,0
+ 	ldi r24,0
++	breq .L6
+ /* epilogue start */
+ 	ret
+ .L6:
+-	ldi r25,0
+-	ldi r24,0
+ 	call exit
+ .L2:
+ 	call abort

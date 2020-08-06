@@ -1,0 +1,159 @@
+--- pr83362.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:53:13.757100050 +0000
++++ pr83362.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:53:13.609098571 +0000
+@@ -20,14 +20,24 @@
+ 	push r13
+ 	push r14
+ 	push r15
++	push r28
++	push r29
++	rcall .
++	rcall .
++	in r28,__SP_L__
++	in r29,__SP_H__
+ /* prologue: function */
+-/* frame size = 0 */
+-/* stack size = 12 */
+-.L__stack_usage = 12
+-	lds r19,e
+-	lds r18,e+1
+-	lds r24,e+2
+-	lds r25,e+3
++/* frame size = 4 */
++/* stack size = 18 */
++.L__stack_usage = 18
++	lds r18,e
++	lds r19,e+1
++	lds r20,e+2
++	lds r21,e+3
++	std Y+1,r18
++	std Y+2,r19
++	std Y+3,r20
++	std Y+4,r21
+ 	lds r8,b
+ 	lds r9,b+1
+ 	lds r10,b+2
+@@ -38,56 +48,56 @@
+ 	lds r15,a+3
+ 	clr r4
+ 	dec r4
+-	ldi r20,lo8(15)
+-	mov r5,r20
++	ldi r24,lo8(15)
++	mov r5,r24
+ 	mov r6,__zero_reg__
+ 	mov r7,__zero_reg__
+-	rjmp .L4
+-.L8:
+-	mov r22,r19
+-	mov r23,r18
+-	movw r20,r6
+-	movw r18,r4
+-	call __udivmodsi4
+-	movw r22,r20
+-	movw r20,r18
+-	subi r20,3
+-	sbc r21,__zero_reg__
+-	sbc r22,__zero_reg__
+-	sbc r23,__zero_reg__
+-.L3:
+-	mov r19,r20
+-	mov r18,r21
+-	movw r24,r22
+-	cpi r20,-34
+-	ldi r30,87
+-	cpc r21,r30
+-	ldi r30,1
+-	cpc r22,r30
+-	cpc r23,__zero_reg__
+-	brlo .L7
+ .L4:
+ 	cp r12,r8
+ 	cpc r13,r9
+ 	cpc r14,r10
+ 	cpc r15,r11
+-	brsh .L8
+-	ldi r20,0
+-	ldi r21,0
+-	ldi r22,0
+-	ldi r23,0
+-	rjmp .L3
+-.L7:
++	brlo .L2
++	ldd r22,Y+1
++	ldd r23,Y+2
++	ldd r24,Y+3
++	ldd r25,Y+4
++	movw r20,r6
++	movw r18,r4
++	call __udivmodsi4
++	movw r24,r20
++	movw r22,r18
++	subi r22,3
++	sbc r23,__zero_reg__
++	sbc r24,__zero_reg__
++	sbc r25,__zero_reg__
++	std Y+1,r22
++	std Y+2,r23
++	std Y+3,r24
++	std Y+4,r25
++	cpi r22,-34
++	ldi r19,87
++	cpc r23,r19
++	ldi r19,1
++	cpc r24,r19
++	cpc r25,__zero_reg__
++	brsh .L4
++.L6:
+ 	sts d,__zero_reg__
+ 	sts d+1,__zero_reg__
+ 	sts d+2,__zero_reg__
+ 	sts d+3,__zero_reg__
+-	sts e,r20
+-	sts e+1,r21
+-	sts e+2,r22
+-	sts e+3,r23
+-	movw r22,r20
++	sts e,r22
++	sts e+1,r23
++	sts e+2,r24
++	sts e+3,r25
+ /* epilogue start */
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop r29
++	pop r28
+ 	pop r15
+ 	pop r14
+ 	pop r13
+@@ -101,6 +111,11 @@
+ 	pop r5
+ 	pop r4
+ 	ret
++.L2:
++	ldi r22,0
++	ldi r23,0
++	movw r24,r22
++	rjmp .L6
+ 	.size	foo, .-foo
+ 	.section	.text.startup,"ax",@progbits
+ .global	main
+@@ -123,7 +138,7 @@
+ 	cpc r23,__zero_reg__
+ 	cpc r24,__zero_reg__
+ 	cpc r25,__zero_reg__
+-	brne .L11
++	brne .L10
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+@@ -132,7 +147,7 @@
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+ 	ret
+-.L11:
++.L10:
+ 	call abort
+ 	.size	main, .-main
+ .global	c

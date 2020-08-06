@@ -1,0 +1,15 @@
+DIR 0f65f4374e556df2f76389620dbbfdf5
+--- pr41463.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:58:12.482490980 +0000
++++ pr41463.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:08:52.634892619 +0000
+@@ -14,9 +14,9 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	movw r26,r24
++	lsl r22
++	rol r23
+ 	movw r30,r22
+-	lsl r30
+-	rol r31
+ 	add r30,r26
+ 	adc r31,r27
+ 	std Z+17,__zero_reg__

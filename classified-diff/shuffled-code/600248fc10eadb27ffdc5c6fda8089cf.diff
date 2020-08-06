@@ -1,0 +1,17 @@
+--- va-arg-10.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:55:18.086342119 +0000
++++ va-arg-10.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:55:17.926340521 +0000
+@@ -102,11 +102,11 @@
+ 	ret
+ .L9:
+ 	movw r30,r14
++	ldi r24,2
++	add r14,r24
++	adc r15,__zero_reg__
+ 	ld r24,Z
+ 	ldd r25,Z+1
+-	ldi r31,2
+-	add r14,r31
+-	adc r15,__zero_reg__
+ 	call to_hex
+ 	mov __tmp_reg__,r28
+ 	lsl r0

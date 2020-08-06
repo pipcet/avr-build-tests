@@ -1,0 +1,30 @@
+--- 920428-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 14:12:17.439598736 +0000
++++ 920428-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 14:12:17.115595578 +0000
+@@ -89,11 +89,11 @@
+ 	adiw r24,28
+ 	std Y+8,r25
+ 	std Y+7,r24
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cp __zero_reg__,r18
+ 	cpc __zero_reg__,r19
+ 	brlt .L9
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ .L6:
+ /* epilogue start */
+ 	adiw r28,8
+@@ -122,8 +122,11 @@
+ 	pop r2
+ 	ret
+ .L9:
+-	sbiw r24,27
+-	movw r2,r24
++	clr r2
++	inc r2
++	mov r3,__zero_reg__
++	add r2,r28
++	adc r3,r29
+ 	movw r24,r18
+ 	call f.0
+ 	rjmp .L6

@@ -1,0 +1,32 @@
+--- pr61673.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 15:59:11.796913570 +0000
++++ pr61673.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 15:59:11.576911107 +0000
+@@ -31,8 +31,12 @@
+ .L__stack_usage = 0
+ 	movw r30,r24
+ 	ld r24,Z
+-	cpi r24,lo8(127)
+-	breq .L10
++	mov r18,r24
++	mov __tmp_reg__,r24
++	lsl r0
++	sbc r19,r19
++	cpi r18,-128
++	cpc r19,__zero_reg__
+ 	brlo .L10
+ 	sts e,r24
+ .L10:
+@@ -47,8 +51,12 @@
+ .L__stack_usage = 0
+ 	movw r30,r24
+ 	ld r24,Z
+-	cpi r24,lo8(127)
+-	breq .L11
++	mov r18,r24
++	mov __tmp_reg__,r24
++	lsl r0
++	sbc r19,r19
++	cpi r18,-128
++	cpc r19,__zero_reg__
+ 	brlo .L11
+ 	sts e,r24
+ .L11:

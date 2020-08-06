@@ -1,0 +1,16 @@
+DIR 31392793f5457ec409aaa2015acb5a62
+--- pr66556.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:46:20.933267398 +0000
++++ pr66556.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 18:46:20.765266253 +0000
+@@ -88,10 +88,11 @@
+ 	andi r24,lo8(3)
+ 	lsl r24
+ 	or r24,r25
++	ldi r25,0
+ 	ldi r18,lo8(1)
+ 	ldi r19,0
+ 	cp r24,r20
+-	cpc __zero_reg__,r21
++	cpc r25,r21
+ 	brge .L6
+ 	ldi r19,0
+ 	ldi r18,0

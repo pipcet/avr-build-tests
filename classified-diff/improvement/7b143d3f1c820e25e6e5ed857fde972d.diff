@@ -1,0 +1,71 @@
+--- string-opt-5.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 15:55:53.718697997 +0000
++++ string-opt-5.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 15:55:53.206692884 +0000
+@@ -323,8 +323,7 @@
+ 	call memset
+ 	subi r24,lo8(buf+3)
+ 	sbci r25,hi8(buf+3)
+-	breq .+2
+-	rjmp .L3
++	brne .L3
+ 	ldi r20,lo8(11)
+ 	ldi r21,0
+ 	ldi r22,lo8(.LC8)
+@@ -333,8 +332,7 @@
+ 	ldi r25,hi8(buf)
+ 	call memcmp
+ 	or r24,r25
+-	breq .+2
+-	rjmp .L3
++	brne .L3
+ 	ldi r24,lo8(5)
+ 	ldi r25,0
+ 	sts y+1,r25
+@@ -356,12 +354,20 @@
+ 	cpi r24,45
+ 	sbci r25,45
+ 	breq .L11
+-.L8:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L9:
++.L3:
++	call abort
++.L11:
++	lds r24,buf+10
++	lds r25,buf+10+1
++	sbiw r24,45
++	brne .L3
++	lds r24,buf+12
++	lds r25,buf+12+1
+ 	or r24,r25
+ 	brne .L3
++	lds r24,buf+14
++	cpse r24,__zero_reg__
++	rjmp .L3
+ 	ldi r24,lo8(15)
+ 	ldi r25,0
+ 	sts x+1,r25
+@@ -394,23 +400,6 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ 	ret
+-.L11:
+-	lds r24,buf+10
+-	lds r25,buf+10+1
+-	sbiw r24,45
+-	brne .L8
+-	lds r24,buf+12
+-	lds r25,buf+12+1
+-	or r24,r25
+-	brne .L8
+-	lds r24,buf+14
+-	cpse r24,__zero_reg__
+-	rjmp .L8
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L9
+-.L3:
+-	call abort
+ 	.size	main, .-main
+ .global	buf
+ 	.section .bss

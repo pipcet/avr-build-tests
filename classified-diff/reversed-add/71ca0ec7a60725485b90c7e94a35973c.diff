@@ -1,0 +1,16 @@
+--- 20170401-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:07:20.732698589 +0000
++++ 20170401-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:07:20.504696354 +0000
+@@ -44,9 +44,10 @@
+ 	std Y+3,r24
+ 	std Y+2,r25
+ 	std Y+1,r24
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	movw r24,r28
+ 	adiw r24,3
+ 	call adjust_xy

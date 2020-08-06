@@ -1,0 +1,12 @@
+DIR 87d9358b3e4122d46b36243cd1b13706
+--- 920501-8.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 19:03:32.545680140 +0000
++++ 920501-8.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 19:03:32.369678480 +0000
+@@ -98,6 +98,8 @@
+ 	push r25
+ 	push r24
+ 	call sprintf
++	in r24,__SP_L__
++	in r25,__SP_H__
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29

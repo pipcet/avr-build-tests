@@ -1,0 +1,55 @@
+--- 920501-9.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:19:45.888663210 +0000
++++ 920501-9.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:19:45.644660476 +0000
+@@ -224,9 +224,10 @@
+ 	push r19
+ 	push r18
+ 	call sprintf
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	ldi r24,lo8(.LC2)
+ 	ldi r25,hi8(.LC2)
+ 	call strcmp
+@@ -257,9 +258,10 @@
+ 	push r25
+ 	push r24
+ 	call sprintf
+-	movw r22,r28
+-	subi r22,-1
+-	sbci r23,-1
++	ldi r22,lo8(1)
++	ldi r23,0
++	add r22,r28
++	adc r23,r29
+ 	ldi r24,lo8(.LC3)
+ 	ldi r25,hi8(.LC3)
+ 	call strcmp
+@@ -270,9 +272,10 @@
+ 	out __SP_L__,r28
+ 	or r24,r25
+ 	brne .L11
+-	movw r16,r28
+-	subi r16,-1
+-	sbci r17,-1
++	ldi r16,lo8(1)
++	ldi r17,0
++	add r16,r28
++	adc r17,r29
+ 	ldi r18,lo8(120)
+ 	ldi r19,lo8(86)
+ 	ldi r20,lo8(52)
+@@ -288,6 +291,10 @@
+ 	call strcmp
+ 	or r24,r25
+ 	brne .L11
++	ldi r16,lo8(1)
++	ldi r17,0
++	add r16,r28
++	adc r17,r29
+ 	ldi r18,lo8(-1)
+ 	ldi r19,lo8(-1)
+ 	ldi r20,lo8(-1)

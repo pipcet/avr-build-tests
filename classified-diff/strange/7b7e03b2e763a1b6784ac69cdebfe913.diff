@@ -1,0 +1,18 @@
+DIR 7476fe8273a2e8247b69456da5a091e9
+--- pr67816.c.{atmega128}.{3}.{vanilla}.s	2020-08-05 19:02:49.109267935 +0000
++++ pr67816.c.{atmega128}.{3}.{ccmode}.s	2020-08-05 19:02:48.889265834 +0000
+@@ -15,9 +15,11 @@
+ .L__stack_usage = 0
+ 	lds r24,e
+ 	lds r25,e+1
+-.L2:
+-	sbiw r24,0
+-	breq .L2
++	or r24,r25
++	brne .L6
++.L5:
++	rjmp .L5
++.L6:
+ .L3:
+ 	rjmp .L3
+ 	.size	fn1, .-fn1

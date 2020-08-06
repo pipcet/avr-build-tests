@@ -1,0 +1,15 @@
+--- strct-varg-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 14:21:36.465888753 +0000
++++ strct-varg-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-05 14:21:36.181885638 +0000
+@@ -17,8 +17,10 @@
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+-	movw r30,r28
+-	adiw r30,5
++	ldi r30,lo8(5)
++	ldi r31,0
++	add r30,r28
++	adc r31,r29
+ 	ld r24,Z+
+ 	ld r25,Z+
+ 	sbiw r24,2

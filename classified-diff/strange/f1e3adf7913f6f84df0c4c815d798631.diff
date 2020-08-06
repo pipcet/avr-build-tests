@@ -1,0 +1,24 @@
+DIR 0449d0e9cce87ade6d7e27deca4eda54
+--- vla-const-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-05 18:57:30.150036720 +0000
++++ vla-const-1.c.{atmega128}.{s}.{lra}.s	2020-08-06 13:08:24.606625693 +0000
+@@ -18,14 +18,16 @@
+ /* frame size = 2 */
+ /* stack size = 4 */
+ .L__stack_usage = 4
+-	in r18,__SP_L__
+-	in r19,__SP_H__
+-	std Y+2,r19
+-	std Y+1,r18
++	in r24,__SP_L__
++	in r25,__SP_H__
++	std Y+2,r25
++	std Y+1,r24
+ 	ldi r24,lo8(a)
+ 	ldi r25,hi8(a)
+ 	lsl r24
+ 	rol r25
++	in r18,__SP_L__
++	in r19,__SP_H__
+ 	sub r18,r24
+ 	sbc r19,r25
+ 	in __tmp_reg__,__SREG__

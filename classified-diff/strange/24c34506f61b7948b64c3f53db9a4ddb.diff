@@ -1,0 +1,159 @@
+DIR 6dd88391bdb8052c35116969e5b104b6
+--- pr69691.c.{atmega128}.{2}.{vanilla}.s	2020-08-05 18:49:52.080282472 +0000
++++ pr69691.c.{atmega128}.{2}.{ccmode}.s	2020-08-05 18:49:50.780263122 +0000
+@@ -114,16 +114,17 @@
+ 	push r29
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-	subi r29,2
++	subi r28,1
++	sbci r29,2
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ /* prologue: function */
+-/* frame size = 512 */
+-/* stack size = 530 */
+-.L__stack_usage = 530
++/* frame size = 513 */
++/* stack size = 531 */
++.L__stack_usage = 531
+ 	movw r30,r24
+ 	lds r12,r2
+ 	lds r13,r2+1
+@@ -142,27 +143,32 @@
+ 	rjmp .L14
+ 	movw r24,r30
+ 	adiw r24,2
+-	subi r28,lo8(-511)
+-	sbci r29,hi8(-511)
++	subi r28,lo8(-512)
++	sbci r29,hi8(-512)
+ 	std Y+1,r25
+ 	st Y,r24
+-	subi r28,lo8(511)
+-	sbci r29,hi8(511)
+-	movw r30,r28
+-	subi r30,11
+-	sbci r31,-2
+-	movw r8,r30
++	subi r28,lo8(512)
++	sbci r29,hi8(512)
++	movw r8,r28
++	ldi r25,11
++	sub r8,r25
++	ldi r25,-2
++	sbc r9,r25
+ 	ldi r25,lo8(10)
+ 	mov r3,r25
+-	ldi r18,lo8(10)
+-	mov r2,r18
++	mov r2,r8
++	subi r28,lo8(-511)
++	sbci r29,hi8(-511)
++	st Y,r9
++	subi r28,lo8(511)
++	sbci r29,hi8(511)
+ .L24:
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call strcpy
+-	movw r24,r28
+-	adiw r24,1
+-	movw r14,r24
++	movw r30,r28
++	adiw r30,1
++	movw r14,r30
+ 	ldi r22,lo8(32)
+ 	ldi r23,0
+ 	movw r24,r14
+@@ -240,7 +246,12 @@
+ 	brlt .L21
+ .L39:
+ 	ldi r24,lo8(10)
+-	movw r30,r8
++	mov r30,r2
++	subi r28,lo8(-511)
++	sbci r29,hi8(-511)
++	ld r31,Y
++	subi r28,lo8(511)
++	sbci r29,hi8(511)
+ 	movw r26,r12
+ 	0:
+ 	ld r0,Z+
+@@ -286,26 +297,26 @@
+ 	breq .+2
+ 	rjmp .L26
+ 	movw r30,r12
+-	mov r18,r2
++	ldi r18,lo8(10)
+ 	0:
+ 	st Z+,__zero_reg__
+ 	dec r18
+ 	brne 0b
+ .L22:
+-	subi r28,lo8(-511)
+-	sbci r29,hi8(-511)
++	subi r28,lo8(-512)
++	sbci r29,hi8(-512)
+ 	ld r30,Y
+ 	ldd r31,Y+1
+-	subi r28,lo8(511)
+-	sbci r29,hi8(511)
++	subi r28,lo8(512)
++	sbci r29,hi8(512)
+ 	ld r22,Z+
+ 	ld r23,Z+
+-	subi r28,lo8(-511)
+-	sbci r29,hi8(-511)
++	subi r28,lo8(-512)
++	sbci r29,hi8(-512)
+ 	std Y+1,r31
+ 	st Y,r30
+-	subi r28,lo8(511)
+-	sbci r29,hi8(511)
++	subi r28,lo8(512)
++	sbci r29,hi8(512)
+ 	cp r22,__zero_reg__
+ 	cpc r23,__zero_reg__
+ 	breq .L14
+@@ -337,7 +348,8 @@
+ 	rjmp .L25
+ .L14:
+ /* epilogue start */
+-	subi r29,-2
++	subi r28,-1
++	sbci r29,-3
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29
+@@ -467,9 +479,11 @@
+ 	cpc r17,__zero_reg__
+ 	brne .+2
+ 	rjmp .L43
+-	movw r24,r28
+-	adiw r24,1
+-	movw r10,r24
++	clr r10
++	inc r10
++	mov r11,__zero_reg__
++	add r10,r28
++	adc r11,r29
+ 	ldi r24,lo8(96)
+ 	mov r13,__zero_reg__
+ 	mov r12,__zero_reg__
+@@ -533,10 +547,8 @@
+ 	brlt .L43
+ 	movw r30,r28
+ 	adiw r30,4
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	add r24,r28
+-	adc r25,r29
++	movw r24,r28
++	adiw r24,1
+ 	add r4,r24
+ 	adc r5,r25
+ .L54:
