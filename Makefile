@@ -37,6 +37,7 @@ clean:
 
 realclean: clean
 	rm -f differences.diff
+	rm -f status-differences.diff
 	rm -f diff/*
 	rm -f diff-lra/*
 
