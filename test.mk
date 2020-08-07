@@ -58,6 +58,8 @@ $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmo
 
 $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{vanilla}.exe: %.c ; $${VANILLA_GCC} $(DUMP_RTL) -dumpbase $$@ -O$(o) -mmcu=$(m) -o $$@ $$< 2> $$@.msg)))
 
+$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{lra}.exe: %.c ; $${LRA_GCC} $(DUMP_RTL) -dumpbase $$@ -O$(o) -mmcu=$(m) -o $$@ $$< 2> $$@.msg)))
+
 # %.c.{ccmode}.exe.done: %.c $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.exe))
 #	touch $@
 
@@ -65,12 +67,15 @@ $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{vani
 #	touch $@
 
 %.exe.status: %.exe
-	(timeout 10 simulavr -B __stop_program -B abort -d atmega32 --file $< -v && echo success || echo aborted) > $@ 2>&1
+	(timeout 10 simulavr -B __stop_program -B abort -d atmega128 --file $< -v && echo success || echo aborted) > $@ 2>&1
 
-%.status.diff: %.{vanilla}.exe.status %.{ccmode}.exe.status
+%.status.exit: %.status
+	egrep '^MESSAGE Found EP ' $< > $@ || true
+
+%.status.exit.diff: %.{vanilla}.exe.status.exit %.{ccmode}.exe.status.exit
 	diff -u $^ > $@ || true
 
-%.c.exe.done: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.exe.status %.c.{$(m)}.{$(o)}.{vanilla}.exe.status %.c.{$(m)}.{$(o)}.status.diff))
+%.c.exe.done: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.exe.status.exit %.c.{$(m)}.{$(o)}.{vanilla}.exe.status.exit %.c.{$(m)}.{$(o)}.{lra}.exe.status.exit %.c.{$(m)}.{$(o)}.status.exit.diff))
 	touch $@
 
 %.c.execute: %.c.exe.done
