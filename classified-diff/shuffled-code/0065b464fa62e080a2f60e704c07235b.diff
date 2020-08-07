@@ -1,0 +1,76 @@
+DIR 0f9356db3d30a5518f0dfd5216ee1216
+--- pr68185.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 12:00:08.905888586 +0000
++++ pr68185.c.{atmega128}.{s}.{lra}.s	2020-08-07 12:00:10.569949797 +0000
+@@ -16,7 +16,7 @@
+ .L__stack_usage = 0
+ 	lds r12,t
+ 	lds r13,t+1
+-	lds r27,w
++	lds r11,w
+ 	lds r30,f
+ 	lds r31,f+1
+ 	lds r24,q
+@@ -25,18 +25,18 @@
+ 	lds r21,d+1
+ 	lds r14,e
+ 	lds r15,e+1
+-	lds r11,b
+-	lds r10,b+1
++	lds r10,b
++	lds r9,b+1
+ 	lds r23,c
+ 	lds r22,c+1
+-	lds r9,z
+-	lds r8,z+1
++	lds r8,z
++	lds r7,z+1
+ 	lds r18,o
+ 	lds r19,o+1
+ 	lds r16,u
+ 	lds r17,u+1
+-	lds r28,a
+-	lds r29,a+1
++	lds r26,a
++	lds r27,a+1
+ .L2:
+ 	cp r20,__zero_reg__
+ 	cpc r21,__zero_reg__
+@@ -55,15 +55,16 @@
+ 	breq .L9
+ 	call abort
+ .L3:
+-	sbiw r28,0
++	sbiw r26,0
+ 	brne .L3
+ .L4:
+ 	cp r16,__zero_reg__
+ 	cpc r17,__zero_reg__
+ 	brne .L3
+-	mov r18,r9
+-	mov r19,r8
+-	movw r22,r10
++	mov r18,r8
++	mov r19,r7
++	mov r23,r10
++	mov r22,r9
+ .L5:
+ 	cp r14,__zero_reg__
+ 	cpc r15,__zero_reg__
+@@ -75,13 +76,13 @@
+ 	cp __zero_reg__,r12
+ 	cpc __zero_reg__,r13
+ 	brlt .L6
+-	mov r26,r27
++	mov r29,r11
+ .L6:
+-	mov r30,r26
+-	mov __tmp_reg__,r26
++	mov r30,r29
++	mov __tmp_reg__,r29
+ 	lsl r0
+ 	sbc r31,r31
+-	tst r26
++	tst r29
+ 	breq .L7
+ 	ldi r24,lo8(1)
+ 	ldi r25,0

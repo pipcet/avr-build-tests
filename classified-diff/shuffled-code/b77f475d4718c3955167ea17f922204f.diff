@@ -1,0 +1,15 @@
+DIR 16acf63ec1ecfdce032d7df19705ed07
+--- pr57875.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 12:00:34.210819434 +0000
++++ pr57875.c.{atmega128}.{3}.{lra}.s	2020-08-07 12:00:35.482866228 +0000
+@@ -43,9 +43,9 @@
+ 	ldi r21,0
+ 	lsl r20
+ 	rol r21
++	subi r20,lo8(-(a))
++	sbci r21,hi8(-(a))
+ 	movw r30,r20
+-	subi r30,lo8(-(a))
+-	sbci r31,hi8(-(a))
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	sts b+1,r25

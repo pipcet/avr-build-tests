@@ -1,0 +1,12 @@
+DIR 1430a06f9d36532171de06195524312f
+--- loop-8.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 12:00:21.162339434 +0000
++++ loop-8.c.{atmega128}.{3}.{lra}.s	2020-08-07 12:00:22.486388140 +0000
+@@ -40,8 +40,6 @@
+ main:
+ 	rcall .
+ 	rcall .
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 4 */
+ /* stack size = 4 */

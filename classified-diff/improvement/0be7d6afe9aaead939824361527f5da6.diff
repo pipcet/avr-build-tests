@@ -1,0 +1,50 @@
+DIR 245d4537d45cfd210b5eaa16a3626d1c
+--- 20030717-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 12:01:26.604746936 +0000
++++ 20030717-1.c.{atmega128}.{3}.{lra}.s	2020-08-07 12:01:28.468815516 +0000
+@@ -17,8 +17,8 @@
+ 	push r13
+ 	push r14
+ 	push r15
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 10 */
+@@ -30,10 +30,9 @@
+ 	ld r21,X
+ 	sbiw r26,12+1
+ 	ldd r24,Z+1
+-	mov r28,r24
+-	lsr r28
+-	ldi r24,0
+-	mov r29,r24
++	lsr r24
++	mov r16,r24
++	ldi r17,0
+ 	ldd r22,Z+2
+ 	ldd r23,Z+3
+ 	movw r30,r20
+@@ -123,15 +122,15 @@
+ 	rol r19
+ 	add r26,r18
+ 	adc r27,r19
+-	add r28,r22
+-	adc r29,r23
++	add r16,r22
++	adc r17,r23
+ 	adiw r26,6+1
+-	st X,r29
+-	st -X,r28
++	st X,r17
++	st -X,r16
+ 	sbiw r26,6
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	pop r15
+ 	pop r14
+ 	pop r13

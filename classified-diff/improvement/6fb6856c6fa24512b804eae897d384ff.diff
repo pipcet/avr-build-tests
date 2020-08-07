@@ -1,0 +1,30 @@
+DIR e920f247a0f8659c7c4265dd92915759
+--- sync-3.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 20:48:06.112451469 +0000
++++ sync-3.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 20:48:07.576467013 +0000
+@@ -1063,20 +1063,18 @@
+ /* stack size = 72 */
+ .L__stack_usage = 72
+ 	ldi r22,lo8(-1)
+-	ldi r24,lo8(67)
+-	ldi r25,0
+-	add r24,r28
+-	adc r25,r29
++	movw r24,r28
++	subi r24,-67
++	sbci r25,-1
+ 	adiw r24,1
+ 	call __sync_lock_test_and_set_1
+ 	adiw r28,68-63
+ 	std Y+63,r24
+ 	sbiw r28,68-63
+ 	ldi r22,lo8(-1)
+-	ldi r24,lo8(65)
+-	ldi r25,0
+-	add r24,r28
+-	adc r25,r29
++	movw r24,r28
++	subi r24,-65
++	sbci r25,-1
+ 	adiw r24,1
+ 	call __sync_lock_test_and_set_1
+ 	adiw r28,66-63

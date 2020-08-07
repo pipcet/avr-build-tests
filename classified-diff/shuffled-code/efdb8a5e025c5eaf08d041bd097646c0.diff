@@ -1,0 +1,30 @@
+DIR f4d5d0c0671be202bc241807c243e80b
+--- s.c.{atmega128}.{3}.{vanilla}.s	2020-08-06 20:48:55.900975085 +0000
++++ s.c.{atmega128}.{3}.{ccmode}.s	2020-08-06 20:48:56.344979710 +0000
+@@ -50,9 +50,9 @@
+ 	breq .L2
+ 	cp r10,r8
+ 	cpc r11,r9
++	ldi r18,lo8(12)
+ 	brlt .L7
+ .L5:
+-	ldi r18,lo8(12)
+ 	movw r30,r28
+ 	adiw r30,27
+ 	movw r26,r24
+@@ -83,7 +83,6 @@
+ 	pop r8
+ 	ret
+ .L7:
+-	ldi r18,lo8(12)
+ 	movw r30,r28
+ 	adiw r30,1
+ 	movw r26,r24
+@@ -110,6 +109,7 @@
+ 	std Y+31,r20
+ 	std Y+34,r19
+ 	std Y+33,r18
++	ldi r18,lo8(12)
+ 	rjmp .L5
+ 	.size	structret, .-structret
+ .global	s2

@@ -1,0 +1,43 @@
+DIR 2d1d80522d0da49b5629e83e864e0ed0
+--- 20011008-3.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 12:02:26.062934529 +0000
++++ 20011008-3.c.{atmega128}.{2}.{lra}.s	2020-08-07 12:02:27.742996344 +0000
+@@ -21,15 +21,15 @@
+ .global	__db_txnlist_lsnadd
+ 	.type	__db_txnlist_lsnadd, @function
+ __db_txnlist_lsnadd:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r30,r24
+ 	movw r26,r22
+-	movw r28,r20
++	movw r16,r20
+ 	andi r18,1
+ 	clr r19
+ 	ldi r21,0
+@@ -62,13 +62,14 @@
+ 	ldd r21,Z+1
+ 	ldd r22,Z+2
+ 	ldd r23,Z+3
+-	st Y,r20
+-	std Y+1,r21
+-	std Y+2,r22
+-	std Y+3,r23
++	movw r30,r16
++	st Z,r20
++	std Z+1,r21
++	std Z+2,r22
++	std Z+3,r23
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ 	.size	__db_txnlist_lsnadd, .-__db_txnlist_lsnadd
+ 	.section	.text.startup,"ax",@progbits

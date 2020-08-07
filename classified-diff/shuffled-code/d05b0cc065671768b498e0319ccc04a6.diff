@@ -1,0 +1,19 @@
+DIR 187ffeb5b92d7e11817c9262292789d8
+--- loop-2b.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 12:00:41.083072243 +0000
++++ loop-2b.c.{atmega128}.{2}.{lra}.s	2020-08-07 12:00:42.431121833 +0000
+@@ -14,11 +14,11 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	movw r18,r24
+-	cpi r24,-1
+-	ldi r20,127
+-	cpc r25,r20
++	cpi r18,-1
++	ldi r24,127
++	cpc r19,r24
+ 	breq .L3
+-	movw r30,r24
++	movw r30,r18
+ 	lsl r30
+ 	rol r31
+ 	subi r30,lo8(-(a))

@@ -1,0 +1,17 @@
+DIR f39866a7171b86682169ced697d766dd
+--- 950719-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 20:48:49.440907711 +0000
++++ 950719-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 20:48:49.836911847 +0000
+@@ -31,10 +31,9 @@
+ 	mul r25,r22
+ 	add r19,r0
+ 	clr r1
+-	ldi r22,lo8(3)
+-	ldi r23,0
+-	add r22,r28
+-	adc r23,r29
++	movw r22,r28
++	subi r22,-3
++	sbci r23,-1
+ 	add r22,r18
+ 	adc r23,r19
+ 	call g

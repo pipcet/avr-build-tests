@@ -1,0 +1,59 @@
+DIR 008797a81000b1f2a9ec99a1d6e38be3
+--- pr20527-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 11:59:35.956676654 +0000
++++ pr20527-1.c.{atmega128}.{3}.{lra}.s	2020-08-07 11:59:37.516734033 +0000
+@@ -24,34 +24,34 @@
+ /* stack size = 10 */
+ .L__stack_usage = 10
+ 	movw r30,r24
++	movw r12,r22
+ 	movw r24,r18
+ 	movw r26,r20
+-	movw r8,r14
+-	movw r10,r16
+-	cp r8,r24
+-	cpc r9,r25
+-	cpc r10,r26
+-	cpc r11,r27
++	movw r20,r14
++	movw r22,r16
++	cp r20,r24
++	cpc r21,r25
++	cpc r22,r26
++	cpc r23,r27
+ 	brlt .L1
+-	movw r20,r18
++	lsl r18
++	rol r19
++	lsl r18
++	rol r19
++	movw r24,r12
++	add r24,r18
++	adc r25,r19
++	add r30,r18
++	adc r31,r19
++	movw r18,r12
++	subi r18,-4
++	sbci r19,-1
+ 	lsl r20
+ 	rol r21
+ 	lsl r20
+ 	rol r21
+-	movw r24,r22
+-	add r24,r20
+-	adc r25,r21
+-	add r30,r20
+-	adc r31,r21
+-	movw r18,r22
+-	subi r18,-4
+-	sbci r19,-1
+-	lsl r8
+-	rol r9
+-	lsl r8
+-	rol r9
+-	add r18,r8
+-	adc r19,r9
++	add r18,r20
++	adc r19,r21
+ 	mov r12,__zero_reg__
+ 	mov r13,__zero_reg__
+ 	movw r14,r12

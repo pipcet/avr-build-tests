@@ -1,0 +1,25 @@
+DIR 0e1b99f290c323efb5528a465aeb187a
+--- pr27073.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 12:00:05.205752481 +0000
++++ pr27073.c.{atmega128}.{2}.{lra}.s	2020-08-07 12:00:06.793810896 +0000
+@@ -129,8 +129,6 @@
+ 	ldi r20,lo8(5)
+ 	mov r14,r20
+ 	mov r15,__zero_reg__
+-	ldi r21,lo8(100)
+-	mov r13,r21
+ .L11:
+ 	ld r16,Z+
+ 	ld r17,Z+
+@@ -138,9 +136,10 @@
+ 	movw r22,r14
+ 	call __divmodhi4
+ 	adiw r24,1
+-	mul r13,r24
++	ldi r22,lo8(100)
++	mul r22,r24
+ 	movw r20,r0
+-	mul r13,r25
++	mul r22,r25
+ 	add r21,r0
+ 	clr __zero_reg__
+ 	cp r16,r20

@@ -1,0 +1,68 @@
+DIR 2d1d80522d0da49b5629e83e864e0ed0
+--- 20011008-3.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 12:02:26.110936295 +0000
++++ 20011008-3.c.{atmega128}.{3}.{lra}.s	2020-08-07 12:02:27.879001348 +0000
+@@ -21,25 +21,25 @@
+ .global	__db_txnlist_lsnadd
+ 	.type	__db_txnlist_lsnadd, @function
+ __db_txnlist_lsnadd:
+-	push r28
+-	push r29
++	push r16
++	push r17
+ /* prologue: function */
+ /* frame size = 0 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r30,r24
+ 	movw r26,r22
+-	movw r28,r20
++	movw r16,r20
+ 	adiw r24,1
+ 	sbrs r18,0
+ 	rjmp .L6
+ 	adiw r26,6
+-	ld r20,X+
+-	ld r21,X
++	ld r22,X+
++	ld r23,X
+ 	sbiw r26,6+1
+ 	movw r24,r30
+-	cp __zero_reg__,r20
+-	cpc __zero_reg__,r21
++	cp __zero_reg__,r22
++	cpc __zero_reg__,r23
+ 	brge .L6
+ 	ldi r19,0
+ 	ldi r18,0
+@@ -50,8 +50,8 @@
+ 	adc r25,r19
+ 	subi r18,-1
+ 	sbci r19,-1
+-	cp r18,r20
+-	cpc r19,r21
++	cp r18,r22
++	cpc r19,r23
+ 	brlt .L5
+ .L6:
+ 	adiw r26,10
+@@ -61,13 +61,14 @@
+ 	ldd r21,Z+1
+ 	ldd r22,Z+2
+ 	ldd r23,Z+3
+-	st Y,r20
+-	std Y+1,r21
+-	std Y+2,r22
+-	std Y+3,r23
++	movw r30,r16
++	st Z,r20
++	std Z+1,r21
++	std Z+2,r22
++	std Z+3,r23
+ /* epilogue start */
+-	pop r29
+-	pop r28
++	pop r17
++	pop r16
+ 	ret
+ 	.size	__db_txnlist_lsnadd, .-__db_txnlist_lsnadd
+ 	.section	.text.startup,"ax",@progbits

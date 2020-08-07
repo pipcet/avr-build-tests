@@ -1,0 +1,74 @@
+DIR 1b65fd7fb8b4af2a45d075c06c7a1117
+--- 920726-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 12:00:56.395635557 +0000
++++ 920726-1.c.{atmega128}.{s}.{lra}.s	2020-08-07 12:00:59.135736362 +0000
+@@ -77,12 +77,12 @@
+ 	push r17
+ 	push r16
+ 	call sprintf
+-	movw r26,r16
++	movw r30,r16
+ 	0:
+-	ld __tmp_reg__,X+
++	ld __tmp_reg__,Z+
+ 	tst __tmp_reg__
+ 	brne 0b
+-	movw r16,r26
++	movw r16,r30
+ 	subi r16,1
+ 	sbc r17,__zero_reg__
+ 	pop __tmp_reg__
+@@ -166,12 +166,12 @@
+ 	push r17
+ 	push r16
+ 	call sprintf
+-	movw r26,r16
++	movw r30,r16
+ 	0:
+-	ld __tmp_reg__,X+
++	ld __tmp_reg__,Z+
+ 	tst __tmp_reg__
+ 	brne 0b
+-	movw r16,r26
++	movw r16,r30
+ 	subi r16,1
+ 	sbc r17,__zero_reg__
+ 	pop __tmp_reg__
+@@ -223,8 +223,8 @@
+ 	push r17
+ 	push r16
+ 	movw r14,r28
+-	ldi r18,101
+-	add r14,r18
++	ldi r24,101
++	add r14,r24
+ 	adc r15,__zero_reg__
+ 	push r15
+ 	push r14
+@@ -245,11 +245,22 @@
+ 	ldi r24,lo8(.LC2)
+ 	ldi r25,hi8(.LC2)
+ 	call strcmp
+-	in __tmp_reg__,__SREG__
+-	cli
+-	out __SP_H__,r29
+-	out __SREG__,__tmp_reg__
+-	out __SP_L__,r28
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
++	pop __tmp_reg__
+ 	or r24,r25
+ 	brne .L12
+ 	movw r22,r16

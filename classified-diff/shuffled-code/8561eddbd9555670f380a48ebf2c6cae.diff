@@ -1,0 +1,59 @@
+DIR 0423aa0b7a1b9541402232159e014f63
+--- 20180112-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 11:59:42.968934566 +0000
++++ 20180112-1.c.{atmega128}.{s}.{lra}.s	2020-08-07 11:59:44.064974878 +0000
+@@ -59,12 +59,11 @@
+ 	ldd r13,Y+6
+ 	ldd r14,Y+7
+ 	ldd r15,Y+8
+-	movw r26,r24
+-	st X+,r16
+-	st X+,r17
+-	st X+,r18
+-	st X,r19
+-	sbiw r26,3
++	movw r30,r24
++	st Z,r16
++	std Z+1,r17
++	std Z+2,r18
++	std Z+3,r19
+ 	lsl r20
+ 	rol r21
+ 	rol r22
+@@ -74,14 +73,12 @@
+ 	eor r21,r13
+ 	eor r22,r14
+ 	eor r23,r15
+-	movw r26,r22
+-	movw r24,r20
+-	lsr r27
+-	ror r26
+-	ror r25
+-	ror r24
+-	movw r22,r24
+-	movw r24,r26
++	lsr r23
++	ror r22
++	ror r21
++	ror r20
++	movw r24,r22
++	movw r22,r20
+ /* epilogue start */
+ 	adiw r28,12
+ 	in __tmp_reg__,__SREG__
+@@ -118,10 +115,12 @@
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call bug
+-	cpi r22,-1
+-	sbci r23,-1
+-	sbci r24,-1
+-	sbci r25,127
++	movw r18,r22
++	movw r20,r24
++	cpi r18,-1
++	sbci r19,-1
++	sbci r20,-1
++	sbci r21,127
+ 	breq .L3
+ 	call abort
+ .L3:

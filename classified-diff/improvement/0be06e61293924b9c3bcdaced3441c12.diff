@@ -1,0 +1,126 @@
+DIR 3a37b22d00fb66192d5000e225724ee6
+--- cvt-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 12:03:35.821501269 +0000
++++ cvt-1.c.{atmega128}.{s}.{lra}.s	2020-08-07 12:03:37.157550430 +0000
+@@ -14,8 +14,6 @@
+ 	push r29
+ 	rcall .
+ 	rcall .
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 4 */
+ /* stack size = 6 */
+@@ -42,22 +40,23 @@
+ .global	f
+ 	.type	f, @function
+ f:
++	push r15
+ 	push r16
+ 	push r17
+ 	push r28
+ 	push r29
+-	in r28,__SP_L__
+-	in r29,__SP_H__
+-	sbiw r28,10
++	in r26,__SP_L__
++	in r27,__SP_H__
++	sbiw r26,8
+ 	in __tmp_reg__,__SREG__
+ 	cli
+-	out __SP_H__,r29
++	out __SP_H__,r27
+ 	out __SREG__,__tmp_reg__
+-	out __SP_L__,r28
++	out __SP_L__,r26
+ /* prologue: function */
+-/* frame size = 10 */
+-/* stack size = 14 */
+-.L__stack_usage = 14
++/* frame size = 8 */
++/* stack size = 13 */
++.L__stack_usage = 13
+ 	call __floatsisf
+ 	std Y+1,r22
+ 	std Y+2,r23
+@@ -77,11 +76,12 @@
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ 	call __floatsisf
+-	movw r16,r22
+-	std Y+10,r24
+-	std Y+9,r25
++	mov r15,r22
++	mov r16,r23
++	mov r17,r24
++	mov r29,r25
+ 	std Y+5,r22
+-	std Y+6,r17
++	std Y+6,r23
+ 	std Y+7,r24
+ 	std Y+8,r25
+ 	ldd r22,Y+5
+@@ -89,38 +89,47 @@
+ 	ldd r24,Y+7
+ 	ldd r25,Y+8
+ 	call __fixsfsi
+-	ldd r18,Y+1
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	cp r18,r22
+-	cpc r19,r23
+-	cpc r20,r24
+-	cpc r21,r25
++	std Y+5,r22
++	std Y+6,r23
++	std Y+7,r24
++	std Y+8,r25
++	ldd r24,Y+1
++	ldd r25,Y+2
++	ldd r26,Y+3
++	ldd r27,Y+4
++	ldd r18,Y+5
++	ldd r19,Y+6
++	ldd r20,Y+7
++	ldd r21,Y+8
++	cp r24,r18
++	cpc r25,r19
++	cpc r26,r20
++	cpc r27,r21
+ 	breq .L2
+ 	call abort
+ .L2:
+-	std Y+1,r16
+-	std Y+2,r17
+-	ldd r19,Y+10
+-	std Y+3,r19
+-	ldd r20,Y+9
+-	std Y+4,r20
++	std Y+1,r15
++	std Y+2,r16
++	std Y+3,r17
++	std Y+4,r29
+ 	ldd r22,Y+1
+ 	ldd r23,Y+2
+ 	ldd r24,Y+3
+ 	ldd r25,Y+4
+ /* epilogue start */
+-	adiw r28,10
++	in r26,__SP_L__
++	in r27,__SP_H__
++	adiw r26,8
+ 	in __tmp_reg__,__SREG__
+ 	cli
+-	out __SP_H__,r29
++	out __SP_H__,r27
+ 	out __SREG__,__tmp_reg__
+-	out __SP_L__,r28
++	out __SP_L__,r26
+ 	pop r29
+ 	pop r28
+ 	pop r17
+ 	pop r16
++	pop r15
+ 	ret
+ 	.size	f, .-f
+ 	.section	.text.startup,"ax",@progbits

@@ -1,0 +1,23 @@
+DIR b642823bc47736128ed453602d71e3f2
+--- pr48381.c.{atmega128}.{s}.{vanilla}.s	2020-08-06 20:43:51.473581405 +0000
++++ pr48381.c.{atmega128}.{s}.{ccmode}.s	2020-08-06 20:43:52.265590938 +0000
+@@ -108,6 +108,9 @@
+ 	mov r7,r18
+ 	sbrc r18,7
+ 	rjmp .L10
++	mov r17,r18
++	lsl r17
++	sbc r17,r17
+ 	movw r18,r20
+ 	ldi r20,0
+ 	ldi r21,0
+@@ -116,9 +119,6 @@
+ 	ldi r24,0
+ 	ldi r25,0
+ 	mov r10,r7
+-	mov r17,r7
+-	lsl r17
+-	sbc r17,r17
+ 	mov r11,r17
+ 	mov r12,r17
+ 	mov r13,r17
