@@ -2,7 +2,7 @@ MCUS = atmega128 # avr2 avr25 avr3 avr31 avr35 avr5 avr51 avr6 avrxmega3 avrxmeg
 OPTS = 0 1 2 3 s
 COMPARE_OPTS = 2 3 s
 DUMP_RTL = # -fdump-rtl-all -fdump-tree-all
-VARIANTS = ccmode lra
+VARIANTS = ccmode # lra
 VARIANTS2 = vanilla $(VARIANTS)
 
 $(foreach m,$(MCUS),$(foreach o,$(OPTS),$(eval %.c.{$(m)}.{$(o)}.{ccmode}.s: %.c ; $${CCMODE_GCC} $(DUMP_RTL) -dumpbase $$@ -O$(o) -mmcu=$(m) -S -o $$@ $$< 2> $$@.msg)))
@@ -75,7 +75,7 @@ $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),$(eval %.c.{$(m)}.{$(o)}.{lra}
 %.status.exit.diff: %.{vanilla}.exe.status.exit %.{ccmode}.exe.status.exit
 	diff -u $^ > $@ || true
 
-%.c.exe.done: $(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{ccmode}.exe.status.exit %.c.{$(m)}.{$(o)}.{vanilla}.exe.status.exit %.c.{$(m)}.{$(o)}.{lra}.exe.status.exit %.c.{$(m)}.{$(o)}.status.exit.diff))
+%.c.exe.done: $(foreach v,$(VARIANTS),$(foreach m,$(EXEC_MCUS),$(foreach o,$(EXEC_OPTS),%.c.{$(m)}.{$(o)}.{vanilla}.exe.status.exit %.c.{$(m)}.{$(o)}.{$(v)}.exe.status.exit %.c.{$(m)}.{$(o)}.status.exit.diff)))
 	touch $@
 
 %.c.execute: %.c.exe.done

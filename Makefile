@@ -35,6 +35,11 @@ clean:
 	rm -f execute/*/Makefile
 	find compile execute -name "*.*.*" | xargs rm -f
 
+realclean: clean
+	rm -f differences.diff
+	rm -f diff/*
+	rm -f diff-lra/*
+
 differences.diff:
 	rm -f diffhash-candidates/*
 	ls -SSr diff | while read REPLY; do HASH=`perl ./diffhash.pl diff/$$REPLY`; [ -f diffhash/$$HASH.diff ] || ((echo "DIR $$REPLY $$HASH"; cat diff/$$REPLY); (echo "DIR $$REPLY $$HASH"; cat diff/$$REPLY) > diffhash-candidates/$$HASH.diff); done > $@
