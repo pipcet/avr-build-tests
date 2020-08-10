@@ -1,0 +1,90 @@
+DIR b642823bc47736128ed453602d71e3f2
+--- pr48381.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 14:46:29.674100224 +0000
++++ pr48381.c.{atmega128}.{3}.{ccmode}.s	2020-08-07 14:46:30.002102935 +0000
+@@ -99,42 +99,44 @@
+ 	push r29
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-	sbiw r28,10
++	sbiw r28,18
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ /* prologue: function */
+-/* frame size = 10 */
+-/* stack size = 22 */
+-.L__stack_usage = 22
++/* frame size = 18 */
++/* stack size = 30 */
++.L__stack_usage = 30
+ 	movw r26,r24
+-	std Y+9,r22
+-	std Y+10,r23
++	std Y+17,r22
++	std Y+18,r23
+ 	mov r30,r18
+ 	lds r8,t
+ 	lds r9,t+1
+ 	sbrc r18,7
+ 	rjmp .L6
+ 	ldi r16,lo8(1)
+-	sbiw r24,32
++	cpi r26,32
++	cpc r27,__zero_reg__
+ 	brsh .L7
+-	ldi r25,0
+-	ldi r24,0
+-	movw r16,r24
+-	std Y+1,r16
+-	std Y+2,r17
++	ldi r19,0
++	ldi r18,0
++	movw r10,r18
++	std Y+1,r10
++	std Y+2,r11
++	mov r17,r30
++	lsl r17
++	sbc r17,r17
+ 	movw r18,r20
+ 	ldi r20,0
+ 	ldi r21,0
+ 	ldi r22,0
+ 	ldi r23,0
++	ldi r24,0
+ 	ldi r25,0
+ 	mov r10,r30
+-	mov r17,r30
+-	lsl r17
+-	sbc r17,r17
+ 	mov r11,r17
+ 	mov r12,r17
+ 	mov r13,r17
+@@ -175,13 +177,13 @@
+ 	ldi r24,lo8(1)
+ .L17:
+ 	ldi r25,0
+-	ldd r18,Y+9
+-	ldd r19,Y+10
++	ldd r18,Y+17
++	ldd r19,Y+18
+ 	movw r20,r8
+ 	movw r22,r18
+ 	call fn
+ /* epilogue start */
+-	adiw r28,10
++	adiw r28,18
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29
+@@ -211,7 +213,8 @@
+ .L6:
+ 	ldi r16,0
+ 	ldi r17,0
+-	sbiw r24,32
++	cpi r26,32
++	cpc r27,__zero_reg__
+ 	brlo .L12
+ 	ldi r16,lo8(1)
+ 	rjmp .L18

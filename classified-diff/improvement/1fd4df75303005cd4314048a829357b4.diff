@@ -1,0 +1,29 @@
+DIR de3219579c55bf3f93d76c69df951a74
+--- pr49710.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 14:52:53.981264174 +0000
++++ pr49710.c.{atmega128}.{2}.{ccmode}.s	2020-08-07 14:52:54.193265914 +0000
+@@ -18,13 +18,11 @@
+ 	lds r25,0+1
+ 	or r24,r25
+ 	brne .L1
+-	lds r20,b
+-	lds r21,b+1
++	lds r24,b
++	lds r25,b+1
+ 	ldi r18,lo8(18)
+ 	ldi r19,0
+-.L6:
+-	cp r20,__zero_reg__
+-	cpc r21,__zero_reg__
++	or r24,r25
+ 	breq .L3
+ .L4:
+ 	rjmp .L4
+@@ -34,7 +32,7 @@
+ 	lds r24,0
+ 	lds r25,0+1
+ 	or r24,r25
+-	breq .L6
++	breq .L3
+ .L1:
+ /* epilogue start */
+ 	ret

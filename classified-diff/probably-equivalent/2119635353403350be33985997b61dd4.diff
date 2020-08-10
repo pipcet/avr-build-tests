@@ -1,0 +1,240 @@
+DIR 5813109ef77075703d5f5514e5cadd90
+--- QIcmp.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:32:53.687235566 +0000
++++ QIcmp.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:32:56.675261452 +0000
+@@ -74,10 +74,10 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	mov r20,r24
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cp r18,r20
+ 	brge .L8
+ 	ldi r25,0
+@@ -264,12 +264,12 @@
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r30,r16
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
+-	cp r18,r20
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r18,r19
+ 	brge .L24
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -451,10 +451,10 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cpi r18,lo8(22)
+ 	brge .L39
+ 	ldi r25,0
+@@ -559,10 +559,10 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cp r22,r18
+ 	brge .L49
+ 	ldi r25,0
+@@ -581,12 +581,12 @@
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r30,r14
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
+-	cp r20,r18
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r19,r18
+ 	brge .L51
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -603,10 +603,10 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cpi r18,lo8(34)
+ 	brlt .L53
+ 	ldi r25,0
+@@ -622,12 +622,12 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
+ 	ldi r20,lo8(glob0)
+ 	ldi r21,hi8(glob0)
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cp r18,r20
+ 	brge .L55
+ 	ldi r25,0
+@@ -643,12 +643,12 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	lds r20,-30009
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
+-	cp r20,r18
++	ldi r24,lo8(1)
++	ldi r25,0
++	lds r19,-30009
++	cp r19,r18
+ 	brge .L57
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -668,12 +668,12 @@
+ 	movw r30,r14
+ 	subi r30,-17
+ 	sbci r31,-62
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
+-	cp r20,r18
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r19,r18
+ 	brge .L59
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -693,12 +693,12 @@
+ 	movw r30,r18
+ 	subi r30,57
+ 	sbci r31,117
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
+-	cp r20,r18
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r19,r18
+ 	brge .L61
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -718,12 +718,12 @@
+ 	movw r30,r14
+ 	add r30,r18
+ 	adc r31,r19
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob0)
+ 	ldi r19,hi8(glob0)
+-	cp r20,r18
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r19,r18
+ 	brge .L63
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -800,12 +800,12 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	lds r20,-27008
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
+-	cp r18,r20
++	ldi r24,lo8(1)
++	ldi r25,0
++	lds r19,-27008
++	cp r18,r19
+ 	brge .L71
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -999,12 +999,12 @@
+ 	movw r30,r16
+ 	subi r30,-128
+ 	sbci r31,105
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
+-	cp r18,r20
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r18,r19
+ 	brge .L87
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -1214,12 +1214,12 @@
+ 	movw r30,r20
+ 	subi r30,-128
+ 	sbci r31,105
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
+-	cp r18,r20
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r18,r19
+ 	brge .L103
+ 	ldi r25,0
+ 	ldi r24,0
+@@ -1425,12 +1425,12 @@
+ 	movw r30,r16
+ 	add r30,r20
+ 	adc r31,r21
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	ld r20,Z
+ 	ldi r18,lo8(glob1)
+ 	ldi r19,hi8(glob1)
+-	cp r18,r20
++	ldi r24,lo8(1)
++	ldi r25,0
++	ld r19,Z
++	cp r18,r19
+ 	brge .L119
+ 	ldi r25,0
+ 	ldi r24,0

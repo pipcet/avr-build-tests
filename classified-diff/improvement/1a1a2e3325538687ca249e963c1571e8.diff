@@ -1,0 +1,401 @@
+DIR 3c4b5f378771b7256a698392b43d8563
+--- 20011130-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 14:28:37.224974838 +0000
++++ 20011130-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-07 14:28:37.768979731 +0000
+@@ -35,16 +35,16 @@
+ 	push r29
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-	sbiw r28,20
++	sbiw r28,18
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ /* prologue: function */
+-/* frame size = 20 */
+-/* stack size = 38 */
+-.L__stack_usage = 38
++/* frame size = 18 */
++/* stack size = 36 */
++.L__stack_usage = 36
+ 	movw r14,r24
+ 	mov r17,r20
+ 	mov r16,r21
+@@ -61,7 +61,7 @@
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
+ /* epilogue start */
+-	adiw r28,20
++	adiw r28,18
+ 	in __tmp_reg__,__SREG__
+ 	cli
+ 	out __SP_H__,r29
+@@ -101,32 +101,22 @@
+ 	std Y+18,r18
+ 	mov r13,__zero_reg__
+ 	mov r12,__zero_reg__
+-	movw r20,r14
+-	subi r20,-6
+-	sbci r21,-1
+-	std Y+20,r21
+-	std Y+19,r20
+-	movw r26,r14
+-	adiw r26,12
+-	movw r10,r26
+-	ldd r27,Y+17
+-	cpse r27,__zero_reg__
++	movw r10,r14
++	ldi r19,12
++	add r10,r19
++	adc r11,__zero_reg__
++	ldd r20,Y+17
++	cpse r20,__zero_reg__
+ 	rjmp .L4
+ .L41:
+-	ldd r30,Y+18
+-	ldd r18,Y+19
+-	ldd r19,Y+20
+-	std Y+12,r19
+-	std Y+11,r18
+-	tst r30
+-	brne .+2
+-	rjmp .L8
+-	movw r20,r28
+-	subi r20,-1
+-	sbci r21,-1
+-	std Y+14,r21
+-	std Y+13,r20
+-.L12:
++	ldd r21,Y+18
++	cpse r21,__zero_reg__
++	rjmp .L5
++	movw r24,r14
++	adiw r24,6
++	std Y+12,r25
++	std Y+11,r24
++.L8:
+ 	ldd r26,Y+11
+ 	ldd r27,Y+12
+ 	ld r30,X+
+@@ -192,12 +182,12 @@
+ 	ldd r25,Y+10
+ 	call __ltsf2
+ 	sbrs r24,7
+-	rjmp .L10
++	rjmp .L6
+ 	mov r2,__zero_reg__
+ 	mov r3,__zero_reg__
+ 	mov r4,__zero_reg__
+ 	mov r5,__zero_reg__
+-.L10:
++.L6:
+ 	mov r18,r2
+ 	mov r19,r3
+ 	mov r20,r4
+@@ -214,20 +204,12 @@
+ 	ldd r25,Y+10
+ 	call __ltsf2
+ 	sbrs r24,7
+-	rjmp .L11
++	rjmp .L7
+ 	mov r2,r17
+ 	mov r3,r16
+ 	mov r4,r7
+ 	mov r5,r6
+-.L11:
+-	ldd r26,Y+13
+-	ldd r27,Y+14
+-	ld r30,X+
+-	ld r31,X+
+-	std Y+14,r27
+-	std Y+13,r26
+-	std Y+16,r31
+-	std Y+15,r30
++.L7:
+ 	movw r26,r14
+ 	adiw r26,12
+ 	ld r8,X+
+@@ -241,22 +223,18 @@
+ 	ldd r24,Y+9
+ 	ldd r25,Y+10
+ 	call __fixsfsi
+-	mov r20,r22
+-	mov r21,r23
+-	ldd r30,Y+15
+-	ldd r31,Y+16
+-	add r30,r20
+-	adc r31,r21
+-	ld r24,Z
++	mov r19,r22
++	mov r18,r23
+ 	movw r22,r8
+-	ldi r25,0
++	mov r24,r19
++	mov r25,r18
+ 	call bar
+ 	ldd r30,Y+11
+ 	ldd r31,Y+12
+ 	cp r10,r30
+ 	cpc r11,r31
+ 	breq .+2
+-	rjmp .L12
++	rjmp .L8
+ .L9:
+ 	ldi r27,-1
+ 	sub r12,r27
+@@ -268,16 +246,17 @@
+ 	cpc r13,r25
+ 	brlo .+2
+ 	rjmp .L30
+-	ldd r27,Y+17
+-	tst r27
++	ldd r20,Y+17
++	tst r20
+ 	brne .+2
+ 	rjmp .L41
+ .L4:
+ 	ldd r31,Y+18
+ 	cpse r31,__zero_reg__
+ 	rjmp .L13
+-	ldd r18,Y+19
+-	ldd r19,Y+20
++	movw r18,r14
++	subi r18,-6
++	sbci r19,-1
+ 	std Y+12,r19
+ 	std Y+11,r18
+ 	movw r26,r18
+@@ -407,15 +386,27 @@
+ 	ld r25,X
+ 	movw r26,r30
+ 	rjmp .L16
+-.L8:
+-	ldd r26,Y+11
+-	ldd r27,Y+12
++.L13:
++	movw r30,r14
++	adiw r30,6
++	std Y+12,r31
++	std Y+11,r30
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
++	std Y+14,r19
++	std Y+13,r18
++	movw r26,r30
++.L19:
+ 	ld r30,X+
+ 	ld r31,X+
+ 	std Y+12,r27
+ 	std Y+11,r26
+-	add r30,r12
+-	adc r31,r13
++	sbiw r24,1
++	sub r24,r12
++	sbc r25,r13
++	add r30,r24
++	adc r31,r25
+ 	ld r24,Z
+ 	mov r18,r24
+ 	ldi r19,0
+@@ -473,34 +464,42 @@
+ 	ldd r25,Y+10
+ 	call __ltsf2
+ 	sbrs r24,7
+-	rjmp .L6
++	rjmp .L17
+ 	mov r2,__zero_reg__
+ 	mov r3,__zero_reg__
+ 	mov r4,__zero_reg__
+ 	mov r5,__zero_reg__
+-.L6:
+-	mov r18,r2
+-	mov r19,r3
+-	mov r20,r4
+-	mov r21,r5
++.L17:
+ 	movw r22,r16
+ 	movw r24,r6
+-	std Y+7,r23
+-	std Y+8,r16
+-	std Y+9,r25
+-	std Y+10,r6
++	mov r18,r23
++	mov r19,r16
++	mov r20,r25
++	mov r21,r6
++	std Y+7,r2
++	std Y+8,r3
++	std Y+9,r4
++	std Y+10,r5
+ 	ldd r22,Y+7
+ 	ldd r23,Y+8
+ 	ldd r24,Y+9
+ 	ldd r25,Y+10
+-	call __ltsf2
+-	sbrs r24,7
+-	rjmp .L7
++	call __gtsf2
++	cp __zero_reg__,r24
++	brge .L18
+ 	mov r2,r17
+ 	mov r3,r16
+ 	mov r4,r7
+ 	mov r5,r6
+-.L7:
++.L18:
++	ldd r26,Y+13
++	ldd r27,Y+14
++	ld r30,X+
++	ld r31,X+
++	std Y+14,r27
++	std Y+13,r26
++	std Y+16,r31
++	std Y+15,r30
+ 	movw r26,r14
+ 	adiw r26,12
+ 	ld r8,X+
+@@ -514,40 +513,48 @@
+ 	ldd r24,Y+9
+ 	ldd r25,Y+10
+ 	call __fixsfsi
+-	mov r19,r22
+-	mov r18,r23
++	mov r20,r22
++	mov r21,r23
++	ldd r30,Y+15
++	ldd r31,Y+16
++	add r30,r20
++	adc r31,r21
++	ld r24,Z
+ 	movw r22,r8
+-	mov r24,r19
+-	mov r25,r18
++	ldi r25,0
+ 	call bar
+ 	ldd r30,Y+11
+ 	ldd r31,Y+12
+-	cp r10,r30
+-	cpc r11,r31
+-	breq .+2
+-	rjmp .L8
++	cp r30,r10
++	cpc r31,r11
++	brne .+2
+ 	rjmp .L9
+-.L13:
+-	ldd r30,Y+19
+-	ldd r31,Y+20
+-	std Y+12,r31
+-	std Y+11,r30
+-	movw r18,r28
+-	subi r18,-1
+-	sbci r19,-1
+-	std Y+14,r19
+-	std Y+13,r18
++	movw r26,r14
++	adiw r26,4
++	ld r24,X+
++	ld r25,X
+ 	movw r26,r30
+-.L19:
++	rjmp .L19
++.L5:
++	movw r18,r14
++	subi r18,-6
++	sbci r19,-1
++	std Y+12,r19
++	std Y+11,r18
++	movw r20,r28
++	subi r20,-1
++	sbci r21,-1
++	std Y+14,r21
++	std Y+13,r20
++.L12:
++	ldd r26,Y+11
++	ldd r27,Y+12
+ 	ld r30,X+
+ 	ld r31,X+
+ 	std Y+12,r27
+ 	std Y+11,r26
+-	sbiw r24,1
+-	sub r24,r12
+-	sbc r25,r13
+-	add r30,r24
+-	adc r31,r25
++	add r30,r12
++	adc r31,r13
+ 	ld r24,Z
+ 	mov r18,r24
+ 	ldi r19,0
+@@ -605,34 +612,34 @@
+ 	ldd r25,Y+10
+ 	call __ltsf2
+ 	sbrs r24,7
+-	rjmp .L17
++	rjmp .L10
+ 	mov r2,__zero_reg__
+ 	mov r3,__zero_reg__
+ 	mov r4,__zero_reg__
+ 	mov r5,__zero_reg__
+-.L17:
++.L10:
++	mov r18,r2
++	mov r19,r3
++	mov r20,r4
++	mov r21,r5
+ 	movw r22,r16
+ 	movw r24,r6
+-	mov r18,r23
+-	mov r19,r16
+-	mov r20,r25
+-	mov r21,r6
+-	std Y+7,r2
+-	std Y+8,r3
+-	std Y+9,r4
+-	std Y+10,r5
++	std Y+7,r23
++	std Y+8,r16
++	std Y+9,r25
++	std Y+10,r6
+ 	ldd r22,Y+7
+ 	ldd r23,Y+8
+ 	ldd r24,Y+9
+ 	ldd r25,Y+10
+-	call __gtsf2
+-	cp __zero_reg__,r24
+-	brge .L18
++	call __ltsf2
++	sbrs r24,7
++	rjmp .L11
+ 	mov r2,r17
+ 	mov r3,r16
+ 	mov r4,r7
+ 	mov r5,r6
+-.L18:
++.L11:
+ 	ldd r26,Y+13
+ 	ldd r27,Y+14
+ 	ld r30,X+
+@@ -666,15 +673,10 @@
+ 	call bar
+ 	ldd r30,Y+11
+ 	ldd r31,Y+12
+-	cp r30,r10
+-	cpc r31,r11
+-	brne .+2
++	cp r10,r30
++	cpc r11,r31
++	breq .+2
++	rjmp .L12
+ 	rjmp .L9
+-	movw r26,r14
+-	adiw r26,4
+-	ld r24,X+
+-	ld r25,X
+-	movw r26,r30
+-	rjmp .L19
+ 	.size	foo, .-foo
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
