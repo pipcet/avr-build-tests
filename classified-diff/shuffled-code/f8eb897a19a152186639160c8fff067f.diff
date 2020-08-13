@@ -1,0 +1,18 @@
+DIR 844d776a8957ada6593eb2300488114e
+--- pr42927.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:39:12.826464598 +0000
++++ pr42927.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:39:13.242468092 +0000
+@@ -24,10 +24,10 @@
+ 	ldi r18,0
+ .L2:
+ 	ld r20,Z
+-	cp r20,r18
+-	cpc __zero_reg__,r19
+-	breq .+2
+-	brge .L3
++	ldi r21,0
++	cp r18,r20
++	cpc r19,r21
++	brlt .L3
+ /* epilogue start */
+ 	pop r29
+ 	pop r28

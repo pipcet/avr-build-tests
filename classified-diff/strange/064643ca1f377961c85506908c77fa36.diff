@@ -1,0 +1,44 @@
+DIR 293963d27f3942f24e6e7222e0f70294
+--- pr58277-1.c.{avr3}.{3}.{vanilla}.s	2020-08-10 18:24:50.218288152 +0000
++++ pr58277-1.c.{avr3}.{3}.{ccmode}.s	2020-08-10 18:25:05.342324949 +0000
+@@ -84,13 +84,12 @@
+ 	cp __zero_reg__,r24
+ 	brge .L12
+ .L14:
+-	mov r21,r29
+-	mov r20,r28
+-	subi r20,-1
+-	sbci r21,-1
++	mov r25,r29
++	mov r24,r28
++	adiw r24,1
+ 	adiw r26,1
+-	st X,r21
+-	st -X,r20
++	st X,r25
++	st -X,r24
+ 	lds r18,n
+ 	lds r19,n+1
+ 	subi r18,1
+@@ -100,6 +99,8 @@
+ 	cp r18,__zero_reg__
+ 	cpc r19,__zero_reg__
+ 	breq .L10
++	mov r21,r24
++	mov r20,r25
+ .L13:
+ 	sts u,__zero_reg__
+ 	sts g+1,__zero_reg__
+@@ -127,9 +128,10 @@
+ 	cp __zero_reg__,r24
+ 	brge .L15
+ .L16:
+-	adiw r26,1
+ 	st X,r21
+-	st -X,r20
++	adiw r26,1
++	st X,r20
++	sbiw r26,1
+ 	subi r18,1
+ 	sbc r19,__zero_reg__
+ 	sts n+1,r19

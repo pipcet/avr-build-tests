@@ -1,0 +1,25 @@
+DIR 5d5494af52cff7da36658c6d1e033d70
+--- 20040703-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 18:34:32.851092607 +0000
++++ 20040703-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 18:34:36.167054760 +0000
+@@ -66,18 +66,9 @@
+ 	ldi r21,0
+ 	ldi r20,0
+ .L3:
+-	mov r18,r20
+-	std Y+2,r21
+-	std Y+1,r20
+-	mov r20,r22
+-	std Y+4,r23
+-	std Y+3,r22
+-	mov r22,r30
+-	std Y+6,r31
+-	std Y+5,r30
+-	ldd r19,Y+2
+-	ldd r21,Y+4
+-	ldd r23,Y+6
++	movw r18,r20
++	movw r20,r22
++	movw r22,r30
+ /* epilogue start */
+ 	adiw r28,16
+ 	in __tmp_reg__,__SREG__

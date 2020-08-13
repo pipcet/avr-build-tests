@@ -1,0 +1,23 @@
+DIR 0978c9fe80dd339ae84af1b91d9c08ad
+--- pr65401.c.{avr25}.{3}.{vanilla}.s	2020-08-10 18:16:14.277952441 +0000
++++ pr65401.c.{avr25}.{3}.{ccmode}.s	2020-08-10 18:16:18.849949448 +0000
+@@ -86,8 +86,7 @@
+ 	movw r24,r28
+ 	adiw r24,1
+ 	rcall foo
+-	movw r30,r28
+-	adiw r30,1
++	movw r30,r14
+ 	ldi r24,0
+ 	ldi r25,lo8(64)
+ .L11:
+@@ -101,8 +100,7 @@
+ 	cp r30,r16
+ 	cpc r31,r17
+ 	brne .L11
+-	movw r30,r28
+-	adiw r30,1
++	movw r30,r14
+ 	ldi r24,0
+ 	ldi r25,lo8(64)
+ .L12:

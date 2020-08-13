@@ -1,0 +1,16 @@
+DIR 994d98b9d623a9f65433c72e33e330a4
+--- pr33133.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 14:42:48.064263320 +0000
++++ pr33133.c.{atmega128}.{2}.{ccmode}.s	2020-08-07 14:42:48.428266347 +0000
+@@ -98,10 +98,8 @@
+ 	add r24,r25
+ .L3:
+ 	asr r24
+-	ldi r30,lo8(1)
+-	ldi r31,0
+-	add r30,r28
+-	adc r31,r29
++	movw r30,r28
++	adiw r30,1
+ 	add r30,r24
+ 	adc r31,__zero_reg__
+ 	sbrc r24,7

@@ -1,0 +1,21 @@
+DIR 83078a8c45ffdc67bc075b14f04ba7b7
+--- 20090113-2.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:52:25.435721873 +0000
++++ 20090113-2.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:52:32.987723983 +0000
+@@ -249,7 +249,6 @@
+ 	ror r24
+ 	ldi r19,0
+ 	ldi r18,0
+-	rjmp .L19
+ .L22:
+ 	movw r26,r18
+ 	lsl r26
+@@ -358,7 +357,8 @@
+ 	std Y+19,__zero_reg__
+ 	std Y+22,__zero_reg__
+ 	std Y+21,__zero_reg__
+-	adiw r24,14
++	movw r24,r28
++	adiw r24,15
+ 	rcall foobar.constprop.0
+ 	ldi r25,0
+ 	ldi r24,0

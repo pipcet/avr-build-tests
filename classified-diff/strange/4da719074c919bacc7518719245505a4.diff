@@ -1,0 +1,20 @@
+DIR 3c47e8a680e4f88329768478d78bf173
+--- 20020807-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 14:28:36.680969946 +0000
++++ 20020807-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-07 14:28:36.844971422 +0000
+@@ -25,11 +25,12 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	call foo
+-	movw r18,r24
+ .L4:
+-	cpi r18,-1
+-	cpc r19,r18
+-	breq .L4
++	adiw r24,1
++	brne .L7
++.L6:
++	rjmp .L6
++.L7:
+ /* epilogue start */
+ 	ret
+ 	.size	test, .-test

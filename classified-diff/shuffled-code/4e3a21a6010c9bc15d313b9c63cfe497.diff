@@ -1,0 +1,35 @@
+DIR a702276cb388be1e4e367b2e234e5d4c
+--- pr78559.c.{atmega128}.{2}.{vanilla}.s	2020-08-10 19:02:20.349466718 +0000
++++ pr78559.c.{atmega128}.{2}.{ccmode}.s	2020-08-10 19:02:24.693480659 +0000
+@@ -57,9 +57,10 @@
+ .L6:
+ 	sbiw r24,0
+ 	brne .L7
++.L18:
+ 	cp r18,__zero_reg__
+ 	cpc r19,__zero_reg__
+-	brne .L6
++	brne .L18
+ .L8:
+ 	call abort
+ .L7:
+@@ -75,15 +76,15 @@
+ 	brpl 1b
+ 	cpi r24,2
+ 	cpc r25,__zero_reg__
+-	brlt .L23
+-.L14:
++	brlt .L20
++.L13:
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L23:
++.L20:
+ 	or r18,r19
+-	brne .L14
++	brne .L13
+ 	or r24,r25
+ 	brne .L8
+ 	ldi r25,0

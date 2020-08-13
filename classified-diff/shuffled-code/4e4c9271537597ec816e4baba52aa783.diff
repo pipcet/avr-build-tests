@@ -1,0 +1,28 @@
+DIR 25860b9dd3c1bf5a01f58c64755bc013
+--- 920501-23.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:20:40.921123166 +0000
++++ 920501-23.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:20:41.585127302 +0000
+@@ -105,12 +105,12 @@
+ 	movw r18,r24
+ .L11:
+ 	movw r30,r18
++	subi r18,-4
++	sbci r19,-1
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	ldd r26,Z+2
+ 	ldd r27,Z+3
+-	subi r18,-4
+-	sbci r19,-1
+ 	sbiw r24,0
+ 	cpc r26,__zero_reg__
+ 	cpc r27,__zero_reg__
+@@ -152,8 +152,8 @@
+ 	movw r28,r24
+ .L19:
+ 	movw r30,r28
+-	ld r17,Y
+ 	adiw r28,8
++	ld r17,Z
+ 	ldd r27,Z+1
+ 	ldd r20,Z+2
+ 	ldd r21,Z+3

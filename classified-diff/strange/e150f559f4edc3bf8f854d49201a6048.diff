@@ -1,0 +1,25 @@
+DIR 32faa9933ccff0f0736cc88f83a5df8a
+--- arith-rand.c.{atmega128}.{2}.{vanilla}.s	2020-08-10 18:29:21.826819494 +0000
++++ arith-rand.c.{atmega128}.{2}.{ccmode}.s	2020-08-10 18:29:30.802833111 +0000
+@@ -149,6 +149,8 @@
+ 	add r30,r24
+ 	adc r31,r25
+ 	sbiw r24,0
++	cpc r26,__zero_reg__
++	cpc r27,__zero_reg__
+ 	brne .L14
+ .L4:
+ 	sts seed.0,r18
+@@ -323,8 +325,10 @@
+ 	add r18,r0
+ 	adc r19,r1
+ 	clr __zero_reg__
+-	cp r30,r18
+-	cpc __zero_reg__,r19
++	mov r24,r30
++	ldi r25,0
++	cp r18,r24
++	cpc r19,r25
+ 	brne .L18
+ 	mov r24,r30
+ 	mov __tmp_reg__,r30

@@ -1,0 +1,18 @@
+DIR 3613bc1f01d66ca18887e9a021f790f5
+--- va-arg-10.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:29:36.338841406 +0000
++++ va-arg-10.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:29:53.770867021 +0000
+@@ -101,11 +101,11 @@
+ 	ret
+ .L9:
+ 	movw r30,r14
++	ldi r24,2
++	add r14,r24
++	adc r15,__zero_reg__
+ 	ld r24,Z
+ 	ldd r25,Z+1
+-	ldi r31,2
+-	add r14,r31
+-	adc r15,__zero_reg__
+ 	rcall to_hex
+ 	mov __tmp_reg__,r28
+ 	lsl r0

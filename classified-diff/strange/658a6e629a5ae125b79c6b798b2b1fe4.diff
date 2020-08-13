@@ -1,0 +1,23 @@
+DIR 4e89c8a255d6231f82259d236ea496be
+--- loop-13.c.{avr3}.{s}.{vanilla}.s	2020-08-10 18:36:37.971295320 +0000
++++ loop-13.c.{avr3}.{s}.{ccmode}.s	2020-08-10 18:36:42.551298794 +0000
+@@ -181,8 +181,6 @@
+ 	ldi r25,0
+ 	ldi r26,0
+ 	ldi r27,0
+-	mov r22,r30
+-	mov r23,r31
+ .L7:
+ 	st Z+,r24
+ 	st Z+,r25
+@@ -198,6 +196,10 @@
+ 	brne .L7
+ 	ldi r20,lo8(5)
+ 	ldi r21,0
++	mov r23,r29
++	mov r22,r28
++	subi r22,-1
++	sbci r23,-1
+ 	mov r25,r29
+ 	mov r24,r28
+ 	adiw r24,41

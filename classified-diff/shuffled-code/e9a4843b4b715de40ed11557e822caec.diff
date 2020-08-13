@@ -1,0 +1,36 @@
+DIR 576cc3484099a5c0f8e4cc2c85ac16e2
+--- pr20100-1.c.{avr25}.{2}.{vanilla}.s	2020-08-13 18:34:22.011218007 +0000
++++ pr20100-1.c.{avr25}.{2}.{ccmode}.s	2020-08-13 18:34:23.347202410 +0000
+@@ -69,11 +69,11 @@
+ 	adiw r24,1
+ 	cp r18,r20
+ 	cpc r19,r21
+-	breq .L9
++	breq .L14
+ 	cpi r24,5
+ 	cpc r25,__zero_reg__
+ 	brne .L10
+-.L9:
++.L14:
+ 	sts g+1,r19
+ 	sts g,r18
+ 	ret
+@@ -107,15 +107,15 @@
+ 	sts g,r24
+ 	rcall get_n
+ 	sbiw r24,1
+-	brne .L15
++	brne .L16
+ 	lds r24,g
+ 	lds r25,g+1
+ 	sbiw r24,2
+-	brne .L15
++	brne .L16
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rcall exit
+-.L15:
++.L16:
+ 	rcall abort
+ 	.size	main, .-main
+ .global	e

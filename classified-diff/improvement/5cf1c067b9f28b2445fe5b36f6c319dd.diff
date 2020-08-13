@@ -1,0 +1,30 @@
+DIR 6a5d8e51f9d1d3c87bdc8f6f50865573
+--- 20000706-1.c.{avr25}.{s}.{vanilla}.s	2020-08-13 18:35:10.546674916 +0000
++++ 20000706-1.c.{avr25}.{s}.{ccmode}.s	2020-08-13 18:35:12.014659155 +0000
+@@ -145,21 +145,17 @@
+ /* frame size = 10 */
+ /* stack size = 10 */
+ .L__stack_usage = 10
+-	ldi r24,lo8(1)
+-	mov r16,r24
+-	ldi r24,lo8(2)
+-	mov r18,r24
+-	ldi r24,lo8(3)
+-	mov r20,r24
+-	ldi r24,lo8(4)
+-	mov r22,r24
+-	ldi r24,lo8(5)
+ 	mov r15,__zero_reg__
+ 	mov r14,__zero_reg__
++	ldi r16,lo8(1)
+ 	ldi r17,0
++	ldi r18,lo8(2)
+ 	ldi r19,0
++	ldi r20,lo8(3)
+ 	ldi r21,0
++	ldi r22,lo8(4)
+ 	ldi r23,0
++	ldi r24,lo8(5)
+ 	ldi r25,0
+ 	rcall foo
+ 	ldi r25,0

@@ -1,0 +1,62 @@
+DIR ac74d44874c236aa9e28c7e189f7df1f
+--- 980707-1.c.{avr3}.{3}.{vanilla}.s	2020-08-10 19:04:16.757812030 +0000
++++ 980707-1.c.{avr3}.{3}.{ccmode}.s	2020-08-10 19:04:21.757825642 +0000
+@@ -116,36 +116,25 @@
+ 	mov r31,r25
+ 	ld r26,Z
+ 	ldd r27,Z+1
+-	ld r18,X
+-	mov r20,r18
+-	subi r20,97
+-	sbc r21,r21
+-	mov r25,r21
+-	mov r24,r20
+-	cpi r18,lo8(97)
+-	brne .L18
++	ld r24,X
++	cpi r24,lo8(97)
++	breq .L22
++.L21:
++	call abort
++.L22:
+ 	adiw r26,1
+ 	ld r24,X
+-	ldi r25,0
+-.L18:
+-	or r24,r25
+-	brne .L21
++	cpse r24,__zero_reg__
++	rjmp .L21
+ 	ldd r26,Z+2
+ 	ldd r27,Z+3
+-	ld r18,X
+-	mov r20,r18
+-	subi r20,98
+-	sbc r21,r21
+-	mov r25,r21
+-	mov r24,r20
+-	cpi r18,lo8(98)
+-	brne .L20
+-	adiw r26,1
+ 	ld r24,X
+-	ldi r25,0
+-.L20:
+-	or r24,r25
++	cpi r24,lo8(98)
+ 	brne .L21
++	adiw r26,1
++	ld r24,X
++	cpse r24,__zero_reg__
++	rjmp .L21
+ 	ldd r24,Z+4
+ 	ldd r25,Z+5
+ 	or r24,r25
+@@ -153,8 +142,6 @@
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit
+-.L21:
+-	call abort
+ 	.size	main, .-main
+ 	.local	arglist.0
+ 	.comm	arglist.0,512,1

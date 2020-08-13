@@ -1,0 +1,14 @@
+DIR a1427a96761a0bd1b6cb8369f536a567
+--- 20000827-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:43:49.452773429 +0000
++++ 20000827-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:43:49.596774623 +0000
+@@ -13,8 +13,8 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	cpse r18,__zero_reg__
+-	rjmp .L5
++	tst r18
++	brne .L5
+ .L4:
+ 	rjmp .L4
+ .L5:

@@ -1,0 +1,14 @@
+DIR ba765df0455d49fbd6cbd3233731cec7
+--- pr52175.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:47:01.346361840 +0000
++++ pr52175.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:47:01.630364186 +0000
+@@ -29,8 +29,8 @@
+ .L2:
+ 	ld r24,Y
+ 	movw r14,r28
+-	cpse r24,__zero_reg__
+-	rjmp .L4
++	tst r24
++	brne .L4
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rjmp .L1

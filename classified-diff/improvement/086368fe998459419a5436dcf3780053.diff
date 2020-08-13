@@ -1,0 +1,281 @@
+DIR 9dae99b6d127c98ff333a76a4a559467
+--- 20010915-1.c.{avr31}.{2}.{vanilla}.s	2020-08-10 18:58:39.588623580 +0000
++++ 20010915-1.c.{avr31}.{2}.{ccmode}.s	2020-08-10 18:58:43.392640690 +0000
+@@ -9,10 +9,8 @@
+ .global	x
+ 	.type	x, @function
+ x:
+-	push r10
+-	push r11
++	push r12
+ 	push r13
+-	push r14
+ 	push r15
+ 	push r16
+ 	push r17
+@@ -20,8 +18,8 @@
+ 	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 9 */
+-.L__stack_usage = 9
++/* stack size = 7 */
++.L__stack_usage = 7
+ 	mov r26,r24
+ 	mov r27,r25
+ 	mov r28,r22
+@@ -30,99 +28,74 @@
+ 	lds r25,o+1
+ 	cp r24,r26
+ 	cpc r25,r27
+-	brlt .+2
+-	rjmp .L6
++	brge .L6
+ 	cpi r26,3
+ 	cpc r27,__zero_reg__
+-	brge .+2
+-	rjmp .L6
++	brlt .L6
+ 	mov r31,r25
+ 	mov r30,r24
+ 	lsl r30
+ 	rol r31
+-	mov r11,r31
+-	mov r10,r30
+-	add r10,r28
+-	adc r11,r29
+-	mov r31,r11
+-	mov r30,r10
++	mov r13,r31
++	mov r12,r30
++	add r12,r28
++	adc r13,r29
++	mov r31,r13
++	mov r30,r12
+ 	ld r20,Z
+ 	ldd r21,Z+1
+ 	cp r20,__zero_reg__
+ 	cpc r21,__zero_reg__
+-	brne .+2
+-	rjmp .L6
+-	mov r31,r21
+-	mov r30,r20
+-	ld r22,Z
+-	mov r30,r22
+-	subi r30,97
+-	sbc r31,r31
+-	mov r19,r31
+-	mov r18,r30
+-	cpi r22,lo8(97)
+-	brne .L3
++	breq .L6
+ 	mov r31,r21
+ 	mov r30,r20
++	ld r18,Z
++	cpi r18,lo8(97)
++	breq .L20
++.L6:
++	call abort
++.L20:
+ 	ldd r18,Z+1
+-	ldi r19,0
+-.L3:
+-	or r18,r19
+-	breq .+2
+-	rjmp .L6
++	tst r18
++	brne .L6
+ 	lds r18,check
+ 	lds r19,check+1
+-	mov r15,r19
+-	mov r14,r18
+-	ldi r31,-1
+-	sub r14,r31
+-	sbc r15,r31
+-	sts check+1,r15
+-	sts check,r14
++	mov r17,r19
++	mov r16,r18
++	subi r16,-1
++	sbci r17,-1
++	sts check+1,r17
++	sts check,r16
+ 	cpi r18,2
+ 	cpc r19,__zero_reg__
+-	brlt .+2
+-	rjmp .L6
+-	mov r31,r21
+-	mov r30,r20
+-	ld r13,Z+
++	brge .L6
++	ld r15,Z+
+ 	mov r23,r31
+ 	mov r22,r30
+-	mov r30,r13
+-	subi r30,97
+-	sbc r31,r31
+-	mov r17,r31
+-	mov r16,r30
+ 	ldi r31,lo8(97)
+-	cp r13,r31
+-	brne .L5
++	cp r15,r31
++	brne .L6
+ 	mov r31,r21
+ 	mov r30,r20
+-	ldd r16,Z+1
+-	ldi r17,0
+-.L5:
+-	or r16,r17
+-	breq .+2
+-	rjmp .L6
++	ldd r20,Z+1
++	tst r20
++	brne .L6
+ 	subi r18,-2
+ 	sbci r19,-1
+ 	sts check+1,r19
+ 	sts check,r18
+-	ldi r31,2
+-	cp r14,r31
+-	cpc r15,__zero_reg__
+-	brlt .+2
+-	rjmp .L6
++	cpi r16,2
++	cpc r17,__zero_reg__
++	brge .L6
+ 	sts u+1,__zero_reg__
+ 	sts u,__zero_reg__
+-	mov r31,r11
+-	mov r30,r10
++	mov r31,r13
++	mov r30,r12
+ 	ld r18,Z
+ 	ldd r19,Z+1
+ 	cp r18,r22
+ 	cpc r19,r23
+-	brne .+2
+-	rjmp .L6
++	breq .L6
+ 	adiw r24,1
+ 	sts o+1,r25
+ 	sts o,r24
+@@ -175,17 +148,14 @@
+ 	pop r17
+ 	pop r16
+ 	pop r15
+-	pop r14
+ 	pop r13
+-	pop r11
+-	pop r10
++	pop r12
+ 	ret
+ .L18:
+ 	sts cnt.0+1,r21
+ 	sts cnt.0,r20
+ 	sts c.1,r18
+-.L6:
+-	call abort
++	rjmp .L6
+ 	.size	x, .-x
+ 	.section	.rodata.str1.1,"aMS",@progbits,1
+ .LC0:
+@@ -240,19 +210,19 @@
+ 	ldi r25,0
+ 	call x
+ 	or r24,r25
+-	brne .L21
++	brne .L22
+ 	lds r24,check
+ 	lds r25,check+1
+ 	sbiw r24,2
+-	brne .L21
++	brne .L22
+ 	lds r24,o
+ 	lds r25,o+1
+ 	sbiw r24,5
+-	brne .L21
++	brne .L22
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit
+-.L21:
++.L22:
+ 	call abort
+ 	.size	main, .-main
+ 	.section	.text.unlikely,"ax",@progbits
+@@ -277,19 +247,15 @@
+ 	mov r31,r25
+ 	mov r26,r22
+ 	mov r27,r23
+-	ld r18,Z
+-	mov r20,r18
+-	subi r20,97
+-	sbc r21,r21
+-	mov r25,r21
+-	mov r24,r20
+-	cpi r18,lo8(97)
+-	brne .L25
++	ld r24,Z
++	cpi r24,lo8(97)
++	breq .L29
++.L28:
++	call abort
++.L29:
+ 	ldd r24,Z+1
+-	ldi r25,0
+-.L25:
+-	or r24,r25
+-	brne .L27
++	tst r24
++	brne .L28
+ 	lds r24,check
+ 	lds r25,check+1
+ 	mov r19,r25
+@@ -299,7 +265,7 @@
+ 	sts check+1,r19
+ 	sts check,r18
+ 	sbiw r24,2
+-	brge .L27
++	brge .L28
+ 	adiw r30,1
+ 	st X+,r30
+ 	st X,r31
+@@ -307,8 +273,6 @@
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L27:
+-	call abort
+ 	.size	s, .-s
+ .global	r
+ 	.type	r, @function
+@@ -322,16 +286,16 @@
+ 	lds r24,c.1
+ 	ld r18,Z
+ 	cp r18,r24
+-	brne .L29
++	brne .L31
+ 	ldd r25,Z+1
+ 	lds r24,c.1+1
+ 	cp r25,r24
+-	brne .L29
++	brne .L31
+ 	lds r24,cnt.0
+ 	lds r25,cnt.0+1
+ 	cpi r24,4
+ 	cpc r25,__zero_reg__
+-	brge .L29
++	brge .L31
+ 	subi r18,lo8(-(1))
+ 	sts c.1,r18
+ 	adiw r24,1
+@@ -341,7 +305,7 @@
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret
+-.L29:
++.L31:
+ 	call abort
+ 	.size	r, .-r
+ 	.local	cnt.0

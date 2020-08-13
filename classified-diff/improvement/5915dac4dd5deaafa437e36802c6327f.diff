@@ -1,0 +1,27 @@
+DIR 9c0c17fa3838cdbcc0bc26e841012f15
+--- pr87623.c.{avr31}.{3}.{vanilla}.s	2020-08-10 18:58:17.308521241 +0000
++++ pr87623.c.{avr31}.{3}.{ccmode}.s	2020-08-10 18:58:19.444531211 +0000
+@@ -22,19 +22,18 @@
+ 	sbiw r26,2
+ 	ldd r24,Z+6
+ 	cp r25,r24
+-	breq .L7
+ 	ldi r24,lo8(1)
+-.L5:
++	breq .L6
++.L4:
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret
+-.L7:
+-	ldi r24,lo8(1)
++.L6:
+ 	adiw r26,3
+ 	ld r18,X
+ 	ldd r25,Z+7
+ 	cp r18,r25
+-	brne .L5
++	brne .L4
+ 	ldi r24,0
+ 	ldi r25,0
+ /* epilogue start */

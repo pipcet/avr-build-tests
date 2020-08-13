@@ -1,0 +1,26 @@
+DIR 609857b70c32956c425c8b02a246f58e
+--- pr44575.c.{avr3}.{3}.{vanilla}.s	2020-08-13 18:34:44.210963897 +0000
++++ pr44575.c.{avr3}.{3}.{ccmode}.s	2020-08-13 18:34:46.242941150 +0000
+@@ -91,14 +91,14 @@
+ 	ldi r24,29
+ 	add r12,r24
+ 	adc r13,__zero_reg__
+-	mov r21,r11
+-	mov r20,r10
+-	mov r19,r9
+-	mov r18,r8
+-	ldd r22,Z+8
+-	ldd r23,Z+9
+-	ldd r24,Z+10
+-	ldd r25,Z+11
++	ldd r18,Z+8
++	ldd r19,Z+9
++	ldd r20,Z+10
++	ldd r21,Z+11
++	mov r25,r11
++	mov r24,r10
++	mov r23,r9
++	mov r22,r8
+ 	call __nesf2
+ 	tst r24
+ 	breq .L3

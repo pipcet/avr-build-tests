@@ -1,0 +1,26 @@
+DIR 9f962d2ba9c5e8dcdd8dc1c5a0e58011
+--- pr88714.c.{avr3}.{3}.{vanilla}.s	2020-08-10 18:59:29.504840097 +0000
++++ pr88714.c.{avr3}.{3}.{ccmode}.s	2020-08-10 18:59:32.284851662 +0000
+@@ -180,13 +180,19 @@
+ 	std Y+17,__zero_reg__
+ 	std Y+20,__zero_reg__
+ 	std Y+19,__zero_reg__
+-	adiw r24,6
++	mov r25,r29
++	mov r24,r28
++	adiw r24,15
+ 	std Y+22,r25
+ 	std Y+21,r24
+-	sbiw r24,2
++	mov r25,r29
++	mov r24,r28
++	adiw r24,13
+ 	sts o+1,r25
+ 	sts o,r24
+-	adiw r24,4
++	mov r25,r29
++	mov r24,r28
++	adiw r24,17
+ 	sts t+1,r25
+ 	sts t,r24
+ 	mov r17,r29

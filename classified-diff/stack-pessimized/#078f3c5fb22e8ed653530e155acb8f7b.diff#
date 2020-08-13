@@ -1,0 +1,101 @@
+DIR 43c624d66b6f4c233ef4904572d2374f
+--- 20080124-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:29:26.037411916 +0000
++++ 20080124-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:29:26.521416232 +0000
+@@ -9,6 +9,8 @@
+ .global	bar
+ 	.type	bar, @function
+ bar:
++	push r8
++	push r9
+ 	push r10
+ 	push r11
+ 	push r12
+R@@ -23,28 +25,34 @@
+ 	in r29,__SP_H__
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 10 */
+-.L__stack_usage = 10
+-	ldd r16,Y+13
+-	ldd r17,Y+14
+-	clr r12
+-	inc r12
+-	mov r13,__zero_reg__
+-	ldd r10,Y+15
+-	ldd r11,Y+16
++/* stack size = 12 */
++.L__stack_usage = 12
++	ldd r16,Y+15
++	ldd r17,Y+16
++	clr r8
++	inc r8
++	mov r9,__zero_reg__
++	ldd r10,Y+17
++	ldd r11,Y+18
+ 	ldi r24,-8
+ 	sub r11,r24
+-	ldd r14,Y+17
+-	ldd r15,Y+18
++	ldd r12,Y+19
++	ldd r13,Y+20
++	mov __tmp_reg__,r13
++	lsl r0
++	sbc r14,r14
++	sbc r15,r15
+ 	ldi r30,1
+-	sub r14,r30
++	sub r12,r30
++	sbc r13,__zero_reg__
++	sbc r14,__zero_reg__
+ 	sbc r15,__zero_reg__
+ .L2:
+ 	movw r30,r10
+ 	ld r24,Z
+ 	ldd r25,Z+1
+-	cp r24,r12
+-	cpc r25,r13
++	cp r24,r8
++	cpc r25,r9
+ 	brge .L14
+ /* epilogue start */
+ 	pop r29
+@@ -57,14 +65,18 @@
+ 	pop r12
+ 	pop r11
+ 	pop r10
++	pop r9
++	pop r8
+ 	ret
+ .L14:
+ 	ldi r31,10
+-	cp r14,r31
++	cp r12,r31
++	cpc r13,__zero_reg__
++	cpc r14,__zero_reg__
+ 	cpc r15,__zero_reg__
+ 	brlo .+2
+ 	rjmp .L3
+-	movw r30,r14
++	movw r30,r12
+ 	subi r30,lo8(-(gs(.L5)))
+ 	sbci r31,hi8(-(gs(.L5)))
+ 	jmp __tablejump2__
+@@ -150,14 +162,14 @@
+ 	brne .L13
+ .L3:
+ 	movw r22,r28
+-	subi r22,-19
++	subi r22,-21
+ 	sbci r23,-1
+ 	movw r24,r16
+ 	call foo
+ .L13:
+ 	ldi r31,-1
+-	sub r12,r31
+-	sbc r13,r31
++	sub r8,r31
++	sbc r9,r31
+ 	rjmp .L2
+ 	.size	bar, .-bar
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"

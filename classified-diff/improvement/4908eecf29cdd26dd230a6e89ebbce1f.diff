@@ -1,0 +1,22 @@
+DIR baca5970bea8302b1d77138e490d0201
+--- pr87468.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:47:03.518379774 +0000
++++ pr87468.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:47:03.774381888 +0000
+@@ -23,15 +23,14 @@
+ 	brne .L2
+ 	movw r24,r28
+ 	sbiw r24,2
+-	sbiw r24,2
+-	brsh .L7
+-	rjmp .L6
++	sbiw r24,1
++	rjmp .L16
+ .L2:
+ 	movw r24,r28
+ 	sbiw r24,1
+ 	sbiw r24,3
++.L16:
+ 	brsh .L7
+-.L6:
+ 	call f
+ .L7:
+ 	lds r24,a

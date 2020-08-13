@@ -1,0 +1,110 @@
+DIR 5d5494af52cff7da36658c6d1e033d70
+--- 20040703-1.c.{avr3}.{s}.{vanilla}.s	2020-08-13 18:34:32.607095401 +0000
++++ 20040703-1.c.{avr3}.{s}.{ccmode}.s	2020-08-13 18:34:35.915057628 +0000
+@@ -48,20 +48,20 @@
+ 	mov r13,r15
+ 	ldd r8,Y+9
+ 	ldd r9,Y+10
+-	ldd r10,Y+11
+-	ldd r11,Y+12
+-	ldd r14,Y+13
+-	ldd r15,Y+14
++	ldd r14,Y+11
++	ldd r15,Y+12
++	ldd r10,Y+13
++	ldd r11,Y+14
+ 	cp r12,r24
+ 	cpc r13,r25
+ 	brlo .L2
+-	cp r14,__zero_reg__
+-	cpc r15,__zero_reg__
++	cp r10,__zero_reg__
++	cpc r11,__zero_reg__
+ 	brne .L47
+-	or r10,r8
+-	or r11,r9
++	or r14,r8
++	or r15,r9
+ 	ldi r24,lo8(1)
+-	or r10,r11
++	or r14,r15
+ 	brne .L4
+ .L47:
+ 	ldi r24,0
+@@ -84,8 +84,8 @@
+ 	ldi r18,16
+ 	sub r4,r18
+ 	sbc r5,__zero_reg__
+-	mov r21,r11
+-	mov r20,r10
++	mov r21,r15
++	mov r20,r14
+ 	ldi r31,0
+ 	ldi r30,0
+ .L5:
+@@ -149,8 +149,8 @@
+ 	and r20,r18
+ 	and r21,r19
+ .L8:
+-	cp r14,__zero_reg__
+-	cpc r15,__zero_reg__
++	cp r10,__zero_reg__
++	cpc r11,__zero_reg__
+ 	breq .+2
+ 	rjmp .L28
+ 	mov r23,r25
+@@ -274,8 +274,8 @@
+ 	and r23,r25
+ .L17:
+ 	ldi r24,lo8(1)
+-	cp r10,r26
+-	cpc r11,r27
++	cp r14,r26
++	cpc r15,r27
+ 	brne .L45
+ 	cp r8,r22
+ 	cpc r9,r23
+@@ -286,17 +286,11 @@
+ 	ldi r25,0
+ .L3:
+ 	mov r18,r20
+-	std Y+2,r21
+-	std Y+1,r20
++	mov r19,r21
+ 	mov r20,r30
+-	std Y+4,r31
+-	std Y+3,r30
+-	mov r22,r14
+-	std Y+6,r15
+-	std Y+5,r14
+-	ldd r19,Y+2
+-	ldd r21,Y+4
+-	ldd r23,Y+6
++	mov r21,r31
++	mov r22,r10
++	mov r23,r11
+ /* epilogue start */
+ 	adiw r28,16
+ 	in __tmp_reg__,__SREG__
+@@ -322,8 +316,8 @@
+ 	pop r4
+ 	ret
+ .L23:
+-	mov r31,r11
+-	mov r30,r10
++	mov r31,r15
++	mov r30,r14
+ 	mov r21,r9
+ 	mov r20,r8
+ 	mov r5,r13
+@@ -348,8 +342,8 @@
+ 	and r30,r18
+ 	and r31,r19
+ .L9:
+-	cp r14,__zero_reg__
+-	cpc r15,__zero_reg__
++	cp r10,__zero_reg__
++	cpc r11,__zero_reg__
+ 	breq .L44
+ 	ldi r24,0
+ 	ldi r25,0

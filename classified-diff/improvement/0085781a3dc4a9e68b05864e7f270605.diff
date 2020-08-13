@@ -1,0 +1,73 @@
+DIR bee3994069e7226389a531d8368bf512
+--- complex-3.c.{avr3}.{s}.{vanilla}.s	2020-08-13 16:41:29.948688726 +0000
++++ complex-3.c.{avr3}.{s}.{ccmode}.s	2020-08-13 16:41:31.264670270 +0000
+@@ -8,9 +8,6 @@
+ .global	f
+ 	.type	f, @function
+ f:
+-	push r15
+-	push r16
+-	push r17
+ 	push r28
+ 	push r29
+ 	in r28,__SP_L__
+@@ -23,35 +20,20 @@
+ 	out __SP_L__,r28
+ /* prologue: function */
+ /* frame size = 8 */
+-/* stack size = 13 */
+-.L__stack_usage = 13
+-	mov r30,r18
+-	mov r31,r19
+-	mov r15,r22
+-	mov r16,r22
+-	mov r17,r23
+-	mov r18,r24
+-	mov r19,r25
+-	std Y+1,r16
+-	std Y+2,r17
+-	std Y+3,r18
+-	std Y+4,r19
+-	mov r22,r30
+-	mov r24,r30
+-	mov r25,r31
+-	mov r26,r20
+-	mov r27,r21
+-	std Y+5,r24
+-	std Y+6,r25
+-	std Y+7,r26
+-	std Y+8,r27
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+-	mov r18,r15
+-	ldd r24,Y+7
+-	ldd r25,Y+8
++/* stack size = 10 */
++.L__stack_usage = 10
++	mov r27,r22
++	mov r26,r23
++	mov r31,r24
++	mov r30,r25
++	mov r22,r18
++	mov r23,r19
++	mov r24,r20
++	mov r25,r21
++	mov r18,r27
++	mov r19,r26
++	mov r20,r31
++	mov r21,r30
+ /* epilogue start */
+ 	adiw r28,8
+ 	in __tmp_reg__,__SREG__
+@@ -61,9 +43,6 @@
+ 	out __SP_L__,r28
+ 	pop r29
+ 	pop r28
+-	pop r17
+-	pop r16
+-	pop r15
+ 	ret
+ 	.size	f, .-f
+ 	.section	.text.startup,"ax",@progbits

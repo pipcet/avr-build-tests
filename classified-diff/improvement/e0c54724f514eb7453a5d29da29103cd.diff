@@ -1,0 +1,53 @@
+DIR 0cc7c496a2d259a6b75c9e36a6ebd5d1
+--- 20001111-1.c.{avr3}.{3}.{vanilla}.s	2020-08-13 16:45:50.033042529 +0000
++++ 20001111-1.c.{avr3}.{3}.{ccmode}.s	2020-08-13 16:45:51.753018424 +0000
+@@ -93,46 +93,9 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	lds r18,next_buffer
+-	lds r19,next_buffer+1
+-	mov r25,r19
+-	mov r24,r18
+-	lsl r24
+-	rol r25
+-	add r24,r18
+-	adc r25,r19
+-	lsl r24
+-	rol r25
+-	swap r24
+-	swap r25
+-	andi r25,0xf0
+-	eor r25,r24
+-	andi r24,0xf0
+-	eor r25,r24
+-	add r24,r18
+-	adc r25,r19
+-	mov r21,r25
+-	mov r20,r24
+-	swap r20
+-	swap r21
+-	andi r21,0xf0
+-	eor r21,r20
+-	andi r20,0xf0
+-	eor r21,r20
+-	add r24,r20
+-	adc r25,r21
+-	lsl r24
+-	rol r25
+-	add r24,r18
+-	adc r25,r19
+-	swap r24
+-	swap r25
+-	andi r25,0xf0
+-	eor r25,r24
+-	andi r24,0xf0
+-	eor r25,r24
+-	cp r24,r18
+-	cpc r25,r19
++	lds r24,next_buffer
++	lds r25,next_buffer+1
++	or r24,r25
+ 	brne .L6
+ 	ldi r24,lo8(1)
+ 	ldi r25,0

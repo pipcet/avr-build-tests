@@ -1,0 +1,30 @@
+DIR 5731465dffda9507abe49a43bd72f9b8
+--- switch-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-10 18:39:38.931416747 +0000
++++ switch-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-10 18:39:42.727418984 +0000
+@@ -29,6 +29,7 @@
+ 	dec r18
+ 	brpl 1b
+ 	andi r24,lo8(41)
++	tst r24
+ 	breq .L5
+ .L3:
+ 	ldi r24,lo8(30)
+@@ -60,8 +61,8 @@
+ .L19:
+ 	cpi r18,30
+ 	cpc r19,__zero_reg__
++.L21:
+ 	breq .L8
+-.L10:
+ 	call abort
+ .L7:
+ 	cpi r28,6
+@@ -74,7 +75,7 @@
+ 	cpc r29,__zero_reg__
+ 	breq .L19
+ 	sbiw r24,31
+-	brne .L10
++	rjmp .L21
+ .L8:
+ 	adiw r28,1
+ 	cpi r28,66

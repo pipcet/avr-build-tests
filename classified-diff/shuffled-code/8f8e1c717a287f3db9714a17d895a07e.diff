@@ -1,0 +1,22 @@
+DIR 609857b70c32956c425c8b02a246f58e
+--- pr44575.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 18:34:44.494960714 +0000
++++ pr44575.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 18:34:46.406939318 +0000
+@@ -88,12 +88,12 @@
+ 	ldi r24,29
+ 	add r12,r24
+ 	adc r13,__zero_reg__
+-	movw r20,r10
+-	movw r18,r8
+-	ldd r22,Z+8
+-	ldd r23,Z+9
+-	ldd r24,Z+10
+-	ldd r25,Z+11
++	ldd r18,Z+8
++	ldd r19,Z+9
++	ldd r20,Z+10
++	ldd r21,Z+11
++	movw r24,r10
++	movw r22,r8
+ 	call __nesf2
+ 	tst r24
+ 	breq .L3

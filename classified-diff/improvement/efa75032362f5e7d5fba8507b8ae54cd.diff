@@ -1,0 +1,14 @@
+DIR eaeea710f5d0f36bc138fcc9f0cd4014
+--- storecc.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 14:54:26.926026794 +0000
++++ storecc.c.{atmega128}.{3}.{ccmode}.s	2020-08-07 14:54:27.062027910 +0000
+@@ -15,8 +15,8 @@
+ .L__stack_usage = 0
+ 	movw r30,r24
+ 	st Z,r22
+-	cpse r22,__zero_reg__
+-	rjmp .L4
++	tst r22
++	brne .L4
+ /* epilogue start */
+ 	ret
+ .L4:

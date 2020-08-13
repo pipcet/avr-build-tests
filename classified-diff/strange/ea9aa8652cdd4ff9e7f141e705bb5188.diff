@@ -1,0 +1,17 @@
+DIR 1a1bc3bd64852c1771cb8ed20d7761b9
+--- 20120919-1.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:20:21.457802515 +0000
++++ 20120919-1.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:20:24.293800915 +0000
+@@ -50,9 +50,10 @@
+ 	movw r22,r28
+ 	subi r22,-1
+ 	sbci r23,-1
+-	movw r24,r28
+-	subi r24,7
+-	sbci r25,-12
++	ldi r24,lo8(-7)
++	ldi r25,lo8(11)
++	add r24,r28
++	adc r25,r29
+ 	rcall init
+ 	subi r28,lo8(-3065)
+ 	sbci r29,hi8(-3065)

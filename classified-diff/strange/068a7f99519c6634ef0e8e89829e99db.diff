@@ -1,0 +1,23 @@
+DIR a1d6766c006530923bb00655ba50feca
+--- 20000412-4.c.{avr25}.{2}.{vanilla}.s	2020-08-10 19:00:13.785018472 +0000
++++ 20000412-4.c.{avr25}.{2}.{ccmode}.s	2020-08-10 19:00:17.029031066 +0000
+@@ -43,9 +43,8 @@
+ 	adc r25,r31
+ 	sbrc r25,7
+ 	rjmp .L4
+-	subi r18,-1
+-	sbci r19,-1
+ 	movw r24,r18
++	adiw r24,1
+ 	sub r24,r28
+ 	sbc r25,r29
+ 	add r24,r30
+@@ -56,6 +55,8 @@
+ 	sbc r25,r17
+ 	add r24,r30
+ 	adc r25,r31
++	subi r18,-1
++	sbci r19,-1
+ 	cpi r18,3
+ 	cpc r19,__zero_reg__
+ 	breq .L1

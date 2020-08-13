@@ -1,0 +1,16 @@
+DIR c3ec49d53788ea1062f6fbb914344ea8
+--- pr80233.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:48:04.742884947 +0000
++++ pr80233.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:48:04.942886596 +0000
+@@ -15,8 +15,10 @@
+ .L__stack_usage = 0
+ 	or r24,r25
+ 	brne .L10
+-	sts xg+1,__zero_reg__
+-	sts xg,__zero_reg__
++	ldi r25,0
++	ldi r24,0
++	sts xg+1,r25
++	sts xg,r24
+ 	call abort
+ .L10:
+ /* epilogue start */

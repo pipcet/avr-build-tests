@@ -1,0 +1,28 @@
+DIR 9c0c17fa3838cdbcc0bc26e841012f15
+--- pr87623.c.{avr31}.{s}.{vanilla}.s	2020-08-10 18:58:17.344521409 +0000
++++ pr87623.c.{avr31}.{s}.{ccmode}.s	2020-08-10 18:58:19.540531658 +0000
+@@ -22,21 +22,18 @@
+ 	sbiw r26,2
+ 	ldd r24,Z+6
+ 	cp r25,r24
+-	brne .L4
+ 	ldi r24,lo8(1)
++	brne .L4
+ 	adiw r26,3
+ 	ld r18,X
+ 	ldd r25,Z+7
+ 	cp r18,r25
+-	brne .L5
++	brne .L4
+ 	ldi r24,0
+-.L5:
++.L4:
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret
+-.L4:
+-	ldi r24,lo8(1)
+-	rjmp .L5
+ 	.size	a_or_b_different, .-a_or_b_different
+ 	.section	.text.startup,"ax",@progbits
+ .global	main

@@ -1,0 +1,32 @@
+DIR 4f04d49c358a1afbd887438b26cd0ddf
+--- pr16808.c.{atmega128}.{2}.{vanilla}.s	2020-08-07 14:31:40.958602661 +0000
++++ pr16808.c.{atmega128}.{2}.{ccmode}.s	2020-08-07 14:31:41.230605038 +0000
+@@ -31,10 +31,9 @@
+ 	breq .L1
+ 	ld r24,Y
+ 	ldd r25,Y+1
+-.L3:
+ 	sbiw r24,0
+ 	brne .L7
+-	rjmp .L3
++	rjmp .L14
+ .L4:
+ 	sbiw r24,1
+ 	std Y+1,r25
+@@ -58,11 +57,9 @@
+ 	call f0
+ 	rjmp .L5
+ .L6:
+-	cpse r18,__zero_reg__
+-	rjmp .L3
+-/* epilogue start */
+-	pop r29
+-	pop r28
+-	ret
++	tst r18
++	breq .L1
++.L14:
++	rjmp .L14
+ 	.size	evalPrimary, .-evalPrimary
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
