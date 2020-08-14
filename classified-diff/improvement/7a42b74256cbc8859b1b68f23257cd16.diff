@@ -1,0 +1,25 @@
+DIR 1e7fcf63bfbbb3eb48692575acef1a4e
+--- pr79737-1.c.{avr3}.{3}.{vanilla}.s	2020-08-14 11:38:18.348428976 +0000
++++ pr79737-1.c.{avr3}.{3}.{ccmode}.s	2020-08-14 11:38:21.736387723 +0000
+@@ -41,10 +41,10 @@
+ 	lds r24,g
+ 	lds r25,g+1
+ 	or r24,r25
+-	breq .L5
+ 	ldi r24,lo8(9)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
++	breq .L5
+ 	mov r27,r29
+ 	mov r26,r28
+ 	adiw r26,1
+@@ -98,9 +98,6 @@
+ 	pop r28
+ 	ret
+ .L5:
+-	ldi r24,lo8(9)
+-	ldi r30,lo8(.LC0)
+-	ldi r31,hi8(.LC0)
+ 	mov r27,r29
+ 	mov r26,r28
+ 	adiw r26,1

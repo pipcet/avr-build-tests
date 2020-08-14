@@ -1,0 +1,12 @@
+DIR 125c94f5734884fa8a42d220a9b1af57
+--- pr91137.c.{atmega128}.{s}.{vanilla}.s	2020-08-14 11:37:11.997236672 +0000
++++ pr91137.c.{atmega128}.{s}.{ccmode}.s	2020-08-14 11:37:16.149186143 +0000
+@@ -83,6 +83,8 @@
+ 	lds r25,c+1
+ 	subi r18,1
+ 	sbc r19,__zero_reg__
++	cp r18,__zero_reg__
++	cpc r19,__zero_reg__
+ 	brne .L3
+ 	sts e+1,r25
+ 	sts e,r24

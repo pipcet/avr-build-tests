@@ -1,0 +1,181 @@
+DIR 25a794464f5cc0873941b95f324761a9
+--- printf-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-14 11:39:11.595780495 +0000
++++ printf-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-14 11:39:16.271723536 +0000
+@@ -39,10 +39,15 @@
+ 	push r17
+ 	push r16
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-4
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,5
+ 	breq .L2
+ .L3:
+@@ -58,8 +63,15 @@
+ 	push r15
+ 	push r14
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-2
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,6
+ 	brne .L3
+ 	ldi r24,lo8(97)
+@@ -72,8 +84,15 @@
+ 	push r11
+ 	push r10
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-2
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,1
+ 	brne .L3
+ 	ldi r24,lo8(.LC3)
+@@ -83,10 +102,18 @@
+ 	push r13
+ 	push r12
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-2
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	or r24,r25
+-	brne .L3
++	breq .+2
++	rjmp .L3
+ 	push r17
+ 	push r16
+ 	ldi r28,lo8(.LC4)
+@@ -119,10 +146,15 @@
+ 	push r29
+ 	push r28
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-4
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,6
+ 	breq .+2
+ 	rjmp .L3
+@@ -134,10 +166,15 @@
+ 	push r29
+ 	push r28
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-4
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,1
+ 	breq .+2
+ 	rjmp .L3
+@@ -146,10 +183,15 @@
+ 	push r29
+ 	push r28
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-4
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	or r24,r25
+ 	breq .+2
+ 	rjmp .L3
+@@ -164,10 +206,15 @@
+ 	push r25
+ 	push r24
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-4
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,1
+ 	breq .+2
+ 	rjmp .L3
+@@ -180,10 +227,15 @@
+ 	push r25
+ 	push r24
+ 	call printf
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in r18,__SP_L__
++	in r19,__SP_H__
++	subi r18,-4
++	sbci r19,-1
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r19
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r18
+ 	sbiw r24,7
+ 	breq .+2
+ 	rjmp .L3

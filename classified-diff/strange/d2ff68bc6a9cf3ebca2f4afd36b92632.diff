@@ -1,0 +1,17 @@
+DIR 0e1b99f290c323efb5528a465aeb187a
+--- pr27073.c.{avr25}.{s}.{vanilla}.s	2020-08-14 11:35:33.686432537 +0000
++++ pr27073.c.{avr25}.{s}.{ccmode}.s	2020-08-14 11:35:36.734395479 +0000
+@@ -114,8 +114,11 @@
+ 	rcall foo
+ 	movw r30,r28
+ 	adiw r30,1
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r29
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r28
+ 	ldi r19,0
+ 	ldi r18,0
+ 	ldi r16,lo8(5)

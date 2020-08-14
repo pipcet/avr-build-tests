@@ -1,0 +1,76 @@
+DIR 008797a81000b1f2a9ec99a1d6e38be3
+--- pr20527-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-14 11:33:56.379614962 +0000
++++ pr20527-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-14 11:34:00.283567550 +0000
+@@ -19,20 +19,23 @@
+ 	push r15
+ 	push r16
+ 	push r17
++	push r28
++	push r29
+ /* prologue: function */
+ /* frame size = 0 */
+-/* stack size = 10 */
+-.L__stack_usage = 10
++/* stack size = 12 */
++.L__stack_usage = 12
+ 	movw r30,r24
+-	movw r12,r22
++	movw r28,r22
+ 	movw r24,r18
+ 	movw r26,r20
+-	movw r8,r14
+-	movw r10,r16
+-	cp r8,r24
+-	cpc r9,r25
+-	cpc r10,r26
+-	cpc r11,r27
++	mov r12,r14
++	mov r13,r15
++	movw r14,r16
++	cp r12,r24
++	cpc r13,r25
++	cpc r14,r26
++	cpc r15,r27
+ 	brlt .L1
+ 	movw r20,r18
+ 	lsl r20
+@@ -44,16 +47,13 @@
+ 	adc r25,r21
+ 	add r30,r20
+ 	adc r31,r21
+-	lsl r8
+-	rol r9
+-	lsl r8
+-	rol r9
+-	ldi r18,4
+-	add r12,r18
+-	adc r13,__zero_reg__
+-	movw r18,r8
+-	add r18,r12
+-	adc r19,r13
++	lsl r12
++	rol r13
++	lsl r12
++	rol r13
++	adiw r28,4
++	add r28,r12
++	adc r29,r13
+ 	mov r12,__zero_reg__
+ 	mov r13,__zero_reg__
+ 	movw r14,r12
+@@ -88,11 +88,13 @@
+ 	st Z+,r21
+ 	st Z+,r22
+ 	st Z+,r23
+-	cp r18,r24
+-	cpc r19,r25
++	cp r28,r24
++	cpc r29,r25
+ 	brne .L3
+ .L1:
+ /* epilogue start */
++	pop r29
++	pop r28
+ 	pop r17
+ 	pop r16
+ 	pop r15

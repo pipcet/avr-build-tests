@@ -1,0 +1,37 @@
+DIR 0e253982a049d5fd2921006d59eb5d02
+--- 20090113-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-14 11:35:34.366424269 +0000
++++ 20090113-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-14 11:35:38.750370967 +0000
+@@ -72,10 +72,8 @@
+ 	movw r30,r14
+ 	movw r26,r28
+ 	adiw r26,1
+-	ldi r24,lo8(-1)
+-	ldi r25,lo8(-1)
+-	add r24,r28
+-	adc r25,r29
++	movw r24,r28
++	sbiw r24,1
+ 	add r18,r24
+ 	adc r19,r25
+ .L4:
+@@ -184,9 +182,9 @@
+ /* frame size = 118 */
+ /* stack size = 118 */
+ .L__stack_usage = 118
++	ldi r24,lo8(36)
+ 	movw r30,r28
+ 	adiw r30,57
+-	ldi r24,lo8(36)
+ 	movw r26,r30
+ 	0:
+ 	st X+,__zero_reg__
+@@ -211,8 +209,8 @@
+ 	ldi r19,0
+ 	std Y+56,r19
+ 	std Y+55,r18
+-	sbiw r30,40
+ 	ldi r20,lo8(30)
++	sbiw r30,40
+ 	movw r26,r30
+ 	0:
+ 	st X+,__zero_reg__

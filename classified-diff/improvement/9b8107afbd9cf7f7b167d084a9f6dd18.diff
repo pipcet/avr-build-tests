@@ -1,0 +1,32 @@
+DIR 1e99d5f9bc757db22bef2868e50ef8a0
+--- 20000113-1.c.{avr25}.{3}.{vanilla}.s	2020-08-14 11:38:21.296393081 +0000
++++ 20000113-1.c.{avr25}.{3}.{ccmode}.s	2020-08-14 11:38:24.124358646 +0000
+@@ -13,20 +13,21 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	movw r30,r24
++	mov r25,r24
++	andi r25,lo8(1)
+ 	mov r24,r22
+ 	andi r24,lo8(3)
+ 	andi r22,3
+ 	clr r23
+-	movw r18,r30
+-	andi r18,1
+-	clr r19
+-	sub r22,r18
+-	sbc r23,r19
++	andi r30,1
++	clr r31
++	sub r22,r30
++	sbc r23,r31
+ 	rcall __mulqi3
+ 	add r20,r24
+ 	andi r20,lo8(7)
+-	sbrs r30,0
+-	rjmp .L3
++	tst r25
++	breq .L3
+ 	andi r20,lo8(7)
+ 	cpi r20,lo8(5)
+ 	brne .L3

@@ -1,0 +1,23 @@
+DIR 10ef96b675e607570aae47f462f32dce
+--- pr34099-2.c.{avr3}.{3}.{vanilla}.s	2020-08-14 11:35:56.846150923 +0000
++++ pr34099-2.c.{avr3}.{3}.{ccmode}.s	2020-08-14 11:35:59.934113369 +0000
+@@ -69,17 +69,12 @@
+ 	mov r18,r22
+ 	mov r19,r23
+ 	or r24,r25
+-	breq .L14
+ 	ldi r24,lo8(1)
++	breq .L14
+ 	or r18,r19
+-	breq .L15
++	breq .L14
+ 	ldi r24,0
+-.L15:
+-	ldi r25,0
+-/* epilogue start */
+-	ret
+ .L14:
+-	ldi r24,lo8(1)
+ 	ldi r25,0
+ /* epilogue start */
+ 	ret

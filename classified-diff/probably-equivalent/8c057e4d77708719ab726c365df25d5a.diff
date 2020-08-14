@@ -1,0 +1,29 @@
+DIR 2885c656f2da67c1a5cfae86470b33c3
+--- pr59358.c.{atmega128}.{3}.{vanilla}.s	2020-08-14 11:40:07.243102530 +0000
++++ pr59358.c.{atmega128}.{3}.{ccmode}.s	2020-08-14 11:40:11.703048184 +0000
+@@ -75,9 +75,9 @@
+ 	sbci r17,-1
+ 	std Y+2,r17
+ 	std Y+1,r16
+-	ldi r24,2
+-	add r14,r24
+-	adc r15,__zero_reg__
++	movw r24,r14
++	adiw r24,2
++	movw r14,r24
+ .L18:
+ 	ldi r22,lo8(16)
+ 	ldi r23,0
+@@ -147,9 +147,9 @@
+ 	sbci r17,-1
+ 	std Y+2,r17
+ 	std Y+1,r16
+-	ldi r24,2
+-	add r14,r24
+-	adc r15,__zero_reg__
++	movw r24,r14
++	adiw r24,2
++	movw r14,r24
+ 	cpi r16,17
+ 	cpc r17,__zero_reg__
+ 	breq .+2

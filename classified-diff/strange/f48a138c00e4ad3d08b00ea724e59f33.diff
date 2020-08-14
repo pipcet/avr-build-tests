@@ -1,0 +1,32 @@
+DIR 107e65474a5ee44fa017daaf22f5c78f
+--- pr23929.c.{avr3}.{2}.{vanilla}.s	2020-08-14 12:26:33.629225011 +0000
++++ pr23929.c.{avr3}.{2}.{ccmode}.s	2020-08-14 12:26:37.269171161 +0000
+@@ -40,6 +40,8 @@
+ .L2:
+ 	subi r20,1
+ 	sbc r21,__zero_reg__
++	cp r20,__zero_reg__
++	cpc r21,__zero_reg__
+ 	breq .L8
+ .L4:
+ 	cpi r16,88
+@@ -64,13 +66,15 @@
+ 	std Z+1,r24
+ 	adiw r30,2
+ 	adiw r26,2
+-	cp r30,r18
+-	cpc r31,r19
++	cp r18,r30
++	cpc r19,r31
+ 	brne .L3
+-	mov r14,r30
+-	mov r15,r31
++	mov r14,r18
++	mov r15,r19
+ 	subi r20,1
+ 	sbc r21,__zero_reg__
++	cp r20,__zero_reg__
++	cpc r21,__zero_reg__
+ 	brne .L4
+ .L8:
+ /* epilogue start */

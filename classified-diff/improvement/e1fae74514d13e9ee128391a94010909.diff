@@ -1,0 +1,39 @@
+DIR 0e253982a049d5fd2921006d59eb5d02
+--- 20090113-1.c.{avr3}.{2}.{vanilla}.s	2020-08-14 11:35:34.114427333 +0000
++++ 20090113-1.c.{avr3}.{2}.{ccmode}.s	2020-08-14 11:35:37.838382056 +0000
+@@ -80,10 +80,9 @@
+ 	mov r27,r29
+ 	mov r26,r28
+ 	adiw r26,1
+-	ldi r24,lo8(-1)
+-	ldi r25,lo8(-1)
+-	add r24,r28
+-	adc r25,r29
++	mov r25,r29
++	mov r24,r28
++	sbiw r24,1
+ 	add r18,r24
+ 	adc r19,r25
+ .L4:
+@@ -199,10 +198,10 @@
+ /* frame size = 118 */
+ /* stack size = 118 */
+ .L__stack_usage = 118
++	ldi r24,lo8(36)
+ 	mov r31,r29
+ 	mov r30,r28
+ 	adiw r30,57
+-	ldi r24,lo8(36)
+ 	mov r27,r31
+ 	mov r26,r30
+ 	0:
+@@ -229,8 +228,8 @@
+ 	ldi r19,0
+ 	std Y+56,r19
+ 	std Y+55,r18
+-	sbiw r30,40
+ 	ldi r20,lo8(30)
++	sbiw r30,40
+ 	mov r27,r31
+ 	mov r26,r30
+ 	0:

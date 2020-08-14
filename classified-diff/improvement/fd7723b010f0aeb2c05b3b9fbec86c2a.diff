@@ -1,0 +1,40 @@
+DIR 047576e39fbf25cca64b2b54050945df
+--- 920501-9.c.{avr25}.{s}.{vanilla}.s	2020-08-14 12:22:55.788463940 +0000
++++ 920501-9.c.{avr25}.{s}.{ccmode}.s	2020-08-14 12:22:59.884402703 +0000
+@@ -216,10 +216,9 @@
+ 	mov r15,r24
+ 	push r15
+ 	push r14
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
+ 	push r19
+ 	push r18
+ 	rcall sprintf
+@@ -249,10 +248,8 @@
+ 	push r24
+ 	push r15
+ 	push r14
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-	add r24,r28
+-	adc r25,r29
++	movw r24,r28
++	adiw r24,1
+ 	push r25
+ 	push r24
+ 	rcall sprintf
+@@ -301,8 +298,7 @@
+ 	ldi r25,hi8(.LC5)
+ 	rcall strcmp
+ 	or r24,r25
+-	breq .+2
+-	rjmp .L11
++	brne .L11
+ 	ldi r24,lo8(-86)
+ 	push r24
+ 	ldi r24,lo8(-69)

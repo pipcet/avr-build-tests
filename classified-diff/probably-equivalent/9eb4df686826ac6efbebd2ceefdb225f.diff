@@ -1,0 +1,20 @@
+DIR 1ac04ca3c8eb88e037629fa86c8f0018
+--- pr39100.c.{avr3}.{s}.{vanilla}.s	2020-08-14 11:37:48.468792756 +0000
++++ pr39100.c.{avr3}.{s}.{ccmode}.s	2020-08-14 11:37:53.060736855 +0000
+@@ -149,11 +149,11 @@
+ 	std Y+13,__zero_reg__
+ 	std Y+2,__zero_reg__
+ 	std Y+1,__zero_reg__
+-	mov r15,r29
+-	mov r14,r28
+-	ldi r24,5
+-	add r14,r24
+-	adc r15,__zero_reg__
++	mov r25,r29
++	mov r24,r28
++	adiw r24,5
++	mov r15,r25
++	mov r14,r24
+ 	std Y+4,r15
+ 	std Y+3,r14
+ 	ldi r24,lo8(1)
