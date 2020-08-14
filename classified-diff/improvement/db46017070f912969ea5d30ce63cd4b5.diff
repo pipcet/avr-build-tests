@@ -1,0 +1,18 @@
+DIR 9652b31a23c30547f228e3bdbda29d95
+--- pr52092.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:55:50.396500205 +0000
++++ pr52092.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:55:51.416490004 +0000
+@@ -30,12 +30,10 @@
+ 	lds r24,b
+ 	lds r25,b+1
+ .L3:
+-	mov r25,r24
+-	lsl r25
+-	add r24,r25
+ 	ldi r30,lo8(f)
+ 	ldi r31,hi8(f)
+-	brne .L4
++	cpse r24,__zero_reg__
++	rjmp .L4
+ 	ldi r30,0
+ 	ldi r31,0
+ .L4:

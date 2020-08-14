@@ -1,0 +1,108 @@
+DIR df207dc9143c6fabf60b69b9c3035103
+--- bad.c.{avr3}.{s}.{vanilla}.s	2020-08-13 19:01:49.598830103 +0000
++++ bad.c.{avr3}.{s}.{ccmode}.s	2020-08-13 19:01:50.614813807 +0000
+@@ -28,51 +28,45 @@
+ /* frame size = 8 */
+ /* stack size = 16 */
+ .L__stack_usage = 16
+-	mov r16,r18
+-	mov r17,r19
+-	mov r18,r20
+-	mov r19,r21
+-	clr r12
+-	clr r13
+-	clr r14
+-	clr r15
+-	sub r12,r16
+-	sbc r13,r17
+-	sbc r14,r18
+-	sbc r15,r19
++	mov r31,r22
++	mov r30,r23
++	mov r12,r18
++	mov r13,r19
++	mov r14,r20
++	mov r15,r21
++	clr r16
++	clr r17
++	clr r18
++	clr r19
++	sub r16,r12
++	sbc r17,r13
++	sbc r18,r14
++	sbc r19,r15
+ 	mov r20,r22
+ 	mov r21,r23
+ 	mov r22,r24
+ 	mov r23,r25
+-	or r16,r17
+-	or r16,r18
+-	or r16,r19
++	or r12,r13
++	or r12,r14
++	or r12,r15
+ 	brne .L2
+-	com r23
+-	com r22
+-	com r21
+-	neg r20
+-	sbci r21,lo8(-1)
+-	sbci r22,lo8(-1)
+-	sbci r23,lo8(-1)
++	clr r12
++	clr r13
++	clr r14
++	clr r15
++	sub r12,r20
++	sbc r13,r21
++	sbc r14,r22
++	sbc r15,r23
+ .L3:
+-	mov r18,r12
+-	std Y+1,r12
+-	std Y+2,r13
+-	std Y+3,r14
+-	std Y+4,r15
+-	mov r24,r20
+-	std Y+5,r20
+-	std Y+6,r21
+-	std Y+7,r22
+-	std Y+8,r23
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+-	mov r22,r24
+-	ldd r24,Y+7
+-	ldd r25,Y+8
++	mov r20,r18
++	mov r21,r19
++	mov r22,r12
++	mov r23,r13
++	mov r18,r16
++	mov r19,r17
++	mov r24,r14
++	mov r25,r15
+ /* epilogue start */
+ 	adiw r28,8
+ 	in __tmp_reg__,__SREG__
+@@ -90,10 +84,14 @@
+ 	pop r12
+ 	ret
+ .L2:
+-	com r20
+-	com r21
+-	com r22
+-	com r23
++	mov r13,r30
++	mov r12,r31
++	mov r15,r25
++	mov r14,r24
++	com r12
++	com r13
++	com r14
++	com r15
+ 	rjmp .L3
+ 	.size	__negdi2, .-__negdi2
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200813 (experimental)"

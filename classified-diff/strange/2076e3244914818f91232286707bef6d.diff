@@ -1,0 +1,20 @@
+DIR cf0ee995841b1b353959cc06283c1400
+--- pr81290.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 19:00:29.408151035 +0000
++++ pr81290.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 19:00:30.816127220 +0000
+@@ -17,6 +17,7 @@
+ 	ldi r24,lo8(19)
+ 	ldi r25,0
+ .L2:
++	movw r20,r18
+ 	lsl r18
+ 	rol r19
+ 	sbiw r24,1
+@@ -25,7 +26,7 @@
+ 	ldi r25,0
+ 	sts vz+1,r25
+ 	sts vz,r24
+-	or r18,r19
++	or r20,r21
+ 	brne .L4
+ 	call abort
+ .L4:

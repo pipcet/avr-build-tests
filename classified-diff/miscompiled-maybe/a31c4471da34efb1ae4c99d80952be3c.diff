@@ -1,0 +1,16 @@
+DIR 9652b31a23c30547f228e3bdbda29d95
+--- pr52092.c.{avr31}.{s}.{vanilla}.s	2020-08-13 18:55:49.940504765 +0000
++++ pr52092.c.{avr31}.{s}.{ccmode}.s	2020-08-13 18:55:50.948494684 +0000
+@@ -30,11 +30,9 @@
+ 	lds r24,b
+ 	lds r25,b+1
+ .L3:
+-	mov r25,r24
+-	lsl r25
+-	add r24,r25
+ 	ldi r30,lo8(f)
+ 	ldi r31,hi8(f)
++	tst r24
+ 	brne .L4
+ 	ldi r30,0
+ 	ldi r31,0
