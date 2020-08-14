@@ -1,0 +1,27 @@
+DIR 3cde40510ffff7862c3e4bd43bf28e2f
+--- pr58946.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:47:32.313711297 +0000
++++ pr58946.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:47:33.917693129 +0000
+@@ -13,19 +13,12 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	sbrc r25,7
+-	rjmp .L4
+-	sbiw r24,0
+-	brne .L2
+-.L4:
+-	ldi r24,0
+-	ldi r25,lo8(-128)
+-.L2:
+-	sbrs r25,7
+-	rjmp .L3
++	cp __zero_reg__,r24
++	cpc __zero_reg__,r25
++	brlt .L2
+ 	ldi r25,0
+ 	ldi r24,0
+-.L3:
++.L2:
+ /* epilogue start */
+ 	ret
+ 	.size	foo, .-foo

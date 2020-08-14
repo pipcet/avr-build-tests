@@ -1,0 +1,25 @@
+DIR c421593465160c325345d1b660178120
+--- 20000917-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:39:16.992306549 +0000
++++ 20000917-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:39:18.256295172 +0000
+@@ -69,18 +69,12 @@
+ /* frame size = 6 */
+ /* stack size = 8 */
+ .L__stack_usage = 8
+-	std Y+2,__zero_reg__
+-	std Y+1,__zero_reg__
+-	std Y+4,__zero_reg__
+-	std Y+3,__zero_reg__
+-	std Y+6,__zero_reg__
+-	std Y+5,__zero_reg__
+-	ldd r19,Y+2
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+ 	ldi r18,0
++	ldi r19,0
+ 	ldi r20,0
++	ldi r21,0
+ 	ldi r22,0
++	ldi r23,0
+ 	ldi r24,0
+ 	ldi r25,0
+ /* epilogue start */

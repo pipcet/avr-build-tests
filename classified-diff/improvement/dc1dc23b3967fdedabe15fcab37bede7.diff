@@ -1,0 +1,33 @@
+DIR b3d29bd29fb5aeed2e1f81cdae8eff77
+--- 950628-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:38:33.656699136 +0000
++++ 950628-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:38:34.708689541 +0000
+@@ -20,12 +20,11 @@
+ /* frame size = 5 */
+ /* stack size = 7 */
+ .L__stack_usage = 7
+-	ldi r24,lo8(4)
+-	mov r21,r24
+-	ldi r22,0
+ 	ldi r18,lo8(1)
+ 	ldi r19,lo8(2)
+ 	ldi r20,lo8(3)
++	ldi r21,lo8(4)
++	ldi r22,0
+ 	ldi r23,0
+ 	ldi r24,0
+ 	ldi r25,0
+@@ -53,12 +52,11 @@
+ /* frame size = 5 */
+ /* stack size = 7 */
+ .L__stack_usage = 7
+-	ldi r24,lo8(4)
+-	mov r21,r24
+-	ldi r22,0
+ 	ldi r18,lo8(1)
+ 	ldi r19,lo8(2)
+ 	ldi r20,lo8(3)
++	ldi r21,lo8(4)
++	ldi r22,0
+ 	ldi r23,0
+ 	ldi r24,0
+ 	ldi r25,0

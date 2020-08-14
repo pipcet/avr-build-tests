@@ -1,0 +1,47 @@
+DIR 3f4681636faa37538bedf8b4fc260300
+--- 20030319-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:47:49.065522310 +0000
++++ 20030319-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:47:50.057511170 +0000
+@@ -35,33 +35,22 @@
+ 	ldd r23,Y+12
+ 	com r22
+ 	com r23
+-	ldd r30,Y+13
+-	ldd r31,Y+14
+-	com r30
+-	com r31
+-	ldd r24,Y+15
+-	ldd r25,Y+16
++	ldd r24,Y+13
++	ldd r25,Y+14
+ 	com r24
+ 	com r25
++	ldd r30,Y+15
++	ldd r31,Y+16
++	com r30
++	com r31
+ 	ldd r20,Y+9
+ 	ldd r21,Y+10
+ 	com r20
+ 	com r21
+-	mov r18,r20
+-	std Y+2,r21
+-	std Y+1,r20
+-	mov r20,r22
+-	std Y+4,r23
+-	std Y+3,r22
+-	mov r22,r30
+-	std Y+6,r31
+-	std Y+5,r30
+-	std Y+8,r25
+-	std Y+7,r24
+-	ldd r19,Y+2
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+-	ldd r25,Y+8
++	movw r18,r20
++	movw r20,r22
++	movw r22,r24
++	movw r24,r30
+ /* epilogue start */
+ 	adiw r28,16
+ 	in __tmp_reg__,__SREG__
