@@ -1,0 +1,66 @@
+DIR 34380ab936b027cb635f0eedbaeed867
+--- loop-5.c.{avr25}.{s}.{vanilla}.s	2020-08-14 10:16:30.690444921 +0000
++++ loop-5.c.{avr25}.{s}.{ccmode}.s	2020-08-14 10:16:35.718364488 +0000
+@@ -30,8 +30,10 @@
+ 	ldi r24,lo8(8)
+ 	ldi r30,lo8(.LC0)
+ 	ldi r31,hi8(.LC0)
+-	movw r26,r28
+-	adiw r26,1
++	movw r22,r28
++	subi r22,-1
++	sbci r23,-1
++	movw r26,r22
+ 	0:
+ 	ld r0,Z+
+ 	st X+,r0
+@@ -47,20 +49,17 @@
+ 	movw r16,r24
+ 	subi r16,-4
+ 	sbci r17,-1
+-	ldi r30,lo8(1)
+-	ldi r31,0
++	ldi r18,lo8(1)
++	ldi r19,0
+ 	ldi r20,lo8(4)
+ 	ldi r21,0
+ .L2:
++	movw r30,r18
+ 	sbiw r30,1
+ 	lsl r30
+ 	rol r31
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
+-	add r30,r18
+-	adc r31,r19
++	add r30,r22
++	adc r31,r23
+ 	ld r18,Z
+ 	ldd r19,Z+1
+ 	cpi r24,4
+@@ -71,17 +70,16 @@
+ .L7:
+ 	rcall abort
+ .L5:
+-	movw r22,r20
+-	subi r22,1
+-	sbc r23,__zero_reg__
++	movw r30,r20
++	sbiw r30,1
+ 	cpi r20,1
+ 	cpc r21,__zero_reg__
+ 	brne .L3
+-	ldi r22,lo8(4)
+-	ldi r23,0
++	ldi r30,lo8(4)
++	ldi r31,0
+ .L3:
+-	movw r30,r20
+-	movw r20,r22
++	movw r18,r20
++	movw r20,r30
+ 	rjmp .L2
+ .L4:
+ 	adiw r24,1

@@ -1,0 +1,61 @@
+DIR 02d9c6a432721d5a9db1b87b75f67890
+--- pr34176.c.{avr3}.{2}.{vanilla}.s	2020-08-14 10:08:51.033783691 +0000
++++ pr34176.c.{avr3}.{2}.{ccmode}.s	2020-08-14 10:08:54.029735984 +0000
+@@ -55,7 +55,6 @@
+ 	rcall .
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-.L12:
+ /* prologue: function */
+ /* frame size = 2 */
+ /* stack size = 2 */
+@@ -63,16 +62,20 @@
+ 	mov r25,r29
+ 	mov r24,r28
+ 	adiw r24,1
++	mov r15,r25
++	mov r14,r24
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
+ 	mov r25,r17
+ 	mov r24,r16
++	mov r12,r14
++	mov r13,r15
+ .L9:
+ 	call foo
+ 	cp r16,__zero_reg__
+ 	cpc r17,__zero_reg__
+-	breq .L12
++	breq .L7
+ 	lsl r16
+ 	rol r17
+ 	lsl r16
+@@ -83,9 +86,8 @@
+ 	ror r14
+ 	asr r15
+ 	ror r14
+-	mov r25,r29
+-	mov r24,r28
+-	adiw r24,1
++	mov r24,r12
++	mov r25,r13
+ 	call hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
+@@ -102,6 +104,15 @@
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+ 	ret
++.L7:
++	mov r24,r12
++	mov r25,r13
++	call hash_find_entry
++	ldd r16,Y+1
++	ldd r17,Y+2
++	mov r25,r17
++	mov r24,r16
++	rjmp .L9
+ 	.size	main, .-main
+ 	.local	count.0
+ 	.comm	count.0,2,1
