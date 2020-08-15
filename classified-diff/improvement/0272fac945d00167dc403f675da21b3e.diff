@@ -1,0 +1,60 @@
+DIR 1067414cc55e8dcb4464795189772acf
+--- 920302-1.c.{avr25}.{3}.{vanilla}.s	2020-08-10 18:17:41.037897203 +0000
++++ 920302-1.c.{avr25}.{3}.{ccmode}.s	2020-08-10 18:17:44.385895134 +0000
+@@ -41,14 +41,14 @@
+ 	ret
+ .L3:
+ 	movw r30,r26
+-	st Z,r24
+ 	adiw r26,1
++	st Z,r24
+ 	movw r30,r18
++	subi r18,-2
++	sbci r19,-1
+ 	ld __tmp_reg__,Z+
+ 	ld r31,Z
+ 	mov r30,__tmp_reg__
+-	subi r18,-2
+-	sbci r19,-1
+ 	subi r30,lo8(-(gs(.L2)))
+ 	sbci r31,hi8(-(gs(.L2)))
+ 	ijmp
+@@ -107,32 +107,23 @@
+ 	lds r25,buf+1
+ 	cpi r24,120
+ 	sbci r25,121
+-	breq .L15
+-.L12:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L13:
+-	or r24,r25
+-	brne .L16
+-	ldi r25,0
+-	ldi r24,0
+-	rcall exit
++	breq .L17
+ .L15:
++	rcall abort
++.L17:
+ 	lds r24,buf+2
+ 	lds r25,buf+2+1
+ 	cpi r24,120
+ 	sbci r25,121
+-	brne .L12
++	brne .L15
+ 	lds r24,buf+4
+ 	lds r25,buf+4+1
+ 	cpi r24,122
+ 	cpc r25,__zero_reg__
+-	brne .L12
++	brne .L15
+ 	ldi r25,0
+ 	ldi r24,0
+-	rjmp .L13
+-.L16:
+-	rcall abort
++	rcall exit
+ 	.size	main, .-main
+ .global	p
+ 	.section .bss

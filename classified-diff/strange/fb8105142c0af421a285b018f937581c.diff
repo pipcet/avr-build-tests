@@ -1,0 +1,17 @@
+DIR 27afb841c39100d013b276ac98aadfa3
+--- 20050224-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-14 11:40:03.087153173 +0000
++++ 20050224-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-14 11:40:06.563110817 +0000
+@@ -120,9 +120,10 @@
+ 	cpc r26,r6
+ 	cpc r27,r7
+ 	brsh .L9
+-	ldi r16,-1
+-	sub r2,r16
+-	sbc r3,r16
++	movw r16,r2
++	subi r16,-1
++	sbci r17,-1
++	movw r2,r16
+ 	rjmp .L8
+ .L9:
+ 	ldd r4,Y+7

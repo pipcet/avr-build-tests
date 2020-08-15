@@ -1,0 +1,34 @@
+DIR 2a2c10fb0ef37bc574f4773fcc363e7f
+--- ashldi-1.c.{avr25}.{3}.{vanilla}.s	2020-08-10 18:25:10.986338427 +0000
++++ ashldi-1.c.{avr25}.{3}.{ccmode}.s	2020-08-10 18:25:19.050357448 +0000
+@@ -62,10 +62,11 @@
+ 	cpi r30,1
+ 	cpc r31,__zero_reg__
+ 	breq .L4
++.L12:
+ 	movw r24,r30
+ 	sbiw r24,2
+ 	sbiw r24,62
+-	brsh .L14
++	brsh .L15
+ .L5:
+ 	adiw r30,1
+ 	adiw r26,8
+@@ -75,7 +76,7 @@
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rcall exit
+-.L14:
++.L15:
+ 	ld r18,X
+ 	adiw r26,1
+ 	ld r19,X
+@@ -144,7 +145,7 @@
+ 	adiw r26,8
+ 	ldi r30,lo8(2)
+ 	ldi r31,0
+-	rjmp .L8
++	rjmp .L12
+ 	.size	main, .-main
+ 	.section	.rodata
+ 	.type	data, @object

@@ -1,0 +1,17 @@
+DIR 0e1b99f290c323efb5528a465aeb187a
+--- pr27073.c.{atmega128}.{3}.{vanilla}.s	2020-08-14 11:35:34.206426215 +0000
++++ pr27073.c.{atmega128}.{3}.{ccmode}.s	2020-08-14 11:35:37.530385800 +0000
+@@ -120,8 +120,11 @@
+ 	movw r24,r28
+ 	adiw r24,1
+ 	call foo
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r29
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r28
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+ 	cpi r24,100

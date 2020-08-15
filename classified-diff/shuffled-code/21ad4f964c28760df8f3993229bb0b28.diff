@@ -1,0 +1,25 @@
+DIR 22bb9dd13d2e2afb9fab90a12c95d1be
+--- pr85582-1.c.{avr3}.{s}.{vanilla}.s	2020-08-10 18:22:21.757867851 +0000
++++ pr85582-1.c.{avr3}.{s}.{ccmode}.s	2020-08-10 18:22:24.669877240 +0000
+@@ -32,6 +32,10 @@
+ 	lds r15,c+5
+ 	lds r30,c+6
+ 	lds r17,c+7
++	mov r27,r9
++	mov r26,r8
++	andi r26,5
++	clr r27
+ 	mov r18,r10
+ 	mov r19,r11
+ 	mov r20,r12
+@@ -40,10 +44,6 @@
+ 	mov r23,r15
+ 	mov r24,r30
+ 	mov r25,r17
+-	mov r27,r9
+-	mov r26,r8
+-	andi r26,5
+-	clr r27
+ 	mov r16,r26
+ 	call __ashrdi3
+ 	mov r6,r18

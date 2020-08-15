@@ -1,0 +1,21 @@
+DIR 2885c656f2da67c1a5cfae86470b33c3
+--- pr59358.c.{avr25}.{s}.{vanilla}.s	2020-08-14 11:40:06.755108477 +0000
++++ pr59358.c.{avr25}.{s}.{ccmode}.s	2020-08-14 11:40:10.515062660 +0000
+@@ -72,8 +72,8 @@
+ 	sbc r19,__zero_reg__
+ 	cpi r18,8
+ 	cpc r19,__zero_reg__
+-	brsh .L7
+ 	movw r18,r16
++	brsh .L7
+ 	lsl r18
+ 	rol r19
+ .L8:
+@@ -83,7 +83,6 @@
+ .L13:
+ 	rcall abort
+ .L7:
+-	movw r18,r16
+ 	subi r18,4
+ 	sbc r19,__zero_reg__
+ 	cpi r18,4

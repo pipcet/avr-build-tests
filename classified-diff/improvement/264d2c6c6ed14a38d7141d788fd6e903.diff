@@ -1,0 +1,26 @@
+DIR 9a2a5ee261b6ac03e96e271c1b881b85
+--- pr40026.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:56:08.732316978 +0000
++++ pr40026.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:56:09.568308631 +0000
+@@ -26,18 +26,11 @@
+ 	ldi r18,0
+ 	ldi r19,lo8(1)
+ .L2:
+-	std Y+1,__zero_reg__
+-	std Y+2,__zero_reg__
+-	std Y+3,__zero_reg__
+-	std Y+4,__zero_reg__
+-	mov r22,r18
+-	std Y+6,r19
+-	std Y+5,r18
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	ldd r23,Y+6
++	movw r22,r18
+ 	ldi r18,0
++	ldi r19,0
++	ldi r20,0
++	ldi r21,0
+ 	ldi r24,0
+ 	ldi r25,0
+ /* epilogue start */

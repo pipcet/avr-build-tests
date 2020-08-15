@@ -1,0 +1,13 @@
+DIR 23cf94b51ce29b9b89c57be33163c4d4
+--- pr40351.c.{avr3}.{s}.{vanilla}.s	2020-08-13 18:45:03.123484726 +0000
++++ pr40351.c.{avr3}.{s}.{ccmode}.s	2020-08-13 18:45:04.007473625 +0000
+@@ -20,8 +20,8 @@
+ /* stack size = 7 */
+ .L__stack_usage = 7
+ 	call io_apic_read
+-	mov r18,r24
+ 	mov r19,r25
++	mov r18,r24
+ 	ldd r20,Y+3
+ 	ldd r21,Y+4
+ 	ldd r22,Y+5

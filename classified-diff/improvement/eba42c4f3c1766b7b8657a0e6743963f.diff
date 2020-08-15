@@ -1,0 +1,21 @@
+DIR 11c2a2970825d4f0973ce213304ff107
+--- pr36343.c.{avr25}.{3}.{vanilla}.s	2020-08-14 11:36:05.826041712 +0000
++++ pr36343.c.{avr25}.{3}.{ccmode}.s	2020-08-14 11:36:08.170013204 +0000
+@@ -49,8 +49,8 @@
+ 	std Y+3,r22
+ 	std Y+4,r23
+ 	or r24,r25
+-	breq .L7
+ 	movw r24,r28
++	breq .L7
+ 	adiw r24,5
+ 	rcall bar
+ 	ldd r30,Y+5
+@@ -88,7 +88,6 @@
+ 	pop r28
+ 	ret
+ .L7:
+-	movw r24,r28
+ 	adiw r24,1
+ 	rcall bar
+ 	ldd r22,Y+1

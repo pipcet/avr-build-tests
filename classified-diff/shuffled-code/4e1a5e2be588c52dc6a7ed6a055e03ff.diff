@@ -1,0 +1,15 @@
+DIR 4ba6a098b2b567420af5c088d7d3dd29
+--- pr82388.c.{avr3}.{s}.{vanilla}.s	2020-08-10 18:35:30.051240942 +0000
++++ pr82388.c.{avr3}.{s}.{ccmode}.s	2020-08-10 18:35:32.247242788 +0000
+@@ -19,10 +19,10 @@
+ /* frame size = 6 */
+ /* stack size = 8 */
+ .L__stack_usage = 8
+-	ldi r24,lo8(6)
+ 	mov r31,r29
+ 	mov r30,r28
+ 	adiw r30,1
++	ldi r24,lo8(6)
+ 	mov r27,r31
+ 	mov r26,r30
+ 	0:

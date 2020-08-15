@@ -1,0 +1,24 @@
+DIR e6a58c2c58f3c8774333c83b00116741
+--- 20081103-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:40:51.095144836 +0000
++++ 20081103-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:40:52.447121556 +0000
+@@ -74,16 +74,11 @@
+ /* frame size = 9 */
+ /* stack size = 9 */
+ .L__stack_usage = 9
+-	lds r24,A
+-	lds r19,A+1
+-	lds r18,A+2
+-	lds r25,A+3
+-	mov r17,r24
+-	std Y+4,r18
++	lds r17,A
++	lds r18,A+1
++	lds r19,A+2
++	lds r20,A+3
+ 	ldd r16,Y+1
+-	mov r18,r19
+-	ldd r19,Y+4
+-	mov r20,r25
+ 	ldd r21,Y+6
+ 	ldd r22,Y+7
+ 	ldd r23,Y+8

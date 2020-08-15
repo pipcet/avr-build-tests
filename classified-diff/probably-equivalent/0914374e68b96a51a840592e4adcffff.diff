@@ -1,0 +1,74 @@
+DIR 478a675a90ef88e1746ba1816bf9b332
+--- cmpdi-1.c.{avr25}.{3}.{vanilla}.s	2020-08-10 18:34:10.479169692 +0000
++++ cmpdi-1.c.{avr25}.{3}.{ccmode}.s	2020-08-10 18:34:22.079180632 +0000
+@@ -429,14 +429,16 @@
+ 	std Y+13,r18
+ 	rjmp .L45
+ .L41:
+-	ldi r24,13
+-	cp r6,r24
++	ldi r30,13
++	cp r6,r30
+ 	cpc r7,__zero_reg__
+ 	breq .+2
+ 	rjmp .L36
+ 	ldi r24,lo8(-116)
+ 	ldi r25,0
+ .L48:
++	ldd r30,Y+13
++	ldd r31,Y+14
+ 	ldd r18,Z+14
+ 	ldd r19,Z+15
+ 	cp r18,r24
+@@ -463,16 +465,14 @@
+ 	rcall __cmpdi2
+ 	brlo .+2
+ 	rjmp .L63
+-	ldi r18,13
+-	cp r6,r18
++	ldi r24,13
++	cp r6,r24
+ 	cpc r7,__zero_reg__
+ 	breq .+2
+ 	rjmp .L36
+ 	ldi r24,lo8(-116)
+ 	ldi r25,0
+ .L47:
+-	ldd r30,Y+13
+-	ldd r31,Y+14
+ 	adiw r30,20
+ 	std Y+14,r31
+ 	std Y+13,r30
+@@ -610,8 +610,8 @@
+ 	breq .+4
+ 	brlo .+2
+ 	rjmp .L41
+-	ldi r19,-116
+-	cp r6,r19
++	ldi r25,-116
++	cp r6,r25
+ 	cpc r7,__zero_reg__
+ 	brne .L36
+ 	ldi r24,lo8(13)
+@@ -674,8 +674,8 @@
+ .L36:
+ 	rcall abort
+ .L63:
+-	ldi r31,-116
+-	cp r6,r31
++	ldi r19,-116
++	cp r6,r19
+ 	cpc r7,__zero_reg__
+ 	brne .L36
+ 	ldi r24,lo8(13)
+@@ -688,8 +688,8 @@
+ 	std Y+9,r30
+ 	ldd r30,Y+11
+ 	ldd r31,Y+12
+-	cp r26,r30
+-	cpc r27,r31
++	subi r30,lo8(args+64)
++	sbci r31,hi8(args+64)
+ 	breq .+2
+ 	rjmp .L46
+ 	ldi r25,0

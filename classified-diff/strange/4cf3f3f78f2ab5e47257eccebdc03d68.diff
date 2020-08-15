@@ -1,0 +1,43 @@
+DIR 1463f67f13c4bad5499ca3bfa52543c3
+--- pr51877.c.{avr25}.{3}.{vanilla}.s	2020-08-10 18:18:27.985868578 +0000
++++ pr51877.c.{avr25}.{3}.{ccmode}.s	2020-08-10 18:18:32.489865874 +0000
+@@ -40,7 +40,8 @@
+ 	brne 0b
+ 	std Y+3,r22
+ 	ldi r18,lo8(34)
+-	sbiw r30,3
++	movw r30,r28
++	adiw r30,1
+ 	movw r26,r24
+ 	0:
+ 	ld r0,Z+
+@@ -90,11 +91,13 @@
+ 	movw r16,r24
+ 	cpi r22,6
+ 	cpc r23,__zero_reg__
+-	breq .L7
+ 	ldi r22,lo8(7)
+ 	ldi r23,0
+-	movw r24,r28
+-	adiw r24,1
++	ldi r24,lo8(1)
++	ldi r25,0
++	breq .L7
++	add r24,r28
++	adc r25,r29
+ 	rcall bar
+ 	ldi r24,lo8(34)
+ 	movw r30,r28
+@@ -119,10 +122,8 @@
+ 	pop r16
+ 	rjmp baz
+ .L7:
+-	ldi r22,lo8(7)
+-	ldi r23,0
+-	movw r24,r28
+-	adiw r24,1
++	add r24,r28
++	adc r25,r29
+ 	rcall bar
+ 	ldi r24,lo8(34)
+ 	movw r30,r28

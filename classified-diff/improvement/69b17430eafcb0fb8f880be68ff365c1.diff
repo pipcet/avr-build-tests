@@ -1,0 +1,14 @@
+DIR 9bb384fc9bee4b7c964a1edeee3be399
+--- 931102-2.c.{atmega128}.{3}.{vanilla}.s	2020-08-10 18:58:08.116477939 +0000
++++ 931102-2.c.{atmega128}.{3}.{ccmode}.s	2020-08-10 18:58:10.972491462 +0000
+@@ -16,8 +16,8 @@
+ 	movw r18,r24
+ 	andi r24,1
+ 	clr r25
+-	sbrc r18,0
+-	rjmp .L4
++	sbiw r24,0
++	brne .L4
+ .L3:
+ 	adiw r24,1
+ 	asr r19

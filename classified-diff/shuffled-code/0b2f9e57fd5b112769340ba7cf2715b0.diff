@@ -1,0 +1,24 @@
+DIR 4eeaafeee45288a8bb9add44c4048c61
+--- restrict-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 18:48:58.184758344 +0000
++++ restrict-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 18:48:59.576743192 +0000
+@@ -16,17 +16,17 @@
+ 	movw r30,r24
+ 	ld r24,Z
+ 	ldd r25,Z+1
+-	lsl r24
+-	rol r25
+ 	ldi r20,0
+ 	ldi r21,0
+ 	movw r22,r20
+ 	movw r20,r24
++	lsl r20
++	rol r21
+ 	st Z,r20
+ 	std Z+1,r21
+ 	std Z+2,r22
+ 	std Z+3,r23
+-	sbiw r24,2
++	sbiw r24,1
+ 	brne .L4
+ /* epilogue start */
+ 	ret

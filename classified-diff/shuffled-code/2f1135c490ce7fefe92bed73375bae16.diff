@@ -1,0 +1,36 @@
+DIR 576cc3484099a5c0f8e4cc2c85ac16e2
+--- pr20100-1.c.{atmega128}.{2}.{vanilla}.s	2020-08-13 18:34:22.323214362 +0000
++++ pr20100-1.c.{atmega128}.{2}.{ccmode}.s	2020-08-13 18:34:23.771197468 +0000
+@@ -70,11 +70,11 @@
+ 	adiw r24,1
+ 	cp r18,r20
+ 	cpc r19,r21
+-	breq .L9
++	breq .L14
+ 	cpi r24,5
+ 	cpc r25,__zero_reg__
+ 	brne .L10
+-.L9:
++.L14:
+ 	sts g+1,r19
+ 	sts g,r18
+ 	ret
+@@ -108,15 +108,15 @@
+ 	sts g,r24
+ 	call get_n
+ 	sbiw r24,1
+-	brne .L15
++	brne .L16
+ 	lds r24,g
+ 	lds r25,g+1
+ 	sbiw r24,2
+-	brne .L15
++	brne .L16
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit
+-.L15:
++.L16:
+ 	call abort
+ 	.size	main, .-main
+ .global	e

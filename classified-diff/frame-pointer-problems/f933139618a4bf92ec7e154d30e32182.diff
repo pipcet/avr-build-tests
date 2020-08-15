@@ -1,0 +1,33 @@
+DIR 0a8f8be9f2f5a9f67af43a65d7272d4e
+--- 20020413-1.c.{avr25}.{s}.{vanilla}.s	2020-08-14 10:09:45.280919530 +0000
++++ 20020413-1.c.{avr25}.{s}.{ccmode}.s	2020-08-14 10:09:49.000860248 +0000
+@@ -276,6 +276,9 @@
+ 	ldi r24,lo8(8)
+ 	ldi r25,lo8(64)
+ 	rcall test
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	ldi r18,0
+ 	ldi r19,0
+ 	ldi r20,0
+@@ -285,6 +288,9 @@
+ 	ldi r24,lo8(12)
+ 	ldi r25,lo8(64)
+ 	rcall test
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	ldi r18,0
+ 	ldi r19,0
+ 	ldi r20,0
+@@ -294,6 +300,9 @@
+ 	ldi r24,lo8(16)
+ 	ldi r25,lo8(64)
+ 	rcall test
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	ldi r18,0
+ 	ldi r19,0
+ 	ldi r20,0

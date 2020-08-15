@@ -1,0 +1,19 @@
+DIR 70ca088cd6abed4fabbaef8862d77ae2
+--- pr57568.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 18:35:27.642493422 +0000
++++ pr57568.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 18:35:28.850480758 +0000
+@@ -22,10 +22,11 @@
+ 	lds r31,c+1
+ 	ld r24,Z
+ 	ldd r25,Z+1
+-	lsl r24
+-	rol r25
+-	std Z+1,r25
+-	st Z,r24
++	movw r18,r24
++	lsl r18
++	rol r19
++	std Z+1,r19
++	st Z,r18
+ 	or r24,r25
+ 	brne .L10
+ .L2:

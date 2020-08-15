@@ -1,0 +1,50 @@
+DIR 4e4d90ba489cbd08d4c49892dc4fb7ef
+--- 20071102-1.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 18:48:52.348821963 +0000
++++ 20071102-1.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 18:48:53.560808738 +0000
+@@ -44,10 +44,8 @@
+ 	ldi r23,0
+ 	movw r24,r22
+ 	call __addsf3
+-	mov r17,r22
+-	mov r14,r23
+-	mov r15,r24
+-	mov r16,r25
++	movw r16,r22
++	movw r14,r24
+ 	ldi r18,0
+ 	ldi r19,0
+ 	movw r20,r18
+@@ -56,29 +54,10 @@
+ 	ldd r24,Y+11
+ 	ldd r25,Y+12
+ 	call __addsf3
+-	mov r18,r22
+-	mov r20,r22
+-	mov r21,r23
+-	movw r22,r24
+-	std Y+1,r20
+-	std Y+2,r21
+-	std Y+3,r22
+-	std Y+4,r23
+-	mov r20,r17
+-	mov r21,r14
+-	mov r22,r15
+-	mov r23,r16
+-	std Y+5,r20
+-	std Y+6,r21
+-	std Y+7,r22
+-	std Y+8,r23
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+-	mov r22,r17
+-	ldd r24,Y+7
+-	ldd r25,Y+8
++	movw r20,r24
++	movw r18,r22
++	movw r22,r16
++	movw r24,r14
+ /* epilogue start */
+ 	adiw r28,16
+ 	in __tmp_reg__,__SREG__

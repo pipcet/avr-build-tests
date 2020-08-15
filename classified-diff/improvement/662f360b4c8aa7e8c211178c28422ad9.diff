@@ -1,0 +1,56 @@
+DIR 4e4d90ba489cbd08d4c49892dc4fb7ef
+--- 20071102-1.c.{avr3}.{s}.{vanilla}.s	2020-08-13 18:48:52.248823054 +0000
++++ 20071102-1.c.{avr3}.{s}.{ccmode}.s	2020-08-13 18:48:53.444810004 +0000
+@@ -44,10 +44,10 @@
+ 	ldi r24,0
+ 	ldi r25,0
+ 	call __addsf3
+-	mov r17,r22
+-	mov r14,r23
+-	mov r15,r24
+-	mov r16,r25
++	mov r16,r22
++	mov r17,r23
++	mov r14,r24
++	mov r15,r25
+ 	ldi r18,0
+ 	ldi r19,0
+ 	ldi r20,0
+@@ -57,30 +57,14 @@
+ 	ldd r24,Y+11
+ 	ldd r25,Y+12
+ 	call __addsf3
++	mov r20,r24
++	mov r21,r25
+ 	mov r18,r22
+-	mov r20,r22
+-	mov r21,r23
+-	mov r22,r24
+-	mov r23,r25
+-	std Y+1,r20
+-	std Y+2,r21
+-	std Y+3,r22
+-	std Y+4,r23
+-	mov r20,r17
+-	mov r21,r14
+-	mov r22,r15
+-	mov r23,r16
+-	std Y+5,r20
+-	std Y+6,r21
+-	std Y+7,r22
+-	std Y+8,r23
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+-	mov r22,r17
+-	ldd r24,Y+7
+-	ldd r25,Y+8
++	mov r19,r23
++	mov r22,r16
++	mov r23,r17
++	mov r24,r14
++	mov r25,r15
+ /* epilogue start */
+ 	adiw r28,16
+ 	in __tmp_reg__,__SREG__

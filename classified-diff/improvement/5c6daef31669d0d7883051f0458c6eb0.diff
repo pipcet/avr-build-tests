@@ -1,0 +1,16 @@
+DIR 0fe90b20438a7d4f18db789f1c4903d1
+--- pr15262-2.c.{avr3}.{s}.{vanilla}.s	2020-08-13 16:46:10.504755624 +0000
++++ pr15262-2.c.{avr3}.{s}.{ccmode}.s	2020-08-13 16:46:11.716738638 +0000
+@@ -100,11 +100,9 @@
+ 	subi r18,-7
+ 	sbci r19,-1
+ 	mov r20,r18
+-	std Y+2,r19
+-	std Y+1,r18
++	mov r21,r19
+ 	ldi r16,lo8(X)
+ 	ldi r17,hi8(X)
+-	ldd r21,Y+2
+ 	ldd r22,Y+3
+ 	ldd r23,Y+4
+ 	ldd r24,Y+5

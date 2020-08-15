@@ -1,0 +1,21 @@
+DIR 82f69a6512ffe9d32a35d429233aedaf
+--- 950704-1.c.{avr25}.{3}.{vanilla}.s	2020-08-10 18:52:14.039718670 +0000
++++ 950704-1.c.{avr25}.{3}.{ccmode}.s	2020-08-10 18:52:17.123719539 +0000
+@@ -61,8 +61,8 @@
+ 	mov r25,r26
+ 	ldi r26,0
+ 	rcall __cmpdi2_s8
+-	brlt .L2
+ 	mov r18,r9
++	brlt .L2
+ 	ldd r19,Y+4
+ 	ldd r20,Y+3
+ 	mov r21,r27
+@@ -121,7 +121,6 @@
+ 	pop r2
+ 	ret
+ .L2:
+-	mov r18,r9
+ 	ldd r19,Y+4
+ 	ldd r20,Y+3
+ 	mov r21,r27

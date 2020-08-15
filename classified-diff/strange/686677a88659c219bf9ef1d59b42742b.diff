@@ -1,0 +1,18 @@
+DIR 3075770136d5310a13c251e15bf2ba41
+--- pr71494.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:27:10.354593823 +0000
++++ pr71494.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:27:13.394599647 +0000
+@@ -55,9 +55,11 @@
+ 	ldi r25,0
+ 	std Y+2,r25
+ 	std Y+1,r24
+-	movw r24,r28
+-	adiw r24,1
+-	movw r2,r24
++	clr r2
++	inc r2
++	mov r3,__zero_reg__
++	add r2,r28
++	adc r3,r29
+ 	rcall test.0
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2

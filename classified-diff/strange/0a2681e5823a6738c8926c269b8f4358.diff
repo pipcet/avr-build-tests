@@ -1,0 +1,18 @@
+DIR 8f5d78d2547230ad55877a9eb9e9fc3a
+--- 920501-6.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:56:36.740010283 +0000
++++ 920501-6.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:56:51.716091825 +0000
+@@ -589,9 +589,11 @@
+ 	ldi r24,lo8(.LC1)
+ 	ldi r25,hi8(.LC1)
+ 	rcall str2llu
+-	movw r30,r28
+-	adiw r30,1
+-	movw r8,r30
++	clr r8
++	inc r8
++	mov r9,__zero_reg__
++	add r8,r28
++	adc r9,r29
+ 	rcall plist
+ 	ldd r18,Y+1
+ 	ldd r19,Y+2

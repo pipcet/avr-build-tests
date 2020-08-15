@@ -1,0 +1,12 @@
+DIR 9652b31a23c30547f228e3bdbda29d95
+--- pr52092.c.{avr25}.{s}.{vanilla}.s	2020-08-13 18:55:50.104503125 +0000
++++ pr52092.c.{avr25}.{s}.{ccmode}.s	2020-08-13 18:55:51.156492605 +0000
+@@ -29,8 +29,6 @@
+ 	lds r24,b
+ 	lds r25,b+1
+ .L3:
+-	ldi r22,lo8(3)
+-	rcall __mulqi3
+ 	ldi r30,lo8(f)
+ 	ldi r31,hi8(f)
+ 	cpse r24,__zero_reg__

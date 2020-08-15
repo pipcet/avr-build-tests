@@ -1,0 +1,23 @@
+DIR 7a162020dd59cf1931bb4c5b3ecca2d4
+--- 960218-1.c.{avr3}.{3}.{vanilla}.s	2020-08-10 18:50:27.003687381 +0000
++++ 960218-1.c.{avr3}.{3}.{ccmode}.s	2020-08-10 18:50:28.687687891 +0000
+@@ -26,12 +26,14 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	com r24
+-	com r25
+-	sbiw r24,0
++	mov r19,r25
++	mov r18,r24
++	com r18
++	com r19
++	adiw r24,1
+ 	breq .L4
+-	sts gl+1,r25
+-	sts gl,r24
++	sts gl+1,r19
++	sts gl,r18
+ .L4:
+ /* epilogue start */
+ 	ret

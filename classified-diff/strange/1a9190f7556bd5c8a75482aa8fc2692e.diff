@@ -1,0 +1,18 @@
+DIR 8caccc0c13ab7986aedda106359edd36
+--- pr24135.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:54:26.603754616 +0000
++++ pr24135.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:54:29.587755396 +0000
+@@ -92,9 +92,11 @@
+ 	sbci r19,-1
+ 	std Y+10,r19
+ 	std Y+9,r18
+-	movw r24,r28
+-	adiw r24,1
+-	movw r2,r24
++	clr r2
++	inc r2
++	mov r3,__zero_reg__
++	add r2,r28
++	adc r3,r29
+ 	movw r24,r22
+ 	rcall y.0
+ 	rjmp .L5

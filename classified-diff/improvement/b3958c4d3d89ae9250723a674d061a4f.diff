@@ -1,0 +1,25 @@
+DIR a828e71e7bdd8837dd73779c7ae8bc38
+--- 980223.c.{avr3}.{s}.{vanilla}.s	2020-08-13 18:37:48.825111791 +0000
++++ 980223.c.{avr3}.{s}.{ccmode}.s	2020-08-13 18:37:50.401097145 +0000
+@@ -153,17 +153,11 @@
+ 	ldi r24,lo8(nil)
+ 	ldi r25,hi8(nil)
+ 	mov r14,r24
+-	std Y+8,r25
+-	std Y+7,r24
+-	std Y+9,__zero_reg__
+-	std Y+10,__zero_reg__
+-	std Y+11,__zero_reg__
+-	std Y+12,__zero_reg__
+-	ldd r15,Y+8
++	mov r15,r25
+ 	ldi r16,0
+-	ldd r17,Y+10
+-	ldd r18,Y+11
+-	ldd r19,Y+12
++	ldi r17,0
++	ldi r18,0
++	ldi r19,0
+ 	ldd r20,Y+13
+ 	ldd r21,Y+14
+ 	ldd r22,Y+15

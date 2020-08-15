@@ -1,0 +1,26 @@
+DIR 504b4feee19aafd404357156f22f92db
+--- pr46309.c.{avr3}.{s}.{vanilla}.s	2020-08-10 18:37:19.171325751 +0000
++++ pr46309.c.{avr3}.{s}.{ccmode}.s	2020-08-10 18:37:22.591328197 +0000
+@@ -61,9 +61,8 @@
+ 	ldi r25,0
+ 	std Y+4,r25
+ 	std Y+3,r24
+-	mov r25,r29
+-	mov r24,r28
+-	adiw r24,3
++	add r24,r28
++	adc r25,r29
+ 	call bar
+ 	ldi r16,lo8(1)
+ 	ldi r17,0
+@@ -76,7 +75,9 @@
+ 	adiw r24,1
+ 	sts q+1,r25
+ 	sts q,r24
+-	adiw r24,2
++	mov r25,r29
++	mov r24,r28
++	adiw r24,3
+ 	call bar
+ 	std Y+2,__zero_reg__
+ 	std Y+1,__zero_reg__

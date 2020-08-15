@@ -1,0 +1,14 @@
+DIR daac3617da871375e7d6aa4388fedc2f
+--- pr43367.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 14:52:29.613064102 +0000
++++ pr43367.c.{atmega128}.{3}.{ccmode}.s	2020-08-07 14:52:29.805065678 +0000
+@@ -24,8 +24,8 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	cpse r24,__zero_reg__
+-	rjmp .L5
++	tst r24
++	brne .L5
+ /* epilogue start */
+ 	ret
+ .L5:

@@ -1,0 +1,16 @@
+DIR 75fee6dccc70a0e842c0fee906656ff6
+--- arith-rand-ll.c.{avr25}.{s}.{vanilla}.s	2020-08-10 18:50:48.731693920 +0000
++++ arith-rand-ll.c.{avr25}.{s}.{ccmode}.s	2020-08-10 18:50:56.123696122 +0000
+@@ -441,8 +441,10 @@
+ 	rcall __mulhi3
+ 	add r24,r19
+ 	adc r25,__zero_reg__
+-	cp r18,r24
+-	cpc __zero_reg__,r25
++	mov r20,r18
++	ldi r21,0
++	cp r24,r20
++	cpc r25,r21
+ 	brne .L14
+ 	mov r24,r18
+ 	mov __tmp_reg__,r18

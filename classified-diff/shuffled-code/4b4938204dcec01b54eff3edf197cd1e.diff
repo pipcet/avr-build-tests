@@ -1,0 +1,18 @@
+DIR 008797a81000b1f2a9ec99a1d6e38be3
+--- pr20527-1.c.{avr3}.{s}.{vanilla}.s	2020-08-10 18:14:47.926010899 +0000
++++ pr20527-1.c.{avr3}.{s}.{ccmode}.s	2020-08-10 18:14:51.938008097 +0000
+@@ -77,12 +77,12 @@
+ .L3:
+ 	mov r29,r19
+ 	mov r28,r18
++	subi r18,-4
++	sbci r19,-1
+ 	ldd r8,Y+4
+ 	ldd r9,Y+5
+ 	ldd r10,Y+6
+ 	ldd r11,Y+7
+-	subi r18,-4
+-	sbci r19,-1
+ 	ld r4,Y
+ 	ldd r5,Y+1
+ 	ldd r6,Y+2

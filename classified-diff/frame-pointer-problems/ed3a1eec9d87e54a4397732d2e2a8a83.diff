@@ -1,0 +1,36 @@
+DIR 0978c9fe80dd339ae84af1b91d9c08ad
+--- pr65401.c.{avr3}.{s}.{vanilla}.s	2020-08-14 10:09:34.601089713 +0000
++++ pr65401.c.{avr3}.{s}.{ccmode}.s	2020-08-14 10:09:40.456996403 +0000
+@@ -79,8 +79,6 @@
+ 	mov r30,r24
+ 	ldi r24,0
+ 	ldi r25,lo8(64)
+-	mov r12,r14
+-	mov r13,r15
+ .L8:
+ 	st Z+,r24
+ 	st Z+,r25
+@@ -89,8 +87,9 @@
+ 	cpi r24,64
+ 	cpc r25,__zero_reg__
+ 	brne .L8
+-	mov r24,r12
+-	mov r25,r13
++	mov r25,r29
++	mov r24,r28
++	adiw r24,1
+ 	call foo
+ 	mov r31,r15
+ 	mov r30,r14
+@@ -122,8 +121,9 @@
+ 	cpi r16,64
+ 	cpc r17,__zero_reg__
+ 	brne .L11
+-	mov r24,r12
+-	mov r25,r13
++	mov r25,r29
++	mov r24,r28
++	adiw r24,1
+ 	call bar
+ .L13:
+ 	mov r31,r15

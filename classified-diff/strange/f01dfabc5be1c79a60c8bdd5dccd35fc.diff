@@ -1,0 +1,13 @@
+DIR ce0dfd2b411c14ccf4eb3eb6cab87b7d
+--- pr69740-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 14:51:10.028410256 +0000
++++ pr69740-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-07 14:51:10.172411440 +0000
+@@ -14,7 +14,8 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	lds r24,a
+-	cpse r24,__zero_reg__
++	tst r24
++	breq .L1
+ .L3:
+ 	rjmp .L3
+ .L1:

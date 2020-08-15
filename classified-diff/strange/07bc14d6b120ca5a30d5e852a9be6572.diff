@@ -1,0 +1,31 @@
+DIR 8f221f9b7338cea3a8560c2c25bb84d2
+--- 20010224-1.c.{avr3}.{2}.{vanilla}.s	2020-08-10 18:54:50.435760802 +0000
++++ 20010224-1.c.{avr3}.{2}.{ccmode}.s	2020-08-10 18:54:53.599761617 +0000
+@@ -28,10 +28,10 @@
+ 	mov r26,r24
+ 	ld r24,X+
+ 	ld r25,X
+-	lsl r20
+-	rol r21
+ 	mov r27,r21
+ 	mov r26,r20
++	lsl r26
++	rol r27
+ 	subi r26,lo8(-(bndpsd))
+ 	sbci r27,hi8(-(bndpsd))
+ 	st X+,r24
+@@ -52,10 +52,12 @@
+ 	cpi r30,lo8(psd+8)
+ 	cpc r31,r27
+ 	brne .L3
+-	subi r20,lo8(-(bndpsd))
+-	sbci r21,hi8(-(bndpsd))
++	lsl r20
++	rol r21
+ 	mov r31,r21
+ 	mov r30,r20
++	subi r30,lo8(-(bndpsd))
++	sbci r31,hi8(-(bndpsd))
+ 	std Z+1,r25
+ 	st Z,r24
+ .L1:

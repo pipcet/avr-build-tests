@@ -1,0 +1,35 @@
+DIR 0151b441471006707220e82fddacc549
+--- pr71109.c.{atmega128}.{3}.{vanilla}.s	2020-08-07 14:14:52.719219550 +0000
++++ pr71109.c.{atmega128}.{3}.{ccmode}.s	2020-08-07 14:14:52.963220651 +0000
+@@ -53,10 +53,12 @@
+ 	lds r18,a
+ 	lds r19,a+1
+ 	or r18,r19
+-	brne .L3
+ 	ldi r18,lo8(16)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++	brne .L3
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(a)
+ 	ldi r27,hi8(a)
+ 	0:
+@@ -80,10 +82,12 @@
+ 	ori r18,6
+ 	std Z+1,r19
+ 	st Z,r18
+-.L3:
+ 	ldi r18,lo8(16)
+-	movw r30,r28
+-	adiw r30,1
++	ldi r30,lo8(1)
++	ldi r31,0
++.L3:
++	add r30,r28
++	adc r31,r29
+ 	ldi r26,lo8(a)
+ 	ldi r27,hi8(a)
+ 	0:

@@ -1,0 +1,26 @@
+DIR 4eeaafeee45288a8bb9add44c4048c61
+--- restrict-1.c.{avr3}.{3}.{vanilla}.s	2020-08-13 16:51:00.596690755 +0000
++++ restrict-1.c.{avr3}.{3}.{ccmode}.s	2020-08-13 16:51:01.468678537 +0000
+@@ -16,19 +16,19 @@
+ 	mov r31,r25
+ 	ld r24,Z
+ 	ldd r25,Z+1
+-	lsl r24
+-	rol r25
+ 	ldi r20,0
+ 	ldi r21,0
+ 	ldi r22,0
+ 	ldi r23,0
+ 	mov r21,r25
+ 	mov r20,r24
++	lsl r20
++	rol r21
+ 	st Z,r20
+ 	std Z+1,r21
+ 	std Z+2,r22
+ 	std Z+3,r23
+-	sbiw r24,2
++	sbiw r24,1
+ 	brne .L4
+ /* epilogue start */
+ 	ret

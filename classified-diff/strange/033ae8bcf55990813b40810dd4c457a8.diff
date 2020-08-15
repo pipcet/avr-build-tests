@@ -1,0 +1,46 @@
+DIR 05dbc090286db12ce7c56ecfc6efa7d8
+--- pending-4.c.{atmega128}.{s}.{vanilla}.s	2020-08-14 11:34:40.415080031 +0000
++++ pending-4.c.{atmega128}.{s}.{ccmode}.s	2020-08-14 11:34:42.379056166 +0000
+@@ -28,30 +28,23 @@
+ 	ldi r25,0
+ 	ldi r19,0
+ 	ldi r18,0
+-	ldi r21,0
+-	ldi r20,0
+ .L5:
+-	cpi r24,1
+-	cpc r25,__zero_reg__
+-	brne .L3
+-	subi r20,-1
+-	sbci r21,-1
+-.L4:
++	movw r20,r24
++	subi r20,1
++	sbc r21,__zero_reg__
+ 	sbiw r24,1
++	breq .L9
++	subi r18,-1
++	sbci r19,-1
++	movw r24,r20
++	sbiw r24,0
+ 	brne .L5
+-	cpi r20,1
+-	cpc r21,__zero_reg__
+-	brne .L6
+-	cpi r18,7
+-	cpc r19,__zero_reg__
+-	breq .L7
+ .L6:
+ 	call abort
+-.L3:
+-	subi r18,-1
+-	sbci r19,-1
+-	rjmp .L4
+-.L7:
++.L9:
++	cpi r18,7
++	cpc r19,__zero_reg__
++	brne .L6
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit

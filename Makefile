@@ -15,6 +15,7 @@ env:
 	@echo "export CCMODE_GCC=$$HOME/avr-ccmode/bin/avr-gcc"
 	@echo "export VANILLA_GCC=$$HOME/avr-vanilla/bin/avr-gcc"
 	@echo "export LRA_GCC=$$HOME/avr-lra/bin/avr-gcc"
+	@echo "export POSTRELOAD_GCC=$$HOME/avr-prereload/bin/avr-gcc"
 
 compile/%/done: compile/%/Makefile
 	$(MAKE) -C compile/$* all

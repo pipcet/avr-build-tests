@@ -1,0 +1,29 @@
+DIR 86456528488a581089a4697ea8a0128a
+--- stdarg-3.c.{avr3}.{3}.{vanilla}.s	2020-08-10 18:53:18.767736568 +0000
++++ stdarg-3.c.{avr3}.{3}.{ccmode}.s	2020-08-10 18:53:32.935740394 +0000
+@@ -45,11 +45,11 @@
+ .L5:
+ 	mov r31,r25
+ 	mov r30,r24
++	adiw r24,4
+ 	ld r20,Z
+ 	ldd r21,Z+1
+ 	ldd r22,Z+2
+ 	ldd r23,Z+3
+-	adiw r24,4
+ 	sts x,r20
+ 	sts x+1,r21
+ 	sts x+2,r22
+@@ -91,11 +91,11 @@
+ .L9:
+ 	mov r31,r25
+ 	mov r30,r24
++	adiw r24,4
+ 	ld r20,Z
+ 	ldd r21,Z+1
+ 	ldd r22,Z+2
+ 	ldd r23,Z+3
+-	adiw r24,4
+ 	sts d,r20
+ 	sts d+1,r21
+ 	sts d+2,r22

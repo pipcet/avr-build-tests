@@ -1,0 +1,106 @@
+DIR b10030d5792656a024d2a85a078a6473
+--- 920501-9.c.{avr25}.{3}.{vanilla}.s	2020-08-10 19:05:57.954070594 +0000
++++ 920501-9.c.{avr25}.{3}.{ccmode}.s	2020-08-10 19:06:03.150082968 +0000
+@@ -221,10 +221,9 @@
+ 	mov r15,r24
+ 	push r15
+ 	push r14
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
+ 	push r19
+ 	push r18
+ 	rcall sprintf
+@@ -236,14 +235,10 @@
+ 	ldd r24,Y+1
+ 	ldd r25,Y+2
+ 	sbiw r24,49
+-	brne .+2
+-	rjmp .L15
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L12:
+-	or r24,r25
+-	breq .+2
+-	rjmp .L14
++	breq .L15
++.L14:
++	rcall abort
++.L15:
+ 	ldi r24,lo8(18)
+ 	push r24
+ 	ldi r24,lo8(52)
+@@ -252,14 +247,11 @@
+ 	push r24
+ 	ldi r24,lo8(120)
+ 	push r24
+-	ldi r24,lo8(.LC1)
+-	ldi r25,hi8(.LC1)
+-	push r25
+-	push r24
+-	ldi r18,lo8(1)
+-	ldi r19,0
+-	add r18,r28
+-	adc r19,r29
++	push r15
++	push r14
++	movw r18,r28
++	subi r18,-1
++	sbci r19,-1
+ 	push r19
+ 	push r18
+ 	rcall sprintf
+@@ -275,8 +267,7 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ 	or r24,r25
+-	breq .+2
+-	rjmp .L14
++	brne .L14
+ 	movw r16,r28
+ 	subi r16,-1
+ 	sbci r17,-1
+@@ -295,6 +286,9 @@
+ 	rcall strcmp
+ 	or r24,r25
+ 	brne .L14
++	movw r16,r28
++	subi r16,-1
++	sbci r17,-1
+ 	ldi r18,lo8(-1)
+ 	ldi r19,lo8(-1)
+ 	ldi r20,lo8(-1)
+@@ -309,7 +303,8 @@
+ 	ldi r25,hi8(.LC5)
+ 	rcall strcmp
+ 	or r24,r25
+-	brne .L14
++	breq .+2
++	rjmp .L14
+ 	ldi r24,lo8(-86)
+ 	push r24
+ 	ldi r24,lo8(-69)
+@@ -333,16 +328,11 @@
+ 	out __SREG__,__tmp_reg__
+ 	out __SP_L__,r28
+ 	or r24,r25
+-	brne .L14
++	breq .+2
++	rjmp .L14
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rcall exit
+-.L15:
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L12
+-.L14:
+-	rcall abort
+ 	.size	main, .-main
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200804 (experimental)"
+ .global __do_copy_data

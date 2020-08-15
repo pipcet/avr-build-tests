@@ -1,0 +1,17 @@
+DIR 733a97358779c9781c6ee66dcf6148b9
+--- pr65803.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:37:13.757460691 +0000
++++ pr65803.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:37:14.077463400 +0000
+@@ -75,10 +75,9 @@
+ .L4:
+ 	mov r12,r15
+ 	mov r13,r14
+-	ldi r20,lo8(1)
+-	ldi r21,0
+-	add r20,r28
+-	adc r21,r29
++	movw r20,r28
++	subi r20,-1
++	sbci r21,-1
+ 	add r20,r18
+ 	adc r21,__zero_reg__
+ 	movw r30,r20

@@ -1,0 +1,14 @@
+DIR cd1d2ee9aea7435b6a3e82321cf33538
+--- pr29695-2.c.{atmega128}.{s}.{vanilla}.s	2020-08-07 14:50:41.168172973 +0000
++++ pr29695-2.c.{atmega128}.{s}.{ccmode}.s	2020-08-07 14:50:41.556176164 +0000
+@@ -44,8 +44,8 @@
+ /* stack size = 0 */
+ .L__stack_usage = 0
+ 	lds r24,b
+-	sbrc r24,7
+-	rjmp .L5
++	tst r24
++	brlt .L5
+ 	ldi r25,0
+ 	ldi r24,0
+ 	ret

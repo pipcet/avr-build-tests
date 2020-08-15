@@ -1,0 +1,17 @@
+DIR 0e1b99f290c323efb5528a465aeb187a
+--- pr27073.c.{avr25}.{2}.{vanilla}.s	2020-08-14 11:35:33.614433412 +0000
++++ pr27073.c.{avr25}.{2}.{ccmode}.s	2020-08-14 11:35:36.458398834 +0000
+@@ -122,8 +122,11 @@
+ 	movw r16,r28
+ 	subi r16,-1
+ 	sbci r17,-1
+-	pop __tmp_reg__
+-	pop __tmp_reg__
++	in __tmp_reg__,__SREG__
++	cli
++	out __SP_H__,r29
++	out __SREG__,__tmp_reg__
++	out __SP_L__,r28
+ 	ldi r31,0
+ 	ldi r30,0
+ 	ldi r27,lo8(5)

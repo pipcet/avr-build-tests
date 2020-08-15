@@ -1,0 +1,42 @@
+DIR 1067414cc55e8dcb4464795189772acf
+--- 920302-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-14 11:35:54.386180838 +0000
++++ 920302-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-14 11:35:58.090135795 +0000
+@@ -108,32 +108,23 @@
+ 	lds r25,buf+1
+ 	cpi r24,120
+ 	sbci r25,121
+-	breq .L15
+-.L12:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L13:
+-	or r24,r25
+-	brne .L16
+-	ldi r25,0
+-	ldi r24,0
+-	call exit
++	breq .L17
+ .L15:
++	call abort
++.L17:
+ 	lds r24,buf+2
+ 	lds r25,buf+2+1
+ 	cpi r24,120
+ 	sbci r25,121
+-	brne .L12
++	brne .L15
+ 	lds r24,buf+4
+ 	lds r25,buf+4+1
+ 	cpi r24,122
+ 	cpc r25,__zero_reg__
+-	brne .L12
++	brne .L15
+ 	ldi r25,0
+ 	ldi r24,0
+-	rjmp .L13
+-.L16:
+-	call abort
++	call exit
+ 	.size	main, .-main
+ .global	p
+ 	.section .bss

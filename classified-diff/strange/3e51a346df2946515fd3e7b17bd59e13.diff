@@ -1,0 +1,16 @@
+DIR 4ca48c850def358d4dc45993540f0fa2
+--- pr51447.c.{avr25}.{s}.{vanilla}.s	2020-08-14 09:38:46.824650345 +0000
++++ pr51447.c.{avr25}.{s}.{ccmode}.s	2020-08-14 09:38:47.812638637 +0000
+@@ -59,8 +59,10 @@
+ 	adiw r24,12
+ 	std Y+8,r25
+ 	std Y+7,r24
+-	sbiw r24,11
+-	movw r2,r24
++	movw r2,r28
++	ldi r24,-1
++	sub r2,r24
++	sbc r3,r24
+ 	ldi r24,lo8(gs(.L4))
+ 	ldi r25,hi8(gs(.L4))
+ 	rcall bar.0

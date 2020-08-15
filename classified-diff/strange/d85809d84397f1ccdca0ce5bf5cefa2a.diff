@@ -1,0 +1,94 @@
+DIR df207dc9143c6fabf60b69b9c3035103
+--- bad.c.{atmega128}.{s}.{vanilla}.s	2020-08-13 19:01:49.710828306 +0000
++++ bad.c.{atmega128}.{s}.{ccmode}.s	2020-08-13 19:01:50.706812332 +0000
+@@ -29,48 +29,35 @@
+ /* frame size = 8 */
+ /* stack size = 16 */
+ .L__stack_usage = 16
+-	mov r16,r18
+-	mov r17,r19
+-	movw r18,r20
+-	clr r12
+-	clr r13
+-	movw r14,r12
+-	sub r12,r16
+-	sbc r13,r17
+-	sbc r14,r18
+-	sbc r15,r19
++	movw r12,r18
++	movw r14,r20
++	clr r16
++	clr r17
++	movw r18,r16
++	sub r16,r12
++	sbc r17,r13
++	sbc r18,r14
++	sbc r19,r15
+ 	mov r20,r22
+ 	mov r21,r23
+ 	movw r22,r24
+-	or r16,r17
+-	or r16,r18
+-	or r16,r19
++	or r12,r13
++	or r12,r14
++	or r12,r15
+ 	brne .L2
+-	com r23
+-	com r22
+-	com r21
+-	neg r20
+-	sbci r21,lo8(-1)
+-	sbci r22,lo8(-1)
+-	sbci r23,lo8(-1)
++	clr r12
++	clr r13
++	movw r14,r12
++	sub r12,r20
++	sbc r13,r21
++	sbc r14,r22
++	sbc r15,r23
+ .L3:
+-	mov r18,r12
+-	std Y+1,r12
+-	std Y+2,r13
+-	std Y+3,r14
+-	std Y+4,r15
+-	mov r24,r20
+-	std Y+5,r20
+-	std Y+6,r21
+-	std Y+7,r22
+-	std Y+8,r23
+-	ldd r19,Y+2
+-	ldd r20,Y+3
+-	ldd r21,Y+4
+-	ldd r23,Y+6
+-	mov r22,r24
+-	ldd r24,Y+7
+-	ldd r25,Y+8
++	movw r20,r18
++	movw r22,r12
++	mov r18,r16
++	mov r19,r17
++	movw r24,r14
+ /* epilogue start */
+ 	adiw r28,8
+ 	in __tmp_reg__,__SREG__
+@@ -88,10 +75,12 @@
+ 	pop r12
+ 	ret
+ .L2:
+-	com r20
+-	com r21
+-	com r22
+-	com r23
++	movw r12,r20
++	movw r14,r24
++	com r12
++	com r13
++	com r14
++	com r15
+ 	rjmp .L3
+ 	.size	__negdi2, .-__negdi2
+-	.ident	"GCC: (GNU) 11.0.0 20200802 (experimental)"
++	.ident	"GCC: (GNU) 11.0.0 20200813 (experimental)"

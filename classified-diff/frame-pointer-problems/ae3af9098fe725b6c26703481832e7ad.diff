@@ -1,0 +1,49 @@
+DIR 02d9c6a432721d5a9db1b87b75f67890
+--- pr34176.c.{avr25}.{3}.{vanilla}.s	2020-08-14 10:08:50.793787513 +0000
++++ pr34176.c.{avr25}.{3}.{ccmode}.s	2020-08-14 10:08:53.693741334 +0000
+@@ -76,28 +76,28 @@
+ 	rcall .
+ 	in r28,__SP_L__
+ 	in r29,__SP_H__
+-.L14:
+ /* prologue: function */
+ /* frame size = 2 */
+ /* stack size = 2 */
+ .L__stack_usage = 2
+ 	movw r24,r28
+ 	adiw r24,1
++	movw r14,r24
+ 	rcall hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
++	movw r12,r14
+ .L13:
+ 	rcall foo.constprop.0
+ 	cp r16,__zero_reg__
+ 	cpc r17,__zero_reg__
+-	breq .L14
++	breq .L10
+ 	movw r14,r16
+ 	lsl r14
+ 	rol r15
+ 	lsl r14
+ 	rol r15
+-	movw r24,r28
+-	adiw r24,1
++	movw r24,r12
+ 	rcall hash_find_entry
+ 	ldd r16,Y+1
+ 	ldd r17,Y+2
+@@ -110,6 +110,12 @@
+ 	pop __tmp_reg__
+ 	pop __tmp_reg__
+ 	ret
++.L10:
++	movw r24,r12
++	rcall hash_find_entry
++	ldd r16,Y+1
++	ldd r17,Y+2
++	rjmp .L13
+ 	.size	main, .-main
+ 	.local	count.0
+ 	.comm	count.0,2,1

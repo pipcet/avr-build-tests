@@ -5027,3 +5027,5 @@ DIR 388099ce1059ec9fa875eadb193714f0
  	.size	main, .-main
  .global	z
  	.section .bss
+ pr82052.c.{atmega128}.{2}.{ccmode}.s | 3544 +++++++++++++++++------------------
+ 1 file changed, 1769 insertions(+), 1775 deletions(-)

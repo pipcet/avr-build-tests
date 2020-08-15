@@ -1,0 +1,121 @@
+DIR 68818ad31e9b86136518082166f3c061
+--- 20050826-1.c.{avr3}.{3}.{vanilla}.s	2020-08-10 18:45:15.883579790 +0000
++++ 20050826-1.c.{avr3}.{3}.{ccmode}.s	2020-08-10 18:45:18.723580918 +0000
+@@ -23,27 +23,10 @@
+ 	sbiw r26,1
+ 	cpi r24,1
+ 	sbci r25,72
+-	breq .L9
+-.L2:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L3:
+-	or r24,r25
+-	brne .L5
+-	mov r31,r27
+-	mov r30,r26
+-	adiw r30,7
+-	subi r27,-8
+-.L6:
+-	ld r24,Z+
+-	cpse r24,__zero_reg__
+-	rjmp .L5
+-	cp r30,r26
+-	cpc r31,r27
+-	brne .L6
+-/* epilogue start */
+-	ret
+-.L9:
++	breq .L10
++.L5:
++	call abort
++.L10:
+ 	mov r31,r27
+ 	mov r30,r26
+ 	adiw r30,2
+@@ -53,22 +36,30 @@
+ 	sbiw r26,2+1
+ 	cpi r24,69
+ 	sbci r25,76
+-	brne .L2
++	brne .L5
+ 	adiw r30,2
+ 	ld r24,Z
+ 	ldd r25,Z+1
+ 	cpi r24,76
+ 	sbci r25,79
+-	brne .L2
++	brne .L5
+ 	ldd r24,Z+2
+ 	ldd r25,Z+3
+ 	sbiw r24,1
+-	brne .L2
+-	ldi r25,0
+-	ldi r24,0
+-	rjmp .L3
+-.L5:
+-	call abort
++	brne .L5
++	mov r31,r27
++	mov r30,r26
++	adiw r30,7
++	subi r27,-8
++.L6:
++	ld r24,Z+
++	cpse r24,__zero_reg__
++	rjmp .L5
++	cp r30,r26
++	cpc r31,r27
++	brne .L6
++/* epilogue start */
++	ret
+ 	.size	bar, .-bar
+ 	.section	.rodata.str1.1
+ .LC1:
+@@ -111,37 +102,28 @@
+ 	lds r25,a+1
+ 	cpi r24,1
+ 	sbci r25,72
+-	breq .L14
+-.L11:
+-	ldi r24,lo8(1)
+-	ldi r25,0
+-.L12:
+-	or r24,r25
+-	brne .L15
+-	ldi r25,0
+-	ldi r24,0
+-/* epilogue start */
+-	ret
+-.L14:
++	breq .L17
++.L15:
++	call abort
++.L17:
+ 	lds r24,a+2
+ 	lds r25,a+2+1
+ 	cpi r24,69
+ 	sbci r25,76
+-	brne .L11
++	brne .L15
+ 	lds r24,a+4
+ 	lds r25,a+4+1
+ 	cpi r24,76
+ 	sbci r25,79
+-	brne .L11
++	brne .L15
+ 	lds r24,a+6
+ 	lds r25,a+6+1
+ 	sbiw r24,1
+-	brne .L11
++	brne .L15
+ 	ldi r25,0
+ 	ldi r24,0
+-	rjmp .L12
+-.L15:
+-	call abort
++/* epilogue start */
++	ret
+ 	.size	foo, .-foo
+ 	.section	.text.startup,"ax",@progbits
+ .global	main

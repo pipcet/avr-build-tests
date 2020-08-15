@@ -1,0 +1,23 @@
+DIR d05974b52903d4233a268364f5a28a6f
+--- 20001111-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 18:39:58.155937726 +0000
++++ 20001111-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 18:39:59.631924560 +0000
+@@ -63,17 +63,8 @@
+ /* frame size = 0 */
+ /* stack size = 0 */
+ .L__stack_usage = 0
+-	lds r20,next_buffer
+-	lds r21,next_buffer+1
+-	ldi r18,lo8(47)
+-	ldi r19,lo8(-50)
+-	mul r20,r18
+-	movw r24,r0
+-	mul r20,r19
+-	add r25,r0
+-	mul r21,r18
+-	add r25,r0
+-	clr r1
++	lds r24,next_buffer
++	lds r25,next_buffer+1
+ 	or r24,r25
+ 	brne .L6
+ 	ldi r24,lo8(1)

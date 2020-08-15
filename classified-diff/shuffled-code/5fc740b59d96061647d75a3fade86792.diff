@@ -1,0 +1,132 @@
+DIR 576cc3484099a5c0f8e4cc2c85ac16e2
+--- pr20100-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-13 18:34:22.335214222 +0000
++++ pr20100-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-13 18:34:23.815196955 +0000
+@@ -54,104 +54,104 @@
+ 	lds r25,g+1
+ 	cp r18,r24
+ 	cpc r19,r25
+-	breq .L14
++	breq .L15
+ 	lds r20,e
+ 	subi r20,1
+ 	sbc r21,r21
+ 	cp r20,r24
+ 	cpc r21,r25
+-	breq .L15
++	breq .L16
+ 	adiw r24,1
+ 	cp r18,r24
+ 	cpc r19,r25
+-	breq .L16
+-.L25:
++	breq .L17
++.L26:
+ 	cp r20,r24
+ 	cpc r21,r25
+-	breq .L17
++	breq .L18
+ 	adiw r24,1
+ .L10:
+ 	cp r18,r24
+ 	cpc r19,r25
+-	breq .L18
++	breq .L19
+ 	cp r20,r24
+ 	cpc r21,r25
+-	breq .L19
++	breq .L20
+ 	adiw r24,1
+ .L11:
+ 	cp r18,r24
+ 	cpc r19,r25
+-	breq .L20
++	breq .L21
+ 	cp r20,r24
+ 	cpc r21,r25
+-	breq .L21
++	breq .L22
+ 	adiw r24,1
+ .L12:
+ 	cp r18,r24
+ 	cpc r19,r25
+-	breq .L22
++	breq .L23
+ 	cp r20,r24
+ 	cpc r21,r25
+-	breq .L23
++	breq .L24
+ 	adiw r24,1
+ .L13:
+ 	cp r24,r18
+ 	cpc r25,r19
+-	breq .L24
++	breq .L25
+ 	sts g+1,r25
+ 	sts g,r24
+ 	ldi r24,lo8(5)
+ 	ldi r25,0
+ 	ret
+-.L15:
++.L16:
+ 	ldi r25,0
+ 	ldi r24,0
+ 	cp r18,r24
+ 	cpc r19,r25
+-	brne .L25
+-.L16:
++	brne .L26
++.L17:
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
+ .L9:
+ 	sts g+1,r19
+ 	sts g,r18
+ 	ret
+-.L14:
++.L15:
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L19:
++.L20:
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rjmp .L11
+-.L18:
++.L19:
+ 	ldi r24,lo8(2)
+ 	ldi r25,0
+ 	sts g+1,r19
+ 	sts g,r18
+ 	ret
+-.L17:
++.L18:
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rjmp .L10
+-.L20:
++.L21:
+ 	ldi r24,lo8(3)
+ 	ldi r25,0
+ 	rjmp .L9
+-.L22:
++.L23:
+ 	ldi r24,lo8(4)
+ 	ldi r25,0
+ 	rjmp .L9
+-.L21:
++.L22:
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rjmp .L12
+-.L23:
++.L24:
+ 	ldi r25,0
+ 	ldi r24,0
+ 	rjmp .L13
+-.L24:
++.L25:
+ 	ldi r24,lo8(5)
+ 	ldi r25,0
+ 	rjmp .L9

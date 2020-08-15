@@ -1,0 +1,93 @@
+DIR cefd5d234f29b74bb137c74da02ca8f9
+--- 20140212-1.c.{avr25}.{3}.{vanilla}.s	2020-08-13 18:39:54.367971532 +0000
++++ 20140212-1.c.{avr25}.{3}.{ccmode}.s	2020-08-13 18:39:55.291963284 +0000
+@@ -40,28 +40,26 @@
+ .L6:
+ 	sbiw r24,0
+ 	brne .L8
+-	cp r18,__zero_reg__
+-	cpc r19,__zero_reg__
+-	breq .L10
+-	ldi r30,lo8(54)
+-	ldi r31,lo8(2)
+-	ldi r18,lo8(1)
+-	ldi r19,0
+ 	ldi r22,lo8(9)
+ 	ldi r23,0
+ 	ldi r20,lo8(9)
+ 	ldi r21,0
++	cp r18,__zero_reg__
++	cpc r19,__zero_reg__
++	brne .L12
++.L11:
++	ldi r30,0
++	ldi r31,0
+ 	rjmp .L5
+ .L3:
+ 	ldi r19,0
+ 	ldi r18,0
+-	ldi r30,0
+-	ldi r31,0
+ 	sbiw r24,0
+-	breq .L13
+-.L12:
++	breq .L9
+ 	ldi r24,lo8(1)
+ 	ldi r25,0
++	ldi r30,0
++	ldi r31,0
+ .L5:
+ 	sts h+1,r23
+ 	sts h,r22
+@@ -75,30 +73,26 @@
+ 	sts k,r18
+ /* epilogue start */
+ 	ret
+-.L10:
+-	ldi r30,0
+-	ldi r31,0
+-.L13:
++.L9:
+ 	ldi r22,lo8(9)
+ 	ldi r23,0
+ 	ldi r20,lo8(9)
+ 	ldi r21,0
++	ldi r30,0
++	ldi r31,0
+ 	rjmp .L5
+ .L8:
++	ldi r24,lo8(1)
++	ldi r25,0
+ 	cp r18,__zero_reg__
+ 	cpc r19,__zero_reg__
+ 	breq .L11
++.L12:
+ 	ldi r30,lo8(54)
+ 	ldi r31,lo8(2)
+ 	ldi r18,lo8(1)
+ 	ldi r19,0
+-	ldi r24,lo8(1)
+-	ldi r25,0
+ 	rjmp .L5
+-.L11:
+-	ldi r30,0
+-	ldi r31,0
+-	rjmp .L12
+ 	.size	fn1, .-fn1
+ 	.section	.text.startup,"ax",@progbits
+ .global	main
+@@ -112,12 +106,12 @@
+ 	lds r24,c
+ 	lds r25,c+1
+ 	sbiw r24,1
+-	brne .L17
++	brne .L16
+ 	ldi r25,0
+ 	ldi r24,0
+ /* epilogue start */
+ 	ret
+-.L17:
++.L16:
+ 	rcall abort
+ 	.size	main, .-main
+ .global	j

@@ -1,0 +1,34 @@
+DIR a9b90711aa85651638cb4966c39947a1
+--- lshrdi-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-10 19:03:31.901685625 +0000
++++ lshrdi-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-10 19:03:41.453713204 +0000
+@@ -63,10 +63,11 @@
+ 	cpi r30,1
+ 	cpc r31,__zero_reg__
+ 	breq .L4
++.L12:
+ 	movw r24,r30
+ 	sbiw r24,2
+ 	sbiw r24,62
+-	brsh .L14
++	brsh .L15
+ .L5:
+ 	adiw r30,1
+ 	adiw r26,8
+@@ -76,7 +77,7 @@
+ 	ldi r25,0
+ 	ldi r24,0
+ 	call exit
+-.L14:
++.L15:
+ 	ld r18,X
+ 	adiw r26,1
+ 	ld r19,X
+@@ -145,7 +146,7 @@
+ 	adiw r26,8
+ 	ldi r30,lo8(2)
+ 	ldi r31,0
+-	rjmp .L8
++	rjmp .L12
+ 	.size	main, .-main
+ 	.section	.rodata
+ 	.type	zext, @object

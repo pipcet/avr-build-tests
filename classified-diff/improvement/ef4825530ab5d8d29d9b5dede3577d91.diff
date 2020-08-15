@@ -1,0 +1,16 @@
+DIR 03306ae72c8f638cf328fc7b60cfc447
+--- unalign-1.c.{atmega128}.{3}.{vanilla}.s	2020-08-14 12:22:40.128698206 +0000
++++ unalign-1.c.{atmega128}.{3}.{ccmode}.s	2020-08-14 12:22:42.592661331 +0000
+@@ -25,10 +25,8 @@
+ 	rol r25
+ 	lsl r24
+ 	rol r25
+-	ldi r26,lo8(1)
+-	ldi r27,0
+-	add r26,r28
+-	adc r27,r29
++	movw r26,r28
++	adiw r26,1
+ 	add r26,r24
+ 	adc r27,r25
+ 	movw r30,r26
