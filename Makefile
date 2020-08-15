@@ -6,6 +6,11 @@ all: $(foreach src,$(SOURCES),$(dir $(src))/done)
 
 makefiles: $(foreach src,$(SOURCES),$(dir $(src))/Makefile)
 
+
+env_max:
+	@echo "export CCMODE_GCC=$$HOME/devel/avr-pipcet/gcc-install/bin/avr-gcc"
+	@echo "export VANILLA_GCC=$$HOME/devel/avr-gcc/gcc-install/bin/avr-gcc"
+
 env:
 	@echo "export CCMODE_GCC=$$HOME/avr-ccmode/bin/avr-gcc"
 	@echo "export VANILLA_GCC=$$HOME/avr-vanilla/bin/avr-gcc"
